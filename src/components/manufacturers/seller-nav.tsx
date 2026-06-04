@@ -6,6 +6,7 @@ import { Link, usePathname } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
 const tabs = [
+  { href: "/seller/products", key: "navProducts" },
   { href: "/seller/onboarding", key: "navProfile" },
   { href: "/seller/verification", key: "navVerification" },
 ] as const
@@ -17,7 +18,8 @@ export function SellerNav() {
   return (
     <nav className="flex gap-1 rounded-lg border border-border bg-card p-1 text-sm">
       {tabs.map((tab) => {
-        const active = pathname === tab.href
+        const active =
+          pathname === tab.href || pathname.startsWith(`${tab.href}/`)
         return (
           <Link
             key={tab.href}

@@ -17,7 +17,7 @@ export async function SiteHeader() {
     user?.role === "admin"
       ? "/admin"
       : user?.role === "manufacturer"
-        ? "/seller/onboarding"
+        ? "/seller/products"
         : null
 
   return (

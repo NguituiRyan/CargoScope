@@ -29,6 +29,13 @@
       "when": 1780612258418,
       "tag": "0003_storage_and_guards",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780613739555,
+      "tag": "0004_product_media_storage",
+      "breakpoints": true
     }
   ]
 }
