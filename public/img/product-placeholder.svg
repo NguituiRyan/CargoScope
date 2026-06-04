@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Product image placeholder">
+  <rect width="800" height="600" fill="#0c4a48"/>
+  <g fill="none" stroke="#e3b341" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" transform="translate(400 270)">
+    <path d="M-120 -70 L0 -130 L120 -70 L120 70 L0 130 L-120 70 Z"/>
+    <path d="M-120 -70 L0 -10 L120 -70"/>
+    <path d="M0 -10 L0 130"/>
+  </g>
+  <text x="400" y="500" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="600" fill="#e6f2f1">CargoScope</text>
+  <text x="400" y="544" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#7fb3b1">Product image</text>
+</svg>
