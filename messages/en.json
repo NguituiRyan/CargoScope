@@ -6,7 +6,8 @@
     "howItWorks": "How it works",
     "signIn": "Sign in",
     "account": "Account",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "dashboard": "Dashboard"
   },
   "home": {
     "badge": "Verified China–Africa sourcing",
@@ -59,6 +60,93 @@
       "manufacturer": "Manufacturer",
       "admin": "Admin"
     }
+  },
+  "verification": {
+    "status": {
+      "pending": "Pending",
+      "identity": "Identity-checked",
+      "verified": "Verified Supplier",
+      "premium": "Premium Verified",
+      "rejected": "Rejected"
+    },
+    "docStatus": {
+      "pending": "Under review",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "type": {
+      "identity": "Identity document",
+      "business": "Business licence",
+      "inspection": "Factory inspection"
+    }
+  },
+  "seller": {
+    "navProfile": "Company profile",
+    "navVerification": "Verification",
+    "onboardingTitle": "Company profile",
+    "onboardingSubtitle": "Tell buyers about your factory. You can refine this anytime.",
+    "companyName": "Company name",
+    "companyNamePlaceholder": "Shenzhen BrightTech Co., Ltd",
+    "country": "Country",
+    "city": "City",
+    "yearEstablished": "Year established",
+    "mainCategories": "Main categories",
+    "mainCategoriesPlaceholder": "Electronics, Home & Kitchen",
+    "listHint": "Separate items with commas.",
+    "certifications": "Certifications",
+    "description": "About your company",
+    "descriptionPlaceholder": "Products you make, factory size, export experience…",
+    "saveProfile": "Save changes",
+    "continueCta": "Save and continue",
+    "saving": "Saving…",
+    "profileSaved": "Profile saved.",
+    "verificationTitle": "Verification",
+    "verificationSubtitle": "Get verified to list products and earn buyer trust.",
+    "verifyHelp": "Submit your business licence and identity documents. Our team reviews them and assigns your verification tier. Only verified manufacturers appear in the public catalogue.",
+    "submitTitle": "Submit documents",
+    "docType": "Document type",
+    "documents": "Documents",
+    "documentsHint": "JPG, PNG, WebP, or PDF. Up to 5 files, 10 MB each.",
+    "submitDocs": "Submit for review",
+    "uploading": "Uploading…",
+    "docsSubmitted": "Documents submitted for review.",
+    "historyTitle": "Your submissions",
+    "noSubmissions": "You haven't submitted any documents yet.",
+    "fileCount": "{count, plural, one {# file} other {# files}}",
+    "reviewerNotes": "Reviewer notes"
+  },
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Vet manufacturers and manage the platform.",
+    "openQueue": "Open vetting queue",
+    "totalManufacturers": "Manufacturers",
+    "pendingReview": "Awaiting review",
+    "pendingDocs": "Documents to review",
+    "vettingQueue": "Vetting queue",
+    "vettingQueueHint": "Review manufacturer profiles and verification documents.",
+    "manufacturersTitle": "Manufacturers",
+    "manufacturersSubtitle": "Pending manufacturers appear first.",
+    "noManufacturers": "No manufacturers yet.",
+    "docsPending": "{count, plural, one {# doc pending} other {# docs pending}}",
+    "live": "Live",
+    "backToQueue": "Back to queue",
+    "companyDetails": "Company details",
+    "owner": "Owner",
+    "documents": "Verification documents",
+    "documentsHint": "Open each document to review before deciding.",
+    "noDocuments": "No documents submitted yet.",
+    "reviewNotes": "Notes",
+    "reviewNotesPlaceholder": "Optional notes for this document…",
+    "approve": "Approve",
+    "reject": "Reject",
+    "decision": "Verification decision",
+    "decisionHint": "Set the tier and publish to make the storefront public.",
+    "setTier": "Verification tier",
+    "publish": "Published (visible in catalogue)",
+    "publishHint": "Only published manufacturers with an identity, verified, or premium tier appear publicly.",
+    "statusSaved": "Saved.",
+    "saveStatus": "Save decision",
+    "saving": "Saving…"
   },
   "notFound": {
     "title": "Page not found",

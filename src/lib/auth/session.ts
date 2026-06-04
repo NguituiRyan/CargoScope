@@ -55,3 +55,18 @@ export async function requireUser(): Promise<SessionUser> {
   const locale = await getLocale()
   redirect(localePath(locale, "/sign-in"))
 }
+
+/**
+ * Require an authenticated user with one of the given roles. Sends
+ * unauthenticated users to sign-in and authorized-but-wrong-role users
+ * to their account page.
+ */
+export async function requireRole(
+  role: Role | Role[]
+): Promise<SessionUser> {
+  const user = await requireUser()
+  const allowed = Array.isArray(role) ? role : [role]
+  if (allowed.includes(user.role)) return user
+  const locale = await getLocale()
+  redirect(localePath(locale, "/account"))
+}

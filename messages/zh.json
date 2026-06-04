@@ -6,7 +6,8 @@
     "howItWorks": "运作方式",
     "signIn": "登录",
     "account": "账户",
-    "signOut": "退出登录"
+    "signOut": "退出登录",
+    "dashboard": "控制台"
   },
   "home": {
     "badge": "经核实的中非采购",
@@ -59,6 +60,93 @@
       "manufacturer": "制造商",
       "admin": "管理员"
     }
+  },
+  "verification": {
+    "status": {
+      "pending": "待审核",
+      "identity": "已核实身份",
+      "verified": "认证供应商",
+      "premium": "高级认证",
+      "rejected": "已拒绝"
+    },
+    "docStatus": {
+      "pending": "审核中",
+      "approved": "已通过",
+      "rejected": "已拒绝"
+    },
+    "type": {
+      "identity": "身份证件",
+      "business": "营业执照",
+      "inspection": "工厂验厂"
+    }
+  },
+  "seller": {
+    "navProfile": "公司资料",
+    "navVerification": "认证",
+    "onboardingTitle": "公司资料",
+    "onboardingSubtitle": "向买家介绍您的工厂。您可以随时完善。",
+    "companyName": "公司名称",
+    "companyNamePlaceholder": "Shenzhen BrightTech Co., Ltd",
+    "country": "国家",
+    "city": "城市",
+    "yearEstablished": "成立年份",
+    "mainCategories": "主营品类",
+    "mainCategoriesPlaceholder": "电子产品，家居厨房",
+    "listHint": "用逗号分隔各项。",
+    "certifications": "认证证书",
+    "description": "公司简介",
+    "descriptionPlaceholder": "您生产的产品、工厂规模、出口经验…",
+    "saveProfile": "保存更改",
+    "continueCta": "保存并继续",
+    "saving": "正在保存…",
+    "profileSaved": "资料已保存。",
+    "verificationTitle": "认证",
+    "verificationSubtitle": "通过认证以上架产品并赢得买家信任。",
+    "verifyHelp": "提交您的营业执照和身份证件。我们的团队将进行审核并评定您的认证等级。只有经认证的制造商才会出现在公开目录中。",
+    "submitTitle": "提交证件",
+    "docType": "证件类型",
+    "documents": "证件",
+    "documentsHint": "JPG、PNG、WebP 或 PDF。最多 5 个文件，每个 10 MB。",
+    "submitDocs": "提交审核",
+    "uploading": "正在上传…",
+    "docsSubmitted": "证件已提交审核。",
+    "historyTitle": "您的提交记录",
+    "noSubmissions": "您还没有提交任何证件。",
+    "fileCount": "{count, plural, other {# 个文件}}",
+    "reviewerNotes": "审核备注"
+  },
+  "admin": {
+    "title": "管理后台",
+    "subtitle": "审核制造商并管理平台。",
+    "openQueue": "打开审核队列",
+    "totalManufacturers": "制造商",
+    "pendingReview": "待审核",
+    "pendingDocs": "待审证件",
+    "vettingQueue": "审核队列",
+    "vettingQueueHint": "审查制造商资料和认证证件。",
+    "manufacturersTitle": "制造商",
+    "manufacturersSubtitle": "待审核的制造商优先显示。",
+    "noManufacturers": "暂无制造商。",
+    "docsPending": "{count, plural, other {# 份证件待审}}",
+    "live": "已上线",
+    "backToQueue": "返回队列",
+    "companyDetails": "公司详情",
+    "owner": "所有者",
+    "documents": "认证证件",
+    "documentsHint": "在决定前打开每份证件进行审查。",
+    "noDocuments": "尚未提交任何证件。",
+    "reviewNotes": "备注",
+    "reviewNotesPlaceholder": "对此证件的可选备注…",
+    "approve": "通过",
+    "reject": "拒绝",
+    "decision": "认证决定",
+    "decisionHint": "设置等级并发布以公开店铺。",
+    "setTier": "认证等级",
+    "publish": "已发布（在目录中可见）",
+    "publishHint": "只有已发布且具有身份核实、认证或高级等级的制造商才会公开显示。",
+    "statusSaved": "已保存。",
+    "saveStatus": "保存决定",
+    "saving": "正在保存…"
   },
   "notFound": {
     "title": "未找到页面",

@@ -13,6 +13,13 @@ export async function SiteHeader() {
   const locale = await getLocale()
   const user = await getSessionUser()
 
+  const dashboardHref =
+    user?.role === "admin"
+      ? "/admin"
+      : user?.role === "manufacturer"
+        ? "/seller/onboarding"
+        : null
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
@@ -46,6 +53,17 @@ export async function SiteHeader() {
           <LocaleSwitcher />
           {user ? (
             <>
+              {dashboardHref ? (
+                <Link
+                  href={dashboardHref}
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "hidden sm:inline-flex"
+                  )}
+                >
+                  {t("dashboard")}
+                </Link>
+              ) : null}
               <Link
                 href="/account"
                 className={cn(

@@ -6,7 +6,8 @@
     "howItWorks": "Jinsi inavyofanya kazi",
     "signIn": "Ingia",
     "account": "Akaunti",
-    "signOut": "Toka"
+    "signOut": "Toka",
+    "dashboard": "Dashibodi"
   },
   "home": {
     "badge": "Ununuzi uliothibitishwa China–Afrika",
@@ -59,6 +60,93 @@
       "manufacturer": "Mtengenezaji",
       "admin": "Msimamizi"
     }
+  },
+  "verification": {
+    "status": {
+      "pending": "Inasubiri",
+      "identity": "Utambulisho umethibitishwa",
+      "verified": "Msambazaji Aliyethibitishwa",
+      "premium": "Aliyethibitishwa Premium",
+      "rejected": "Imekataliwa"
+    },
+    "docStatus": {
+      "pending": "Inakaguliwa",
+      "approved": "Imeidhinishwa",
+      "rejected": "Imekataliwa"
+    },
+    "type": {
+      "identity": "Hati ya utambulisho",
+      "business": "Leseni ya biashara",
+      "inspection": "Ukaguzi wa kiwanda"
+    }
+  },
+  "seller": {
+    "navProfile": "Wasifu wa kampuni",
+    "navVerification": "Uthibitisho",
+    "onboardingTitle": "Wasifu wa kampuni",
+    "onboardingSubtitle": "Waeleze wanunuzi kuhusu kiwanda chako. Unaweza kuhariri wakati wowote.",
+    "companyName": "Jina la kampuni",
+    "companyNamePlaceholder": "Shenzhen BrightTech Co., Ltd",
+    "country": "Nchi",
+    "city": "Jiji",
+    "yearEstablished": "Mwaka ulioanzishwa",
+    "mainCategories": "Kategoria kuu",
+    "mainCategoriesPlaceholder": "Elektroniki, Nyumbani na Jikoni",
+    "listHint": "Tenganisha vipengele kwa koma.",
+    "certifications": "Vyeti",
+    "description": "Kuhusu kampuni yako",
+    "descriptionPlaceholder": "Bidhaa unazozalisha, ukubwa wa kiwanda, uzoefu wa kuuza nje…",
+    "saveProfile": "Hifadhi mabadiliko",
+    "continueCta": "Hifadhi na uendelee",
+    "saving": "Inahifadhi…",
+    "profileSaved": "Wasifu umehifadhiwa.",
+    "verificationTitle": "Uthibitisho",
+    "verificationSubtitle": "Thibitishwa ili kuorodhesha bidhaa na kupata imani ya wanunuzi.",
+    "verifyHelp": "Wasilisha leseni yako ya biashara na hati za utambulisho. Timu yetu itazikagua na kukupa daraja la uthibitisho. Watengenezaji waliothibitishwa pekee ndio huonekana kwenye orodha ya umma.",
+    "submitTitle": "Wasilisha hati",
+    "docType": "Aina ya hati",
+    "documents": "Hati",
+    "documentsHint": "JPG, PNG, WebP, au PDF. Hadi faili 5, 10 MB kila moja.",
+    "submitDocs": "Wasilisha kwa ukaguzi",
+    "uploading": "Inapakia…",
+    "docsSubmitted": "Hati zimewasilishwa kwa ukaguzi.",
+    "historyTitle": "Mawasilisho yako",
+    "noSubmissions": "Bado hujawasilisha hati zozote.",
+    "fileCount": "{count, plural, one {faili #} other {faili #}}",
+    "reviewerNotes": "Maelezo ya mkaguzi"
+  },
+  "admin": {
+    "title": "Msimamizi",
+    "subtitle": "Kagua watengenezaji na simamia jukwaa.",
+    "openQueue": "Fungua foleni ya ukaguzi",
+    "totalManufacturers": "Watengenezaji",
+    "pendingReview": "Wanasubiri ukaguzi",
+    "pendingDocs": "Hati za kukagua",
+    "vettingQueue": "Foleni ya ukaguzi",
+    "vettingQueueHint": "Kagua wasifu wa watengenezaji na hati za uthibitisho.",
+    "manufacturersTitle": "Watengenezaji",
+    "manufacturersSubtitle": "Watengenezaji wanaosubiri huonekana kwanza.",
+    "noManufacturers": "Bado hakuna watengenezaji.",
+    "docsPending": "{count, plural, one {hati # inasubiri} other {hati # zinasubiri}}",
+    "live": "Hai",
+    "backToQueue": "Rudi kwenye foleni",
+    "companyDetails": "Maelezo ya kampuni",
+    "owner": "Mmiliki",
+    "documents": "Hati za uthibitisho",
+    "documentsHint": "Fungua kila hati uikague kabla ya kuamua.",
+    "noDocuments": "Hakuna hati zilizowasilishwa bado.",
+    "reviewNotes": "Maelezo",
+    "reviewNotesPlaceholder": "Maelezo ya hiari kwa hati hii…",
+    "approve": "Idhinisha",
+    "reject": "Kataa",
+    "decision": "Uamuzi wa uthibitisho",
+    "decisionHint": "Weka daraja na uchapishe ili kuonyesha duka hadharani.",
+    "setTier": "Daraja la uthibitisho",
+    "publish": "Imechapishwa (inaonekana kwenye orodha)",
+    "publishHint": "Watengenezaji waliochapishwa wenye daraja la utambulisho, verified, au premium pekee ndio huonekana hadharani.",
+    "statusSaved": "Imehifadhiwa.",
+    "saveStatus": "Hifadhi uamuzi",
+    "saving": "Inahifadhi…"
   },
   "notFound": {
     "title": "Ukurasa haujapatikana",
