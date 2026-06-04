@@ -4,7 +4,9 @@
     "products": "Products",
     "manufacturers": "Manufacturers",
     "howItWorks": "How it works",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "account": "Account",
+    "signOut": "Sign out"
   },
   "home": {
     "badge": "Verified China–Africa sourcing",
@@ -19,6 +21,43 @@
       "landedBody": "See the real price in KES — product, freight, duty, and fees — before you commit, with no surprises at the port.",
       "translateTitle": "Talk in your language",
       "translateBody": "Message factories in English or Swahili and we translate to Mandarin instantly, so nothing gets lost."
+    }
+  },
+  "auth": {
+    "signInTitle": "Welcome back",
+    "signInSubtitle": "Sign in to your CargoScope account.",
+    "signUpTitle": "Create your account",
+    "signUpSubtitle": "Join CargoScope to source or sell with confidence.",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 8 characters.",
+    "fullName": "Full name",
+    "accountType": "I want to",
+    "buyer": "Buy",
+    "buyerHint": "Source products from verified factories.",
+    "supplier": "Sell",
+    "supplierHint": "List your factory and reach African buyers.",
+    "signInCta": "Sign in",
+    "signUpCta": "Create account",
+    "signingIn": "Signing in…",
+    "creatingAccount": "Creating account…",
+    "noAccount": "New to CargoScope?",
+    "haveAccount": "Already have an account?",
+    "checkEmailTitle": "Check your email",
+    "checkEmailBody": "We sent you a confirmation link. Click it to activate your account and sign in."
+  },
+  "account": {
+    "title": "Your account",
+    "subtitle": "Manage your CargoScope profile and session.",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "notSet": "Not set",
+    "signOut": "Sign out",
+    "roles": {
+      "buyer": "Buyer",
+      "manufacturer": "Manufacturer",
+      "admin": "Admin"
     }
   },
   "notFound": {

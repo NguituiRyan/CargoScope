@@ -4,7 +4,9 @@
     "products": "Bidhaa",
     "manufacturers": "Watengenezaji",
     "howItWorks": "Jinsi inavyofanya kazi",
-    "signIn": "Ingia"
+    "signIn": "Ingia",
+    "account": "Akaunti",
+    "signOut": "Toka"
   },
   "home": {
     "badge": "Ununuzi uliothibitishwa China–Afrika",
@@ -19,6 +21,43 @@
       "landedBody": "Ona bei halisi kwa KES — bidhaa, usafirishaji, ushuru, na ada — kabla ya kujitolea, bila mshangao bandarini.",
       "translateTitle": "Ongea kwa lugha yako",
       "translateBody": "Tuma ujumbe kwa viwanda kwa Kiingereza au Kiswahili nasi tunatafsiri kwa Kichina papo hapo, ili kisipotee chochote."
+    }
+  },
+  "auth": {
+    "signInTitle": "Karibu tena",
+    "signInSubtitle": "Ingia kwenye akaunti yako ya CargoScope.",
+    "signUpTitle": "Fungua akaunti yako",
+    "signUpSubtitle": "Jiunge na CargoScope kununua au kuuza kwa uhakika.",
+    "email": "Barua pepe",
+    "password": "Nenosiri",
+    "passwordHint": "Angalau herufi 8.",
+    "fullName": "Jina kamili",
+    "accountType": "Nataka",
+    "buyer": "Kununua",
+    "buyerHint": "Nunua bidhaa kutoka kwa viwanda vilivyothibitishwa.",
+    "supplier": "Kuuza",
+    "supplierHint": "Orodhesha kiwanda chako na ufikie wanunuzi wa Kiafrika.",
+    "signInCta": "Ingia",
+    "signUpCta": "Fungua akaunti",
+    "signingIn": "Inaingia…",
+    "creatingAccount": "Inafungua akaunti…",
+    "noAccount": "Mgeni kwenye CargoScope?",
+    "haveAccount": "Tayari una akaunti?",
+    "checkEmailTitle": "Angalia barua pepe yako",
+    "checkEmailBody": "Tumekutumia kiungo cha uthibitisho. Bofya ili kuwasha akaunti yako na kuingia."
+  },
+  "account": {
+    "title": "Akaunti yako",
+    "subtitle": "Dhibiti wasifu wako wa CargoScope na kipindi chako.",
+    "name": "Jina",
+    "email": "Barua pepe",
+    "role": "Wajibu",
+    "notSet": "Haijawekwa",
+    "signOut": "Toka",
+    "roles": {
+      "buyer": "Mnunuzi",
+      "manufacturer": "Mtengenezaji",
+      "admin": "Msimamizi"
     }
   },
   "notFound": {

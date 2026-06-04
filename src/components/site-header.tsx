@@ -1,13 +1,17 @@
 import { Ship } from "lucide-react"
-import { getTranslations } from "next-intl/server"
+import { getLocale, getTranslations } from "next-intl/server"
 
 import { LocaleSwitcher } from "@/components/locale-switcher"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
+import { signOutAction } from "@/lib/auth/actions"
+import { getSessionUser } from "@/lib/auth/session"
 import { cn } from "@/lib/utils"
 
 export async function SiteHeader() {
   const t = await getTranslations("nav")
+  const locale = await getLocale()
+  const user = await getSessionUser()
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -40,12 +44,32 @@ export async function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
-          <Link
-            href="/sign-in"
-            className={cn(buttonVariants({ variant: "default", size: "sm" }))}
-          >
-            {t("signIn")}
-          </Link>
+          {user ? (
+            <>
+              <Link
+                href="/account"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "max-w-[10rem] truncate"
+                )}
+              >
+                {user.fullName ?? user.email}
+              </Link>
+              <form action={signOutAction}>
+                <input type="hidden" name="locale" value={locale} />
+                <Button type="submit" variant="outline" size="sm">
+                  {t("signOut")}
+                </Button>
+              </form>
+            </>
+          ) : (
+            <Link
+              href="/sign-in"
+              className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+            >
+              {t("signIn")}
+            </Link>
+          )}
         </div>
       </div>
     </header>
