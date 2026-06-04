@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "brand": "CargoScope",
+    "products": "Products",
+    "manufacturers": "Manufacturers",
+    "howItWorks": "How it works",
+    "signIn": "Sign in"
+  },
+  "home": {
+    "badge": "Verified China–Africa sourcing",
+    "title": "Source from verified Chinese manufacturers, with confidence.",
+    "subtitle": "CargoScope connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
+    "ctaBrowse": "Browse products",
+    "ctaSell": "Sell on CargoScope",
+    "pillars": {
+      "verifiedTitle": "Verified suppliers",
+      "verifiedBody": "Every manufacturer is document-checked and tier-rated before they can list, so you know who you are buying from.",
+      "landedTitle": "True landed cost",
+      "landedBody": "See the real price in KES — product, freight, duty, and fees — before you commit, with no surprises at the port.",
+      "translateTitle": "Talk in your language",
+      "translateBody": "Message factories in English or Swahili and we translate to Mandarin instantly, so nothing gets lost."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved.",
+    "home": "Back to home"
+  }
+}

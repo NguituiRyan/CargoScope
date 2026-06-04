@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "brand": "CargoScope",
+    "products": "Bidhaa",
+    "manufacturers": "Watengenezaji",
+    "howItWorks": "Jinsi inavyofanya kazi",
+    "signIn": "Ingia"
+  },
+  "home": {
+    "badge": "Ununuzi uliothibitishwa China–Afrika",
+    "title": "Nunua kutoka kwa watengenezaji wa China waliothibitishwa, kwa uhakika.",
+    "subtitle": "CargoScope inaunganisha wanunuzi wa jumla wa Kenya na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
+    "ctaBrowse": "Vinjari bidhaa",
+    "ctaSell": "Uza kwenye CargoScope",
+    "pillars": {
+      "verifiedTitle": "Wasambazaji waliothibitishwa",
+      "verifiedBody": "Kila mtengenezaji hukaguliwa hati na kupewa daraja kabla ya kuorodhesha, ili ujue unanunua kutoka kwa nani.",
+      "landedTitle": "Gharama halisi ya kufikisha",
+      "landedBody": "Ona bei halisi kwa KES — bidhaa, usafirishaji, ushuru, na ada — kabla ya kujitolea, bila mshangao bandarini.",
+      "translateTitle": "Ongea kwa lugha yako",
+      "translateBody": "Tuma ujumbe kwa viwanda kwa Kiingereza au Kiswahili nasi tunatafsiri kwa Kichina papo hapo, ili kisipotee chochote."
+    }
+  },
+  "notFound": {
+    "title": "Ukurasa haujapatikana",
+    "body": "Ukurasa unaoutafuta haupo au umehamishwa.",
+    "home": "Rudi nyumbani"
+  }
+}

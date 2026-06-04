@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "brand": "CargoScope",
+    "products": "产品",
+    "manufacturers": "制造商",
+    "howItWorks": "运作方式",
+    "signIn": "登录"
+  },
+  "home": {
+    "badge": "经核实的中非采购",
+    "title": "放心地向经核实的中国制造商采购。",
+    "subtitle": "CargoScope 将肯尼亚的批发买家与经审核的工厂连接起来——透明的到岸成本、应用内翻译，每一步都建立信任。",
+    "ctaBrowse": "浏览产品",
+    "ctaSell": "在 CargoScope 上销售",
+    "pillars": {
+      "verifiedTitle": "经核实的供应商",
+      "verifiedBody": "每家制造商在上架前都会经过证件审核和等级评定，让您清楚知道与谁交易。",
+      "landedTitle": "真实到岸成本",
+      "landedBody": "在下单前即可看到以肯尼亚先令计的真实价格——产品、运费、关税和手续费——到港无意外。",
+      "translateTitle": "用您的语言沟通",
+      "translateBody": "用英语或斯瓦希里语向工厂发送消息，我们即时翻译成中文，确保信息无误。"
+    }
+  },
+  "notFound": {
+    "title": "未找到页面",
+    "body": "您查找的页面不存在或已移动。",
+    "home": "返回首页"
+  }
+}
