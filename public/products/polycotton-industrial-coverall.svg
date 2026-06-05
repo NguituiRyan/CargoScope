@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Polycotton Industrial Coverall">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#7c2d12" opacity="0.12"/>
+  <g>
+    <path d="M168 96 L232 96 L240 112 L268 140 L256 168 L240 150 L240 196 L160 196 L160 150 L144 168 L132 140 L160 112 Z" fill="url(#body)"/>
+    <path d="M186 196 L160 196 L160 300 L192 300 L194 220 Z" fill="url(#body)"/>
+    <path d="M214 196 L240 196 L240 300 L208 300 L206 220 Z" fill="url(#body)"/>
+    <path d="M168 96 L232 96 L240 112 L268 140 L256 168 L240 150 L240 196 L160 196 L160 150 L144 168 L132 140 L160 112 Z" fill="url(#sheen)"/>
+    <rect x="160" y="186" width="80" height="12" fill="#7c2d12" opacity="0.45"/>
+    <path d="M174 100 L174 196 L184 196 L184 100 Z" fill="#7c2d12" opacity="0.40"/>
+    <g stroke="#7c2d12" stroke-width="2.5" opacity="0.55"><line x1="179" y1="104" x2="179" y2="192"/></g>
+    <rect x="200" y="120" width="30" height="26" rx="3" fill="#fde68a" opacity="0.85"/>
+    <line x1="200" y1="130" x2="230" y2="130" stroke="#b45309" stroke-width="2" opacity="0.6"/>
+    <g fill="#fde68a"><circle cx="179" cy="120" r="3.2"/><circle cx="179" cy="148" r="3.2"/><circle cx="179" cy="176" r="3.2"/></g>
+    <circle cx="179" cy="200" r="4" fill="#fde68a"/>
+    <path d="M168 96 L232 96 L226 104 L174 104 Z" fill="#7c2d12" opacity="0.40"/>
+    <line x1="160" y1="248" x2="192" y2="248" stroke="#7c2d12" stroke-width="2" opacity="0.30"/>
+    <line x1="208" y1="248" x2="240" y2="248" stroke="#7c2d12" stroke-width="2" opacity="0.30"/>
+  </g>
+</svg>

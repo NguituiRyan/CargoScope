@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Nitrile-Coated Work Gloves">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient>
+    <linearGradient id="cuff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="palm" cx="0.42" cy="0.4" r="0.7"><stop offset="0" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#0f172a" opacity="0.12"/>
+  <g>
+    <path d="M150 196 v-44 q0-12 11-12 12 0 12 12 v36 l4-2 v-54 q0-12 12-12 12 0 12 12 v52 l4-1 v-62 q0-12 12-12 12 0 12 12 v62 l4 1 v-48 q0-12 12-12 12 0 12 12 v74 q0 40-26 64 l-8 8 v18 h-58 v-18 l-8-8 q-21-19-21-50 z" fill="url(#body)"/>
+    <path d="M150 196 v-44 q0-12 11-12 12 0 12 12 v36 l4-2 v-54 q0-12 12-12 12 0 12 12 v52 l4-1 v-62 q0-12 12-12 12 0 12 12 v62 l4 1 v-48 q0-12 12-12 12 0 12 12 v74 q0 40-26 64 l-8 8 v18 h-58 v-18 l-8-8 q-21-19-21-50 z" fill="none" stroke="#0f172a" stroke-width="2" opacity="0.18"/>
+    <ellipse cx="195" cy="235" rx="40" ry="48" fill="url(#palm)"/>
+    <circle cx="161" cy="146" r="11" fill="#94a3b8"/>
+    <circle cx="185" cy="138" r="11" fill="#94a3b8"/>
+    <circle cx="209" cy="134" r="11" fill="#94a3b8"/>
+    <circle cx="233" cy="146" r="11" fill="#94a3b8"/>
+    <g fill="#cbd5e1" opacity="0.85"><circle cx="180" cy="218" r="2.4"/><circle cx="195" cy="214" r="2.4"/><circle cx="210" cy="218" r="2.4"/><circle cx="174" cy="234" r="2.4"/><circle cx="190" cy="232" r="2.4"/><circle cx="206" cy="234" r="2.4"/><circle cx="222" cy="234" r="2.4"/><circle cx="180" cy="250" r="2.4"/><circle cx="196" cy="252" r="2.4"/><circle cx="212" cy="250" r="2.4"/></g>
+    <rect x="158" y="296" width="74" height="34" rx="6" fill="url(#cuff)"/>
+    <g stroke="#92400e" stroke-width="2" opacity="0.55"><line x1="166" y1="298" x2="166" y2="328"/><line x1="178" y1="298" x2="178" y2="328"/><line x1="190" y1="298" x2="190" y2="328"/><line x1="202" y1="298" x2="202" y2="328"/><line x1="214" y1="298" x2="214" y2="328"/><line x1="224" y1="298" x2="224" y2="328"/></g>
+    <path d="M156 150 q-9 4-9 46 v6 q0 26 18 46 l6 6 v20 h-9 v-18 l-8-8 q-21-19-21-50 v-48 q0-12 11-12 6 0 8 4 z" fill="url(#sheen)"/>
+  </g>
+</svg>

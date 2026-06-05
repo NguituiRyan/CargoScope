@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="3-Piece Bamboo Cutting Board Set">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/></linearGradient>
+    <linearGradient id="board" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#047857"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#10b981" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#10b981" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#064e3b" opacity="0.12"/>
+  <g>
+    <g transform="rotate(-9 200 250)">
+      <rect x="112" y="226" width="176" height="74" rx="16" fill="url(#board)"/>
+      <rect x="120" y="234" width="160" height="58" rx="11" fill="none" stroke="#064e3b" stroke-width="2" opacity="0.4"/>
+      <ellipse cx="262" cy="263" rx="13" ry="8" fill="#064e3b" opacity="0.55"/>
+      <g stroke="#a7f3d0" stroke-width="1.5" opacity="0.5"><line x1="128" y1="248" x2="248" y2="248"/><line x1="128" y1="263" x2="240" y2="263"/><line x1="128" y1="278" x2="248" y2="278"/></g>
+    </g>
+    <g transform="rotate(-1 200 200)">
+      <rect x="116" y="158" width="168" height="68" rx="15" fill="url(#board)"/>
+      <rect x="116" y="158" width="46" height="68" rx="15" fill="url(#sheen)"/>
+      <rect x="124" y="166" width="152" height="52" rx="10" fill="none" stroke="#064e3b" stroke-width="2" opacity="0.4"/>
+      <ellipse cx="256" cy="192" rx="12" ry="7" fill="#064e3b" opacity="0.55"/>
+      <g stroke="#a7f3d0" stroke-width="1.5" opacity="0.55"><line x1="132" y1="180" x2="240" y2="180"/><line x1="132" y1="192" x2="234" y2="192"/><line x1="132" y1="204" x2="240" y2="204"/></g>
+    </g>
+    <g transform="rotate(8 200 150)">
+      <rect x="124" y="98" width="152" height="60" rx="14" fill="url(#board)"/>
+      <rect x="124" y="98" width="42" height="60" rx="14" fill="url(#sheen)"/>
+      <rect x="131" y="105" width="138" height="46" rx="9" fill="none" stroke="#064e3b" stroke-width="2" opacity="0.4"/>
+      <ellipse cx="249" cy="128" rx="11" ry="6.5" fill="#064e3b" opacity="0.55"/>
+      <g stroke="#a7f3d0" stroke-width="1.5" opacity="0.6"><line x1="139" y1="118" x2="228" y2="118"/><line x1="139" y1="128" x2="222" y2="128"/><line x1="139" y1="138" x2="228" y2="138"/></g>
+    </g>
+  </g>
+</svg>

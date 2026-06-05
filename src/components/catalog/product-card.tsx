@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { Clock, Package } from "lucide-react"
 
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
+import { Stars } from "@/components/reviews/stars"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import type { ProductCard as ProductCardData } from "@/lib/catalog/queries"
@@ -16,10 +17,12 @@ export async function ProductCard({
   product,
   currency,
   rates,
+  rating,
 }: {
   product: ProductCardData
   currency: DisplayCurrency
   rates: DisplayRates["rates"]
+  rating?: { avg: number; count: number }
 }) {
   const t = await getTranslations("catalog")
 
@@ -61,6 +64,10 @@ export async function ProductCard({
               <span className="text-muted-foreground">{t("priceOnRequest")}</span>
             )}
           </p>
+
+          {rating && rating.count > 0 ? (
+            <Stars value={rating.avg} count={rating.count} />
+          ) : null}
 
           <div className="mt-auto flex flex-wrap gap-1.5 text-xs">
             {product.moq ? (

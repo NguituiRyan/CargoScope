@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Bubble Cushion Wrap Roll">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf6ef"/><stop offset="1" stop-color="#efe6d8"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b08968"/><stop offset="1" stop-color="#7f5539"/></linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7d3bd"/><stop offset="1" stop-color="#7f5539"/></linearGradient>
+    <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e7d3bd" stop-opacity="0.95"/><stop offset="1" stop-color="#d4a373" stop-opacity="0.8"/></linearGradient>
+    <radialGradient id="bub" cx="0.4" cy="0.35" r="0.7"><stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/><stop offset="1" stop-color="#b08968" stop-opacity="0.25"/></radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#d4a373" opacity="0.11"/>
+  <circle cx="76" cy="118" r="26" fill="#d4a373" opacity="0.09"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#3a2614" opacity="0.12"/>
+  <g>
+    <path d="M250 118 L250 282 Q140 300 116 226 Q116 152 250 118 Z" fill="url(#sheet)"/>
+    <g fill="url(#bub)">
+      <circle cx="146" cy="170" r="6"/><circle cx="170" cy="162" r="6"/><circle cx="194" cy="156" r="6"/><circle cx="218" cy="151" r="6"/>
+      <circle cx="142" cy="196" r="6"/><circle cx="166" cy="190" r="6"/><circle cx="190" cy="185" r="6"/><circle cx="214" cy="181" r="6"/>
+      <circle cx="146" cy="222" r="6"/><circle cx="170" cy="218" r="6"/><circle cx="194" cy="214" r="6"/><circle cx="218" cy="211" r="6"/>
+      <circle cx="158" cy="248" r="6"/><circle cx="182" cy="245" r="6"/><circle cx="206" cy="242" r="6"/>
+    </g>
+    <ellipse cx="262" cy="200" rx="44" ry="92" fill="url(#body)"/>
+    <ellipse cx="262" cy="200" rx="18" ry="92" fill="url(#sheen)"/>
+    <ellipse cx="262" cy="200" rx="44" ry="92" fill="none" stroke="#3a2614" stroke-opacity="0.25" stroke-width="2"/>
+    <ellipse cx="262" cy="200" rx="20" ry="42" fill="url(#core)"/>
+    <ellipse cx="262" cy="200" rx="8" ry="18" fill="#3a2614" opacity="0.55"/>
+  </g>
+</svg>

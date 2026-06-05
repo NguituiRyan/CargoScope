@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="SPF50+ Facial Sunscreen 50ml">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="label" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fbcfe8"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#ec4899" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#ec4899" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#831843" opacity="0.12"/>
+  <g>
+    <rect x="138" y="138" width="124" height="160" rx="40" fill="url(#body)"/>
+    <rect x="138" y="138" width="48" height="160" rx="24" fill="url(#sheen)"/>
+    <rect x="152" y="116" width="96" height="30" rx="10" fill="url(#cap)"/>
+    <g fill="#831843" opacity="0.45"><rect x="158" y="120" width="3" height="22" rx="1.5"/><rect x="167" y="120" width="3" height="22" rx="1.5"/><rect x="176" y="120" width="3" height="22" rx="1.5"/><rect x="221" y="120" width="3" height="22" rx="1.5"/><rect x="230" y="120" width="3" height="22" rx="1.5"/><rect x="239" y="120" width="3" height="22" rx="1.5"/></g>
+    <rect x="184" y="92" width="32" height="30" rx="7" fill="url(#cap)"/>
+    <rect x="184" y="92" width="12" height="30" rx="6" fill="#ffffff" opacity="0.35"/>
+    <rect x="160" y="186" width="80" height="86" rx="16" fill="url(#label)"/>
+    <circle cx="200" cy="216" r="15" fill="#ec4899"/>
+    <g stroke="#ec4899" stroke-width="3" stroke-linecap="round"><line x1="200" y1="189" x2="200" y2="196"/><line x1="200" y1="236" x2="200" y2="243"/><line x1="173" y1="216" x2="180" y2="216"/><line x1="220" y1="216" x2="227" y2="216"/><line x1="181" y1="197" x2="186" y2="202"/><line x1="214" y1="230" x2="219" y2="235"/><line x1="219" y1="197" x2="214" y2="202"/><line x1="186" y1="230" x2="181" y2="235"/></g>
+    <rect x="174" y="254" width="52" height="6" rx="3" fill="#be185d" opacity="0.6"/>
+  </g>
+</svg>

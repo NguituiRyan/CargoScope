@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="WiFi Smart Bulb RGBW">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef2ff"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient>
+    <radialGradient id="glass" cx="0.42" cy="0.38" r="0.72"><stop offset="0" stop-color="#ffffff"/><stop offset="0.45" stop-color="#c7d2fe"/><stop offset="1" stop-color="#6366f1"/></radialGradient>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#c7d2fe" stop-opacity="0.55"/><stop offset="1" stop-color="#c7d2fe" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#6366f1" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#6366f1" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#1e1b4b" opacity="0.12"/>
+  <circle cx="200" cy="172" r="118" fill="url(#glow)"/>
+  <g>
+    <path d="M200 90 C151 90 124 128 124 168 C124 198 142 214 152 230 C160 243 162 252 162 262 L238 262 C238 252 240 243 248 230 C258 214 276 198 276 168 C276 128 249 90 200 90 Z" fill="url(#glass)"/>
+    <path d="M200 90 C170 90 148 105 135 128 C146 112 165 102 186 102 C198 102 206 106 210 116 C214 124 210 134 200 140 C182 150 168 134 172 116 C176 100 188 92 200 90 Z" fill="url(#sheen)"/>
+    <path d="M168 145 C168 122 184 108 200 108" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="6" stroke-linecap="round"/>
+    <path d="M188 168 C188 152 200 144 200 130 C200 144 212 152 212 168 C212 182 188 182 188 168 Z" fill="#4338ca" opacity="0.5"/>
+    <circle cx="200" cy="178" r="5" fill="#1e1b4b" opacity="0.55"/>
+    <rect x="162" y="262" width="76" height="11" rx="4" fill="url(#base)"/>
+    <rect x="166" y="275" width="68" height="11" rx="4" fill="url(#base)"/>
+    <rect x="170" y="288" width="60" height="11" rx="4" fill="url(#base)"/>
+    <rect x="162" y="262" width="22" height="37" fill="url(#sheen)"/>
+    <path d="M178 299 L222 299 L211 312 C208 316 192 316 189 312 Z" fill="#1e1b4b"/>
+    <circle cx="200" cy="318" r="4" fill="#4338ca"/>
+  </g>
+</svg>

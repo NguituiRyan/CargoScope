@@ -2,6 +2,7 @@ import { Calculator, Languages, ShieldCheck } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { CatalogFilters } from "@/components/catalog/catalog-filters"
+import { HeroSearch } from "@/components/catalog/hero-search"
 import { ProductCard } from "@/components/catalog/product-card"
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
@@ -14,6 +15,7 @@ import {
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates } from "@/lib/fx"
+import { getProductRatings } from "@/lib/reviews/queries"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
 import { cn } from "@/lib/utils"
 
@@ -107,6 +109,7 @@ export async function CatalogView({
   const rate = displayRates.rates[currency] || 1
   const filters = parseFilters(sp, rate)
   const { items, total } = await searchProducts(filters)
+  const ratings = await getProductRatings(items.map((i) => i.id))
 
   const activeCategory = filters.category ?? null
   const pillars = [
@@ -114,6 +117,10 @@ export async function CatalogView({
     { icon: Calculator, label: tHome("pillars.landedTitle") },
     { icon: Languages, label: tHome("pillars.translateTitle") },
   ]
+  const popular = categories.slice(0, 5).map((c) => ({
+    label: c.name,
+    href: `/products?category=${c.slug}`,
+  }))
 
   return (
     <div className="flex flex-col">
@@ -130,6 +137,9 @@ export async function CatalogView({
             <p className="text-sm text-muted-foreground text-pretty sm:text-base">
               {tHome("subtitle")}
             </p>
+            <div className="pt-1">
+              <HeroSearch defaultValue={filters.q} popular={popular} />
+            </div>
             <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-0.5">
               {pillars.map(({ icon: Icon, label }) => (
                 <li
@@ -197,6 +207,7 @@ export async function CatalogView({
                 product={product}
                 currency={currency}
                 rates={displayRates.rates}
+                rating={ratings.get(product.id)}
               />
             ))}
           </div>

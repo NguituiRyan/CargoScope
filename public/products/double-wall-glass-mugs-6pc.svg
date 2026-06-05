@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Double-Wall Glass Coffee Mugs (6pc)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7f3d0" stop-opacity="0.55"/><stop offset="1" stop-color="#10b981" stop-opacity="0.35"/></linearGradient>
+    <linearGradient id="coffee" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b45309"/><stop offset="1" stop-color="#7c2d12"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#10b981" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#10b981" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#064e3b" opacity="0.12"/>
+  <g>
+    <path d="M250 168 a30 30 0 0 1 0 60 l-12 0 0 -16 12 0 a14 14 0 0 0 0 -28 l-12 0 0 -16 z" fill="url(#glass)" stroke="#047857" stroke-width="2" stroke-opacity="0.5"/>
+    <path d="M132 138 h120 a8 8 0 0 1 8 8 v118 a26 26 0 0 1 -26 26 h-84 a26 26 0 0 1 -26 -26 v-118 a8 8 0 0 1 8 -8 z" fill="url(#glass)" stroke="#047857" stroke-width="2.5" stroke-opacity="0.55"/>
+    <path d="M152 156 h80 a4 4 0 0 1 4 4 v96 a16 16 0 0 1 -16 16 h-56 a16 16 0 0 1 -16 -16 v-96 a4 4 0 0 1 4 -4 z" fill="#ecfdf5" fill-opacity="0.35" stroke="#047857" stroke-width="2" stroke-opacity="0.45"/>
+    <path d="M152 214 h88 v42 a16 16 0 0 1 -16 16 h-56 a16 16 0 0 1 -16 -16 z" fill="url(#coffee)"/>
+    <ellipse cx="196" cy="214" rx="44" ry="6" fill="#92400e" opacity="0.8"/>
+    <rect x="150" y="156" width="20" height="116" rx="6" fill="url(#sheen)"/>
+    <line x1="216" y1="166" x2="216" y2="252" stroke="#ffffff" stroke-width="4" stroke-opacity="0.5" stroke-linecap="round"/>
+    <ellipse cx="180" cy="180" rx="10" ry="22" fill="#ffffff" opacity="0.35"/>
+    <line x1="244" y1="180" x2="244" y2="214" stroke="#ffffff" stroke-width="3" stroke-opacity="0.4" stroke-linecap="round"/>
+  </g>
+</svg>

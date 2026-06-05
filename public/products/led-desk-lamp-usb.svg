@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Dimmable LED Desk Lamp">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef2ff"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/></linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/></linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7d2fe" stop-opacity="0.95"/><stop offset="1" stop-color="#c7d2fe" stop-opacity="0"/></linearGradient>
+    <radialGradient id="base" cx="0.4" cy="0.35" r="0.8"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/></radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#6366f1" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#6366f1" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#1e1b4b" opacity="0.12"/>
+  <g>
+    <path d="M133 296 L150 196 L166 200 L152 296 Z" fill="url(#body)"/>
+    <path d="M155 200 L185 132 L199 139 L171 204 Z" fill="url(#body)"/>
+    <circle cx="155" cy="200" r="9" fill="#1e1b4b" opacity="0.55"/>
+    <circle cx="186" cy="135" r="8" fill="#1e1b4b" opacity="0.55"/>
+    <rect x="180" y="116" width="118" height="26" rx="11" fill="url(#bar)" transform="rotate(-4 239 129)"/>
+    <rect x="180" y="116" width="50" height="26" rx="11" fill="url(#sheen)" transform="rotate(-4 239 129)"/>
+    <path d="M188 142 L296 134 L304 168 L182 178 Z" fill="url(#glow)" transform="rotate(-4 245 156)"/>
+    <ellipse cx="200" cy="300" rx="62" ry="18" fill="url(#base)"/>
+    <ellipse cx="200" cy="294" rx="62" ry="18" fill="url(#body)"/>
+    <ellipse cx="183" cy="288" rx="30" ry="8" fill="#ffffff" opacity="0.22"/>
+    <rect x="172" y="290" width="56" height="9" rx="4.5" fill="#1e1b4b" opacity="0.45"/>
+    <circle cx="216" cy="294" r="6" fill="#c7d2fe"/>
+  </g>
+</svg>

@@ -283,7 +283,7 @@ export async function searchProducts(
 
   const { data } = await query
     .order("created_at", { ascending: false })
-    .limit(60)
+    .limit(120)
 
   let items = (data ?? [])
     .map((row) => mapCard(row as CardRow))

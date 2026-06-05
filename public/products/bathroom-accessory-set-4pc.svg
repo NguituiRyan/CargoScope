@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="4-Piece Resin Bathroom Accessory Set">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#047857"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="speck" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#a7f3d0" stop-opacity="0.5"/><stop offset="1" stop-color="#a7f3d0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#10b981" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#10b981" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="120" ry="17" fill="#064e3b" opacity="0.12"/>
+  <g>
+    <rect x="120" y="116" width="46" height="170" rx="13" fill="url(#body)"/>
+    <rect x="120" y="116" width="19" height="170" rx="9" fill="url(#sheen)"/>
+    <rect x="135" y="92" width="16" height="30" rx="5" fill="#064e3b" opacity="0.6"/>
+    <rect x="149" y="98" width="24" height="9" rx="4" fill="#047857"/>
+    <circle cx="133" cy="170" r="6" fill="url(#speck)"/>
+    <circle cx="151" cy="232" r="7" fill="url(#speck)"/>
+  </g>
+  <g>
+    <rect x="180" y="170" width="42" height="116" rx="11" fill="url(#body)"/>
+    <rect x="180" y="170" width="17" height="116" rx="8" fill="url(#sheen)"/>
+    <ellipse cx="201" cy="170" rx="21" ry="6" fill="#a7f3d0"/>
+    <circle cx="194" cy="220" r="6" fill="url(#speck)"/>
+  </g>
+  <g>
+    <rect x="232" y="150" width="44" height="136" rx="11" fill="url(#body)"/>
+    <rect x="232" y="150" width="17" height="136" rx="8" fill="url(#sheen)"/>
+    <g fill="#064e3b" opacity="0.55"><rect x="241" y="158" width="6" height="16" rx="3"/><rect x="251" y="158" width="6" height="16" rx="3"/><rect x="261" y="158" width="6" height="16" rx="3"/></g>
+    <circle cx="263" cy="226" r="7" fill="url(#speck)"/>
+  </g>
+  <g>
+    <ellipse cx="200" cy="286" rx="84" ry="20" fill="url(#body)"/>
+    <ellipse cx="200" cy="280" rx="84" ry="20" fill="#a7f3d0"/>
+    <ellipse cx="200" cy="278" rx="66" ry="13" fill="#047857" opacity="0.5"/>
+    <ellipse cx="176" cy="274" rx="22" ry="6" fill="#ffffff" opacity="0.4"/>
+    <circle cx="232" cy="282" r="6" fill="url(#speck)"/>
+  </g>
+</svg>

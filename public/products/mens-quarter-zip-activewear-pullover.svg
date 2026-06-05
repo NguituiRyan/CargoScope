@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Men's Quarter-Zip Activewear Pullover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#ffedd5"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></linearGradient>
+    <linearGradient id="collar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#7c2d12" opacity="0.12"/>
+  <g>
+    <path d="M150 132 L122 168 L96 150 L66 196 L104 226 L122 206 L122 296 Q122 304 130 304 L270 304 Q278 304 278 296 L278 206 L296 226 L334 196 L304 150 L278 168 L250 132 Q236 116 200 116 Q164 116 150 132 Z" fill="url(#body)"/>
+    <path d="M150 132 L122 168 L96 150 L66 196 L104 226 L122 206 L122 296 Q122 304 130 304 L162 304 L162 138 Q156 134 150 132 Z" fill="url(#sheen)"/>
+    <path d="M150 132 Q164 116 200 116 Q236 116 250 132 L228 156 Q214 144 200 144 Q186 144 172 156 Z" fill="url(#sheen)" opacity="0.5"/>
+    <path d="M172 116 Q186 104 200 104 Q214 104 228 116 L228 142 Q214 130 200 130 Q186 130 172 142 Z" fill="url(#collar)"/>
+    <path d="M172 116 Q186 104 200 104 L204 130 Q188 130 176 140 Z" fill="#ffffff" opacity="0.35"/>
+    <path d="M198 130 Q188 130 178 138 L182 200 Q190 192 198 196 Z" fill="#7c2d12" opacity="0.5"/>
+    <line x1="200" y1="106" x2="200" y2="196" stroke="#7c2d12" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+    <rect x="195" y="116" width="10" height="20" rx="3" fill="#fde68a"/>
+    <rect x="197.5" y="124" width="5" height="14" rx="2.5" fill="#7c2d12" opacity="0.6"/>
+    <path d="M122 296 L122 304 Q122 312 130 312 L168 312 L168 296 Z" fill="#b45309"/>
+    <path d="M232 296 L232 312 L270 312 Q278 312 278 304 L278 296 Z" fill="#b45309"/>
+    <path d="M66 196 L60 212 L96 240 L104 226 Z" fill="#b45309"/>
+    <path d="M334 196 L340 212 L304 240 L296 226 Z" fill="#b45309"/>
+    <path d="M150 132 Q200 150 250 132" fill="none" stroke="#7c2d12" stroke-width="2" opacity="0.3"/>
+  </g>
+</svg>

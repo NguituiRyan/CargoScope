@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="7-Piece Stainless Steel Manicure Set">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+    <linearGradient id="caseBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="caseLid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#be185d"/><stop offset="1" stop-color="#831843"/></linearGradient>
+    <linearGradient id="liner" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#831843"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fbcfe8"/><stop offset="0.5" stop-color="#ffffff"/><stop offset="1" stop-color="#fbcfe8"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#ec4899" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#ec4899" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#831843" opacity="0.12"/>
+  <g>
+    <rect x="112" y="150" width="176" height="120" rx="14" fill="url(#caseLid)"/>
+    <rect x="110" y="148" width="180" height="118" rx="14" fill="url(#caseBody)"/>
+    <rect x="110" y="148" width="74" height="118" rx="14" fill="url(#sheen)"/>
+    <rect x="126" y="162" width="148" height="90" rx="9" fill="url(#liner)"/>
+    <rect x="126" y="162" width="148" height="90" rx="9" fill="none" stroke="#fbcfe8" stroke-width="1.5" opacity="0.4"/>
+    <g fill="none" stroke="#fbcfe8" stroke-width="6" opacity="0.55" stroke-linecap="round">
+      <line x1="150" y1="174" x2="150" y2="240"/>
+      <line x1="180" y1="174" x2="180" y2="240"/>
+      <line x1="210" y1="174" x2="210" y2="240"/>
+      <line x1="240" y1="174" x2="240" y2="240"/>
+    </g>
+    <g transform="rotate(-9 150 207)"><rect x="142" y="172" width="16" height="70" rx="5" fill="url(#steel)"/><rect x="144" y="178" width="3" height="58" fill="#be185d" opacity="0.35"/><circle cx="150" cy="180" r="4" fill="#831843" opacity="0.5"/></g>
+    <g transform="rotate(-3 180 207)"><rect x="173" y="170" width="14" height="74" rx="6" fill="url(#steel)"/><rect x="178" y="176" width="4" height="40" fill="#fbcfe8" opacity="0.7"/><ellipse cx="180" cy="238" rx="9" ry="11" fill="none" stroke="#be185d" stroke-width="3"/></g>
+    <g transform="rotate(3 210 207)"><path d="M203 240 L207 176 Q210 170 213 176 L217 240 Z" fill="url(#steel)"/><line x1="210" y1="180" x2="210" y2="234" stroke="#be185d" stroke-width="1.5" opacity="0.4"/><circle cx="210" cy="240" r="5" fill="#831843" opacity="0.45"/></g>
+    <g transform="rotate(9 240 207)"><rect x="232" y="172" width="16" height="70" rx="5" fill="url(#steel)"/><rect x="234" y="222" width="12" height="18" rx="3" fill="#be185d" opacity="0.4"/><circle cx="240" cy="180" r="5" fill="none" stroke="#831843" stroke-width="2" opacity="0.5"/></g>
+    <rect x="118" y="156" width="164" height="6" rx="3" fill="#fbcfe8" opacity="0.5"/>
+  </g>
+</svg>

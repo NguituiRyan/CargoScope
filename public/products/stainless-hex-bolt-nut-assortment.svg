@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Stainless Hex Bolt & Nut Assortment">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="1" stop-color="#cbd5e1" stop-opacity="0.10"/></linearGradient>
+    <linearGradient id="cell" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#1e293b"/></linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset="0.5" stop-color="#cbd5e1"/><stop offset="1" stop-color="#64748b"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="head" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#f8fafc"/><stop offset="0.6" stop-color="#cbd5e1"/><stop offset="1" stop-color="#475569"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.09"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#0f172a" opacity="0.12"/>
+  <g>
+    <rect x="112" y="96" width="176" height="208" rx="16" fill="url(#box)"/>
+    <rect x="120" y="104" width="160" height="192" rx="10" fill="url(#cell)"/>
+    <line x1="200" y1="104" x2="200" y2="296" stroke="#0f172a" stroke-width="5" opacity="0.7"/>
+    <line x1="120" y1="200" x2="280" y2="200" stroke="#0f172a" stroke-width="5" opacity="0.7"/>
+    <g fill="url(#steel)" stroke="#334155" stroke-width="1.5" stroke-linejoin="round">
+      <polygon points="150,128 162,135 162,149 150,156 138,149 138,135"/>
+      <polygon points="178,140 188,146 188,158 178,164 168,158 168,146"/>
+      <polygon points="150,166 158,171 158,181 150,186 142,181 142,171"/>
+    </g>
+    <g fill="url(#head)" stroke="#334155" stroke-width="1.5">
+      <circle cx="245" cy="135" r="13"/>
+      <circle cx="262" cy="160" r="10"/>
+      <circle cx="232" cy="165" r="9"/>
+    </g>
+    <g fill="none" stroke="#0f172a" stroke-width="1.5" opacity="0.55">
+      <circle cx="245" cy="135" r="5"/>
+      <circle cx="262" cy="160" r="4"/>
+      <circle cx="232" cy="165" r="3.5"/>
+    </g>
+    <g fill="none" stroke="url(#steel)" stroke-width="4">
+      <circle cx="155" cy="248" r="14"/>
+      <circle cx="180" cy="262" r="10"/>
+      <circle cx="150" cy="275" r="8"/>
+    </g>
+    <g fill="url(#steel)" stroke="#334155" stroke-width="1.5" stroke-linejoin="round">
+      <polygon points="240,238 252,238 256,248 252,258 240,258 236,248"/>
+      <rect x="244" y="258" width="4" height="26" rx="1.5"/>
+      <polygon points="262,255 272,255 275,263 272,271 262,271 259,263"/>
+      <rect x="265" y="271" width="3.5" height="20" rx="1.5"/>
+    </g>
+    <rect x="112" y="96" width="176" height="208" rx="16" fill="url(#lid)"/>
+    <rect x="112" y="96" width="52" height="208" rx="16" fill="url(#sheen)"/>
+    <rect x="118" y="102" width="164" height="6" rx="3" fill="#ffffff" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="DIN-Rail Miniature Circuit Breaker">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e2e8f0"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#64748b"/><stop offset="1" stop-color="#334155"/></linearGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#94a3b8"/></linearGradient>
+    <linearGradient id="toggle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#334155"/><stop offset="1" stop-color="#0f172a"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#0f172a" opacity="0.12"/>
+  <g>
+    <rect x="138" y="100" width="124" height="36" rx="6" fill="url(#rail)"/>
+    <rect x="138" y="100" width="124" height="8" rx="4" fill="#0f172a" opacity="0.18"/>
+    <rect x="138" y="128" width="124" height="8" rx="4" fill="#0f172a" opacity="0.18"/>
+    <rect x="148" y="92" width="104" height="200" rx="12" fill="url(#body)"/>
+    <rect x="148" y="92" width="34" height="200" rx="12" fill="url(#sheen)"/>
+    <rect x="186" y="108" width="28" height="20" rx="4" fill="#0f172a" opacity="0.45"/>
+    <rect x="190" y="112" width="20" height="12" rx="2" fill="#cbd5e1"/>
+    <line x1="194" y1="114" x2="206" y2="114" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <line x1="194" y1="118" x2="206" y2="118" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <line x1="194" y1="122" x2="206" y2="122" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <rect x="178" y="174" width="44" height="48" rx="5" fill="#0f172a" opacity="0.85"/>
+    <rect x="188" y="156" width="24" height="56" rx="6" fill="url(#toggle)"/>
+    <rect x="191" y="159" width="7" height="40" rx="3" fill="#64748b" opacity="0.6"/>
+    <rect x="186" y="160" width="28" height="6" rx="3" fill="#f59e0b"/>
+    <rect x="186" y="256" width="28" height="20" rx="4" fill="#0f172a" opacity="0.45"/>
+    <rect x="190" y="260" width="20" height="12" rx="2" fill="#cbd5e1"/>
+    <line x1="194" y1="262" x2="206" y2="262" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <line x1="194" y1="266" x2="206" y2="266" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <line x1="194" y1="270" x2="206" y2="270" stroke="#0f172a" stroke-width="1.4" opacity="0.55"/>
+    <rect x="156" y="240" width="88" height="3" rx="1.5" fill="#0f172a" opacity="0.2"/>
+  </g>
+</svg>

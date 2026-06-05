@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Collapsible Silicone Food Containers (5pc)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#047857"/></linearGradient>
+    <linearGradient id="bodySm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#047857"/></linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7f3d0" stop-opacity="0.92"/><stop offset="1" stop-color="#6ee7b7" stop-opacity="0.78"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#10b981" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#10b981" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#064e3b" opacity="0.12"/>
+
+  <!-- Large container (collapsed/compressed, showing folding ribs) -->
+  <g>
+    <ellipse cx="148" cy="298" rx="46" ry="11" fill="url(#body)"/>
+    <path d="M102 252 q4 6 0 12 q4 6 0 12 q4 6 0 12 q4 6 0 10 q0 11 46 11 q46 0 46 -11 q-4 -4 0 -10 q-4 -6 0 -12 q-4 -6 0 -12 q-4 -6 0 -12 l0 -4 q0 -11 -46 -11 q-46 0 -46 11 z" fill="url(#body)"/>
+    <path d="M102 252 q4 6 0 12 q4 6 0 12 q4 6 0 12 q4 6 0 10 l8 0 q-4 -4 0 -10 q-4 -6 0 -12 q-4 -6 0 -12 q-4 -6 0 -12 z" fill="url(#sheen)"/>
+    <g stroke="#064e3b" stroke-width="2" opacity="0.35" fill="none"><path d="M104 262 q44 9 88 0"/><path d="M104 274 q44 9 88 0"/><path d="M104 286 q44 9 88 0"/></g>
+    <ellipse cx="148" cy="248" rx="48" ry="13" fill="url(#lid)"/>
+    <ellipse cx="148" cy="246" rx="38" ry="9" fill="#a7f3d0" opacity="0.45"/>
+  </g>
+
+  <!-- Medium container (expanded) -->
+  <g>
+    <ellipse cx="208" cy="300" rx="40" ry="10" fill="url(#body)"/>
+    <path d="M170 222 q-3 38 0 74 q0 10 38 10 q38 0 38 -10 q3 -36 0 -74 l0 -2 q0 -10 -38 -10 q-38 0 -38 10 z" fill="url(#body)"/>
+    <path d="M170 222 q-3 38 0 74 q0 10 38 10 l8 0 q0 -8 0 -10 q-3 -36 0 -74 z" fill="url(#sheen)"/>
+    <g stroke="#064e3b" stroke-width="2" opacity="0.3" fill="none"><path d="M172 244 q36 8 72 0"/><path d="M171 266 q37 8 74 0"/><path d="M171 288 q37 8 74 0"/></g>
+    <ellipse cx="208" cy="220" rx="42" ry="12" fill="url(#lid)"/>
+    <ellipse cx="208" cy="218" rx="32" ry="8" fill="#a7f3d0" opacity="0.45"/>
+  </g>
+
+  <!-- Small container (expanded, front) -->
+  <g>
+    <ellipse cx="262" cy="302" rx="33" ry="9" fill="url(#bodySm)"/>
+    <path d="M232 246 q-2 30 0 56 q0 9 30 9 q30 0 30 -9 q2 -26 0 -56 l0 -2 q0 -9 -30 -9 q-30 0 -30 9 z" fill="url(#bodySm)"/>
+    <path d="M232 246 q-2 30 0 56 q0 9 30 9 l7 0 q0 -7 0 -9 q-2 -26 0 -56 z" fill="url(#sheen)"/>
+    <g stroke="#064e3b" stroke-width="1.8" opacity="0.3" fill="none"><path d="M234 264 q28 7 56 0"/><path d="M233 282 q29 7 58 0"/><path d="M233 298 q29 6 58 0"/></g>
+    <ellipse cx="262" cy="244" rx="35" ry="10" fill="url(#lid)"/>
+    <ellipse cx="262" cy="242" rx="26" ry="7" fill="#a7f3d0" opacity="0.45"/>
+  </g>
+</svg>

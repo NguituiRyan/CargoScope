@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Amber Glass Dropper Bottle 30ml">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf6ef"/><stop offset="1" stop-color="#efe6d8"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b08968"/><stop offset="1" stop-color="#7f5539"/></linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2614"/><stop offset="0.5" stop-color="#1c1109"/><stop offset="1" stop-color="#3a2614"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#d4a373" opacity="0.11"/>
+  <circle cx="76" cy="118" r="26" fill="#d4a373" opacity="0.09"/>
+  <ellipse cx="200" cy="326" rx="84" ry="15" fill="#3a2614" opacity="0.12"/>
+  <g>
+    <rect x="170" y="86" width="60" height="22" rx="6" fill="url(#cap)"/>
+    <g stroke="#000000" stroke-opacity="0.35" stroke-width="2"><line x1="178" y1="90" x2="178" y2="104"/><line x1="188" y1="90" x2="188" y2="104"/><line x1="200" y1="90" x2="200" y2="104"/><line x1="212" y1="90" x2="212" y2="104"/><line x1="222" y1="90" x2="222" y2="104"/></g>
+    <rect x="186" y="108" width="28" height="14" rx="3" fill="#2a1b0e"/>
+    <path d="M158 150 q0 -28 22 -34 h40 q22 6 22 34 v118 q0 30 -28 30 h-28 q-28 0 -28 -30 z" fill="url(#body)"/>
+    <path d="M170 122 h60 v32 h-60 z" fill="url(#body)"/>
+    <rect x="195" y="158" width="10" height="120" rx="5" fill="#3a2614" opacity="0.45"/>
+    <path d="M162 152 q4 -26 22 -32 v150 q-22 -2 -22 -28 z" fill="url(#sheen)"/>
+    <rect x="166" y="200" width="68" height="58" rx="8" fill="#e7d3bd" opacity="0.92"/>
+    <rect x="172" y="210" width="56" height="5" rx="2.5" fill="#7f5539" opacity="0.55"/>
+    <rect x="172" y="222" width="44" height="4" rx="2" fill="#7f5539" opacity="0.4"/>
+    <rect x="172" y="232" width="50" height="4" rx="2" fill="#7f5539" opacity="0.4"/>
+    <rect x="172" y="242" width="38" height="4" rx="2" fill="#7f5539" opacity="0.4"/>
+  </g>
+</svg>

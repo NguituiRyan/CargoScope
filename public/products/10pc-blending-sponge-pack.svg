@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="10-Piece Latex-Free Blending Sponge Pack">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+    <linearGradient id="bodyA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="bodyB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbcfe8"/><stop offset="1" stop-color="#ec4899"/></linearGradient>
+    <linearGradient id="bodyC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9a8d4"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <radialGradient id="texA" cx="0.4" cy="0.7" r="0.7"><stop offset="0.55" stop-color="#831843" stop-opacity="0"/><stop offset="1" stop-color="#831843" stop-opacity="0.28"/></radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#ec4899" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#ec4899" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#831843" opacity="0.12"/>
+  <g>
+    <path d="M150 300 C112 300 96 252 110 212 C122 178 145 138 165 110 C175 96 192 96 201 110 C218 136 196 190 188 224 C181 256 188 300 150 300 Z" fill="url(#bodyC)"/>
+    <path d="M150 300 C112 300 96 252 110 212 C122 178 145 138 165 110 C175 96 192 96 201 110 C218 136 196 190 188 224 C181 256 188 300 150 300 Z" fill="url(#texA)"/>
+    <path d="M165 112 C148 142 128 178 118 212 C108 244 116 282 140 290 C124 280 120 248 130 218 C140 184 158 146 172 118 Z" fill="#fbcfe8" opacity="0.45"/>
+    <path d="M250 304 C212 304 218 256 226 222 C234 188 214 134 231 108 C240 94 257 94 267 108 C287 136 310 176 322 210 C336 250 320 304 282 304 Z" fill="url(#bodyA)"/>
+    <path d="M250 304 C212 304 218 256 226 222 C234 188 214 134 231 108 C240 94 257 94 267 108 C287 136 310 176 322 210 C336 250 320 304 282 304 Z" fill="url(#texA)"/>
+    <path d="M231 110 C217 138 235 188 227 222 C220 252 216 290 236 296 C224 286 230 252 238 220 C246 186 230 138 244 112 Z" fill="url(#sheen)"/>
+    <path d="M200 308 C168 308 154 268 166 234 C176 204 192 166 200 142 C206 124 224 124 232 142 C242 166 254 206 262 236 C272 270 252 308 216 308 Z" fill="url(#bodyB)"/>
+    <path d="M200 308 C168 308 154 268 166 234 C176 204 192 166 200 142 C206 124 224 124 232 142 C242 166 254 206 262 236 C272 270 252 308 216 308 Z" fill="url(#texA)"/>
+    <path d="M213 144 C203 168 187 204 178 234 C170 262 174 296 196 300 C182 290 184 262 192 234 C201 204 215 168 224 146 Z" fill="#ffffff" opacity="0.5"/>
+    <ellipse cx="208" cy="288" rx="48" ry="14" fill="#831843" opacity="0.18"/>
+  </g>
+</svg>

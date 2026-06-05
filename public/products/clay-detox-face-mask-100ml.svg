@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Kaolin Clay Detox Face Mask 100ml">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf2f8"/><stop offset="1" stop-color="#fce7f3"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#be185d"/><stop offset="1" stop-color="#831843"/></linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="clay" cx="0.5" cy="0.4" r="0.6"><stop offset="0" stop-color="#fbcfe8"/><stop offset="1" stop-color="#9ca3af"/></radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#ec4899" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#ec4899" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#831843" opacity="0.12"/>
+  <g>
+    <path d="M165 300 L160 150 Q160 110 200 92 Q240 110 240 150 L235 300 Z" fill="url(#body)"/>
+    <path d="M173 298 L169 152 Q169 118 196 100 L186 102 Q172 120 172 152 L177 298 Z" fill="url(#sheen)"/>
+    <rect x="160" y="288" width="80" height="24" rx="7" fill="url(#cap)"/>
+    <rect x="160" y="288" width="80" height="9" rx="4" fill="#fbcfe8" opacity="0.35"/>
+    <path d="M186 92 Q200 86 214 92 L211 100 Q200 95 189 100 Z" fill="#9ca3af"/>
+    <ellipse cx="200" cy="94" rx="14" ry="5" fill="url(#clay)"/>
+    <path d="M191 94 Q196 90 200 94 Q204 98 209 94" stroke="#831843" stroke-width="1.6" fill="none" opacity="0.5" stroke-linecap="round"/>
+    <circle cx="200" cy="178" r="26" fill="#fbcfe8" opacity="0.25"/>
+    <path d="M190 178 Q198 168 200 178 Q202 188 210 178 Q202 184 200 178 Q198 172 190 178 Z" fill="#fbcfe8" opacity="0.85"/>
+    <path d="M200 168 Q210 176 200 188 Q190 176 200 168 Z" fill="#831843" opacity="0.18"/>
+    <rect x="172" y="214" width="56" height="5" rx="2.5" fill="#fbcfe8" opacity="0.7"/>
+    <rect x="178" y="226" width="44" height="4" rx="2" fill="#fbcfe8" opacity="0.45"/>
+  </g>
+</svg>

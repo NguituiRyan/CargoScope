@@ -10,7 +10,17 @@
  * client. Idempotent: re-running upserts reference data and replaces the demo
  * manufacturers' products and the demo buyer's RFQs.
  */
+import { readFileSync } from "node:fs"
+
 import { createClient, type User } from "@supabase/supabase-js"
+
+import type { ProductSeed } from "./seed-types"
+
+// Auto-generated demo products (catalog-products workflow), read at runtime so
+// the raw-node seed needs no TypeScript module resolution.
+const extraProducts = JSON.parse(
+  readFileSync(new URL("./seed-extra-products.json", import.meta.url), "utf8")
+) as ProductSeed[]
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -171,24 +181,33 @@ const manufacturerSeed: ManufacturerSeed[] = [
     responseRate: 85,
     desc: "Color cosmetics and skincare contract manufacturer. Private-label formulations with compliant ingredient documentation.",
   },
+  {
+    slug: "qingdao-irontools",
+    company: "Qingdao IronTools Industrial Co., Ltd",
+    ownerEmail: "owner.irontools@cargoscope.app",
+    city: "Qingdao",
+    vstatus: "verified",
+    tier: "verified",
+    year: 2011,
+    cats: ["Industrial & Tools"],
+    certs: ["ISO 9001", "CE"],
+    responseRate: 90,
+    desc: "Hand tools, power-tool accessories and industrial hardware. Bulk export experience supplying East African hardware distributors.",
+  },
+  {
+    slug: "shenzhen-packpro",
+    company: "Shenzhen PackPro Packaging Co., Ltd",
+    ownerEmail: "owner.packpro@cargoscope.app",
+    city: "Shenzhen",
+    vstatus: "verified",
+    tier: "verified",
+    year: 2015,
+    cats: ["Packaging"],
+    certs: ["ISO 9001", "FSC"],
+    responseRate: 93,
+    desc: "Custom packaging — corrugated boxes, mailers, bottles, labels and pouches. Low-MOQ printing for retail and e-commerce brands.",
+  },
 ]
-
-type Tier = [number, string]
-
-interface ProductSeed {
-  mfr: string
-  cat: string
-  title: string
-  desc: string
-  moq: number
-  unit: string
-  lead: number
-  hs: string
-  certs?: string[]
-  customizable?: boolean
-  sample: string | null
-  tiers: Tier[]
-}
 
 const productSeed: ProductSeed[] = [
   // Shenzhen BrightTech — electronics
@@ -215,6 +234,9 @@ const productSeed: ProductSeed[] = [
   { mfr: "foshan-pureglow", cat: "beauty", title: "Vitamin C Facial Serum 30ml", desc: "Brightening 15% vitamin C serum with hyaluronic acid in a dropper bottle. Custom label.", moq: 100, unit: "piece", lead: 30, hs: "3304.99", customizable: true, sample: "3.60", tiers: [[100, "3.20"], [500, "2.60"], [2000, "2.15"]] },
   { mfr: "foshan-pureglow", cat: "beauty", title: "12-Piece Makeup Brush Set", desc: "Synthetic-bristle makeup brush set with vegan PU pouch. Custom handle colour.", moq: 150, unit: "set", lead: 22, hs: "9603.30", sample: "5.80", tiers: [[150, "5.40"], [600, "4.40"], [2400, "3.60"]] },
 ]
+
+// Append the auto-generated demo products to the curated set above.
+productSeed.push(...extraProducts)
 
 /* ─────────────────────────── run ─────────────────────────── */
 
@@ -345,7 +367,7 @@ async function main() {
     customizable: p.customizable ?? false,
     sample_available: p.sample !== null,
     sample_price: p.sample,
-    primary_image_url: PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
+    primary_image_url: p.img ?? PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
     status: "active",
   }))
   const products = await supabase
@@ -376,6 +398,137 @@ async function main() {
   }))
   ok((await supabase.from("product_media").insert(mediaRows)).error, "product media")
   console.log(`  ✓ price tiers (${tierRows.length}) + media (${mediaRows.length})`)
+
+  // 6b) Reviewer buyers + orders + reviews (social proof) -------------------
+  const reviewerOwnerId = await ensureUser("reviewers@cargoscope.app", {
+    full_name: "CargoScope Buyers",
+  })
+  ok(
+    (
+      await supabase.from("profiles").upsert(
+        [
+          {
+            id: reviewerOwnerId,
+            role: "buyer",
+            full_name: "CargoScope Buyers",
+            locale: "en",
+            country: "KE",
+          },
+        ],
+        { onConflict: "id" }
+      )
+    ).error,
+    "reviewer profile"
+  )
+
+  // Idempotent reset: drop this owner's prior orders (cascades their reviews)
+  // then their buyer rows before re-creating the review authors.
+  const prior = await supabase
+    .from("buyers")
+    .select("id")
+    .eq("owner_profile_id", reviewerOwnerId)
+  const priorIds = (prior.data ?? []).map((b) => b.id as string)
+  if (priorIds.length > 0) {
+    await supabase.from("orders").delete().in("buyer_id", priorIds)
+    await supabase.from("buyers").delete().in("id", priorIds)
+  }
+
+  const reviewerCompanies = [
+    "Nairobi Wholesale Hub",
+    "Mombasa Bulk Traders",
+    "Kampala Imports Co.",
+    "Dar es Salaam Distributors",
+    "Kigali Retail Group",
+    "Eldoret Supply Co.",
+    "Kisumu Trade House",
+    "Arusha Merchants Ltd",
+  ]
+  const reviewerInsert = await supabase
+    .from("buyers")
+    .insert(
+      reviewerCompanies.map((c) => ({
+        owner_profile_id: reviewerOwnerId,
+        company_name: c,
+        country: "KE",
+        sector: "Wholesale & retail",
+      }))
+    )
+    .select("id")
+  ok(reviewerInsert.error, "reviewer buyers")
+  const reviewerBuyerIds = (reviewerInsert.data ?? []).map((b) => b.id as string)
+
+  const COMMENTS = [
+    "Exactly as described. Solid quality for the price.",
+    "Fast response and samples reached Nairobi within a week.",
+    "Reordered twice now — consistent quality and on-time shipping to Mombasa.",
+    "Good communication throughout; custom logo printing came out clean.",
+    "Sturdy packaging — nothing damaged in transit to Kenya.",
+    "Competitive FOB pricing and flexible MOQ. Will order again.",
+    "Sample matched the bulk order. Recommended supplier.",
+    "Lead time was as promised. Smooth first order.",
+    "Great value at the higher tier — margins work for our shops.",
+    "Responsive team, handled our customisation request without fuss.",
+    "Solid build quality and consistent sizing across the batch.",
+    "Shipping to Dar was quick and the export docs were in order.",
+    "Have sourced here for two seasons now. Reliable.",
+    "Clear specs and honest lead times — no surprises at the port.",
+    "Bulk discount made this very profitable for resale.",
+    "Product matches the photos and our customers are happy.",
+    "Easy to work with for private-label orders.",
+    "Good after-sales support when we had a question.",
+    "Arrived ahead of schedule. Impressed.",
+    "Quality control is clearly taken seriously here.",
+    "Fair pricing and quick quotes through the platform.",
+    "Met our certification requirements without issues.",
+    "Decent quality; communication could be a touch faster.",
+    "Repeat supplier for us — dependable and fair.",
+  ]
+
+  const orderByPair = new Map<string, string>()
+  async function ensureOrder(rb: string, mfrId: string): Promise<string | null> {
+    const key = `${rb}:${mfrId}`
+    const cached = orderByPair.get(key)
+    if (cached) return cached
+    const { data } = await supabase
+      .from("orders")
+      .insert({ buyer_id: rb, manufacturer_id: mfrId, currency: "USD" })
+      .select("id")
+      .single()
+    const id = (data?.id as string | undefined) ?? null
+    if (id) orderByPair.set(key, id)
+    return id
+  }
+
+  const reviewRows: {
+    order_id: string
+    buyer_id: string
+    manufacturer_id: string
+    product_id: string
+    rating: number
+    comment: string
+  }[] = []
+  for (const p of productSeed) {
+    const productId = idByTitle.get(p.title)
+    const mfrId = mfrIdBySlug.get(p.mfr)
+    if (!productId || !mfrId) continue
+    const n = 2 + Math.floor(Math.random() * 5) // 2–6 reviews
+    for (let k = 0; k < n; k++) {
+      const rb = reviewerBuyerIds[Math.floor(Math.random() * reviewerBuyerIds.length)]
+      const orderId = await ensureOrder(rb, mfrId)
+      if (!orderId) continue
+      const rating = Math.random() < 0.68 ? 5 : Math.random() < 0.7 ? 4 : 3
+      reviewRows.push({
+        order_id: orderId,
+        buyer_id: rb,
+        manufacturer_id: mfrId,
+        product_id: productId,
+        rating,
+        comment: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+      })
+    }
+  }
+  ok((await supabase.from("reviews").insert(reviewRows)).error, "reviews")
+  console.log(`  ✓ reviews (${reviewRows.length}) from ${reviewerBuyerIds.length} buyers`)
 
   // 7) One open RFQ from the buyer ------------------------------------------
   ok((await supabase.from("rfqs").delete().eq("buyer_id", buyerId)).error, "clear rfqs")
