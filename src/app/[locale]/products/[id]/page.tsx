@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ArrowLeft, Calculator } from "lucide-react"
 
+import { LandedCostCalculator } from "@/components/catalog/landed-cost-calculator"
 import { ProductGallery } from "@/components/catalog/product-gallery"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { Badge } from "@/components/ui/badge"
@@ -12,6 +13,7 @@ import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
 import { getPublicProduct } from "@/lib/catalog/queries"
 import { formatMoney } from "@/lib/format"
+import { getFxRate } from "@/lib/fx"
 import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
@@ -42,9 +44,13 @@ export default async function ProductDetailPage({
   if (!product) notFound()
 
   const t = await getTranslations("productView")
-  const user = await getSessionUser()
+  const [user, fx] = await Promise.all([getSessionUser(), getFxRate()])
   const m = product.manufacturer
   const memberYear = yearOf(m.memberSince)
+  const usdTiers = product.priceTiers.map((tier) => ({
+    minQty: tier.minQty,
+    unitPriceUsd: Number(tier.unitPrice),
+  }))
 
   const specs: { label: string; value: string }[] = [
     {
@@ -237,9 +243,19 @@ export default async function ProductDetailPage({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                {t("landedCostHint")}
-              </p>
+              {usdTiers.length > 0 ? (
+                <LandedCostCalculator
+                  tiers={usdTiers}
+                  unit={product.unit}
+                  moq={product.moq}
+                  hsCode={product.hsCode}
+                  fx={fx}
+                />
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  {t("landedCostHint")}
+                </p>
+              )}
             </CardContent>
           </Card>
         </div>
