@@ -7,7 +7,8 @@
     "signIn": "Sign in",
     "account": "Account",
     "signOut": "Sign out",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "currency": "Currency"
   },
   "home": {
     "badge": "Verified China–Africa sourcing",
@@ -173,6 +174,9 @@
   "catalog": {
     "title": "Products",
     "subtitle": "Browse products from verified manufacturers.",
+    "browseByCategory": "Browse by category",
+    "allProducts": "All products",
+    "indicativePrice": "Indicative · 1 USD ≈ {rate}",
     "searchPlaceholder": "Search products, HS codes…",
     "results": "{count, plural, one {# product} other {# products}}",
     "empty": "No products match your filters.",

@@ -12,8 +12,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
 import { getPublicProduct } from "@/lib/catalog/queries"
-import { formatMoney } from "@/lib/format"
-import { getFxRate } from "@/lib/fx"
+import { getDisplayCurrency } from "@/lib/currency/server"
+import { formatDisplayPrice } from "@/lib/currency/shared"
+import { getDisplayRates, getFxRate } from "@/lib/fx"
 import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
@@ -44,7 +45,12 @@ export default async function ProductDetailPage({
   if (!product) notFound()
 
   const t = await getTranslations("productView")
-  const [user, fx] = await Promise.all([getSessionUser(), getFxRate()])
+  const [user, fx, currency, displayRates] = await Promise.all([
+    getSessionUser(),
+    getFxRate(),
+    getDisplayCurrency(),
+    getDisplayRates(),
+  ])
   const m = product.manufacturer
   const memberYear = yearOf(m.memberSince)
   const usdTiers = product.priceTiers.map((tier) => ({
@@ -135,7 +141,11 @@ export default async function ProductDetailPage({
                           ≥ {tier.minQty} {product.unit}
                         </td>
                         <td className="py-2 text-right font-medium">
-                          {formatMoney(Number(tier.unitPrice), tier.currency)}
+                          {formatDisplayPrice(
+                            Number(tier.unitPrice),
+                            currency,
+                            displayRates.rates
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -214,7 +224,11 @@ export default async function ProductDetailPage({
                 {product.samplePrice && (
                   <p className="text-muted-foreground">
                     {t("samplePrice", {
-                      price: formatMoney(Number(product.samplePrice)),
+                      price: formatDisplayPrice(
+                        Number(product.samplePrice),
+                        currency,
+                        displayRates.rates
+                      ),
                     })}
                   </p>
                 )}

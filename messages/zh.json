@@ -7,7 +7,8 @@
     "signIn": "登录",
     "account": "账户",
     "signOut": "退出登录",
-    "dashboard": "控制台"
+    "dashboard": "控制台",
+    "currency": "货币"
   },
   "home": {
     "badge": "经核实的中非采购",
@@ -173,6 +174,9 @@
   "catalog": {
     "title": "产品",
     "subtitle": "浏览来自认证制造商的产品。",
+    "browseByCategory": "按类别浏览",
+    "allProducts": "所有产品",
+    "indicativePrice": "参考价 · 1 USD ≈ {rate}",
     "searchPlaceholder": "搜索产品、HS 编码…",
     "results": "{count, plural, other {# 件产品}}",
     "empty": "没有符合筛选条件的产品。",

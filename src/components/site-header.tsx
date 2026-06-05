@@ -1,17 +1,22 @@
 import { Ship } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
+import { CurrencySelector } from "@/components/currency-selector"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { signOutAction } from "@/lib/auth/actions"
 import { getSessionUser } from "@/lib/auth/session"
+import { getDisplayCurrency } from "@/lib/currency/server"
 import { cn } from "@/lib/utils"
 
 export async function SiteHeader() {
   const t = await getTranslations("nav")
   const locale = await getLocale()
-  const user = await getSessionUser()
+  const [user, currency] = await Promise.all([
+    getSessionUser(),
+    getDisplayCurrency(),
+  ])
 
   const dashboardHref =
     user?.role === "admin"
@@ -50,6 +55,7 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <CurrencySelector current={currency} label={t("currency")} />
           <LocaleSwitcher />
           {user ? (
             <>

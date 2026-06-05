@@ -7,7 +7,8 @@
     "signIn": "Ingia",
     "account": "Akaunti",
     "signOut": "Toka",
-    "dashboard": "Dashibodi"
+    "dashboard": "Dashibodi",
+    "currency": "Sarafu"
   },
   "home": {
     "badge": "Ununuzi uliothibitishwa China–Afrika",
@@ -173,6 +174,9 @@
   "catalog": {
     "title": "Bidhaa",
     "subtitle": "Vinjari bidhaa kutoka kwa watengenezaji waliothibitishwa.",
+    "browseByCategory": "Vinjari kwa kategoria",
+    "allProducts": "Bidhaa zote",
+    "indicativePrice": "Makadirio · 1 USD ≈ {rate}",
     "searchPlaceholder": "Tafuta bidhaa, misimbo ya HS…",
     "results": "{count, plural, one {bidhaa #} other {bidhaa #}}",
     "empty": "Hakuna bidhaa zinazolingana na vichujio vyako.",

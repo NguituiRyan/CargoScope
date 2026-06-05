@@ -6,9 +6,21 @@ import { VerificationBadge } from "@/components/manufacturers/verification-badge
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import type { ProductCard as ProductCardData } from "@/lib/catalog/queries"
-import { formatMoney } from "@/lib/format"
+import {
+  formatDisplayPrice,
+  type DisplayCurrency,
+  type DisplayRates,
+} from "@/lib/currency/shared"
 
-export async function ProductCard({ product }: { product: ProductCardData }) {
+export async function ProductCard({
+  product,
+  currency,
+  rates,
+}: {
+  product: ProductCardData
+  currency: DisplayCurrency
+  rates: DisplayRates["rates"]
+}) {
   const t = await getTranslations("catalog")
 
   return (
@@ -43,7 +55,7 @@ export async function ProductCard({ product }: { product: ProductCardData }) {
           <p className="text-sm font-semibold">
             {product.minPrice !== null
               ? t("fromPrice", {
-                  price: formatMoney(product.minPrice, product.currency),
+                  price: formatDisplayPrice(product.minPrice, currency, rates),
                 })
               : t("priceOnRequest")}
           </p>

@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getManufacturerStorefront } from "@/lib/catalog/queries"
+import { getDisplayCurrency } from "@/lib/currency/server"
+import { getDisplayRates } from "@/lib/fx"
 
 export async function generateMetadata({
   params,
@@ -35,7 +37,11 @@ export default async function ManufacturerStorefrontPage({
   const { locale, slug } = await params
   setRequestLocale(locale)
 
-  const storefront = await getManufacturerStorefront(slug)
+  const [storefront, currency, displayRates] = await Promise.all([
+    getManufacturerStorefront(slug),
+    getDisplayCurrency(),
+    getDisplayRates(),
+  ])
   if (!storefront) notFound()
 
   const t = await getTranslations("directory")
@@ -177,7 +183,12 @@ export default async function ManufacturerStorefrontPage({
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                currency={currency}
+                rates={displayRates.rates}
+              />
             ))}
           </div>
         )}
