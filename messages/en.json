@@ -201,6 +201,8 @@
     "origin": "Origin country",
     "sort": "Sort by",
     "sortRecent": "Most recent",
+    "sortPopular": "Most popular",
+    "featuredTitle": "Top picks from Premium suppliers",
     "sortPriceAsc": "Price: low to high",
     "sortPriceDesc": "Price: high to low",
     "apply": "Apply filters",

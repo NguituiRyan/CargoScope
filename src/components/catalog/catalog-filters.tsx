@@ -14,7 +14,13 @@ import type { FilterCategory } from "@/lib/catalog/queries"
 import { currencyLabel, type DisplayCurrency } from "@/lib/currency/shared"
 
 const TIERS = ["identity", "verified", "premium"] as const
-const SORTS = ["recent", "priceAsc", "priceDesc"] as const
+const SORTS = ["recent", "popular", "priceAsc", "priceDesc"] as const
+const SORT_LABELS: Record<(typeof SORTS)[number], string> = {
+  recent: "sortRecent",
+  popular: "sortPopular",
+  priceAsc: "sortPriceAsc",
+  priceDesc: "sortPriceDesc",
+}
 
 /** Filter fields the dropdown owns (sort lives in the always-visible toolbar). */
 const FILTER_KEYS = [
@@ -108,13 +114,7 @@ export function CatalogFilters({
       >
         {SORTS.map((sort) => (
           <option key={sort} value={sort}>
-            {t(
-              sort === "recent"
-                ? "sortRecent"
-                : sort === "priceAsc"
-                  ? "sortPriceAsc"
-                  : "sortPriceDesc"
-            )}
+            {t(SORT_LABELS[sort])}
           </option>
         ))}
       </Select>

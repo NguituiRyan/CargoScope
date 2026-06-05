@@ -7,7 +7,7 @@ import type { VerificationTier } from "@/lib/manufacturers/queries"
 
 const PUBLIC_TIERS = ["identity", "verified", "premium"] as const
 
-export type CatalogSort = "recent" | "priceAsc" | "priceDesc"
+export type CatalogSort = "recent" | "popular" | "priceAsc" | "priceDesc"
 
 export interface CatalogFilters {
   q?: string
@@ -441,6 +441,23 @@ export async function getManufacturerStorefront(
     .filter((item): item is ProductCard => item !== null)
 
   return { manufacturer, products }
+}
+
+/** Featured products from Premium-tier suppliers — home "Top picks" rail. */
+export async function getFeaturedProducts(limit = 8): Promise<ProductCard[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from("products")
+    .select(CARD_SELECT)
+    .eq("status", "active")
+    .eq("manufacturers.is_published", true)
+    .eq("manufacturers.subscription_tier", "premium")
+    .order("created_at", { ascending: false })
+    .limit(limit * 2)
+  return (data ?? [])
+    .map((row) => mapCard(row as CardRow))
+    .filter((item): item is ProductCard => item !== null)
+    .slice(0, limit)
 }
 
 /** "You may also like" — active products in the same category, excluding self. */

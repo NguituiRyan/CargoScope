@@ -201,6 +201,8 @@
     "origin": "原产国",
     "sort": "排序方式",
     "sortRecent": "最新",
+    "sortPopular": "最受欢迎",
+    "featuredTitle": "尊享供应商精选",
     "sortPriceAsc": "价格：从低到高",
     "sortPriceDesc": "价格：从高到低",
     "apply": "应用筛选",

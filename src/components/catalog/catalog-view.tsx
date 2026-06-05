@@ -1,4 +1,4 @@
-import { Calculator, Languages, ShieldCheck } from "lucide-react"
+import { Calculator, Languages, ShieldCheck, Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { CatalogFilters } from "@/components/catalog/catalog-filters"
@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/catalog/product-card"
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import {
+  getFeaturedProducts,
   getFilterCategories,
   searchProducts,
   type CatalogFilters as CatalogFilterValues,
@@ -21,7 +22,7 @@ import { cn } from "@/lib/utils"
 
 type SearchParams = Record<string, string | string[] | undefined>
 
-const SORTS: CatalogSort[] = ["recent", "priceAsc", "priceDesc"]
+const SORTS: CatalogSort[] = ["recent", "popular", "priceAsc", "priceDesc"]
 const TIERS: VerificationTier[] = ["identity", "verified", "premium"]
 
 function str(value: string | string[] | undefined): string | undefined {
@@ -111,6 +112,29 @@ export async function CatalogView({
   const { items, total } = await searchProducts(filters)
   const ratings = await getProductRatings(items.map((i) => i.id))
 
+  if (filters.sort === "popular") {
+    items.sort((a, b) => {
+      const ra = ratings.get(a.id)
+      const rb = ratings.get(b.id)
+      return (rb?.count ?? 0) - (ra?.count ?? 0) || (rb?.avg ?? 0) - (ra?.avg ?? 0)
+    })
+  }
+
+  // Featured "Top picks" rail only on the unfiltered landing view.
+  const noFilters =
+    !filters.q &&
+    !filters.category &&
+    !filters.tier &&
+    filters.minPrice === undefined &&
+    filters.maxPrice === undefined &&
+    filters.maxMoq === undefined &&
+    filters.maxLeadTime === undefined &&
+    !filters.origin
+  const featured = noFilters ? await getFeaturedProducts(6) : []
+  const featuredRatings = featured.length
+    ? await getProductRatings(featured.map((p) => p.id))
+    : new Map<string, { avg: number; count: number }>()
+
   const activeCategory = filters.category ?? null
   const pillars = [
     { icon: ShieldCheck, label: tHome("pillars.verifiedTitle") },
@@ -174,6 +198,28 @@ export async function CatalogView({
           </div>
         </div>
       )}
+
+      {featured.length > 0 ? (
+        <div className="mx-auto w-full max-w-6xl px-4 pt-6">
+          <div className="mb-3 flex items-center gap-2">
+            <Sparkles className="size-4 text-primary" aria-hidden />
+            <h2 className="font-heading text-lg font-semibold">
+              {t("featuredTitle")}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+            {featured.map((p) => (
+              <ProductCard
+                key={p.id}
+                product={p}
+                currency={currency}
+                rates={displayRates.rates}
+                rating={featuredRatings.get(p.id)}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="sticky top-14 z-30 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
