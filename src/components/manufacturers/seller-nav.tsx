@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 
 const tabs = [
   { href: "/seller/products", key: "navProducts" },
+  { href: "/seller/rfqs", key: "navRfqs" },
   { href: "/seller/onboarding", key: "navProfile" },
   { href: "/seller/verification", key: "navVerification" },
 ] as const

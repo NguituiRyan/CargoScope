@@ -72,6 +72,17 @@ export async function SiteHeader() {
                   {t("dashboard")}
                 </Link>
               ) : null}
+              {user.role === "buyer" ? (
+                <Link
+                  href="/rfqs"
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "hidden sm:inline-flex"
+                  )}
+                >
+                  {t("rfqs")}
+                </Link>
+              ) : null}
               <Link
                 href="/messages"
                 aria-label={t("messages")}

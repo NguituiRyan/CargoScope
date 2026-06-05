@@ -53,3 +53,27 @@ export function formatDisplayPrice(
 export function currencyLabel(currency: DisplayCurrency): string {
   return { KES: "KSh", USD: "USD", CNY: "CNY" }[currency]
 }
+
+/**
+ * Format a money amount in its own stored currency (no FX conversion) — used for
+ * RFQ target prices and manufacturer quotes, which are quoted in a fixed
+ * currency rather than the shopper's display currency.
+ */
+export function formatMoney(amount: number | string, currency: string): string {
+  const n = typeof amount === "string" ? Number(amount) : amount
+  if (!Number.isFinite(n)) return "—"
+  const symbol =
+    currency === "USD"
+      ? "$"
+      : currency === "CNY"
+        ? "¥"
+        : currency === "KES"
+          ? "KSh "
+          : `${currency} `
+  const decimals = currency === "KES" ? 0 : 2
+  const number = new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(n)
+  return `${symbol}${number}`
+}
