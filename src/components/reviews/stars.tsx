@@ -4,11 +4,14 @@ import { cn } from "@/lib/utils"
 
 function Row({ filled, sizeClass }: { filled: boolean; sizeClass: string }) {
   return (
-    <span className="flex">
+    // w-max keeps the row at its natural 5-star width; shrink-0 stops the stars
+    // from shrinking when the overlay row is clipped to a partial width.
+    <span className="flex w-max shrink-0">
       {[0, 1, 2, 3, 4].map((i) => (
         <Star
           key={i}
           className={cn(
+            "shrink-0",
             sizeClass,
             filled
               ? "fill-amber-400 text-amber-400"
@@ -47,7 +50,7 @@ export function Stars({
       <span className="relative inline-block">
         <Row filled={false} sizeClass={sizeClass} />
         <span
-          className="absolute inset-0 overflow-hidden"
+          className="absolute left-0 top-0 h-full overflow-hidden"
           style={{ width: `${pct}%` }}
         >
           <Row filled sizeClass={sizeClass} />
