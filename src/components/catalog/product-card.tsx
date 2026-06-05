@@ -24,17 +24,17 @@ export async function ProductCard({
   const t = await getTranslations("catalog")
 
   return (
-    <Card className="group overflow-hidden p-0 transition-colors hover:border-ring">
-      <Link href={`/products/${product.id}`} className="flex flex-col">
+    <Card className="group overflow-hidden p-0 transition-all duration-200 hover:-translate-y-0.5 hover:border-ring hover:shadow-md">
+      <Link href={`/products/${product.id}`} className="flex h-full flex-col">
         <div className="relative aspect-square overflow-hidden bg-muted">
           {product.primaryImageUrl ? (
             <Image
               src={product.primaryImageUrl}
-              alt=""
+              alt={product.title}
               fill
               unoptimized
-              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-              className="object-cover transition-transform group-hover:scale-105"
+              sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
             <Package
@@ -52,22 +52,28 @@ export async function ProductCard({
             {product.title}
           </h3>
 
-          <p className="text-sm font-semibold">
-            {product.minPrice !== null
-              ? t("fromPrice", {
-                  price: formatDisplayPrice(product.minPrice, currency, rates),
-                })
-              : t("priceOnRequest")}
+          <p className="text-[15px] font-semibold tracking-tight">
+            {product.minPrice !== null ? (
+              t("fromPrice", {
+                price: formatDisplayPrice(product.minPrice, currency, rates),
+              })
+            ) : (
+              <span className="text-muted-foreground">{t("priceOnRequest")}</span>
+            )}
           </p>
 
-          <div className="mt-auto flex flex-col gap-1 text-xs text-muted-foreground">
-            <span>
-              {product.moq
-                ? `${t("moq")} ${product.moq} ${product.unit}`
-                : product.unit}
-            </span>
+          <div className="mt-auto flex flex-wrap gap-1.5 text-xs">
+            {product.moq ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
+                {t("moq")} {product.moq} {product.unit}
+              </span>
+            ) : (
+              <span className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
+                {product.unit}
+              </span>
+            )}
             {product.leadTimeDays !== null && (
-              <span className="inline-flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
                 <Clock className="size-3" aria-hidden />
                 {t("leadDays", { days: product.leadTimeDays })}
               </span>

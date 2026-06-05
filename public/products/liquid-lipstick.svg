@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Matte Liquid Lipstick Set (6)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdf2f8"/>
+      <stop offset="1" stop-color="#fce7f3"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#be185d"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#831843"/>
+      <stop offset="1" stop-color="#5e0f30"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#ec4899" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#ec4899" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#831843" opacity="0.12"/>
+  <g>
+    <!-- Tube 1 (left) -->
+    <rect x="124" y="150" width="40" height="120" rx="8" fill="url(#body)"/>
+    <rect x="124" y="150" width="15" height="120" rx="7" fill="url(#sheen)"/>
+    <rect x="126" y="118" width="36" height="36" rx="6" fill="url(#cap)"/>
+    <rect x="126" y="118" width="11" height="36" rx="5" fill="#ffffff" opacity="0.18"/>
+    <rect x="124" y="200" width="40" height="6" fill="#fbcfe8" opacity="0.7"/>
+    <!-- Tube 2 (center, doe-foot exposed) -->
+    <rect x="180" y="160" width="40" height="110" rx="8" fill="url(#body)"/>
+    <rect x="180" y="160" width="15" height="110" rx="7" fill="url(#sheen)"/>
+    <rect x="194" y="88" width="12" height="58" rx="5" fill="url(#cap)"/>
+    <ellipse cx="200" cy="150" rx="11" ry="16" fill="#be185d"/>
+    <ellipse cx="196" cy="146" rx="4" ry="7" fill="#fbcfe8" opacity="0.85"/>
+    <rect x="180" y="208" width="40" height="6" fill="#fbcfe8" opacity="0.7"/>
+    <!-- Tube 3 (right) -->
+    <rect x="236" y="150" width="40" height="120" rx="8" fill="url(#body)"/>
+    <rect x="236" y="150" width="15" height="120" rx="7" fill="url(#sheen)"/>
+    <rect x="238" y="116" width="36" height="38" rx="6" fill="url(#cap)"/>
+    <rect x="238" y="116" width="11" height="38" rx="5" fill="#ffffff" opacity="0.18"/>
+    <rect x="236" y="200" width="40" height="6" fill="#fbcfe8" opacity="0.7"/>
+  </g>
+</svg>

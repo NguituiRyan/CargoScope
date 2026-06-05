@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="10,000mAh Slim Power Bank">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#6366f1" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#6366f1" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#1e1b4b" opacity="0.12"/>
+  <g>
+    <rect x="148" y="90" width="104" height="216" rx="20" fill="url(#body)"/>
+    <rect x="148" y="90" width="40" height="216" rx="20" fill="url(#sheen)"/>
+    <rect x="166" y="112" width="72" height="48" rx="8" fill="url(#screen)"/>
+    <rect x="170" y="116" width="30" height="40" rx="4" fill="#1e1b4b" opacity="0.6"/>
+    <text x="195" y="148" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#c7d2fe" text-anchor="middle">87</text>
+    <text x="218" y="130" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#a5b4fc" text-anchor="middle">%</text>
+    <g fill="#c7d2fe"><rect x="166" y="196" width="72" height="6" rx="3" opacity="0.25"/><rect x="166" y="196" width="54" height="6" rx="3"/></g>
+    <g><circle cx="172" cy="222" r="6" fill="#a5b4fc"/><circle cx="190" cy="222" r="6" fill="#a5b4fc"/><circle cx="208" cy="222" r="6" fill="#a5b4fc"/><circle cx="226" cy="222" r="6" fill="#1e1b4b" opacity="0.4"/></g>
+    <rect x="160" y="248" width="80" height="40" rx="10" fill="#1e1b4b" opacity="0.35"/>
+    <rect x="172" y="262" width="26" height="13" rx="2.5" fill="#1e1b4b" opacity="0.7"/>
+    <rect x="175" y="265" width="20" height="7" rx="1.5" fill="#c7d2fe" opacity="0.7"/>
+    <rect x="206" y="263" width="22" height="11" rx="5.5" fill="#1e1b4b" opacity="0.7"/>
+    <rect x="209" y="265.5" width="16" height="6" rx="3" fill="#c7d2fe" opacity="0.55"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="6-Panel Cotton Cap">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#ffedd5"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="brim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d97706"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#7c2d12" opacity="0.12"/>
+  <g>
+    <path d="M118 214 C118 138 162 96 210 96 C262 96 300 140 300 196 C300 206 296 214 286 214 Z" fill="url(#body)"/>
+    <path d="M118 214 C118 138 162 96 210 96 C232 96 252 104 268 118 C236 116 188 130 160 168 C140 194 132 214 130 214 Z" fill="url(#sheen)"/>
+    <path d="M210 96 C210 140 210 178 200 214" fill="none" stroke="#7c2d12" stroke-width="2.5" opacity="0.55"/>
+    <path d="M168 100 C158 142 150 178 142 212" fill="none" stroke="#7c2d12" stroke-width="2.5" opacity="0.5"/>
+    <path d="M256 102 C272 138 286 174 290 206" fill="none" stroke="#7c2d12" stroke-width="2.5" opacity="0.5"/>
+    <circle cx="210" cy="98" r="7" fill="#b45309"/>
+    <circle cx="210" cy="98" r="3.5" fill="#fde68a"/>
+    <g fill="#7c2d12" opacity="0.6"><circle cx="186" cy="150" r="3"/><circle cx="234" cy="150" r="3"/><circle cx="172" cy="178" r="3"/><circle cx="248" cy="178" r="3"/></g>
+    <path d="M286 214 C320 214 352 222 360 236 C362 240 360 246 352 248 C320 252 300 244 286 214 Z" fill="url(#brim)"/>
+    <path d="M290 218 C318 218 342 224 352 234" fill="none" stroke="#fde68a" stroke-width="2" opacity="0.4"/>
+    <rect x="118" y="206" width="14" height="16" rx="3" fill="#7c2d12"/>
+    <rect x="120" y="209" width="10" height="4" rx="1.5" fill="#fde68a" opacity="0.7"/>
+  </g>
+</svg>

@@ -35,9 +35,16 @@ function num(value: string | string[] | undefined): number | undefined {
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : undefined
 }
 
-function parseFilters(params: SearchParams): CatalogFilterValues {
+/**
+ * Catalogue prices are stored in USD, but the price filter is denominated in the
+ * shopper's display currency. `rate` is units of display currency per 1 USD, so
+ * we divide the entered value back to USD for the query.
+ */
+function parseFilters(params: SearchParams, rate: number): CatalogFilterValues {
   const sort = str(params.sort)
   const tier = str(params.tier)
+  const toUsd = (v: number | undefined) =>
+    v === undefined ? undefined : v / (rate > 0 ? rate : 1)
   return {
     q: str(params.q),
     category: str(params.category),
@@ -46,8 +53,8 @@ function parseFilters(params: SearchParams): CatalogFilterValues {
       : undefined,
     maxMoq: num(params.maxMoq),
     maxLeadTime: num(params.maxLeadTime),
-    minPrice: num(params.minPrice),
-    maxPrice: num(params.maxPrice),
+    minPrice: toUsd(num(params.minPrice)),
+    maxPrice: toUsd(num(params.maxPrice)),
     origin: str(params.origin),
     sort: SORTS.includes(sort as CatalogSort) ? (sort as CatalogSort) : undefined,
   }
@@ -66,7 +73,7 @@ function CategoryChip({
     <Link
       href={href}
       className={cn(
-        "rounded-full border px-3 py-1 text-sm transition-colors",
+        "shrink-0 rounded-full border px-3.5 py-1.5 text-sm whitespace-nowrap transition-colors",
         active
           ? "border-primary bg-primary/10 font-medium text-primary"
           : "border-border text-muted-foreground hover:border-ring hover:text-foreground"
@@ -78,27 +85,28 @@ function CategoryChip({
 }
 
 /**
- * The product catalogue — also used as the site landing page. A trust hero sits
- * above category chips, filters, and the price-aware product grid.
+ * The product catalogue — also the site landing page. A compact trust hero sits
+ * above a sticky filter/sort toolbar and a product-forward grid.
  */
 export async function CatalogView({
   searchParams,
 }: {
   searchParams: Promise<SearchParams>
 }) {
-  const [t, tHome] = await Promise.all([
+  const [t, tHome, sp] = await Promise.all([
     getTranslations("catalog"),
     getTranslations("home"),
+    searchParams,
   ])
 
-  const filters = parseFilters(await searchParams)
-  const [{ items, total }, categories, currency, displayRates] =
-    await Promise.all([
-      searchProducts(filters),
-      getFilterCategories(),
-      getDisplayCurrency(),
-      getDisplayRates(),
-    ])
+  const [categories, currency, displayRates] = await Promise.all([
+    getFilterCategories(),
+    getDisplayCurrency(),
+    getDisplayRates(),
+  ])
+  const rate = displayRates.rates[currency] || 1
+  const filters = parseFilters(sp, rate)
+  const { items, total } = await searchProducts(filters)
 
   const activeCategory = filters.category ?? null
   const pillars = [
@@ -109,20 +117,20 @@ export async function CatalogView({
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-border bg-muted/30">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:py-14">
-          <div className="flex max-w-2xl flex-col gap-4">
+      <section className="border-b border-border bg-gradient-to-b from-muted/50 to-background">
+        <div className="mx-auto w-full max-w-6xl px-4 py-7 sm:py-9">
+          <div className="flex max-w-2xl flex-col gap-3">
             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               <span className="size-1.5 rounded-full bg-verified" aria-hidden />
               {tHome("badge")}
             </span>
-            <h1 className="font-heading text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+            <h1 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
               {tHome("title")}
             </h1>
-            <p className="text-base text-muted-foreground text-pretty">
+            <p className="text-sm text-muted-foreground text-pretty sm:text-base">
               {tHome("subtitle")}
             </p>
-            <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-0.5">
               {pillars.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
@@ -137,45 +145,43 @@ export async function CatalogView({
         </div>
       </section>
 
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8">
-        {categories.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              {t("browseByCategory")}
-            </span>
-            <div className="flex flex-wrap gap-2">
+      {categories.length > 0 && (
+        <div className="mx-auto w-full max-w-6xl px-4 pt-5">
+          <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <CategoryChip
+              href="/products"
+              label={t("allProducts")}
+              active={!activeCategory}
+            />
+            {categories.map((category) => (
               <CategoryChip
-                href="/products"
-                label={t("allProducts")}
-                active={!activeCategory}
+                key={category.id}
+                href={`/products?category=${category.slug}`}
+                label={category.name}
+                active={activeCategory === category.slug}
               />
-              {categories.map((category) => (
-                <CategoryChip
-                  key={category.id}
-                  href={`/products?category=${category.slug}`}
-                  label={category.name}
-                  active={activeCategory === category.slug}
-                />
-              ))}
-            </div>
+            ))}
           </div>
-        )}
-
-        <CatalogFilters categories={categories} />
-
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-          <p className="text-sm text-muted-foreground">
-            {t("results", { count: total })}
-          </p>
-          {currency !== "USD" && (
-            <p className="text-xs text-muted-foreground">
-              {t("indicativePrice", {
-                rate: formatDisplayPrice(1, currency, displayRates.rates),
-              })}
-            </p>
-          )}
         </div>
+      )}
 
+      <div className="sticky top-14 z-30 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+          <div className="flex flex-col">
+            <p className="text-sm font-medium">{t("results", { count: total })}</p>
+            {currency !== "USD" && (
+              <p className="text-xs text-muted-foreground">
+                {t("indicativePrice", {
+                  rate: formatDisplayPrice(1, currency, displayRates.rates),
+                })}
+              </p>
+            )}
+          </div>
+          <CatalogFilters categories={categories} currency={currency} />
+        </div>
+      </div>
+
+      <div className="mx-auto w-full max-w-6xl px-4 py-6">
         {items.length === 0 ? (
           <Card>
             <CardContent className="flex flex-col items-center gap-1 py-12 text-center">
@@ -184,7 +190,7 @@ export async function CatalogView({
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
             {items.map((product) => (
               <ProductCard
                 key={product.id}

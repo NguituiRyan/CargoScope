@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="180gsm Cotton Crew T-Shirt">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff7ed"/>
+      <stop offset="1" stop-color="#ffedd5"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="collar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#f59e0b" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#f59e0b" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#7c2d12" opacity="0.12"/>
+  <g>
+    <path d="M138 150 L138 296 Q138 304 146 304 L254 304 Q262 304 262 296 L262 150 L238 158 L200 132 L162 158 Z" fill="url(#body)"/>
+    <path d="M138 150 L162 158 L168 296 Q168 304 160 304 L146 304 Q138 304 138 296 Z" fill="url(#sheen)"/>
+    <path d="M262 150 L238 158 L233 230 L257 222 L262 196 Z" fill="#7c2d12" opacity="0.22"/>
+    <path d="M138 150 L116 196 L100 188 L124 138 L162 158 Z" fill="url(#body)"/>
+    <path d="M138 150 L116 196 L100 188 L124 138 Z" fill="#fde68a" opacity="0.30"/>
+    <path d="M262 150 L284 196 L300 188 L276 138 L238 158 Z" fill="url(#body)"/>
+    <path d="M262 150 L284 196 L300 188 L276 138 Z" fill="#7c2d12" opacity="0.20"/>
+    <path d="M162 158 L200 132 L238 158 Q220 178 200 178 Q180 178 162 158 Z" fill="url(#collar)"/>
+    <path d="M167 159 L200 137 L233 159 Q218 173 200 173 Q182 173 167 159 Z" fill="none" stroke="#7c2d12" stroke-width="2" opacity="0.45"/>
+    <path d="M171 162 Q200 152 229 162" fill="none" stroke="#fde68a" stroke-width="2.5" opacity="0.7"/>
+    <path d="M178 230 Q200 224 222 230" fill="none" stroke="#7c2d12" stroke-width="2" opacity="0.18"/>
+    <path d="M172 268 Q200 260 228 268" fill="none" stroke="#7c2d12" stroke-width="2" opacity="0.18"/>
+    <path d="M196 196 Q200 250 196 298" fill="none" stroke="#fde68a" stroke-width="2" opacity="0.25"/>
+  </g>
+</svg>

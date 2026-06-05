@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="1.83 inch Bluetooth Smart Watch">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="strap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4338ca"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <radialGradient id="screen" cx="0.4" cy="0.35" r="0.85">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="1" stop-color="#0f0d2e"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="28" fill="url(#bg)"/>
+  <circle cx="322" cy="80" r="48" fill="#6366f1" opacity="0.10"/>
+  <circle cx="76" cy="118" r="26" fill="#6366f1" opacity="0.08"/>
+  <ellipse cx="200" cy="326" rx="94" ry="16" fill="#1e1b4b" opacity="0.12"/>
+  <g>
+    <path d="M168 92 q10 -4 32 -4 q22 0 32 4 l-4 38 h-56 z" fill="url(#strap)"/>
+    <path d="M168 308 q10 4 32 4 q22 0 32 4 l-4 -38 h-56 z" fill="url(#strap)" transform="translate(0,-2)"/>
+    <rect x="174" y="298" width="52" height="24" rx="6" fill="url(#strap)"/>
+    <rect x="174" y="78" width="52" height="24" rx="6" fill="url(#strap)"/>
+    <g fill="#1e1b4b" opacity="0.45"><circle cx="186" cy="312" r="2.2"/><circle cx="200" cy="314" r="2.2"/><circle cx="214" cy="312" r="2.2"/></g>
+    <rect x="128" y="118" width="144" height="164" rx="40" fill="url(#body)"/>
+    <rect x="128" y="118" width="56" height="164" rx="40" fill="url(#sheen)"/>
+    <rect x="142" y="132" width="116" height="136" rx="30" fill="url(#screen)"/>
+    <rect x="268" y="178" width="12" height="44" rx="5" fill="#1e1b4b"/>
+    <rect x="270" y="184" width="4" height="32" rx="2" fill="#6366f1" opacity="0.7"/>
+    <circle cx="200" cy="194" r="40" fill="none" stroke="#1e1b4b" stroke-width="7" opacity="0.55"/>
+    <path d="M200 154 a40 40 0 0 1 36 58" fill="none" stroke="#c7d2fe" stroke-width="7" stroke-linecap="round"/>
+    <text x="200" y="206" font-family="system-ui,sans-serif" font-size="34" font-weight="700" fill="#c7d2fe" text-anchor="middle">9:41</text>
+    <circle cx="200" cy="244" r="6" fill="#6366f1"/>
+    <rect x="168" y="240" width="20" height="8" rx="4" fill="#6366f1" opacity="0.6"/>
+    <rect x="212" y="240" width="20" height="8" rx="4" fill="#6366f1" opacity="0.6"/>
+  </g>
+</svg>

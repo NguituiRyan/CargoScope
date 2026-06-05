@@ -28,6 +28,29 @@ const supabase = createClient(url, serviceKey, {
 
 const PLACEHOLDER = "/img/product-placeholder.svg"
 
+/**
+ * Per-product illustration art (intricate SVGs under public/products/), keyed by
+ * product title. Falls back to PLACEHOLDER for any unmapped product.
+ */
+const PRODUCT_IMAGE: Record<string, string> = {
+  "10,000mAh Slim Power Bank": "/products/power-bank.svg",
+  "True Wireless Earbuds (ENC)": "/products/wireless-earbuds.svg",
+  "RGB LED Strip 5m Kit": "/products/led-strip.svg",
+  "USB-C 100W Braided Cable": "/products/usbc-cable.svg",
+  '1.83" Bluetooth Smart Watch': "/products/smart-watch.svg",
+  "5-Piece Nonstick Cookware Set": "/products/cookware-set.svg",
+  "Glass Food Container Set (10pc)": "/products/glass-containers.svg",
+  "750ml Insulated Steel Bottle": "/products/insulated-bottle.svg",
+  "Digital Kitchen Scale 5kg": "/products/kitchen-scale.svg",
+  "180gsm Cotton Crew T-Shirt": "/products/crew-tshirt.svg",
+  "Fleece Pullover Hoodie": "/products/fleece-hoodie.svg",
+  "High-Waist Sports Leggings": "/products/sports-leggings.svg",
+  "6-Panel Cotton Cap": "/products/cotton-cap.svg",
+  "Matte Liquid Lipstick Set (6)": "/products/liquid-lipstick.svg",
+  "Vitamin C Facial Serum 30ml": "/products/vitamin-c-serum.svg",
+  "12-Piece Makeup Brush Set": "/products/makeup-brushes.svg",
+}
+
 function ok(error: { message: string } | null, ctx: string) {
   if (error) throw new Error(`${ctx}: ${error.message}`)
 }
@@ -322,7 +345,7 @@ async function main() {
     customizable: p.customizable ?? false,
     sample_available: p.sample !== null,
     sample_price: p.sample,
-    primary_image_url: PLACEHOLDER,
+    primary_image_url: PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
     status: "active",
   }))
   const products = await supabase
@@ -348,7 +371,7 @@ async function main() {
   const mediaRows = productSeed.map((p) => ({
     product_id: idByTitle.get(p.title),
     type: "image",
-    url: PLACEHOLDER,
+    url: PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
     sort: 0,
   }))
   ok((await supabase.from("product_media").insert(mediaRows)).error, "product media")
