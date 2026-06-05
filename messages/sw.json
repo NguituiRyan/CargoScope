@@ -8,6 +8,7 @@
     "account": "Akaunti",
     "signOut": "Toka",
     "dashboard": "Dashibodi",
+    "messages": "Ujumbe",
     "currency": "Sarafu"
   },
   "home": {
@@ -205,6 +206,7 @@
   "productView": {
     "soldBy": "Inauzwa na",
     "viewStorefront": "Tazama duka",
+    "messageSupplier": "Wasiliana na msambazaji",
     "memberSince": "Mwanachama tangu {year}",
     "responseRate": "Kiwango cha majibu {rate}%",
     "established": "Ilianzishwa {year}",
@@ -236,6 +238,33 @@
     "signInToContact": "Ingia ili kuwasiliana na msambazaji huyu",
     "backToCatalog": "Rudi kwa bidhaa",
     "none": "—"
+  },
+  "messages": {
+    "title": "Ujumbe",
+    "empty": "Bado hakuna mazungumzo.",
+    "emptyHint": "Wasiliana na msambazaji kutoka kwa bidhaa au duka lolote ili kuanza mazungumzo.",
+    "noMessages": "Bado hakuna ujumbe — tuma wa kwanza hapa chini.",
+    "you": "Wewe",
+    "buyer": "Mnunuzi",
+    "supplier": "Msambazaji",
+    "backToInbox": "Ujumbe wote",
+    "aboutProduct": "Kuhusu: {product}",
+    "unreadCount": "{count} hazijasomwa",
+    "placeholder": "Andika ujumbe…",
+    "send": "Tuma",
+    "sending": "Inatuma…",
+    "attachLabel": "Ambatisha faili",
+    "attachHint": "Picha au PDF, hadi MB 10 kila moja (kiwango cha juu 5).",
+    "attachmentFallback": "Kiambatisho",
+    "translated": "Imetafsiriwa",
+    "showOriginal": "Onyesha asili",
+    "showTranslation": "Onyesha tafsiri",
+    "messageError": "Andika ujumbe au ambatisha faili.",
+    "lang": {
+      "en": "Kiingereza",
+      "sw": "Kiswahili",
+      "zh": "Kichina"
+    }
   },
   "landedCost": {
     "quantity": "Idadi",

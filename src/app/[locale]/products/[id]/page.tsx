@@ -6,12 +6,14 @@ import { ArrowLeft, Calculator } from "lucide-react"
 import { LandedCostCalculator } from "@/components/catalog/landed-cost-calculator"
 import { ProductGallery } from "@/components/catalog/product-gallery"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
+import { ContactSupplierButton } from "@/components/messaging/contact-supplier-button"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
 import { getPublicProduct } from "@/lib/catalog/queries"
+import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates, getFxRate } from "@/lib/fx"
@@ -170,12 +172,19 @@ export default async function ProductDetailPage({
             </CardHeader>
             <CardContent>
               {user ? (
-                <Link
-                  href={`/manufacturers/${m.slug}`}
-                  className={cn(buttonVariants({ variant: "default", size: "lg" }))}
-                >
-                  {t("viewStorefront")}
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <form action={startConversationAction}>
+                    <input type="hidden" name="manufacturerId" value={m.id} />
+                    <input type="hidden" name="productId" value={product.id} />
+                    <ContactSupplierButton label={t("messageSupplier")} />
+                  </form>
+                  <Link
+                    href={`/manufacturers/${m.slug}`}
+                    className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+                  >
+                    {t("viewStorefront")}
+                  </Link>
+                </div>
               ) : (
                 <Link
                   href="/sign-in"

@@ -8,6 +8,7 @@
     "account": "账户",
     "signOut": "退出登录",
     "dashboard": "控制台",
+    "messages": "消息",
     "currency": "货币"
   },
   "home": {
@@ -205,6 +206,7 @@
   "productView": {
     "soldBy": "销售方",
     "viewStorefront": "查看店铺",
+    "messageSupplier": "联系供应商",
     "memberSince": "{year} 年加入",
     "responseRate": "回复率 {rate}%",
     "established": "成立于 {year}",
@@ -236,6 +238,33 @@
     "signInToContact": "登录以联系此供应商",
     "backToCatalog": "返回产品",
     "none": "—"
+  },
+  "messages": {
+    "title": "消息",
+    "empty": "暂无对话。",
+    "emptyHint": "从任意产品或店铺联系供应商即可开始对话。",
+    "noMessages": "暂无消息——在下方发送第一条。",
+    "you": "我",
+    "buyer": "买家",
+    "supplier": "供应商",
+    "backToInbox": "全部消息",
+    "aboutProduct": "关于：{product}",
+    "unreadCount": "{count} 条未读",
+    "placeholder": "输入消息…",
+    "send": "发送",
+    "sending": "发送中…",
+    "attachLabel": "添加附件",
+    "attachHint": "图片或 PDF，每个最大 10 MB（最多 5 个）。",
+    "attachmentFallback": "附件",
+    "translated": "已翻译",
+    "showOriginal": "显示原文",
+    "showTranslation": "显示译文",
+    "messageError": "输入消息或添加附件。",
+    "lang": {
+      "en": "英语",
+      "sw": "斯瓦希里语",
+      "zh": "中文"
+    }
   },
   "landedCost": {
     "quantity": "数量",

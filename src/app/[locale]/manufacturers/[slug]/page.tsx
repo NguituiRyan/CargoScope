@@ -6,12 +6,17 @@ import { ArrowLeft, Building2, MapPin } from "lucide-react"
 
 import { ProductCard } from "@/components/catalog/product-card"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
+import { ContactSupplierButton } from "@/components/messaging/contact-supplier-button"
 import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
+import { getSessionUser } from "@/lib/auth/session"
 import { getManufacturerStorefront } from "@/lib/catalog/queries"
+import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { getDisplayRates } from "@/lib/fx"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
   params,
@@ -37,14 +42,18 @@ export default async function ManufacturerStorefrontPage({
   const { locale, slug } = await params
   setRequestLocale(locale)
 
-  const [storefront, currency, displayRates] = await Promise.all([
+  const [storefront, currency, displayRates, user] = await Promise.all([
     getManufacturerStorefront(slug),
     getDisplayCurrency(),
     getDisplayRates(),
+    getSessionUser(),
   ])
   if (!storefront) notFound()
 
-  const t = await getTranslations("directory")
+  const [t, tv] = await Promise.all([
+    getTranslations("directory"),
+    getTranslations("productView"),
+  ])
   const { manufacturer: m, products } = storefront
   const location = [m.city, m.country].filter(Boolean).join(", ")
   const memberYear = yearOf(m.memberSince)
@@ -73,7 +82,7 @@ export default async function ManufacturerStorefrontPage({
           </div>
         )}
         <CardContent className="flex flex-col gap-4 py-6">
-          <div className="flex items-start gap-4">
+          <div className="flex flex-wrap items-start gap-4">
             <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
               {m.logoUrl ? (
                 <Image
@@ -113,6 +122,24 @@ export default async function ManufacturerStorefrontPage({
                   <span>{t("responseRate", { rate: m.responseRate })}</span>
                 )}
               </div>
+            </div>
+            <div className="ml-auto shrink-0">
+              {user ? (
+                <form action={startConversationAction}>
+                  <input type="hidden" name="manufacturerId" value={m.id} />
+                  <ContactSupplierButton
+                    label={tv("messageSupplier")}
+                    size="default"
+                  />
+                </form>
+              ) : (
+                <Link
+                  href="/sign-in"
+                  className={cn(buttonVariants({ variant: "default" }))}
+                >
+                  {tv("signInToContact")}
+                </Link>
+              )}
             </div>
           </div>
 

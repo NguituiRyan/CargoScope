@@ -1,4 +1,4 @@
-import { Ship } from "lucide-react"
+import { MessageSquare, Ship } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
 import { CurrencySelector } from "@/components/currency-selector"
@@ -8,14 +8,16 @@ import { Link } from "@/i18n/navigation"
 import { signOutAction } from "@/lib/auth/actions"
 import { getSessionUser } from "@/lib/auth/session"
 import { getDisplayCurrency } from "@/lib/currency/server"
+import { getUnreadMessageCount } from "@/lib/messaging/queries"
 import { cn } from "@/lib/utils"
 
 export async function SiteHeader() {
   const t = await getTranslations("nav")
   const locale = await getLocale()
-  const [user, currency] = await Promise.all([
+  const [user, currency, unreadCount] = await Promise.all([
     getSessionUser(),
     getDisplayCurrency(),
+    getUnreadMessageCount(),
   ])
 
   const dashboardHref =
@@ -70,6 +72,22 @@ export async function SiteHeader() {
                   {t("dashboard")}
                 </Link>
               ) : null}
+              <Link
+                href="/messages"
+                aria-label={t("messages")}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "gap-1.5"
+                )}
+              >
+                <MessageSquare className="size-4" aria-hidden />
+                <span className="hidden sm:inline">{t("messages")}</span>
+                {unreadCount > 0 ? (
+                  <span className="grid min-w-5 place-items-center rounded-full bg-primary px-1.5 py-0.5 text-[11px] font-semibold leading-none text-primary-foreground">
+                    {unreadCount > 99 ? "99+" : unreadCount}
+                  </span>
+                ) : null}
+              </Link>
               <Link
                 href="/account"
                 className={cn(

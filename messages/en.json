@@ -8,6 +8,7 @@
     "account": "Account",
     "signOut": "Sign out",
     "dashboard": "Dashboard",
+    "messages": "Messages",
     "currency": "Currency"
   },
   "home": {
@@ -205,6 +206,7 @@
   "productView": {
     "soldBy": "Sold by",
     "viewStorefront": "View storefront",
+    "messageSupplier": "Message supplier",
     "memberSince": "Member since {year}",
     "responseRate": "{rate}% response rate",
     "established": "Est. {year}",
@@ -236,6 +238,33 @@
     "signInToContact": "Sign in to contact this supplier",
     "backToCatalog": "Back to products",
     "none": "—"
+  },
+  "messages": {
+    "title": "Messages",
+    "empty": "No conversations yet.",
+    "emptyHint": "Message a supplier from any product or storefront to start a conversation.",
+    "noMessages": "No messages yet — send the first one below.",
+    "you": "You",
+    "buyer": "Buyer",
+    "supplier": "Supplier",
+    "backToInbox": "All messages",
+    "aboutProduct": "About: {product}",
+    "unreadCount": "{count} unread",
+    "placeholder": "Write a message…",
+    "send": "Send",
+    "sending": "Sending…",
+    "attachLabel": "Attach files",
+    "attachHint": "Images or PDF, up to 10 MB each (max 5).",
+    "attachmentFallback": "Attachment",
+    "translated": "Translated",
+    "showOriginal": "Show original",
+    "showTranslation": "Show translation",
+    "messageError": "Type a message or attach a file.",
+    "lang": {
+      "en": "English",
+      "sw": "Swahili",
+      "zh": "Chinese"
+    }
   },
   "landedCost": {
     "quantity": "Quantity",
