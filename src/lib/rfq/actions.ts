@@ -2,10 +2,12 @@
 
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { after } from "next/server"
 import { getLocale } from "next-intl/server"
 import { z } from "zod"
 
 import { localePath, requireUser } from "@/lib/auth/session"
+import { notifyRfqBuyerOfQuote, sendRfqConfirmation } from "@/lib/email"
 import { resolveViewerParties } from "@/lib/messaging/queries"
 import { tierLimits } from "@/lib/subscription/tiers"
 import { createClient } from "@/lib/supabase/server"
@@ -129,6 +131,9 @@ export async function createRfqAction(
     return { error: "Could not post the RFQ. Please try again." }
   }
 
+  after(() =>
+    sendRfqConfirmation(user.email, { rfqTitle: d.title, rfqId: inserted.id })
+  )
   revalidatePath(localePath(locale, "/rfqs"))
   redirect(localePath(locale, `/rfqs/${inserted.id}`))
 }
@@ -209,6 +214,7 @@ export async function submitQuoteAction(
     return { error: "Could not submit the quote. Please try again." }
   }
 
+  after(() => notifyRfqBuyerOfQuote(d.rfqId, parties.manufacturerId!))
   revalidatePath(localePath(locale, "/seller/rfqs"))
   revalidatePath(localePath(locale, `/seller/rfqs/${d.rfqId}`))
   return { ok: true }

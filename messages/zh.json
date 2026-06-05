@@ -85,6 +85,7 @@
     }
   },
   "seller": {
+    "navOverview": "概览",
     "navProducts": "产品",
     "navRfqs": "询价",
     "navProfile": "公司资料",

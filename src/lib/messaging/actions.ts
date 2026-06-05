@@ -2,9 +2,11 @@
 
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { after } from "next/server"
 import { getLocale } from "next-intl/server"
 
 import { translateMessage } from "@/lib/ai/translate"
+import { notifyConversationRecipient } from "@/lib/email"
 import { getSessionUser, localePath, requireUser } from "@/lib/auth/session"
 import { resolveViewerParties, type StoredAttachment } from "@/lib/messaging/queries"
 import { createClient } from "@/lib/supabase/server"
@@ -176,6 +178,7 @@ export async function sendMessageAction(
     return { error: "Could not send the message. Please try again." }
   }
 
+  after(() => notifyConversationRecipient(conversationId, user.id, body))
   const locale = await getLocale()
   revalidatePath(localePath(locale, `/messages/${conversationId}`))
   revalidatePath(localePath(locale, "/messages"))
