@@ -85,6 +85,7 @@
     }
   },
   "seller": {
+    "navOverview": "Overview",
     "navProducts": "Products",
     "navRfqs": "RFQs",
     "navProfile": "Company profile",
@@ -208,6 +209,34 @@
     "priceOnRequest": "Price on request",
     "moq": "MOQ",
     "leadDays": "{days, plural, one {# day} other {# days}}"
+  },
+  "dashboard": {
+    "buyerTitle": "Your dashboard",
+    "buyerSubtitle": "Track your sourcing requests, quotes, and messages.",
+    "sellerTitle": "Dashboard",
+    "sellerSubtitle": "Your storefront at a glance.",
+    "openRfqs": "Open RFQs",
+    "quotesReceived": "Quotes received",
+    "unread": "Unread messages",
+    "activeListings": "Active listings",
+    "rfqsAvailable": "Open RFQs to quote",
+    "quotesSent": "Quotes sent",
+    "rating": "Rating",
+    "responseRate": "Response rate",
+    "recentRfqs": "Recent RFQs",
+    "quickActions": "Quick actions",
+    "postRfq": "Post an RFQ",
+    "browse": "Browse products",
+    "messages": "Messages",
+    "addProduct": "Add a product",
+    "browseRfqs": "Browse RFQs",
+    "verification": "Verification",
+    "plan": "Plan",
+    "listingsUsage": "{used} of {limit}",
+    "unlimited": "Unlimited",
+    "viewPlans": "View plans",
+    "noRfqs": "No RFQs yet.",
+    "viewAll": "View all"
   },
   "pricing": {
     "navLabel": "Pricing",

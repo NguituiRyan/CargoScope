@@ -85,6 +85,7 @@
     }
   },
   "seller": {
+    "navOverview": "Muhtasari",
     "navProducts": "Bidhaa",
     "navRfqs": "Maombi ya bei",
     "navProfile": "Wasifu wa kampuni",
@@ -208,6 +209,34 @@
     "priceOnRequest": "Bei kwa ombi",
     "moq": "MOQ",
     "leadDays": "{days, plural, one {siku #} other {siku #}}"
+  },
+  "dashboard": {
+    "buyerTitle": "Dashibodi yako",
+    "buyerSubtitle": "Fuatilia maombi yako ya bei, nukuu, na ujumbe.",
+    "sellerTitle": "Dashibodi",
+    "sellerSubtitle": "Duka lako kwa mtazamo mmoja.",
+    "openRfqs": "Maombi yaliyo wazi",
+    "quotesReceived": "Nukuu zilizopokelewa",
+    "unread": "Ujumbe usiosomwa",
+    "activeListings": "Orodha hai",
+    "rfqsAvailable": "Maombi ya kunukuu",
+    "quotesSent": "Nukuu zilizotumwa",
+    "rating": "Ukadiriaji",
+    "responseRate": "Kiwango cha majibu",
+    "recentRfqs": "Maombi ya hivi karibuni",
+    "quickActions": "Vitendo vya haraka",
+    "postRfq": "Tuma ombi la bei",
+    "browse": "Vinjari bidhaa",
+    "messages": "Ujumbe",
+    "addProduct": "Ongeza bidhaa",
+    "browseRfqs": "Vinjari maombi",
+    "verification": "Uthibitisho",
+    "plan": "Mpango",
+    "listingsUsage": "{used} kati ya {limit}",
+    "unlimited": "Bila kikomo",
+    "viewPlans": "Tazama mipango",
+    "noRfqs": "Bado hakuna maombi.",
+    "viewAll": "Tazama yote"
   },
   "pricing": {
     "navLabel": "Bei",

@@ -24,8 +24,10 @@ export async function SiteHeader() {
     user?.role === "admin"
       ? "/admin"
       : user?.role === "manufacturer"
-        ? "/seller/products"
-        : null
+        ? "/seller"
+        : user?.role === "buyer"
+          ? "/dashboard"
+          : null
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
