@@ -5,12 +5,16 @@ import { ArrowLeft, CalendarClock, MapPin } from "lucide-react"
 
 import { QuoteForm } from "@/components/rfq/quote-form"
 import { RfqStatusBadge } from "@/components/rfq/status-badge"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { requireRole } from "@/lib/auth/session"
 import { formatMoney } from "@/lib/currency/shared"
 import { formatDateOnly } from "@/lib/datetime"
+import { getMyManufacturer } from "@/lib/manufacturers/queries"
 import { getRfqForQuoting } from "@/lib/rfq/queries"
+import { tierLimits } from "@/lib/subscription/tiers"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("rfq")
@@ -28,6 +32,8 @@ export default async function SellerRfqDetailPage({
   const rfq = await getRfqForQuoting(id, user)
   if (!rfq) notFound()
 
+  const mfr = await getMyManufacturer()
+  const canQuote = tierLimits(mfr?.subscriptionTier).canQuoteRfq
   const t = await getTranslations("rfq")
   const meta: { label: string; value: string }[] = [
     { label: t("buyer"), value: rfq.buyerCompanyName ?? t("buyer") },
@@ -104,12 +110,23 @@ export default async function SellerRfqDetailPage({
           <CardTitle className="text-base">{t("yourQuoteTitle")}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          {rfq.myQuote ? (
-            <p className="rounded-lg bg-muted/50 p-3 text-sm text-muted-foreground">
-              {t("alreadyQuotedNote")}
-            </p>
-          ) : null}
-          <QuoteForm rfqId={rfq.id} initial={rfq.myQuote} />
+          {canQuote ? (
+            <>
+              {rfq.myQuote ? (
+                <p className="rounded-lg bg-muted/50 p-3 text-sm text-muted-foreground">
+                  {t("alreadyQuotedNote")}
+                </p>
+              ) : null}
+              <QuoteForm rfqId={rfq.id} initial={rfq.myQuote} />
+            </>
+          ) : (
+            <div className="flex flex-col items-start gap-3 rounded-lg border border-border bg-muted/40 p-4">
+              <p className="text-sm text-muted-foreground">{t("quoteLocked")}</p>
+              <Link href="/pricing" className={cn(buttonVariants({ size: "sm" }))}>
+                {t("viewPlans")}
+              </Link>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

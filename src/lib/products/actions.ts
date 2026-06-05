@@ -6,6 +6,7 @@ import { getLocale } from "next-intl/server"
 
 import { localePath, requireRole } from "@/lib/auth/session"
 import { createClient } from "@/lib/supabase/server"
+import { tierLimits } from "@/lib/subscription/tiers"
 import type { SupabaseClient } from "@supabase/supabase-js"
 
 export interface ProductActionState {
@@ -183,6 +184,23 @@ export async function saveProductAction(
     revalidatePath(localePath(locale, `/seller/products/${productId}/edit`))
     revalidatePath(localePath(locale, "/seller/products"))
     return { ok: true }
+  }
+
+  // Listing-limit gating by subscription tier (new products only).
+  const { data: mfrRow } = await supabase
+    .from("manufacturers")
+    .select("subscription_tier")
+    .eq("id", manufacturerId)
+    .maybeSingle()
+  const { count: listingCount } = await supabase
+    .from("products")
+    .select("id", { count: "exact", head: true })
+    .eq("manufacturer_id", manufacturerId)
+  const limits = tierLimits(mfrRow?.subscription_tier as string | undefined)
+  if ((listingCount ?? 0) >= limits.maxListings) {
+    return {
+      error: `Your plan allows ${limits.maxListings} active listings. Upgrade your plan to add more.`,
+    }
   }
 
   const { data: created, error: insertError } = await supabase

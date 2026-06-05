@@ -54,6 +54,12 @@ export async function SiteHeader() {
           >
             {t("howItWorks")}
           </Link>
+          <Link
+            href="/pricing"
+            className="transition-colors hover:text-foreground"
+          >
+            {t("pricing")}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">

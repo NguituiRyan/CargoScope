@@ -4,6 +4,7 @@
     "products": "Products",
     "manufacturers": "Manufacturers",
     "howItWorks": "How it works",
+    "pricing": "Pricing",
     "signIn": "Sign in",
     "account": "Account",
     "signOut": "Sign out",
@@ -208,6 +209,34 @@
     "moq": "MOQ",
     "leadDays": "{days, plural, one {# day} other {# days}}"
   },
+  "pricing": {
+    "navLabel": "Pricing",
+    "title": "Plans for suppliers",
+    "subtitle": "List your factory, reach verified African buyers, and win orders. Upgrade anytime as you grow.",
+    "perMonth": "/mo",
+    "free": "Free",
+    "recommended": "Most popular",
+    "cta": "Get started",
+    "ctaContact": "Contact sales",
+    "buyerNote": "Buying on CargoScope is always free — plans are for suppliers.",
+    "tiers": {
+      "basic": {
+        "name": "Basic",
+        "tagline": "Start listing and get discovered.",
+        "features": ["Up to 15 active listings", "Identity-checked badge", "Buyer messaging with AI translation", "Standard catalog placement"]
+      },
+      "verified": {
+        "name": "Verified",
+        "tagline": "Win trust and respond to RFQs.",
+        "features": ["Up to 60 active listings", "Verified Supplier badge", "Respond to buyer RFQs with quotes", "Search ranking boost", "Response-rate analytics"]
+      },
+      "premium": {
+        "name": "Premium",
+        "tagline": "Maximum reach and featured placement.",
+        "features": ["Unlimited listings", "Premium Verified badge", "Featured on home & category rails", "Top search ranking", "Priority RFQ access", "Storefront customization"]
+      }
+    }
+  },
   "reviews": {
     "title": "Reviews",
     "based": "Based on {count, plural, one {# review} other {# reviews}}",
@@ -327,7 +356,9 @@
     "updateQuote": "Update quote",
     "submittingQuote": "Submitting…",
     "quoteSaved": "Quote sent to the buyer.",
-    "alreadyQuotedNote": "You've already quoted this RFQ. Updating replaces your quote."
+    "alreadyQuotedNote": "You've already quoted this RFQ. Updating replaces your quote.",
+    "quoteLocked": "Responding to RFQs requires a Verified or Premium plan.",
+    "viewPlans": "View plans"
   },
   "messages": {
     "title": "Messages",

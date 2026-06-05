@@ -4,6 +4,7 @@
     "products": "产品",
     "manufacturers": "制造商",
     "howItWorks": "运作方式",
+    "pricing": "定价",
     "signIn": "登录",
     "account": "账户",
     "signOut": "退出登录",
@@ -208,6 +209,34 @@
     "moq": "起订量",
     "leadDays": "{days, plural, other {# 天}}"
   },
+  "pricing": {
+    "navLabel": "定价",
+    "title": "供应商套餐",
+    "subtitle": "展示您的工厂，触达已认证的非洲买家，赢得订单。随业务增长随时升级。",
+    "perMonth": "/月",
+    "free": "免费",
+    "recommended": "最受欢迎",
+    "cta": "开始使用",
+    "ctaContact": "联系销售",
+    "buyerNote": "在 CargoScope 采购始终免费 — 套餐面向供应商。",
+    "tiers": {
+      "basic": {
+        "name": "基础版",
+        "tagline": "开始上架，被买家发现。",
+        "features": ["最多 15 个在售商品", "身份核验标识", "买家消息与 AI 翻译", "标准目录展示"]
+      },
+      "verified": {
+        "name": "认证版",
+        "tagline": "赢得信任并响应询价。",
+        "features": ["最多 60 个在售商品", "认证供应商标识", "以报价响应买家询价", "搜索排名提升", "响应率分析"]
+      },
+      "premium": {
+        "name": "尊享版",
+        "tagline": "最大曝光与精选展示。",
+        "features": ["无限商品", "尊享认证标识", "首页与类目精选展示", "搜索排名置顶", "优先询价权限", "店铺定制"]
+      }
+    }
+  },
   "reviews": {
     "title": "评价",
     "based": "基于 {count} 条评价",
@@ -327,7 +356,9 @@
     "updateQuote": "更新报价",
     "submittingQuote": "提交中…",
     "quoteSaved": "报价已发送给买家。",
-    "alreadyQuotedNote": "您已对此询价报价。更新将替换您的报价。"
+    "alreadyQuotedNote": "您已对此询价报价。更新将替换您的报价。",
+    "quoteLocked": "响应询价需要认证版或尊享版套餐。",
+    "viewPlans": "查看套餐"
   },
   "messages": {
     "title": "消息",

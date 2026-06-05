@@ -7,6 +7,7 @@ import { z } from "zod"
 
 import { localePath, requireUser } from "@/lib/auth/session"
 import { resolveViewerParties } from "@/lib/messaging/queries"
+import { tierLimits } from "@/lib/subscription/tiers"
 import { createClient } from "@/lib/supabase/server"
 
 export interface RfqActionState {
@@ -161,6 +162,16 @@ export async function submitQuoteAction(
   const d = parsed.data
 
   const supabase = await createClient()
+
+  // Tier gating: only Verified/Premium suppliers may quote RFQs.
+  const { data: mfrRow } = await supabase
+    .from("manufacturers")
+    .select("subscription_tier")
+    .eq("id", parties.manufacturerId)
+    .maybeSingle()
+  if (!tierLimits(mfrRow?.subscription_tier as string | undefined).canQuoteRfq) {
+    return { error: "Quoting RFQs requires a Verified or Premium plan." }
+  }
 
   // RLS only returns open/quoting RFQs to manufacturers, so this confirms the
   // RFQ is quotable.

@@ -4,6 +4,7 @@
     "products": "Bidhaa",
     "manufacturers": "Watengenezaji",
     "howItWorks": "Jinsi inavyofanya kazi",
+    "pricing": "Bei",
     "signIn": "Ingia",
     "account": "Akaunti",
     "signOut": "Toka",
@@ -208,6 +209,34 @@
     "moq": "MOQ",
     "leadDays": "{days, plural, one {siku #} other {siku #}}"
   },
+  "pricing": {
+    "navLabel": "Bei",
+    "title": "Mipango kwa wasambazaji",
+    "subtitle": "Orodhesha kiwanda chako, fikia wanunuzi wa Afrika walioidhinishwa, na ushinde oda. Pandisha kiwango wakati wowote.",
+    "perMonth": "/mwezi",
+    "free": "Bure",
+    "recommended": "Maarufu zaidi",
+    "cta": "Anza sasa",
+    "ctaContact": "Wasiliana na mauzo",
+    "buyerNote": "Kununua kwenye CargoScope ni bure kila wakati — mipango ni kwa wasambazaji.",
+    "tiers": {
+      "basic": {
+        "name": "Msingi",
+        "tagline": "Anza kuorodhesha na ugundulike.",
+        "features": ["Hadi orodha 15 hai", "Beji ya utambulisho uliothibitishwa", "Ujumbe na tafsiri ya AI", "Uwekaji wa kawaida wa katalogi"]
+      },
+      "verified": {
+        "name": "Aliyethibitishwa",
+        "tagline": "Pata uaminifu na ujibu RFQ.",
+        "features": ["Hadi orodha 60 hai", "Beji ya Msambazaji Aliyethibitishwa", "Jibu RFQ kwa nukuu", "Ongezeko la nafasi ya utafutaji", "Takwimu za kiwango cha majibu"]
+      },
+      "premium": {
+        "name": "Premium",
+        "tagline": "Ufikiaji wa juu na uwekaji maalum.",
+        "features": ["Orodha zisizo na kikomo", "Beji ya Premium Aliyethibitishwa", "Iangaziwe nyumbani na kategoria", "Nafasi ya juu ya utafutaji", "Ufikiaji wa kipaumbele wa RFQ", "Ubinafsishaji wa duka"]
+      }
+    }
+  },
   "reviews": {
     "title": "Maoni",
     "based": "Kulingana na maoni {count, plural, one {#} other {#}}",
@@ -327,7 +356,9 @@
     "updateQuote": "Sasisha nukuu",
     "submittingQuote": "Inawasilisha…",
     "quoteSaved": "Nukuu imetumwa kwa mnunuzi.",
-    "alreadyQuotedNote": "Tayari umenukuu ombi hili. Kusasisha kutabadilisha nukuu yako."
+    "alreadyQuotedNote": "Tayari umenukuu ombi hili. Kusasisha kutabadilisha nukuu yako.",
+    "quoteLocked": "Kujibu RFQ kunahitaji mpango wa Aliyethibitishwa au Premium.",
+    "viewPlans": "Tazama mipango"
   },
   "messages": {
     "title": "Ujumbe",
