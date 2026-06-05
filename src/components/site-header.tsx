@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from "next-intl/server"
 
 import { CurrencySelector } from "@/components/currency-selector"
 import { LocaleSwitcher } from "@/components/locale-switcher"
+import { MobileNav } from "@/components/mobile-nav"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { signOutAction } from "@/lib/auth/actions"
@@ -29,6 +30,13 @@ export async function SiteHeader() {
           ? "/dashboard"
           : null
 
+  const navLinks = [
+    { href: "/products", label: t("products") },
+    { href: "/manufacturers", label: t("manufacturers") },
+    { href: "/how-it-works", label: t("howItWorks") },
+    { href: "/pricing", label: t("pricing") },
+  ]
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
@@ -40,31 +48,20 @@ export async function SiteHeader() {
           <span>{t("brand")}</span>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground sm:flex">
-          <Link href="/products" className="transition-colors hover:text-foreground">
-            {t("products")}
-          </Link>
-          <Link
-            href="/manufacturers"
-            className="transition-colors hover:text-foreground"
-          >
-            {t("manufacturers")}
-          </Link>
-          <Link
-            href="/how-it-works"
-            className="transition-colors hover:text-foreground"
-          >
-            {t("howItWorks")}
-          </Link>
-          <Link
-            href="/pricing"
-            className="transition-colors hover:text-foreground"
-          >
-            {t("pricing")}
-          </Link>
+        <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* Desktop controls */}
+        <div className="hidden items-center gap-2 lg:flex">
           <CurrencySelector current={currency} label={t("currency")} />
           <LocaleSwitcher />
           {user ? (
@@ -72,10 +69,7 @@ export async function SiteHeader() {
               {dashboardHref ? (
                 <Link
                   href={dashboardHref}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "sm" }),
-                    "hidden sm:inline-flex"
-                  )}
+                  className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
                 >
                   {t("dashboard")}
                 </Link>
@@ -83,10 +77,7 @@ export async function SiteHeader() {
               {user.role === "buyer" ? (
                 <Link
                   href="/rfqs"
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "sm" }),
-                    "hidden sm:inline-flex"
-                  )}
+                  className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
                 >
                   {t("rfqs")}
                 </Link>
@@ -100,7 +91,6 @@ export async function SiteHeader() {
                 )}
               >
                 <MessageSquare className="size-4" aria-hidden />
-                <span className="hidden sm:inline">{t("messages")}</span>
                 {unreadCount > 0 ? (
                   <span className="grid min-w-5 place-items-center rounded-full bg-primary px-1.5 py-0.5 text-[11px] font-semibold leading-none text-primary-foreground">
                     {unreadCount > 99 ? "99+" : unreadCount}
@@ -132,6 +122,33 @@ export async function SiteHeader() {
             </Link>
           )}
         </div>
+
+        {/* Mobile menu */}
+        <MobileNav
+          links={navLinks}
+          user={
+            user
+              ? {
+                  label: user.fullName ?? user.email,
+                  dashboardHref,
+                  isBuyer: user.role === "buyer",
+                }
+              : null
+          }
+          unreadCount={unreadCount}
+          locale={locale}
+          labels={{
+            menu: t("menu"),
+            signIn: t("signIn"),
+            signOut: t("signOut"),
+            dashboard: t("dashboard"),
+            rfqs: t("rfqs"),
+            messages: t("messages"),
+          }}
+        >
+          <CurrencySelector current={currency} label={t("currency")} />
+          <LocaleSwitcher />
+        </MobileNav>
       </div>
     </header>
   )

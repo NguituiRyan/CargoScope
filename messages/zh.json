@@ -11,7 +11,8 @@
     "dashboard": "控制台",
     "messages": "消息",
     "rfqs": "询价",
-    "currency": "货币"
+    "currency": "货币",
+    "menu": "菜单"
   },
   "home": {
     "badge": "经核实的中非采购",

@@ -56,11 +56,6 @@ export async function ProductCard({
           <div className="absolute left-2 top-2">
             <VerificationBadge status={product.manufacturer.verificationStatus} />
           </div>
-          {readyToShip ? (
-            <div className="absolute right-2 top-2">
-              <ReadyToShipBadge label={tv("readyToShip")} />
-            </div>
-          ) : null}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-3">
@@ -83,6 +78,7 @@ export async function ProductCard({
           ) : null}
 
           <div className="mt-auto flex flex-wrap gap-1.5 text-xs">
+            {readyToShip ? <ReadyToShipBadge label={tv("readyToShip")} /> : null}
             {product.moq ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
                 {t("moq")} {product.moq} {product.unit}

@@ -52,7 +52,7 @@ export function HeroSearch({
         </Button>
       </form>
       {popular && popular.length > 0 ? (
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
           <span>{t("popular")}</span>
           {popular.map((p) => (
             <Link

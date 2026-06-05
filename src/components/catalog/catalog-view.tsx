@@ -150,7 +150,7 @@ export async function CatalogView({
     <div className="flex flex-col">
       <section className="border-b border-border bg-gradient-to-b from-muted/50 to-background">
         <div className="mx-auto w-full max-w-6xl px-4 py-7 sm:py-9">
-          <div className="flex max-w-2xl flex-col gap-3">
+          <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               <span className="size-1.5 rounded-full bg-verified" aria-hidden />
               {tHome("badge")}
@@ -161,10 +161,10 @@ export async function CatalogView({
             <p className="text-sm text-muted-foreground text-pretty sm:text-base">
               {tHome("subtitle")}
             </p>
-            <div className="pt-1">
+            <div className="w-full pt-1">
               <HeroSearch defaultValue={filters.q} popular={popular} />
             </div>
-            <ul className="flex flex-wrap gap-x-5 gap-y-2 pt-0.5">
+            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 pt-0.5">
               {pillars.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
