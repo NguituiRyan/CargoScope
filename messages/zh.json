@@ -208,7 +208,18 @@
     "moq": "起订量",
     "leadDays": "{days, plural, other {# 天}}"
   },
+  "reviews": {
+    "title": "评价",
+    "based": "基于 {count} 条评价",
+    "empty": "暂无评价 — 成为第一个下单的买家。",
+    "verifiedBuyer": "已验证买家"
+  },
   "productView": {
+    "readyToShip": "现货速发",
+    "save": "省 {pct}%",
+    "bestValue": "超值之选",
+    "relatedTitle": "您可能还喜欢",
+    "reviewsTitle": "买家评价",
     "soldBy": "销售方",
     "viewStorefront": "查看店铺",
     "messageSupplier": "联系供应商",

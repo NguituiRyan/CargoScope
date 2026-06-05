@@ -6,6 +6,8 @@ import { ArrowLeft, Building2, MapPin } from "lucide-react"
 
 import { ProductCard } from "@/components/catalog/product-card"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
+import { ReviewsList } from "@/components/reviews/reviews-list"
+import { Stars } from "@/components/reviews/stars"
 import { ContactSupplierButton } from "@/components/messaging/contact-supplier-button"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
@@ -13,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
 import { getManufacturerStorefront } from "@/lib/catalog/queries"
+import { getManufacturerReviews, getProductRatings } from "@/lib/reviews/queries"
 import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { getDisplayRates } from "@/lib/fx"
@@ -57,6 +60,10 @@ export default async function ManufacturerStorefrontPage({
   const { manufacturer: m, products } = storefront
   const location = [m.city, m.country].filter(Boolean).join(", ")
   const memberYear = yearOf(m.memberSince)
+  const [reviews, ratings] = await Promise.all([
+    getManufacturerReviews(m.id),
+    getProductRatings(products.map((p) => p.id)),
+  ])
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8">
@@ -106,6 +113,9 @@ export default async function ManufacturerStorefrontPage({
               </h1>
               <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
                 <VerificationBadge status={m.verificationStatus} />
+                {reviews.rating.count > 0 ? (
+                  <Stars value={reviews.rating.avg} count={reviews.rating.count} />
+                ) : null}
                 {location && (
                   <span className="inline-flex items-center gap-1">
                     <MapPin className="size-3.5" aria-hidden />
@@ -191,6 +201,21 @@ export default async function ManufacturerStorefrontPage({
         </Card>
       )}
 
+      {reviews.rating.count > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">{tv("reviewsTitle")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ReviewsList
+              rating={reviews.rating}
+              items={reviews.items}
+              showProduct
+            />
+          </CardContent>
+        </Card>
+      )}
+
       <div className="flex flex-col gap-4">
         <div className="flex items-baseline justify-between gap-3">
           <h2 className="font-heading text-lg font-semibold">
@@ -215,6 +240,7 @@ export default async function ManufacturerStorefrontPage({
                 product={product}
                 currency={currency}
                 rates={displayRates.rates}
+                rating={ratings.get(product.id)}
               />
             ))}
           </div>

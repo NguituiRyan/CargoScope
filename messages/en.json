@@ -208,7 +208,18 @@
     "moq": "MOQ",
     "leadDays": "{days, plural, one {# day} other {# days}}"
   },
+  "reviews": {
+    "title": "Reviews",
+    "based": "Based on {count, plural, one {# review} other {# reviews}}",
+    "empty": "No reviews yet — be the first to order.",
+    "verifiedBuyer": "Verified buyer"
+  },
   "productView": {
+    "readyToShip": "Ready to Ship",
+    "save": "Save {pct}%",
+    "bestValue": "Best value",
+    "relatedTitle": "You may also like",
+    "reviewsTitle": "Customer reviews",
     "soldBy": "Sold by",
     "viewStorefront": "View storefront",
     "messageSupplier": "Message supplier",

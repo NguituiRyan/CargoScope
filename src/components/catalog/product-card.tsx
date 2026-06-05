@@ -2,6 +2,10 @@ import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 import { Clock, Package } from "lucide-react"
 
+import {
+  ReadyToShipBadge,
+  READY_TO_SHIP_MAX_DAYS,
+} from "@/components/catalog/ready-to-ship-badge"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { Stars } from "@/components/reviews/stars"
 import { Card } from "@/components/ui/card"
@@ -25,6 +29,10 @@ export async function ProductCard({
   rating?: { avg: number; count: number }
 }) {
   const t = await getTranslations("catalog")
+  const tv = await getTranslations("productView")
+  const readyToShip =
+    product.leadTimeDays !== null &&
+    product.leadTimeDays <= READY_TO_SHIP_MAX_DAYS
 
   return (
     <Card className="group overflow-hidden p-0 transition-all duration-200 hover:-translate-y-0.5 hover:border-ring hover:shadow-md">
@@ -48,6 +56,11 @@ export async function ProductCard({
           <div className="absolute left-2 top-2">
             <VerificationBadge status={product.manufacturer.verificationStatus} />
           </div>
+          {readyToShip ? (
+            <div className="absolute right-2 top-2">
+              <ReadyToShipBadge label={tv("readyToShip")} />
+            </div>
+          ) : null}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-3">

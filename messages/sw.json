@@ -208,7 +208,18 @@
     "moq": "MOQ",
     "leadDays": "{days, plural, one {siku #} other {siku #}}"
   },
+  "reviews": {
+    "title": "Maoni",
+    "based": "Kulingana na maoni {count, plural, one {#} other {#}}",
+    "empty": "Bado hakuna maoni — kuwa wa kwanza kuagiza.",
+    "verifiedBuyer": "Mnunuzi aliyethibitishwa"
+  },
   "productView": {
+    "readyToShip": "Tayari Kusafirishwa",
+    "save": "Okoa {pct}%",
+    "bestValue": "Thamani bora",
+    "relatedTitle": "Unaweza pia kupenda",
+    "reviewsTitle": "Maoni ya wateja",
     "soldBy": "Inauzwa na",
     "viewStorefront": "Tazama duka",
     "messageSupplier": "Wasiliana na msambazaji",

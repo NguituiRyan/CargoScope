@@ -4,15 +4,23 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ArrowLeft, Calculator } from "lucide-react"
 
 import { LandedCostCalculator } from "@/components/catalog/landed-cost-calculator"
+import { ProductCard } from "@/components/catalog/product-card"
 import { ProductGallery } from "@/components/catalog/product-gallery"
+import {
+  ReadyToShipBadge,
+  READY_TO_SHIP_MAX_DAYS,
+} from "@/components/catalog/ready-to-ship-badge"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
+import { ReviewsList } from "@/components/reviews/reviews-list"
+import { Stars } from "@/components/reviews/stars"
 import { ContactSupplierButton } from "@/components/messaging/contact-supplier-button"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
-import { getPublicProduct } from "@/lib/catalog/queries"
+import { getPublicProduct, getRelatedProducts } from "@/lib/catalog/queries"
+import { getProductRatings, getProductReviews } from "@/lib/reviews/queries"
 import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { formatDisplayPrice } from "@/lib/currency/shared"
@@ -60,6 +68,18 @@ export default async function ProductDetailPage({
     unitPriceUsd: Number(tier.unitPrice),
   }))
 
+  const [reviews, related] = await Promise.all([
+    getProductReviews(product.id),
+    getRelatedProducts({ productId: product.id, categoryId: product.categoryId }),
+  ])
+  const relatedRatings = await getProductRatings(related.map((r) => r.id))
+  const readyToShip =
+    product.leadTimeDays !== null &&
+    product.leadTimeDays <= READY_TO_SHIP_MAX_DAYS
+  const baseTierPrice = product.priceTiers.length
+    ? Number(product.priceTiers[0].unitPrice)
+    : 0
+
   const specs: { label: string; value: string }[] = [
     {
       label: t("specMoq"),
@@ -103,6 +123,18 @@ export default async function ProductDetailPage({
             <h1 className="font-heading text-2xl font-semibold tracking-tight">
               {product.title}
             </h1>
+            {(reviews.rating.count > 0 || readyToShip) && (
+              <div className="flex flex-wrap items-center gap-3">
+                {reviews.rating.count > 0 ? (
+                  <Stars
+                    value={reviews.rating.avg}
+                    count={reviews.rating.count}
+                    sizeClass="size-4"
+                  />
+                ) : null}
+                {readyToShip ? <ReadyToShipBadge label={t("readyToShip")} /> : null}
+              </div>
+            )}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
               <span>{t("soldBy")}</span>
               <Link
@@ -134,23 +166,42 @@ export default async function ProductDetailPage({
                       <th className="pb-2 text-right font-medium">
                         {t("unitPrice")}
                       </th>
+                      <th className="pb-2 text-right font-medium" />
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    {product.priceTiers.map((tier) => (
-                      <tr key={tier.id}>
-                        <td className="py-2">
-                          ≥ {tier.minQty} {product.unit}
-                        </td>
-                        <td className="py-2 text-right font-medium">
-                          {formatDisplayPrice(
-                            Number(tier.unitPrice),
-                            currency,
-                            displayRates.rates
-                          )}
-                        </td>
-                      </tr>
-                    ))}
+                    {product.priceTiers.map((tier, i) => {
+                      const price = Number(tier.unitPrice)
+                      const pct =
+                        baseTierPrice > 0
+                          ? Math.round(((baseTierPrice - price) / baseTierPrice) * 100)
+                          : 0
+                      const isBest =
+                        product.priceTiers.length > 1 &&
+                        i === product.priceTiers.length - 1
+                      return (
+                        <tr key={tier.id} className={isBest ? "bg-primary/5" : undefined}>
+                          <td className="py-2">
+                            ≥ {tier.minQty} {product.unit}
+                            {isBest ? (
+                              <span className="ml-2 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">
+                                {t("bestValue")}
+                              </span>
+                            ) : null}
+                          </td>
+                          <td className="py-2 text-right font-medium">
+                            {formatDisplayPrice(price, currency, displayRates.rates)}
+                          </td>
+                          <td className="py-2 text-right">
+                            {pct > 0 ? (
+                              <span className="text-xs font-medium text-verified-foreground">
+                                {t("save", { pct })}
+                              </span>
+                            ) : null}
+                          </td>
+                        </tr>
+                      )
+                    })}
                   </tbody>
                 </table>
               ) : (
@@ -283,6 +334,34 @@ export default async function ProductDetailPage({
           </Card>
         </div>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">{t("reviewsTitle")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ReviewsList rating={reviews.rating} items={reviews.items} />
+        </CardContent>
+      </Card>
+
+      {related.length > 0 ? (
+        <div className="flex flex-col gap-4">
+          <h2 className="font-heading text-lg font-semibold">
+            {t("relatedTitle")}
+          </h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-6">
+            {related.map((rp) => (
+              <ProductCard
+                key={rp.id}
+                product={rp}
+                currency={currency}
+                rates={displayRates.rates}
+                rating={relatedRatings.get(rp.id)}
+              />
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }

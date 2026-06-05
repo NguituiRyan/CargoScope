@@ -442,3 +442,26 @@ export async function getManufacturerStorefront(
 
   return { manufacturer, products }
 }
+
+/** "You may also like" — active products in the same category, excluding self. */
+export async function getRelatedProducts(opts: {
+  productId: string
+  categoryId: string | null
+  limit?: number
+}): Promise<ProductCard[]> {
+  const supabase = await createClient()
+  let query = supabase
+    .from("products")
+    .select(CARD_SELECT)
+    .eq("status", "active")
+    .eq("manufacturers.is_published", true)
+    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .neq("id", opts.productId)
+  if (opts.categoryId) query = query.eq("category_id", opts.categoryId)
+
+  const { data } = await query.order("created_at", { ascending: false }).limit(24)
+  return (data ?? [])
+    .map((row) => mapCard(row as CardRow))
+    .filter((item): item is ProductCard => item !== null)
+    .slice(0, opts.limit ?? 6)
+}
