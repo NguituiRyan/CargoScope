@@ -94,7 +94,7 @@ export default async function ManufacturerStorefrontPage({
               {m.logoUrl ? (
                 <Image
                   src={m.logoUrl}
-                  alt=""
+                  alt={m.companyName}
                   fill
                   unoptimized
                   sizes="64px"

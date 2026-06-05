@@ -24,8 +24,9 @@ export interface ReviewItem {
   createdAt: string
 }
 
-function toIso(value: Date | string | null): string {
-  if (!value) return ""
+// review.createdAt is NOT NULL at the DB level, so this always receives a value
+// and always returns a valid ISO string — no misleading empty-string fallback.
+function toIso(value: Date | string): string {
   return value instanceof Date ? value.toISOString() : new Date(value).toISOString()
 }
 

@@ -221,13 +221,16 @@ export async function submitQuoteAction(
 }
 
 /** Buyer accepts one quote on their RFQ; the rest are declined and it closes. */
-export async function acceptQuoteAction(formData: FormData): Promise<void> {
+export async function acceptQuoteAction(
+  _prev: RfqActionState,
+  formData: FormData
+): Promise<RfqActionState> {
   await requireUser()
   const locale = await getLocale()
 
   const rfqId = String(formData.get("rfqId") ?? "").trim()
   const quoteId = String(formData.get("quoteId") ?? "").trim()
-  if (!rfqId || !quoteId) return
+  if (!rfqId || !quoteId) return { error: "Missing quote reference." }
 
   const supabase = await createClient()
 
@@ -237,17 +240,27 @@ export async function acceptQuoteAction(formData: FormData): Promise<void> {
     .select("id")
     .eq("id", rfqId)
     .maybeSingle()
-  if (!rfq) return
+  if (!rfq) return { error: "This RFQ is no longer available." }
 
   // owns_rfq() lets the buyer update quotes on their own RFQ.
-  await supabase
+  const declined = await supabase
     .from("quotes")
     .update({ status: "declined" })
     .eq("rfq_id", rfqId)
     .neq("id", quoteId)
-  await supabase.from("quotes").update({ status: "accepted" }).eq("id", quoteId)
-  await supabase.from("rfqs").update({ status: "closed" }).eq("id", rfqId)
+  const accepted = await supabase
+    .from("quotes")
+    .update({ status: "accepted" })
+    .eq("id", quoteId)
+  const closed = await supabase
+    .from("rfqs")
+    .update({ status: "closed" })
+    .eq("id", rfqId)
+  if (declined.error || accepted.error || closed.error) {
+    return { error: "Could not accept the quote. Please try again." }
+  }
 
   revalidatePath(localePath(locale, "/rfqs"))
   revalidatePath(localePath(locale, `/rfqs/${rfqId}`))
+  return { ok: true }
 }
