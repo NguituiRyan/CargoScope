@@ -393,7 +393,7 @@ async function main() {
   const mediaRows = productSeed.map((p) => ({
     product_id: idByTitle.get(p.title),
     type: "image",
-    url: PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
+    url: p.img ?? PRODUCT_IMAGE[p.title] ?? PLACEHOLDER,
     sort: 0,
   }))
   ok((await supabase.from("product_media").insert(mediaRows)).error, "product media")

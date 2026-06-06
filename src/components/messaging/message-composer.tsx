@@ -9,6 +9,7 @@ import {
   sendMessageAction,
   type MessagingActionState,
 } from "@/lib/messaging/actions"
+import { ATTACHMENT_ACCEPT } from "@/lib/messaging/attachments"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -76,7 +77,7 @@ export function MessageComposer({
           type="file"
           name="attachments"
           multiple
-          accept="image/jpeg,image/png,image/webp,image/gif,application/pdf"
+          accept={ATTACHMENT_ACCEPT}
           className="h-auto py-2 file:mr-3 file:rounded-md file:bg-secondary file:px-2.5 file:py-1 file:text-secondary-foreground"
         />
         <p className="text-xs text-muted-foreground">{t("attachHint")}</p>

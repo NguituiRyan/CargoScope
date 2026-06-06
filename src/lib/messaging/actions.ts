@@ -8,6 +8,11 @@ import { getLocale } from "next-intl/server"
 import { translateMessage } from "@/lib/ai/translate"
 import { notifyConversationRecipient } from "@/lib/email"
 import { getSessionUser, localePath, requireUser } from "@/lib/auth/session"
+import {
+  ATTACHMENT_MIME_TYPES,
+  MAX_ATTACHMENTS,
+  MAX_ATTACHMENT_BYTES,
+} from "@/lib/messaging/attachments"
 import { resolveViewerParties, type StoredAttachment } from "@/lib/messaging/queries"
 import { createClient } from "@/lib/supabase/server"
 
@@ -17,15 +22,7 @@ export interface MessagingActionState {
 }
 
 const ATTACHMENTS_BUCKET = "chat-attachments"
-const ALLOWED_ATTACHMENT_MIME = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-  "application/pdf",
-])
-const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024
-const MAX_ATTACHMENTS = 5
+const ALLOWED_ATTACHMENT_MIME = new Set<string>(ATTACHMENT_MIME_TYPES)
 const MAX_BODY_CHARS = 4000
 
 function safeName(name: string, fallback: string): string {
@@ -117,7 +114,10 @@ export async function sendMessageAction(
   }
   for (const file of files) {
     if (!ALLOWED_ATTACHMENT_MIME.has(file.type)) {
-      return { error: "Attachments must be JPG, PNG, WebP, GIF, or PDF." }
+      return {
+        error:
+          "Attachments must be an image, PDF, or document (Word, Excel, PowerPoint, CSV, or text).",
+      }
     }
     if (file.size > MAX_ATTACHMENT_BYTES) {
       return { error: "Each attachment must be 10 MB or smaller." }
@@ -146,7 +146,11 @@ export async function sendMessageAction(
           .from(ATTACHMENTS_BUCKET)
           .remove(stored.map((s) => s.path))
       }
-      return { error: "Upload failed. Please try again." }
+      return {
+        error: uploadError.message
+          ? `Upload failed: ${uploadError.message}`
+          : "Upload failed. Please try again.",
+      }
     }
     stored.push({
       path,

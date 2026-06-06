@@ -43,6 +43,13 @@
       "when": 1780614000000,
       "tag": "0005_chat_attachments_storage",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1780700000000,
+      "tag": "0006_widen_chat_mimes_and_fix_media",
+      "breakpoints": true
     }
   ]
 }
