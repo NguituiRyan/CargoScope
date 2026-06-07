@@ -2,6 +2,7 @@
 
 import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
+import Image from "next/image"
 import { Check, Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 
@@ -137,6 +138,54 @@ export function OnboardingForm({
           placeholder={t("descriptionPlaceholder")}
         />
       </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="logo">{t("logo")}</Label>
+          {initial?.logoUrl ? (
+            <div className="relative size-16 overflow-hidden rounded-md border border-border bg-muted">
+              <Image
+                src={initial.logoUrl}
+                alt=""
+                fill
+                unoptimized
+                sizes="64px"
+                className="object-cover"
+              />
+            </div>
+          ) : null}
+          <Input
+            id="logo"
+            name="logo"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="h-auto py-2 file:mr-3 file:rounded-md file:bg-secondary file:px-2.5 file:py-1 file:text-secondary-foreground"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="banner">{t("banner")}</Label>
+          {initial?.bannerUrl ? (
+            <div className="relative aspect-[4/1] w-full overflow-hidden rounded-md border border-border bg-muted">
+              <Image
+                src={initial.bannerUrl}
+                alt=""
+                fill
+                unoptimized
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          ) : null}
+          <Input
+            id="banner"
+            name="banner"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="h-auto py-2 file:mr-3 file:rounded-md file:bg-secondary file:px-2.5 file:py-1 file:text-secondary-foreground"
+          />
+        </div>
+      </div>
+      <p className="text-xs text-muted-foreground">{t("brandingHint")}</p>
 
       {state.error ? (
         <p role="alert" className="text-sm text-destructive">

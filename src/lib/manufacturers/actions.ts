@@ -35,6 +35,38 @@ function randomSuffix(length: number): string {
   return crypto.randomUUID().replace(/-/g, "").slice(0, length)
 }
 
+const ALLOWED_IMAGE_MIME = new Set(["image/jpeg", "image/png", "image/webp"])
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024
+// Logos/banners live in the public product-media bucket; its RLS only allows a
+// manufacturer to write under a folder whose first segment is their own id.
+const BRAND_BUCKET = "product-media"
+
+function safeName(name: string, fallback: string): string {
+  return name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80) || fallback
+}
+
+async function uploadBrandImage(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  manufacturerId: string,
+  kind: "logo" | "banner",
+  file: File
+): Promise<{ url: string } | { error: string }> {
+  if (!ALLOWED_IMAGE_MIME.has(file.type)) {
+    return { error: "Logo and banner must be a JPG, PNG, or WebP image." }
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    return { error: "Logo and banner images must be 5 MB or smaller." }
+  }
+  const path = `${manufacturerId}/brand/${kind}-${crypto.randomUUID()}-${safeName(file.name, kind)}`
+  const buffer = await file.arrayBuffer()
+  const { error } = await supabase.storage
+    .from(BRAND_BUCKET)
+    .upload(path, buffer, { contentType: file.type, upsert: false })
+  if (error) return { error: "Image upload failed. Please try again." }
+  const { data } = supabase.storage.from(BRAND_BUCKET).getPublicUrl(path)
+  return { url: data.publicUrl }
+}
+
 export async function saveManufacturerProfileAction(
   _prev: ManufacturerActionState,
   formData: FormData
@@ -74,53 +106,90 @@ export async function saveManufacturerProfileAction(
     certifications,
   }
 
+  const logoFile = formData.get("logo")
+  const bannerFile = formData.get("banner")
+  const logo = logoFile instanceof File && logoFile.size > 0 ? logoFile : null
+  const banner =
+    bannerFile instanceof File && bannerFile.size > 0 ? bannerFile : null
+
   const { data: existing } = await supabase
     .from("manufacturers")
     .select("id")
     .eq("owner_profile_id", user.id)
     .maybeSingle()
 
+  let manufacturerId: string
+  let isNew = false
+
   if (existing) {
+    manufacturerId = existing.id as string
     const { error } = await supabase
       .from("manufacturers")
       .update(payload)
-      .eq("id", existing.id)
+      .eq("id", manufacturerId)
     if (error) return { error: "Could not save your profile. Please try again." }
-
-    const locale = await getLocale()
-    revalidatePath(localePath(locale, "/seller/onboarding"))
-    return { ok: true }
+  } else {
+    const base = slugify(companyName) || "manufacturer"
+    const slugCandidates = [
+      base,
+      `${base}-${randomSuffix(4)}`,
+      `${base}-${randomSuffix(8)}`,
+    ]
+    let newId: string | null = null
+    let insertError: { code?: string } | null = null
+    for (const slug of slugCandidates) {
+      const { data, error } = await supabase
+        .from("manufacturers")
+        .insert({ ...payload, slug, owner_profile_id: user.id })
+        .select("id")
+        .single()
+      if (!error && data) {
+        newId = data.id as string
+        break
+      }
+      insertError = error
+      if (error?.code !== "23505") break
+    }
+    if (!newId) {
+      return {
+        error: insertError
+          ? "Could not create your profile. Please try again."
+          : "Could not create your profile.",
+      }
+    }
+    manufacturerId = newId
+    isNew = true
   }
 
-  const base = slugify(companyName) || "manufacturer"
-  const slugCandidates = [
-    base,
-    `${base}-${randomSuffix(4)}`,
-    `${base}-${randomSuffix(8)}`,
-  ]
-  let insertError: { code?: string } | null = null
-  let created = false
-  for (const slug of slugCandidates) {
-    const { error } = await supabase
+  const branding: { logo_url?: string; banner_url?: string } = {}
+  if (logo) {
+    const result = await uploadBrandImage(supabase, manufacturerId, "logo", logo)
+    if ("error" in result) return { error: result.error }
+    branding.logo_url = result.url
+  }
+  if (banner) {
+    const result = await uploadBrandImage(
+      supabase,
+      manufacturerId,
+      "banner",
+      banner
+    )
+    if ("error" in result) return { error: result.error }
+    branding.banner_url = result.url
+  }
+  if (Object.keys(branding).length > 0) {
+    await supabase
       .from("manufacturers")
-      .insert({ ...payload, slug, owner_profile_id: user.id })
-    if (!error) {
-      created = true
-      break
-    }
-    insertError = error
-    if (error.code !== "23505") break
-  }
-  if (!created) {
-    return {
-      error: insertError
-        ? "Could not create your profile. Please try again."
-        : "Could not create your profile.",
-    }
+      .update(branding)
+      .eq("id", manufacturerId)
   }
 
   const locale = await getLocale()
-  redirect(localePath(locale, "/seller/verification"))
+  if (isNew) {
+    redirect(localePath(locale, "/seller/verification"))
+  }
+  revalidatePath(localePath(locale, "/seller/onboarding"))
+  return { ok: true }
 }
 
 export async function submitVerificationAction(
