@@ -436,6 +436,8 @@
     "quantity": "数量",
     "unitWeight": "单件重量（公斤）",
     "weightHint": "每件的估计重量——调整以获得准确的运费。",
+    "unitVolume": "单件体积（立方米）",
+    "volumeHint": "每件的大致体积（立方米）——海运按立方米计费。",
     "shippingMode": "运输方式",
     "sea": "海运",
     "air": "空运",

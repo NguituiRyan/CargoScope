@@ -12,6 +12,7 @@
 export type ShippingMode = "sea" | "air"
 
 export const DEFAULT_UNIT_WEIGHT_KG = 0.5
+export const DEFAULT_UNIT_VOLUME_CBM = 0.01
 
 export const LANDED_COST_RATES = {
   /** KRA standard VAT (applied to CIF + duty + levies). */
@@ -24,9 +25,9 @@ export const LANDED_COST_RATES = {
   pvoc: { rate: 0.006, minUsd: 265, maxUsd: 2700 },
   /** Flat clearing agent + handling estimate. */
   clearingFlatUsd: 120,
-  /** Weight-based freight proxy (no product dimensions available yet). */
+  /** Freight: sea is charged per CBM (volume), air per kg (weight). */
   freight: {
-    sea: { perKgUsd: 0.9, minUsd: 60 },
+    sea: { perCbmUsd: 90, minUsd: 60 },
     air: { perKgUsd: 6.5, minUsd: 90 },
   },
 } as const
@@ -61,6 +62,7 @@ export type LandedCostInput = {
   unitPriceUsd: number
   quantity: number
   unitWeightKg: number
+  unitVolumeCbm?: number
   shippingMode: ShippingMode
   hsCode: string | null
 }
@@ -88,14 +90,28 @@ export function calculateLandedCost(
 ): LandedCostBreakdown {
   const quantity = Math.max(0, input.quantity)
   const unitWeightKg = Math.max(0, input.unitWeightKg)
+  const unitVolumeCbm = Math.max(
+    0,
+    input.unitVolumeCbm ?? DEFAULT_UNIT_VOLUME_CBM
+  )
 
   const goodsUsd = input.unitPriceUsd * quantity
 
-  const freightRate = LANDED_COST_RATES.freight[input.shippingMode]
-  const freightUsd =
-    quantity > 0
-      ? Math.max(freightRate.minUsd, freightRate.perKgUsd * unitWeightKg * quantity)
-      : 0
+  // Sea freight scales with volume (per CBM); air with weight (per kg).
+  const freight = LANDED_COST_RATES.freight
+  let freightUsd = 0
+  if (quantity > 0) {
+    freightUsd =
+      input.shippingMode === "sea"
+        ? Math.max(
+            freight.sea.minUsd,
+            freight.sea.perCbmUsd * unitVolumeCbm * quantity
+          )
+        : Math.max(
+            freight.air.minUsd,
+            freight.air.perKgUsd * unitWeightKg * quantity
+          )
+  }
 
   // Customs value (Cost + Insurance + Freight); insurance is folded into freight.
   const cifUsd = goodsUsd + freightUsd

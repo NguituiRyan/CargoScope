@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
+  DEFAULT_UNIT_VOLUME_CBM,
   DEFAULT_UNIT_WEIGHT_KG,
   type ShippingMode,
   calculateLandedCost,
@@ -39,18 +40,27 @@ export function LandedCostCalculator({ tiers, unit, moq, hsCode, fx }: Props) {
 
   const [qtyStr, setQtyStr] = useState(String(initialQty))
   const [weightStr, setWeightStr] = useState(String(DEFAULT_UNIT_WEIGHT_KG))
+  const [volumeStr, setVolumeStr] = useState(String(DEFAULT_UNIT_VOLUME_CBM))
   const [mode, setMode] = useState<ShippingMode>("sea")
 
   const qty = Math.max(0, Math.floor(Number(qtyStr) || 0))
   const weightKg = Math.max(0, Number(weightStr) || 0)
+  const volumeCbm = Math.max(0, Number(volumeStr) || 0)
 
   const breakdown = useMemo(() => {
     const unitPriceUsd = unitPriceForQuantity(tiers, qty)
     return calculateLandedCost(
-      { unitPriceUsd, quantity: qty, unitWeightKg: weightKg, shippingMode: mode, hsCode },
+      {
+        unitPriceUsd,
+        quantity: qty,
+        unitWeightKg: weightKg,
+        unitVolumeCbm: volumeCbm,
+        shippingMode: mode,
+        hsCode,
+      },
       fx.rate
     )
-  }, [tiers, qty, weightKg, mode, hsCode, fx.rate])
+  }, [tiers, qty, weightKg, volumeCbm, mode, hsCode, fx.rate])
 
   const toKes = (usd: number) => formatMoney(Math.round(usd * fx.rate), "KES")
   const dutyPercent = Math.round(breakdown.dutyRate * 100)
@@ -79,34 +89,6 @@ export function LandedCostCalculator({ tiers, unit, moq, hsCode, fx }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="lc-qty">{t("quantity")}</Label>
-          <Input
-            id="lc-qty"
-            type="number"
-            min={1}
-            step={1}
-            inputMode="numeric"
-            value={qtyStr}
-            onChange={(e) => setQtyStr(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="lc-weight">{t("unitWeight")}</Label>
-          <Input
-            id="lc-weight"
-            type="number"
-            min={0}
-            step={0.1}
-            inputMode="decimal"
-            value={weightStr}
-            onChange={(e) => setWeightStr(e.target.value)}
-          />
-          <p className="text-xs text-muted-foreground">{t("weightHint")}</p>
-        </div>
-      </div>
-
       <div className="flex flex-col gap-1.5">
         <Label>{t("shippingMode")}</Label>
         <div className="flex gap-2">
@@ -123,6 +105,50 @@ export function LandedCostCalculator({ tiers, unit, moq, hsCode, fx }: Props) {
             </Button>
           ))}
         </div>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div className="flex flex-col gap-1.5">
+          <Label htmlFor="lc-qty">{t("quantity")}</Label>
+          <Input
+            id="lc-qty"
+            type="number"
+            min={1}
+            step={1}
+            inputMode="numeric"
+            value={qtyStr}
+            onChange={(e) => setQtyStr(e.target.value)}
+          />
+        </div>
+        {mode === "air" ? (
+          <div className="flex flex-col gap-1.5">
+            <Label htmlFor="lc-weight">{t("unitWeight")}</Label>
+            <Input
+              id="lc-weight"
+              type="number"
+              min={0}
+              step={0.1}
+              inputMode="decimal"
+              value={weightStr}
+              onChange={(e) => setWeightStr(e.target.value)}
+            />
+            <p className="text-xs text-muted-foreground">{t("weightHint")}</p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-1.5">
+            <Label htmlFor="lc-volume">{t("unitVolume")}</Label>
+            <Input
+              id="lc-volume"
+              type="number"
+              min={0}
+              step={0.001}
+              inputMode="decimal"
+              value={volumeStr}
+              onChange={(e) => setVolumeStr(e.target.value)}
+            />
+            <p className="text-xs text-muted-foreground">{t("volumeHint")}</p>
+          </div>
+        )}
       </div>
 
       {qty < 1 ? (

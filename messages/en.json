@@ -436,6 +436,8 @@
     "quantity": "Quantity",
     "unitWeight": "Unit weight (kg)",
     "weightHint": "Approximate weight per unit — adjust for an accurate freight figure.",
+    "unitVolume": "Unit volume (CBM)",
+    "volumeHint": "Approximate volume per unit in cubic metres — sea freight is charged per CBM.",
     "shippingMode": "Shipping mode",
     "sea": "Sea",
     "air": "Air",

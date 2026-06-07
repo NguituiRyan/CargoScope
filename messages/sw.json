@@ -436,6 +436,8 @@
     "quantity": "Idadi",
     "unitWeight": "Uzito kwa kila kipande (kg)",
     "weightHint": "Uzito wa makadirio kwa kila kipande — rekebisha kwa makadirio sahihi ya usafirishaji.",
+    "unitVolume": "Ujazo wa kipande (CBM)",
+    "volumeHint": "Ujazo wa takriban kwa kila kipande kwa mita za ujazo — usafirishaji wa baharini hutozwa kwa CBM.",
     "shippingMode": "Njia ya usafirishaji",
     "sea": "Baharini",
     "air": "Angani",
