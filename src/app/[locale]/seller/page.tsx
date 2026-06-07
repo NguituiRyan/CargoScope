@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import {
+  CheckCircle2,
+  Circle,
   FileText,
   MessageSquare,
   Package,
@@ -63,6 +65,27 @@ export default async function SellerDashboardPage({
     : "basic"
   const planName = tp(`tiers.${planTier}.name`)
 
+  const setupSteps = [
+    { done: Boolean(m.description), label: t("setupProfile"), href: "/seller/onboarding" },
+    {
+      done: Boolean(m.logoUrl && m.bannerUrl),
+      label: t("setupBranding"),
+      href: "/seller/onboarding",
+    },
+    {
+      done: ["verified", "premium"].includes(m.verificationStatus),
+      label: t("setupVerify"),
+      href: "/seller/verification",
+    },
+    {
+      done: products.length > 0,
+      label: t("setupProducts"),
+      href: "/seller/products/new",
+    },
+    { done: m.isPublished, label: t("setupLive"), href: "/seller/verification" },
+  ]
+  const setupDone = setupSteps.every((step) => step.done)
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
@@ -85,6 +108,43 @@ export default async function SellerDashboardPage({
           {t("viewPlans")}
         </Link>
       </div>
+
+      {!setupDone ? (
+        <Card>
+          <CardContent className="flex flex-col gap-3 py-4">
+            <p className="text-sm font-semibold">{t("setupTitle")}</p>
+            <ul className="flex flex-col gap-2">
+              {setupSteps.map((step) => (
+                <li key={step.label} className="flex items-center gap-2.5 text-sm">
+                  {step.done ? (
+                    <CheckCircle2
+                      className="size-4 shrink-0 text-verified-foreground"
+                      aria-hidden
+                    />
+                  ) : (
+                    <Circle
+                      className="size-4 shrink-0 text-muted-foreground"
+                      aria-hidden
+                    />
+                  )}
+                  {step.done ? (
+                    <span className="text-muted-foreground line-through">
+                      {step.label}
+                    </span>
+                  ) : (
+                    <Link
+                      href={step.href}
+                      className="font-medium hover:text-primary hover:underline"
+                    >
+                      {step.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      ) : null}
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         <StatCard
