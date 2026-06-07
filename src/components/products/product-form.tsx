@@ -135,6 +135,21 @@ export function ProductForm({
         />
       </div>
 
+      {!initial ? (
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="media">{t("media")}</Label>
+          <Input
+            id="media"
+            name="media"
+            type="file"
+            multiple
+            accept="image/jpeg,image/png,image/webp,video/mp4,video/webm"
+            className="h-auto py-2 file:mr-3 file:rounded-md file:bg-secondary file:px-2.5 file:py-1 file:text-secondary-foreground"
+          />
+          <p className="text-xs text-muted-foreground">{t("mediaHint")}</p>
+        </div>
+      ) : null}
+
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="categoryId">{t("category")}</Label>

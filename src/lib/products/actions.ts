@@ -226,39 +226,33 @@ export async function saveProductAction(
       .insert(tiers.map((t) => ({ ...t, product_id: newId })))
   }
 
+  // Optional photos/videos uploaded in the create step. Best-effort: if it
+  // fails the product still exists and media can be added on the edit page.
+  const mediaFiles = formData
+    .getAll("media")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0)
+  await storeProductMedia(supabase, manufacturerId, newId, mediaFiles, null)
+
   revalidatePath(localePath(locale, "/seller/products"))
   redirect(localePath(locale, `/seller/products/${newId}/edit`))
 }
 
-export async function addProductMediaAction(
-  _prev: ProductActionState,
-  formData: FormData
-): Promise<ProductActionState> {
-  const user = await requireRole("manufacturer")
-  const supabase = await createClient()
-
-  const manufacturerId = await myManufacturerId(supabase, user.id)
-  if (!manufacturerId) return { error: "Create your company profile first." }
-
-  const productId = String(formData.get("productId") ?? "").trim()
-  if (!productId) return { error: "Product not found." }
-
-  const { data: product } = await supabase
-    .from("products")
-    .select("id, primary_image_url")
-    .eq("id", productId)
-    .eq("manufacturer_id", manufacturerId)
-    .maybeSingle()
-  if (!product) return { error: "Product not found." }
-
-  const files = formData
-    .getAll("media")
-    .filter((entry): entry is File => entry instanceof File && entry.size > 0)
-  if (files.length === 0) return { error: "Choose at least one file." }
+/**
+ * Validate + upload media files for a product, then set the primary image if it
+ * isn't set yet. Shared by product create and the edit-page media manager.
+ * Returns {} on success (and a no-op for an empty file list).
+ */
+async function storeProductMedia(
+  supabase: SupabaseClient,
+  manufacturerId: string,
+  productId: string,
+  files: File[],
+  currentPrimaryImageUrl: string | null
+): Promise<{ error?: string }> {
+  if (files.length === 0) return {}
   if (files.length > MAX_MEDIA_FILES) {
     return { error: `Upload at most ${MAX_MEDIA_FILES} files at a time.` }
   }
-
   for (const file of files) {
     const isImage = ALLOWED_IMAGE_MIME.has(file.type)
     const isVideo = ALLOWED_VIDEO_MIME.has(file.type)
@@ -308,12 +302,49 @@ export async function addProductMediaAction(
   const { error: insertError } = await supabase.from("product_media").insert(rows)
   if (insertError) return { error: "Could not save the media. Please try again." }
 
-  if (!product.primary_image_url && firstImageUrl) {
+  if (!currentPrimaryImageUrl && firstImageUrl) {
     await supabase
       .from("products")
       .update({ primary_image_url: firstImageUrl })
       .eq("id", productId)
   }
+  return {}
+}
+
+export async function addProductMediaAction(
+  _prev: ProductActionState,
+  formData: FormData
+): Promise<ProductActionState> {
+  const user = await requireRole("manufacturer")
+  const supabase = await createClient()
+
+  const manufacturerId = await myManufacturerId(supabase, user.id)
+  if (!manufacturerId) return { error: "Create your company profile first." }
+
+  const productId = String(formData.get("productId") ?? "").trim()
+  if (!productId) return { error: "Product not found." }
+
+  const { data: product } = await supabase
+    .from("products")
+    .select("id, primary_image_url")
+    .eq("id", productId)
+    .eq("manufacturer_id", manufacturerId)
+    .maybeSingle()
+  if (!product) return { error: "Product not found." }
+
+  const files = formData
+    .getAll("media")
+    .filter((entry): entry is File => entry instanceof File && entry.size > 0)
+  if (files.length === 0) return { error: "Choose at least one file." }
+
+  const result = await storeProductMedia(
+    supabase,
+    manufacturerId,
+    productId,
+    files,
+    (product.primary_image_url as string | null) ?? null
+  )
+  if (result.error) return { error: result.error }
 
   const locale = await getLocale()
   revalidatePath(localePath(locale, `/seller/products/${productId}/edit`))
