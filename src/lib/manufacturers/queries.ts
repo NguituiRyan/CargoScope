@@ -31,6 +31,15 @@ export interface ManufacturerProfile {
   memberSince: string | null
 }
 
+export interface ManufacturerContacts {
+  wechat: string | null
+  whatsapp: string | null
+  phone: string | null
+  contactEmail: string | null
+  website: string | null
+  notes: string | null
+}
+
 export interface VerificationDoc {
   path: string
   name: string
@@ -126,6 +135,31 @@ export async function getMyManufacturer(): Promise<ManufacturerProfile | null> {
     .maybeSingle()
 
   return data ? mapManufacturer(data as ManufacturerRow) : null
+}
+
+/**
+ * Private contact details for a manufacturer. RLS restricts reads to the owning
+ * manufacturer + admins, so buyers can never see these — they reach suppliers
+ * only through the in-app chat.
+ */
+export async function getManufacturerContacts(
+  manufacturerId: string
+): Promise<ManufacturerContacts | null> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from("manufacturer_contacts")
+    .select("wechat, whatsapp, phone, contact_email, website, notes")
+    .eq("manufacturer_id", manufacturerId)
+    .maybeSingle()
+  if (!data) return null
+  return {
+    wechat: (data.wechat as string | null) ?? null,
+    whatsapp: (data.whatsapp as string | null) ?? null,
+    phone: (data.phone as string | null) ?? null,
+    contactEmail: (data.contact_email as string | null) ?? null,
+    website: (data.website as string | null) ?? null,
+    notes: (data.notes as string | null) ?? null,
+  }
 }
 
 /** Verification submissions for a manufacturer, newest first. */

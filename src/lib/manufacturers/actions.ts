@@ -184,6 +184,19 @@ export async function saveManufacturerProfileAction(
       .eq("id", manufacturerId)
   }
 
+  // Private contact details — owner + admin only (RLS); never shown to buyers.
+  await supabase.from("manufacturer_contacts").upsert(
+    {
+      manufacturer_id: manufacturerId,
+      wechat: String(formData.get("wechat") ?? "").trim() || null,
+      whatsapp: String(formData.get("whatsapp") ?? "").trim() || null,
+      phone: String(formData.get("phone") ?? "").trim() || null,
+      contact_email: String(formData.get("contactEmail") ?? "").trim() || null,
+      website: String(formData.get("website") ?? "").trim() || null,
+    },
+    { onConflict: "manufacturer_id" }
+  )
+
   const locale = await getLocale()
   if (isNew) {
     redirect(localePath(locale, "/seller/verification"))

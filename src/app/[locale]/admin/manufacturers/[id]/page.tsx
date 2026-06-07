@@ -19,6 +19,7 @@ import {
   getManufacturerForReview,
   getSignedDocUrls,
 } from "@/lib/admin/queries"
+import { getManufacturerContacts } from "@/lib/manufacturers/queries"
 
 export async function generateMetadata({
   params,
@@ -58,6 +59,7 @@ export default async function ManufacturerDetailPage({
 
   const allPaths = verifications.flatMap((v) => v.documents.map((d) => d.path))
   const signed = await getSignedDocUrls(allPaths)
+  const contacts = await getManufacturerContacts(m.id)
   const location = [m.city, m.country].filter(Boolean).join(", ") || "—"
 
   return (
@@ -106,6 +108,28 @@ export default async function ManufacturerDetailPage({
                 <p className="text-sm whitespace-pre-line">{m.description}</p>
               </CardContent>
             ) : null}
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">{ts("contactsTitle")}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col divide-y divide-border text-sm">
+              <DetailRow label={ts("wechat")} value={contacts?.wechat || "—"} />
+              <DetailRow
+                label={ts("whatsapp")}
+                value={contacts?.whatsapp || "—"}
+              />
+              <DetailRow label={ts("phone")} value={contacts?.phone || "—"} />
+              <DetailRow
+                label={ts("contactEmail")}
+                value={contacts?.contactEmail || "—"}
+              />
+              <DetailRow
+                label={ts("website")}
+                value={contacts?.website || "—"}
+              />
+            </CardContent>
           </Card>
 
           <Card>

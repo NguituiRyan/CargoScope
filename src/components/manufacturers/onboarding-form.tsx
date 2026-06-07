@@ -10,7 +10,10 @@ import {
   saveManufacturerProfileAction,
   type ManufacturerActionState,
 } from "@/lib/manufacturers/actions"
-import type { ManufacturerProfile } from "@/lib/manufacturers/queries"
+import type {
+  ManufacturerContacts,
+  ManufacturerProfile,
+} from "@/lib/manufacturers/queries"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -35,9 +38,11 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
 export function OnboardingForm({
   locale,
   initial,
+  contacts,
 }: {
   locale: string
   initial: ManufacturerProfile | null
+  contacts: ManufacturerContacts | null
 }) {
   const t = useTranslations("seller")
   const [state, formAction] = useActionState<ManufacturerActionState, FormData>(
@@ -186,6 +191,70 @@ export function OnboardingForm({
         </div>
       </div>
       <p className="text-xs text-muted-foreground">{t("brandingHint")}</p>
+
+      <div className="flex flex-col gap-4 rounded-lg border border-border bg-muted/30 p-4">
+        <div>
+          <p className="text-sm font-medium">{t("contactsTitle")}</p>
+          <p className="text-xs text-muted-foreground">{t("contactsHint")}</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="wechat">{t("wechat")}</Label>
+            <Input
+              id="wechat"
+              name="wechat"
+              type="text"
+              maxLength={120}
+              defaultValue={contacts?.wechat ?? ""}
+              placeholder="wechat-id"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="whatsapp">{t("whatsapp")}</Label>
+            <Input
+              id="whatsapp"
+              name="whatsapp"
+              type="text"
+              maxLength={40}
+              defaultValue={contacts?.whatsapp ?? ""}
+              placeholder="+86 …"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="phone">{t("phone")}</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="text"
+              maxLength={40}
+              defaultValue={contacts?.phone ?? ""}
+              placeholder="+86 …"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="contactEmail">{t("contactEmail")}</Label>
+            <Input
+              id="contactEmail"
+              name="contactEmail"
+              type="email"
+              maxLength={160}
+              defaultValue={contacts?.contactEmail ?? ""}
+              placeholder="sales@factory.com"
+            />
+          </div>
+          <div className="flex flex-col gap-2 sm:col-span-2">
+            <Label htmlFor="website">{t("website")}</Label>
+            <Input
+              id="website"
+              name="website"
+              type="text"
+              maxLength={200}
+              defaultValue={contacts?.website ?? ""}
+              placeholder="https://"
+            />
+          </div>
+        </div>
+      </div>
 
       {state.error ? (
         <p role="alert" className="text-sm text-destructive">

@@ -9,7 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { getMyManufacturer } from "@/lib/manufacturers/queries"
+import {
+  getManufacturerContacts,
+  getMyManufacturer,
+} from "@/lib/manufacturers/queries"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("seller")
@@ -26,6 +29,9 @@ export default async function OnboardingPage({
 
   const t = await getTranslations("seller")
   const manufacturer = await getMyManufacturer()
+  const contacts = manufacturer
+    ? await getManufacturerContacts(manufacturer.id)
+    : null
 
   return (
     <Card>
@@ -34,7 +40,11 @@ export default async function OnboardingPage({
         <CardDescription>{t("onboardingSubtitle")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <OnboardingForm locale={locale} initial={manufacturer} />
+        <OnboardingForm
+          locale={locale}
+          initial={manufacturer}
+          contacts={contacts}
+        />
       </CardContent>
     </Card>
   )
