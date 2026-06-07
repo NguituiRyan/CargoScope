@@ -6,6 +6,7 @@ import { getLocale } from "next-intl/server"
 
 import { localePath, requireRole } from "@/lib/auth/session"
 import { createClient } from "@/lib/supabase/server"
+import { parseSpecInputs } from "@/lib/products/specs"
 import { tierLimits } from "@/lib/subscription/tiers"
 import type { SupabaseClient } from "@supabase/supabase-js"
 
@@ -140,6 +141,11 @@ export async function saveProductAction(
   const tiers = parseTiers(formData)
   if (!Array.isArray(tiers)) return { error: tiers.error }
 
+  const specs = parseSpecInputs(
+    formData.getAll("specName").map((v) => String(v)),
+    formData.getAll("specValue").map((v) => String(v))
+  )
+
   const payload = {
     title,
     description: description || null,
@@ -153,6 +159,7 @@ export async function saveProductAction(
     customizable,
     sample_available: sampleAvailable,
     sample_price: samplePrice,
+    attributes: specs.length > 0 ? { specs } : {},
     status,
   }
 

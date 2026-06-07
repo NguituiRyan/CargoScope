@@ -3,6 +3,7 @@ import "server-only"
 import { getLocale } from "next-intl/server"
 
 import { createClient } from "@/lib/supabase/server"
+import { parseSpecs, type ProductSpec } from "@/lib/products/specs"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
 
 const PUBLIC_TIERS = ["identity", "verified", "premium"] as const
@@ -89,6 +90,7 @@ export interface PublicProductDetail {
   categoryId: string | null
   priceTiers: PublicPriceTier[]
   media: PublicMediaItem[]
+  specs: ProductSpec[]
   manufacturer: StorefrontManufacturer
 }
 
@@ -104,7 +106,7 @@ const CARD_SELECT =
   "id, title, primary_image_url, moq, unit, lead_time_days, origin_country, created_at, manufacturers!inner(company_name, slug, country, verification_status, is_published), product_price_tiers(unit_price, currency)"
 
 const DETAIL_SELECT =
-  "id, title, description, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, category_id, manufacturers!inner(id, company_name, slug, country, city, description, year_established, certifications, main_categories, verification_status, response_rate, member_since, logo_url, banner_url, is_published), product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
+  "id, title, description, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, category_id, attributes, manufacturers!inner(id, company_name, slug, country, city, description, year_established, certifications, main_categories, verification_status, response_rate, member_since, logo_url, banner_url, is_published), product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
 
 const MANUFACTURER_CARD_SELECT =
   "id, company_name, slug, country, city, verification_status, year_established, member_since, response_rate, certifications, main_categories, logo_url, banner_url, description"
@@ -327,6 +329,7 @@ type DetailRow = {
   sample_price: string | null
   primary_image_url: string | null
   category_id: string | null
+  attributes: unknown
   manufacturers: ManufacturerRow | ManufacturerRow[]
   product_price_tiers:
     | { id: string; min_qty: number; unit_price: string; currency: string }[]
@@ -385,6 +388,7 @@ export async function getPublicProduct(
     categoryId: row.category_id,
     priceTiers,
     media,
+    specs: parseSpecs(row.attributes),
     manufacturer: mapStorefrontManufacturer(m),
   }
 }

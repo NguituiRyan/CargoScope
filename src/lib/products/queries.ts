@@ -3,6 +3,7 @@ import "server-only"
 import { getLocale } from "next-intl/server"
 
 import { createClient } from "@/lib/supabase/server"
+import { parseSpecs, type ProductSpec } from "@/lib/products/specs"
 
 export type ProductStatus = "draft" | "active" | "paused"
 export type MediaType = "image" | "video"
@@ -50,6 +51,7 @@ export interface ProductDetail {
   status: ProductStatus
   priceTiers: PriceTier[]
   media: ProductMediaItem[]
+  specs: ProductSpec[]
 }
 
 export interface CategoryOption {
@@ -100,6 +102,7 @@ type ProductDetailRow = {
   sample_price: string | null
   primary_image_url: string | null
   status: ProductStatus
+  attributes: unknown
   product_price_tiers: PriceTierRow[] | null
   product_media: ProductMediaRow[] | null
 }
@@ -108,7 +111,7 @@ const LIST_COLUMNS =
   "id, title, status, primary_image_url, moq, unit, updated_at, product_price_tiers(count)"
 
 const DETAIL_COLUMNS =
-  "id, title, description, category_id, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, status, product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
+  "id, title, description, category_id, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, status, attributes, product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
 
 function mapList(row: ProductListRow): ProductListItem {
   return {
@@ -155,6 +158,7 @@ function mapDetail(row: ProductDetailRow): ProductDetail {
     status: row.status,
     priceTiers,
     media,
+    specs: parseSpecs(row.attributes),
   }
 }
 

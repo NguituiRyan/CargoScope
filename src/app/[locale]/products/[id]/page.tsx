@@ -262,6 +262,15 @@ export default async function ProductDetailPage({
                   <dd className="text-right font-medium">{spec.value}</dd>
                 </div>
               ))}
+              {product.specs.map((spec) => (
+                <div
+                  key={`attr-${spec.name}`}
+                  className="flex justify-between gap-4 py-2"
+                >
+                  <dt className="text-muted-foreground">{spec.name}</dt>
+                  <dd className="text-right font-medium">{spec.value}</dd>
+                </div>
+              ))}
               {product.certifications.length > 0 && (
                 <div className="flex justify-between gap-4 py-2">
                   <dt className="text-muted-foreground">

@@ -33,6 +33,7 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
 }
 
 type TierRow = { key: number; minQty: string; unitPrice: string }
+type SpecRow = { key: number; name: string; value: string }
 
 export function ProductForm({
   locale,
@@ -60,6 +61,17 @@ export function ProductForm({
   )
   const nextKey = useRef(tiers.length)
 
+  const [specs, setSpecs] = useState<SpecRow[]>(() =>
+    initial && initial.specs.length > 0
+      ? initial.specs.map((s, i) => ({ key: i, name: s.name, value: s.value }))
+      : [
+          { key: 0, name: "", value: "" },
+          { key: 1, name: "", value: "" },
+          { key: 2, name: "", value: "" },
+        ]
+  )
+  const nextSpecKey = useRef(specs.length)
+
   function addTier() {
     setTiers((rows) => [
       ...rows,
@@ -71,6 +83,21 @@ export function ProductForm({
   }
   function updateTier(key: number, field: "minQty" | "unitPrice", value: string) {
     setTiers((rows) =>
+      rows.map((row) => (row.key === key ? { ...row, [field]: value } : row))
+    )
+  }
+
+  function addSpec() {
+    setSpecs((rows) => [
+      ...rows,
+      { key: nextSpecKey.current++, name: "", value: "" },
+    ])
+  }
+  function removeSpec(key: number) {
+    setSpecs((rows) => rows.filter((row) => row.key !== key))
+  }
+  function updateSpec(key: number, field: "name" | "value", value: string) {
+    setSpecs((rows) =>
       rows.map((row) => (row.key === key ? { ...row, [field]: value } : row))
     )
   }
@@ -211,6 +238,63 @@ export function ProductForm({
           defaultValue={initial?.certifications.join(", ") ?? ""}
           placeholder="CE, RoHS, FCC"
         />
+      </div>
+
+      <div className="flex flex-col gap-3 rounded-lg border border-border p-4">
+        <div>
+          <p className="text-sm font-medium">{t("specifications")}</p>
+          <p className="text-xs text-muted-foreground">
+            {t("specificationsHint")}
+          </p>
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2 text-xs text-muted-foreground">
+            <span className="flex-1">{t("specName")}</span>
+            <span className="flex-1">{t("specValue")}</span>
+            <span className="w-9" aria-hidden />
+          </div>
+          {specs.map((spec) => (
+            <div key={spec.key} className="flex items-center gap-2">
+              <Input
+                name="specName"
+                type="text"
+                maxLength={60}
+                value={spec.name}
+                onChange={(e) => updateSpec(spec.key, "name", e.target.value)}
+                placeholder={t("specNamePlaceholder")}
+                className="flex-1"
+              />
+              <Input
+                name="specValue"
+                type="text"
+                maxLength={300}
+                value={spec.value}
+                onChange={(e) => updateSpec(spec.key, "value", e.target.value)}
+                placeholder={t("specValuePlaceholder")}
+                className="flex-1"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => removeSpec(spec.key)}
+                aria-label={t("removeSpec")}
+              >
+                <Trash2 className="size-4" aria-hidden />
+              </Button>
+            </div>
+          ))}
+        </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          onClick={addSpec}
+          className="self-start"
+        >
+          <Plus className="size-4" aria-hidden />
+          {t("addSpec")}
+        </Button>
       </div>
 
       <div className="flex flex-col gap-3 rounded-lg border border-border p-4">
