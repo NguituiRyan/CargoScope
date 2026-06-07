@@ -1,5 +1,5 @@
 /**
- * CargoScope demo seed — populates a Supabase project with §13 prototype data:
+ * Shop Budyy demo seed — populates a Supabase project with §13 prototype data:
  * categories, 4 verified manufacturers, ~16 active products (tiered pricing +
  * media), one buyer, one admin, and one open RFQ.
  *
@@ -241,10 +241,10 @@ productSeed.push(...extraProducts)
 /* ─────────────────────────── run ─────────────────────────── */
 
 async function main() {
-  console.log("Seeding CargoScope demo data…")
+  console.log("Seeding Shop Budyy demo data…")
 
   // 1) Accounts (auth.users) ------------------------------------------------
-  const adminId = await ensureUser(ADMIN_EMAIL, { full_name: "CargoScope Admin" })
+  const adminId = await ensureUser(ADMIN_EMAIL, { full_name: "Shop Budyy Admin" })
   const buyerOwnerId = await ensureUser(BUYER_EMAIL, { full_name: "Amani Wanjiru" })
 
   const mfrOwnerIdByEmail = new Map<string, string>()
@@ -258,7 +258,7 @@ async function main() {
 
   // 2) Profiles (role assignment) -------------------------------------------
   const profileRows = [
-    { id: adminId, role: "admin", full_name: "CargoScope Admin", locale: "en", country: "KE" },
+    { id: adminId, role: "admin", full_name: "Shop Budyy Admin", locale: "en", country: "KE" },
     { id: buyerOwnerId, role: "buyer", full_name: "Amani Wanjiru", locale: "en", country: "KE" },
     ...[...mfrOwnerIdByEmail.entries()].map(([, id]) => ({
       id,
@@ -401,7 +401,7 @@ async function main() {
 
   // 6b) Reviewer buyers + orders + reviews (social proof) -------------------
   const reviewerOwnerId = await ensureUser("reviewers@cargoscope.app", {
-    full_name: "CargoScope Buyers",
+    full_name: "Shop Budyy Buyers",
   })
   ok(
     (
@@ -410,7 +410,7 @@ async function main() {
           {
             id: reviewerOwnerId,
             role: "buyer",
-            full_name: "CargoScope Buyers",
+            full_name: "Shop Budyy Buyers",
             locale: "en",
             country: "KE",
           },

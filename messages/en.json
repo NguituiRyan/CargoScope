@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "CargoScope",
+    "brand": "Shop Budyy",
     "products": "Products",
     "manufacturers": "Manufacturers",
     "howItWorks": "How it works",
@@ -17,9 +17,9 @@
   "home": {
     "badge": "Verified China–Africa sourcing",
     "title": "Source from verified Chinese manufacturers, with confidence.",
-    "subtitle": "CargoScope connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
+    "subtitle": "Shop Budyy connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
     "ctaBrowse": "Browse products",
-    "ctaSell": "Sell on CargoScope",
+    "ctaSell": "Sell on Shop Budyy",
     "pillars": {
       "verifiedTitle": "Verified suppliers",
       "verifiedBody": "Every manufacturer is document-checked and tier-rated before they can list, so you know who you are buying from.",
@@ -31,9 +31,9 @@
   },
   "auth": {
     "signInTitle": "Welcome back",
-    "signInSubtitle": "Sign in to your CargoScope account.",
+    "signInSubtitle": "Sign in to your Shop Budyy account.",
     "signUpTitle": "Create your account",
-    "signUpSubtitle": "Join CargoScope to source or sell with confidence.",
+    "signUpSubtitle": "Join Shop Budyy to source or sell with confidence.",
     "email": "Email",
     "password": "Password",
     "passwordHint": "At least 8 characters.",
@@ -47,14 +47,14 @@
     "signUpCta": "Create account",
     "signingIn": "Signing in…",
     "creatingAccount": "Creating account…",
-    "noAccount": "New to CargoScope?",
+    "noAccount": "New to Shop Budyy?",
     "haveAccount": "Already have an account?",
     "checkEmailTitle": "Check your email",
     "checkEmailBody": "We sent you a confirmation link. Click it to activate your account and sign in."
   },
   "account": {
     "title": "Your account",
-    "subtitle": "Manage your CargoScope profile and session.",
+    "subtitle": "Manage your Shop Budyy profile and session.",
     "name": "Name",
     "email": "Email",
     "role": "Role",
@@ -263,7 +263,7 @@
     "recommended": "Most popular",
     "cta": "Get started",
     "ctaContact": "Contact sales",
-    "buyerNote": "Buying on CargoScope is always free — plans are for suppliers.",
+    "buyerNote": "Buying on Shop Budyy is always free — plans are for suppliers.",
     "tiers": {
       "basic": {
         "name": "Basic",
@@ -474,7 +474,7 @@
     "backToDirectory": "Back to manufacturers"
   },
   "howItWorks": {
-    "title": "How CargoScope works",
+    "title": "How Shop Budyy works",
     "subtitle": "A trust-first path from verified Chinese factories to your warehouse in Kenya.",
     "forBuyers": "For buyers",
     "step1Title": "Find verified suppliers",

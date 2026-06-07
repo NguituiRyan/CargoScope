@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, Outfit } from "next/font/google"
 import { notFound } from "next/navigation"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
@@ -20,10 +20,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
+// Display font for headings — geometric + bold, matching the brand kit.
+const display = Outfit({
+  variable: "--font-display",
+  subsets: ["latin"],
+})
+
 export const metadata: Metadata = {
   title: {
-    default: "CargoScope",
-    template: "%s · CargoScope",
+    default: "Shop Budyy",
+    template: "%s · Shop Budyy",
   },
   description:
     "Trust-first B2B sourcing connecting verified Chinese manufacturers with African wholesale buyers.",
@@ -49,7 +55,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${display.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

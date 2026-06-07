@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "CargoScope",
+    "brand": "Shop Budyy",
     "products": "Bidhaa",
     "manufacturers": "Watengenezaji",
     "howItWorks": "Jinsi inavyofanya kazi",
@@ -17,9 +17,9 @@
   "home": {
     "badge": "Ununuzi uliothibitishwa China–Afrika",
     "title": "Nunua kutoka kwa watengenezaji wa China waliothibitishwa, kwa uhakika.",
-    "subtitle": "CargoScope inaunganisha wanunuzi wa jumla wa Kenya na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
+    "subtitle": "Shop Budyy inaunganisha wanunuzi wa jumla wa Kenya na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
     "ctaBrowse": "Vinjari bidhaa",
-    "ctaSell": "Uza kwenye CargoScope",
+    "ctaSell": "Uza kwenye Shop Budyy",
     "pillars": {
       "verifiedTitle": "Wasambazaji waliothibitishwa",
       "verifiedBody": "Kila mtengenezaji hukaguliwa hati na kupewa daraja kabla ya kuorodhesha, ili ujue unanunua kutoka kwa nani.",
@@ -31,9 +31,9 @@
   },
   "auth": {
     "signInTitle": "Karibu tena",
-    "signInSubtitle": "Ingia kwenye akaunti yako ya CargoScope.",
+    "signInSubtitle": "Ingia kwenye akaunti yako ya Shop Budyy.",
     "signUpTitle": "Fungua akaunti yako",
-    "signUpSubtitle": "Jiunge na CargoScope kununua au kuuza kwa uhakika.",
+    "signUpSubtitle": "Jiunge na Shop Budyy kununua au kuuza kwa uhakika.",
     "email": "Barua pepe",
     "password": "Nenosiri",
     "passwordHint": "Angalau herufi 8.",
@@ -47,14 +47,14 @@
     "signUpCta": "Fungua akaunti",
     "signingIn": "Inaingia…",
     "creatingAccount": "Inafungua akaunti…",
-    "noAccount": "Mgeni kwenye CargoScope?",
+    "noAccount": "Mgeni kwenye Shop Budyy?",
     "haveAccount": "Tayari una akaunti?",
     "checkEmailTitle": "Angalia barua pepe yako",
     "checkEmailBody": "Tumekutumia kiungo cha uthibitisho. Bofya ili kuwasha akaunti yako na kuingia."
   },
   "account": {
     "title": "Akaunti yako",
-    "subtitle": "Dhibiti wasifu wako wa CargoScope na kipindi chako.",
+    "subtitle": "Dhibiti wasifu wako wa Shop Budyy na kipindi chako.",
     "name": "Jina",
     "email": "Barua pepe",
     "role": "Wajibu",
@@ -263,7 +263,7 @@
     "recommended": "Maarufu zaidi",
     "cta": "Anza sasa",
     "ctaContact": "Wasiliana na mauzo",
-    "buyerNote": "Kununua kwenye CargoScope ni bure kila wakati — mipango ni kwa wasambazaji.",
+    "buyerNote": "Kununua kwenye Shop Budyy ni bure kila wakati — mipango ni kwa wasambazaji.",
     "tiers": {
       "basic": {
         "name": "Msingi",
@@ -474,7 +474,7 @@
     "backToDirectory": "Rudi kwa watengenezaji"
   },
   "howItWorks": {
-    "title": "Jinsi CargoScope inavyofanya kazi",
+    "title": "Jinsi Shop Budyy inavyofanya kazi",
     "subtitle": "Njia ya uaminifu kutoka viwanda vya China vilivyothibitishwa hadi ghala lako Kenya.",
     "forBuyers": "Kwa wanunuzi",
     "step1Title": "Pata wasambazaji waliothibitishwa",

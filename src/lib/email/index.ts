@@ -12,7 +12,7 @@ import { createAdminClient } from "@/lib/supabase/admin"
  */
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-const FROM = process.env.RESEND_FROM_EMAIL || "CargoScope <noreply@cargoscope.app>"
+const FROM = process.env.RESEND_FROM_EMAIL || "Shop Budyy <noreply@cargoscope.app>"
 
 function hasResend(): boolean {
   return Boolean(process.env.RESEND_API_KEY)
@@ -35,15 +35,15 @@ function escapeHtml(s: string): string {
 
 function layout(title: string, body: string): string {
   return `<div style="font-family:system-ui,-apple-system,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#0f172a">
-    <div style="font-size:18px;font-weight:700;color:#0f766e;margin-bottom:16px">CargoScope</div>
+    <div style="font-size:18px;font-weight:700;color:#ff7700;margin-bottom:16px">Shop Budyy</div>
     <h1 style="font-size:20px;margin:0 0 12px">${title}</h1>
     ${body}
-    <p style="margin-top:28px;font-size:12px;color:#64748b">CargoScope — verified China→Africa sourcing.</p>
+    <p style="margin-top:28px;font-size:12px;color:#64748b">Shop Budyy — verified China→Africa sourcing.</p>
   </div>`
 }
 
 function button(href: string, label: string): string {
-  return `<a href="${href}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600">${label}</a>`
+  return `<a href="${href}" style="display:inline-block;background:#ff7700;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600">${label}</a>`
 }
 
 async function send(to: string, subject: string, html: string): Promise<void> {
@@ -161,7 +161,7 @@ export async function notifyConversationRecipient(
       `New message from ${fromName}`,
       layout(
         "You have a new message",
-        `<p style="font-size:14px;color:#334155">${escapeHtml(fromName)} sent you a message on CargoScope:</p>
+        `<p style="font-size:14px;color:#334155">${escapeHtml(fromName)} sent you a message on Shop Budyy:</p>
          <blockquote style="border-left:3px solid #e2e8f0;margin:12px 0;padding:4px 12px;color:#475569;font-size:14px">${escapeHtml(snippet)}</blockquote>
          <p style="margin-top:16px">${button(`${SITE}/messages`, "Open messages")}</p>`
       )
