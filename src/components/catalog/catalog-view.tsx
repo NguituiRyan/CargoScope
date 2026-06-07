@@ -148,7 +148,7 @@ export async function CatalogView({
 
   return (
     <div className="flex flex-col">
-      <section className="border-b border-border bg-gradient-to-b from-muted/50 to-background">
+      <section className="border-b border-border bg-gradient-to-b from-[#ffd166]/25 to-background">
         <div className="mx-auto w-full max-w-6xl px-4 py-7 sm:py-9">
           <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">

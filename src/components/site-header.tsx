@@ -1,6 +1,7 @@
-import { MessageSquare, Ship } from "lucide-react"
+import { MessageSquare } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
+import { LogoMark } from "@/components/brand/logo-mark"
 import { CurrencySelector } from "@/components/currency-selector"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { MobileNav } from "@/components/mobile-nav"
@@ -44,7 +45,7 @@ export async function SiteHeader() {
           href="/"
           className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight"
         >
-          <Ship className="size-5 text-primary" aria-hidden />
+          <LogoMark className="size-6 text-primary" />
           <span>{t("brand")}</span>
         </Link>
 

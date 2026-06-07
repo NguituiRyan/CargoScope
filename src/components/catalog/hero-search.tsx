@@ -46,7 +46,7 @@ export function HeroSearch({
             className="h-12 rounded-full border-2 pl-11 text-base shadow-sm"
           />
         </div>
-        <Button type="submit" size="lg" className="h-12 rounded-full px-6">
+        <Button type="submit" size="lg" className="h-12 rounded-full px-6 brand-gradient-02 text-white">
           <Search className="size-4 sm:hidden" aria-hidden />
           <span className="hidden sm:inline">{t("search")}</span>
         </Button>
