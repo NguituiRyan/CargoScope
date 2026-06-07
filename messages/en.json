@@ -86,6 +86,8 @@
     }
   },
   "seller": {
+    "portalTitle": "Supplier portal",
+    "portalSubtitle": "Manage your storefront, products, and quotes.",
     "navOverview": "Overview",
     "navProducts": "Products",
     "navRfqs": "RFQs",

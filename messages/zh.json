@@ -86,6 +86,8 @@
     }
   },
   "seller": {
+    "portalTitle": "供应商门户",
+    "portalSubtitle": "管理您的店铺、产品和报价。",
     "navOverview": "概览",
     "navProducts": "产品",
     "navRfqs": "询价",
