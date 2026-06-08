@@ -21,10 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function OnboardingPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<{ welcome?: string }>
 }) {
   const { locale } = await params
+  const { welcome } = await searchParams
   setRequestLocale(locale)
 
   const t = await getTranslations("seller")
@@ -39,7 +42,12 @@ export default async function OnboardingPage({
         <CardTitle>{t("onboardingTitle")}</CardTitle>
         <CardDescription>{t("onboardingSubtitle")}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
+        {welcome ? (
+          <div className="rounded-lg border border-verified/40 bg-verified/10 px-4 py-3 text-sm font-medium text-verified-foreground">
+            {t("welcomeNew")}
+          </div>
+        ) : null}
         <OnboardingForm
           locale={locale}
           initial={manufacturer}

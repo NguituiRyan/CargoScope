@@ -100,9 +100,18 @@ export async function signUpAction(
     return { error: error.message }
   }
 
-  // Email confirmation disabled → session is ready, go straight in.
+  // Email confirmation disabled → session is ready; go straight to the next
+  // step — suppliers build their company profile, buyers start browsing.
   if (data.session) {
-    redirect(localePath(await resolveLocale(formData), "/account"))
+    const loc = await resolveLocale(formData)
+    redirect(
+      localePath(
+        loc,
+        parsed.data.role === "manufacturer"
+          ? "/seller/onboarding?welcome=1"
+          : "/products"
+      )
+    )
   }
 
   return { needsConfirmation: true }

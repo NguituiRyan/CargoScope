@@ -18,7 +18,7 @@ export function SellerNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="flex gap-1 rounded-lg border border-border bg-card p-1 text-sm">
+    <nav className="flex gap-1 overflow-x-auto rounded-lg border border-border bg-card p-1 text-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {tabs.map((tab) => {
         const active =
           tab.href === "/seller"
@@ -29,7 +29,7 @@ export function SellerNav() {
             key={tab.href}
             href={tab.href}
             className={cn(
-              "flex-1 rounded-md px-3 py-1.5 text-center font-medium transition-colors",
+              "flex-1 min-w-fit whitespace-nowrap rounded-md px-3 py-1.5 text-center font-medium transition-colors",
               active
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground"
