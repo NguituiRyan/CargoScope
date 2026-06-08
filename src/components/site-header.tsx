@@ -45,8 +45,8 @@ export async function SiteHeader() {
           href="/"
           className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight"
         >
-          <LogoMark className="size-6 text-primary" />
-          <span>{t("brand")}</span>
+          <LogoMark className="size-6 shrink-0 text-primary" />
+          <span className="hidden sm:inline">{t("brand")}</span>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground lg:flex">
@@ -124,32 +124,41 @@ export async function SiteHeader() {
           )}
         </div>
 
-        {/* Mobile menu */}
-        <MobileNav
-          links={navLinks}
-          user={
-            user
-              ? {
-                  label: user.fullName ?? user.email,
-                  dashboardHref,
-                  isBuyer: user.role === "buyer",
-                }
-              : null
-          }
-          unreadCount={unreadCount}
-          locale={locale}
-          labels={{
-            menu: t("menu"),
-            signIn: t("signIn"),
-            signOut: t("signOut"),
-            dashboard: t("dashboard"),
-            rfqs: t("rfqs"),
-            messages: t("messages"),
-          }}
-        >
+        {/* Mobile controls — currency, language, a prominent sign-up, + menu */}
+        <div className="flex items-center gap-1.5 lg:hidden">
           <CurrencySelector current={currency} label={t("currency")} />
           <LocaleSwitcher />
-        </MobileNav>
+          {user ? null : (
+            <Link
+              href="/sign-up"
+              className={cn(buttonVariants({ variant: "default", size: "sm" }))}
+            >
+              {t("signUp")}
+            </Link>
+          )}
+          <MobileNav
+            links={navLinks}
+            user={
+              user
+                ? {
+                    label: user.fullName ?? user.email,
+                    dashboardHref,
+                    isBuyer: user.role === "buyer",
+                  }
+                : null
+            }
+            unreadCount={unreadCount}
+            locale={locale}
+            labels={{
+              menu: t("menu"),
+              signIn: t("signIn"),
+              signOut: t("signOut"),
+              dashboard: t("dashboard"),
+              rfqs: t("rfqs"),
+              messages: t("messages"),
+            }}
+          />
+        </div>
       </div>
     </header>
   )

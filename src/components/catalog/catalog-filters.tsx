@@ -141,7 +141,7 @@ export function CatalogFilters({
         {open ? (
           <div
             id={panelId}
-            className="absolute right-0 z-30 mt-2 w-[min(92vw,28rem)] rounded-xl border border-border bg-card p-4 shadow-lg"
+            className="fixed inset-x-3 top-28 z-40 max-h-[72vh] overflow-y-auto rounded-xl border border-border bg-card p-4 shadow-lg sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-2 sm:max-h-none sm:w-[min(92vw,28rem)] sm:overflow-visible"
           >
             <div className="mb-3 flex items-center justify-between">
               <span className="text-sm font-medium">{t("filtersTitle")}</span>
