@@ -26,7 +26,13 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
   )
 }
 
-export function SignInForm({ locale }: { locale: string }) {
+export function SignInForm({
+  locale,
+  next,
+}: {
+  locale: string
+  next?: string
+}) {
   const t = useTranslations("auth")
   const [state, formAction] = useActionState<AuthState, FormData>(
     signInAction,
@@ -36,6 +42,7 @@ export function SignInForm({ locale }: { locale: string }) {
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <input type="hidden" name="locale" value={locale} />
+      {next ? <input type="hidden" name="next" value={next} /> : null}
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">{t("email")}</Label>

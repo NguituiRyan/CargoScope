@@ -313,6 +313,7 @@
     "soldBy": "销售方",
     "viewStorefront": "查看店铺",
     "messageSupplier": "联系供应商",
+    "inquireHint": "免费咨询 — 注册账户即可发送您的消息。",
     "memberSince": "{year} 年加入",
     "responseRate": "回复率 {rate}%",
     "established": "成立于 {year}",

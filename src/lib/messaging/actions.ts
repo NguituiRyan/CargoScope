@@ -13,7 +13,10 @@ import {
   MAX_ATTACHMENTS,
   MAX_ATTACHMENT_BYTES,
 } from "@/lib/messaging/attachments"
-import { resolveViewerParties, type StoredAttachment } from "@/lib/messaging/queries"
+import {
+  getOrCreateConversation,
+  type StoredAttachment,
+} from "@/lib/messaging/queries"
 import { createClient } from "@/lib/supabase/server"
 
 export interface MessagingActionState {
@@ -30,55 +33,31 @@ function safeName(name: string, fallback: string): string {
 }
 
 /**
- * Open (or reuse) the current user's conversation with a manufacturer and send
- * them to the thread. The initiator is always the buyer side, so we find-or-
- * create their buyer row first (RLS allows owner_profile_id = auth.uid()).
+ * Start (or reuse) the buyer's conversation with a manufacturer and send them to
+ * the thread. A logged-out shopper can still click "Message supplier" — we route
+ * them to sign-up with a `next` that finishes the inquiry once their account is
+ * created, so contacting a supplier never feels like a wall up front.
  */
 export async function startConversationAction(formData: FormData): Promise<void> {
   const locale = await getLocale()
-  const user = await getSessionUser()
-  if (!user) redirect(localePath(locale, "/sign-in"))
-
   const manufacturerId = String(formData.get("manufacturerId") ?? "").trim()
   const productId = String(formData.get("productId") ?? "").trim() || null
   if (!manufacturerId) redirect(localePath(locale, "/products"))
 
-  // A manufacturer cannot message their own storefront.
-  const parties = await resolveViewerParties(user.id)
-  if (parties.manufacturerId && parties.manufacturerId === manufacturerId) {
-    redirect(localePath(locale, "/messages"))
+  const user = await getSessionUser()
+  if (!user) {
+    const qs = new URLSearchParams({ manufacturerId })
+    if (productId) qs.set("productId", productId)
+    const next = localePath(locale, `/messages/start?${qs.toString()}`)
+    redirect(localePath(locale, `/sign-up?next=${encodeURIComponent(next)}`))
   }
 
-  const supabase = await createClient()
-
-  let buyerId = parties.buyerId
-  if (!buyerId) {
-    const newBuyerId = crypto.randomUUID()
-    const { error: buyerError } = await supabase
-      .from("buyers")
-      .insert({ id: newBuyerId, owner_profile_id: user.id })
-    buyerId = buyerError ? null : newBuyerId
-  }
-  if (!buyerId) redirect(localePath(locale, "/products"))
-
-  const { data: existing } = await supabase
-    .from("conversations")
-    .select("id")
-    .eq("buyer_id", buyerId)
-    .eq("manufacturer_id", manufacturerId)
-    .maybeSingle()
-
-  let conversationId = existing?.id as string | undefined
-  if (!conversationId) {
-    const newConvoId = crypto.randomUUID()
-    const { error: convoError } = await supabase.from("conversations").insert({
-      id: newConvoId,
-      buyer_id: buyerId,
-      manufacturer_id: manufacturerId,
-      product_id: productId,
-    })
-    conversationId = convoError ? undefined : newConvoId
-  }
+  const { conversationId, selfOwned } = await getOrCreateConversation(
+    user.id,
+    manufacturerId,
+    productId
+  )
+  if (selfOwned) redirect(localePath(locale, "/messages"))
   if (!conversationId) redirect(localePath(locale, "/products"))
 
   redirect(localePath(locale, `/messages/${conversationId}`))

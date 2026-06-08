@@ -29,7 +29,13 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
 const roleClasses =
   "flex cursor-pointer flex-col gap-1 rounded-lg border border-input bg-background p-3 text-sm transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary/5 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50"
 
-export function SignUpForm({ locale }: { locale: string }) {
+export function SignUpForm({
+  locale,
+  next,
+}: {
+  locale: string
+  next?: string
+}) {
   const t = useTranslations("auth")
   const [state, formAction] = useActionState<AuthState, FormData>(
     signUpAction,
@@ -54,6 +60,7 @@ export function SignUpForm({ locale }: { locale: string }) {
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <input type="hidden" name="locale" value={locale} />
+      {next ? <input type="hidden" name="next" value={next} /> : null}
 
       <fieldset className="flex flex-col gap-2">
         <legend className="mb-2 text-sm font-medium">{t("accountType")}</legend>

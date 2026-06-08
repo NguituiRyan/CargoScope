@@ -6,7 +6,7 @@ import { getLocale } from "next-intl/server"
 import { z } from "zod"
 
 import { createClient } from "@/lib/supabase/server"
-import { localePath } from "@/lib/auth/session"
+import { localePath, safeNextPath } from "@/lib/auth/session"
 
 export interface AuthState {
   error?: string
@@ -69,7 +69,8 @@ export async function signInAction(
     return { error: "Invalid email or password." }
   }
 
-  redirect(localePath(await resolveLocale(formData), "/account"))
+  const next = safeNextPath(formData.get("next") as string | null)
+  redirect(next ?? localePath(await resolveLocale(formData), "/account"))
 }
 
 export async function signUpAction(
@@ -104,13 +105,15 @@ export async function signUpAction(
   // step — suppliers build their company profile, buyers start browsing.
   if (data.session) {
     const loc = await resolveLocale(formData)
+    const next = safeNextPath(formData.get("next") as string | null)
     redirect(
-      localePath(
-        loc,
-        parsed.data.role === "manufacturer"
-          ? "/seller/onboarding?welcome=1"
-          : "/products"
-      )
+      next ??
+        localePath(
+          loc,
+          parsed.data.role === "manufacturer"
+            ? "/seller/onboarding?welcome=1"
+            : "/products"
+        )
     )
   }
 

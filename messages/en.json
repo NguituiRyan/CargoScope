@@ -313,6 +313,7 @@
     "soldBy": "Sold by",
     "viewStorefront": "View storefront",
     "messageSupplier": "Message supplier",
+    "inquireHint": "Free to inquire — create an account to send your message.",
     "memberSince": "Member since {year}",
     "responseRate": "{rate}% response rate",
     "established": "Est. {year}",

@@ -24,6 +24,18 @@ export function localePath(locale: string, href: string): string {
 }
 
 /**
+ * Validate a `next` redirect target. Only same-origin relative paths are
+ * allowed, so a crafted `?next=` can't bounce the user to an external site.
+ */
+export function safeNextPath(
+  value: string | string[] | undefined | null
+): string | null {
+  const s = Array.isArray(value) ? value[0] : value
+  if (typeof s !== "string") return null
+  return s.startsWith("/") && !s.startsWith("//") ? s : null
+}
+
+/**
  * Resolve the current authenticated user and their profile role.
  * `cache` dedupes the lookup across a single request (header + page + guard).
  */

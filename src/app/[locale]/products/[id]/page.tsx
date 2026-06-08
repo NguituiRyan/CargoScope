@@ -222,28 +222,24 @@ export default async function ProductDetailPage({
               <CardTitle className="text-base">{t("contactTitle")}</CardTitle>
             </CardHeader>
             <CardContent>
-              {user ? (
-                <div className="flex flex-col gap-2">
-                  <form action={startConversationAction}>
-                    <input type="hidden" name="manufacturerId" value={m.id} />
-                    <input type="hidden" name="productId" value={product.id} />
-                    <ContactSupplierButton label={t("messageSupplier")} />
-                  </form>
-                  <Link
-                    href={`/manufacturers/${m.slug}`}
-                    className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-                  >
-                    {t("viewStorefront")}
-                  </Link>
-                </div>
-              ) : (
+              <div className="flex flex-col gap-2">
+                <form action={startConversationAction}>
+                  <input type="hidden" name="manufacturerId" value={m.id} />
+                  <input type="hidden" name="productId" value={product.id} />
+                  <ContactSupplierButton label={t("messageSupplier")} />
+                </form>
+                {!user ? (
+                  <p className="text-xs text-muted-foreground">
+                    {t("inquireHint")}
+                  </p>
+                ) : null}
                 <Link
-                  href="/sign-in"
-                  className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+                  href={`/manufacturers/${m.slug}`}
+                  className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
                 >
-                  {t("signInToContact")}
+                  {t("viewStorefront")}
                 </Link>
-              )}
+              </div>
             </CardContent>
           </Card>
         </div>

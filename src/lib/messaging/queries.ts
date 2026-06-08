@@ -98,6 +98,57 @@ export async function resolveViewerParties(
   }
 }
 
+/**
+ * Find or reuse the user's (buyer-side) conversation with a manufacturer.
+ * Shared by the contact action and the post-sign-up `/messages/start` route.
+ * Uses explicit client-side ids and no chained `.select()` to avoid the RLS
+ * insert+select pitfall on the buyers/conversations tables.
+ */
+export async function getOrCreateConversation(
+  userId: string,
+  manufacturerId: string,
+  productId: string | null
+): Promise<{ conversationId: string | null; selfOwned: boolean }> {
+  const parties = await resolveViewerParties(userId)
+  // A manufacturer cannot start a conversation with their own storefront.
+  if (parties.manufacturerId && parties.manufacturerId === manufacturerId) {
+    return { conversationId: null, selfOwned: true }
+  }
+
+  const supabase = await createClient()
+
+  let buyerId = parties.buyerId
+  if (!buyerId) {
+    const newBuyerId = crypto.randomUUID()
+    const { error } = await supabase
+      .from("buyers")
+      .insert({ id: newBuyerId, owner_profile_id: userId })
+    buyerId = error ? null : newBuyerId
+  }
+  if (!buyerId) return { conversationId: null, selfOwned: false }
+
+  const { data: existing } = await supabase
+    .from("conversations")
+    .select("id")
+    .eq("buyer_id", buyerId)
+    .eq("manufacturer_id", manufacturerId)
+    .maybeSingle()
+
+  let conversationId = (existing?.id as string | undefined) ?? undefined
+  if (!conversationId) {
+    const newConvoId = crypto.randomUUID()
+    const { error } = await supabase.from("conversations").insert({
+      id: newConvoId,
+      buyer_id: buyerId,
+      manufacturer_id: manufacturerId,
+      product_id: productId,
+    })
+    conversationId = error ? undefined : newConvoId
+  }
+
+  return { conversationId: conversationId ?? null, selfOwned: false }
+}
+
 function partyScope(parties: ViewerParties): SQL | null {
   const conds: SQL[] = []
   if (parties.manufacturerId) {

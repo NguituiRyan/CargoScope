@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
-import { getSessionUser, localePath } from "@/lib/auth/session"
+import { getSessionUser, localePath, safeNextPath } from "@/lib/auth/session"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("auth")
@@ -21,14 +21,17 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function SignInPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const { locale } = await params
   setRequestLocale(locale)
 
+  const next = safeNextPath((await searchParams).next)
   if (await getSessionUser()) {
-    redirect(localePath(locale, "/account"))
+    redirect(next ?? localePath(locale, "/account"))
   }
 
   const t = await getTranslations("auth")
@@ -40,12 +43,12 @@ export default async function SignInPage({
         <CardDescription>{t("signInSubtitle")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <SignInForm locale={locale} />
+        <SignInForm locale={locale} next={next ?? undefined} />
       </CardContent>
       <CardFooter className="justify-center text-sm text-muted-foreground">
         <span>{t("noAccount")}</span>
         <Link
-          href="/sign-up"
+          href={{ pathname: "/sign-up", query: next ? { next } : {} }}
           className="ml-1 font-medium text-primary hover:underline"
         >
           {t("signUpCta")}

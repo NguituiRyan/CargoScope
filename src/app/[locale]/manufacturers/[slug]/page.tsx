@@ -10,7 +10,6 @@ import { ReviewsList } from "@/components/reviews/reviews-list"
 import { Stars } from "@/components/reviews/stars"
 import { ContactSupplierButton } from "@/components/messaging/contact-supplier-button"
 import { Badge } from "@/components/ui/badge"
-import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { getSessionUser } from "@/lib/auth/session"
@@ -19,7 +18,6 @@ import { getManufacturerReviews, getProductRatings } from "@/lib/reviews/queries
 import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { getDisplayRates } from "@/lib/fx"
-import { cn } from "@/lib/utils"
 
 export async function generateMetadata({
   params,
@@ -133,23 +131,19 @@ export default async function ManufacturerStorefrontPage({
                 )}
               </div>
             </div>
-            <div className="ml-auto shrink-0">
-              {user ? (
-                <form action={startConversationAction}>
-                  <input type="hidden" name="manufacturerId" value={m.id} />
-                  <ContactSupplierButton
-                    label={tv("messageSupplier")}
-                    size="default"
-                  />
-                </form>
-              ) : (
-                <Link
-                  href="/sign-in"
-                  className={cn(buttonVariants({ variant: "default" }))}
-                >
-                  {tv("signInToContact")}
-                </Link>
-              )}
+            <div className="ml-auto flex shrink-0 flex-col items-end gap-1">
+              <form action={startConversationAction}>
+                <input type="hidden" name="manufacturerId" value={m.id} />
+                <ContactSupplierButton
+                  label={tv("messageSupplier")}
+                  size="default"
+                />
+              </form>
+              {!user ? (
+                <p className="max-w-[12rem] text-right text-xs text-muted-foreground">
+                  {tv("inquireHint")}
+                </p>
+              ) : null}
             </div>
           </div>
 
