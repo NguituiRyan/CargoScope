@@ -9,7 +9,13 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const tokenHash = searchParams.get("token_hash")
   const type = searchParams.get("type") as EmailOtpType | null
-  const next = searchParams.get("next") ?? "/account"
+  // Open-redirect guard: only follow internal relative paths — never an
+  // absolute (https://evil.com) or protocol-relative (//evil.com) URL.
+  const requestedNext = searchParams.get("next") ?? "/account"
+  const next =
+    requestedNext.startsWith("/") && !requestedNext.startsWith("//")
+      ? requestedNext
+      : "/account"
 
   if (tokenHash && type) {
     const supabase = await createClient()
