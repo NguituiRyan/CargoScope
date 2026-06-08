@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { getLocale } from "next-intl/server"
 
+import { logAudit } from "@/lib/audit/log"
 import { localePath, requireRole } from "@/lib/auth/session"
 import { createClient } from "@/lib/supabase/server"
 
@@ -46,6 +47,14 @@ export async function reviewVerificationAction(
     .eq("id", verificationId)
   if (error) return { error: "Could not update the verification." }
 
+  await logAudit({
+    actorProfileId: user.id,
+    action: "verification.review",
+    targetType: "manufacturer",
+    targetId: manufacturerId || null,
+    metadata: { verificationId, decision },
+  })
+
   const locale = await getLocale()
   if (manufacturerId) {
     revalidatePath(localePath(locale, `/admin/manufacturers/${manufacturerId}`))
@@ -57,7 +66,7 @@ export async function setManufacturerVerificationAction(
   _prev: AdminActionState,
   formData: FormData
 ): Promise<AdminActionState> {
-  await requireRole("admin")
+  const user = await requireRole("admin")
 
   const manufacturerId = String(formData.get("manufacturerId") ?? "")
   const status = String(formData.get("status") ?? "")
@@ -89,6 +98,14 @@ export async function setManufacturerVerificationAction(
     .update(update)
     .eq("id", manufacturerId)
   if (error) return { error: "Could not update the manufacturer." }
+
+  await logAudit({
+    actorProfileId: user.id,
+    action: "manufacturer.status",
+    targetType: "manufacturer",
+    targetId: manufacturerId,
+    metadata: { status, publish },
+  })
 
   const locale = await getLocale()
   revalidatePath(localePath(locale, "/admin/manufacturers"))

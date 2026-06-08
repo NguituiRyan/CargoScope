@@ -6,6 +6,7 @@ import { after } from "next/server"
 import { getLocale } from "next-intl/server"
 import { z } from "zod"
 
+import { logAudit } from "@/lib/audit/log"
 import { localePath, requireUser } from "@/lib/auth/session"
 import { notifyRfqBuyerOfQuote, sendRfqConfirmation } from "@/lib/email"
 import { resolveViewerParties } from "@/lib/messaging/queries"
@@ -225,7 +226,7 @@ export async function acceptQuoteAction(
   _prev: RfqActionState,
   formData: FormData
 ): Promise<RfqActionState> {
-  await requireUser()
+  const user = await requireUser()
   const locale = await getLocale()
 
   const rfqId = String(formData.get("rfqId") ?? "").trim()
@@ -259,6 +260,14 @@ export async function acceptQuoteAction(
   if (declined.error || accepted.error || closed.error) {
     return { error: "Could not accept the quote. Please try again." }
   }
+
+  await logAudit({
+    actorProfileId: user.id,
+    action: "quote.accept",
+    targetType: "rfq",
+    targetId: rfqId,
+    metadata: { quoteId },
+  })
 
   revalidatePath(localePath(locale, "/rfqs"))
   revalidatePath(localePath(locale, `/rfqs/${rfqId}`))
