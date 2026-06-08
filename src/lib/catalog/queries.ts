@@ -312,6 +312,36 @@ export async function searchProducts(
   return { items, total: items.length }
 }
 
+/**
+ * Highest catalogue "from" price (USD) across published products — the upper
+ * bound for the price-range slider. Pulls only price tiers so it stays light.
+ */
+export async function getPriceCeilingUsd(): Promise<number> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from("products")
+    .select(
+      "product_price_tiers(unit_price, currency), manufacturers!inner(is_published, verification_status)"
+    )
+    .eq("status", "active")
+    .eq("manufacturers.is_published", true)
+    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .limit(1000)
+
+  let max = 0
+  for (const row of data ?? []) {
+    const { price } = minTierPrice(
+      (
+        row as {
+          product_price_tiers: { unit_price: string; currency: string }[] | null
+        }
+      ).product_price_tiers
+    )
+    if (price !== null && price > max) max = price
+  }
+  return max
+}
+
 type ManufacturerRow = Parameters<typeof mapStorefrontManufacturer>[0]
 
 type DetailRow = {

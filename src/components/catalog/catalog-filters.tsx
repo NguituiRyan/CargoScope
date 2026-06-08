@@ -5,13 +5,14 @@ import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { Search, SlidersHorizontal, X } from "lucide-react"
 
+import { PriceRange } from "@/components/catalog/price-range"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { useRouter } from "@/i18n/navigation"
 import type { FilterCategory } from "@/lib/catalog/queries"
-import { currencyLabel, type DisplayCurrency } from "@/lib/currency/shared"
+import type { DisplayCurrency } from "@/lib/currency/shared"
 
 const TIERS = ["identity", "verified", "premium"] as const
 const SORTS = ["recent", "popular", "priceAsc", "priceDesc"] as const
@@ -42,9 +43,13 @@ const FILTER_KEYS = [
 export function CatalogFilters({
   categories,
   currency,
+  priceMax,
+  priceStep,
 }: {
   categories: FilterCategory[]
   currency: DisplayCurrency
+  priceMax: number
+  priceStep: number
 }) {
   const t = useTranslations("catalog")
   const tv = useTranslations("verification")
@@ -56,7 +61,6 @@ export function CatalogFilters({
 
   const current = (key: string) => params.get(key) ?? ""
   const activeCount = FILTER_KEYS.filter((k) => current(k)).length
-  const ccy = currencyLabel(currency)
 
   // Close the dropdown on outside click or Escape.
   useEffect(() => {
@@ -200,35 +204,17 @@ export function CatalogFilters({
                   </Select>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="filter-minPrice">
-                    {t("minPrice", { currency: ccy })}
-                  </Label>
-                  <Input
-                    id="filter-minPrice"
-                    name="minPrice"
-                    type="number"
-                    min={0}
-                    step="1"
-                    inputMode="decimal"
-                    defaultValue={current("minPrice")}
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="filter-maxPrice">
-                    {t("maxPrice", { currency: ccy })}
-                  </Label>
-                  <Input
-                    id="filter-maxPrice"
-                    name="maxPrice"
-                    type="number"
-                    min={0}
-                    step="1"
-                    inputMode="decimal"
-                    defaultValue={current("maxPrice")}
-                  />
-                </div>
+                <PriceRange
+                  priceMax={priceMax}
+                  priceStep={priceStep}
+                  currency={currency}
+                  defaultMin={
+                    current("minPrice") ? Number(current("minPrice")) : undefined
+                  }
+                  defaultMax={
+                    current("maxPrice") ? Number(current("maxPrice")) : undefined
+                  }
+                />
 
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="filter-maxMoq">{t("maxMoq")}</Label>

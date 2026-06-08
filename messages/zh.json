@@ -221,6 +221,7 @@
     "maxLeadTime": "最长交货周期（天）",
     "minPrice": "最低价格（{currency}）",
     "maxPrice": "最高价格（{currency}）",
+    "priceRange": "价格（{currency}）",
     "origin": "原产国",
     "sort": "排序方式",
     "sortRecent": "最新",

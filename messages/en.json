@@ -221,6 +221,7 @@
     "maxLeadTime": "Max lead time (days)",
     "minPrice": "Min price ({currency})",
     "maxPrice": "Max price ({currency})",
+    "priceRange": "Price ({currency})",
     "origin": "Origin country",
     "sort": "Sort by",
     "sortRecent": "Most recent",

@@ -221,6 +221,7 @@
     "maxLeadTime": "Muda wa juu wa kuandaa (siku)",
     "minPrice": "Bei ya chini ({currency})",
     "maxPrice": "Bei ya juu ({currency})",
+    "priceRange": "Bei ({currency})",
     "origin": "Nchi ya asili",
     "sort": "Panga kwa",
     "sortRecent": "Za hivi karibuni",

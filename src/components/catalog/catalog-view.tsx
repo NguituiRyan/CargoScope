@@ -10,6 +10,7 @@ import { Link } from "@/i18n/navigation"
 import {
   getFeaturedProducts,
   getFilterCategories,
+  getPriceCeilingUsd,
   searchProducts,
   type CatalogFilters as CatalogFilterValues,
   type CatalogSort,
@@ -36,6 +37,15 @@ function num(value: string | string[] | undefined): number | undefined {
   if (raw === undefined) return undefined
   const parsed = Number(raw)
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : undefined
+}
+
+/** Round up to a "nice" 1/2/5×10ⁿ value, for the price-slider ceiling and step. */
+function niceCeil(value: number): number {
+  if (!(value > 0)) return 0
+  const mag = 10 ** Math.floor(Math.log10(value))
+  const norm = value / mag
+  const niceNorm = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10
+  return niceNorm * mag
 }
 
 /**
@@ -102,12 +112,16 @@ export async function CatalogView({
     searchParams,
   ])
 
-  const [categories, currency, displayRates] = await Promise.all([
-    getFilterCategories(),
-    getDisplayCurrency(),
-    getDisplayRates(),
-  ])
+  const [categories, currency, displayRates, priceCeilingUsd] =
+    await Promise.all([
+      getFilterCategories(),
+      getDisplayCurrency(),
+      getDisplayRates(),
+      getPriceCeilingUsd(),
+    ])
   const rate = displayRates.rates[currency] || 1
+  const priceMax = niceCeil((priceCeilingUsd > 0 ? priceCeilingUsd : 1000) * rate)
+  const priceStep = niceCeil(priceMax / 100) || 1
   const filters = parseFilters(sp, rate)
   const { items } = await searchProducts(filters)
   const ratings = await getProductRatings(items.map((i) => i.id))
@@ -220,7 +234,12 @@ export async function CatalogView({
       <div className="sticky top-14 z-30 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
           <CatalogSearch />
-          <CatalogFilters categories={categories} currency={currency} />
+          <CatalogFilters
+            categories={categories}
+            currency={currency}
+            priceMax={priceMax}
+            priceStep={priceStep}
+          />
         </div>
       </div>
 
