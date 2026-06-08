@@ -1,5 +1,6 @@
 "use server"
 
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { getLocale } from "next-intl/server"
 import { z } from "zod"
@@ -28,6 +29,26 @@ async function resolveLocale(formData: FormData): Promise<string> {
   const fromForm = formData.get("locale")
   if (typeof fromForm === "string" && fromForm) return fromForm
   return getLocale()
+}
+
+/**
+ * Absolute origin of the current request (e.g. https://cargo-scope.vercel.app),
+ * used to build the email-confirmation redirect. Derived from the request host
+ * so it always points at the live domain — not whatever NEXT_PUBLIC_SITE_URL
+ * happens to be — with that env var as a last-resort fallback.
+ */
+async function siteOrigin(): Promise<string> {
+  const h = await headers()
+  const host = h.get("x-forwarded-host") ?? h.get("host")
+  if (host) {
+    const proto =
+      h.get("x-forwarded-proto") ??
+      (host.startsWith("localhost") || host.startsWith("127.0.0.1")
+        ? "http"
+        : "https")
+    return `${proto}://${host}`
+  }
+  return process.env.NEXT_PUBLIC_SITE_URL ?? ""
 }
 
 export async function signInAction(
@@ -66,7 +87,7 @@ export async function signUpAction(
   }
 
   const supabase = await createClient()
-  const origin = process.env.NEXT_PUBLIC_SITE_URL ?? ""
+  const origin = await siteOrigin()
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
