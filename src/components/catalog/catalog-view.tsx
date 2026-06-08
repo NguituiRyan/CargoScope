@@ -2,6 +2,7 @@ import { Calculator, Languages, ShieldCheck, Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { CatalogFilters } from "@/components/catalog/catalog-filters"
+import { CatalogSearch } from "@/components/catalog/catalog-search"
 import { HeroSearch } from "@/components/catalog/hero-search"
 import { ProductCard } from "@/components/catalog/product-card"
 import { Card, CardContent } from "@/components/ui/card"
@@ -14,7 +15,6 @@ import {
   type CatalogSort,
 } from "@/lib/catalog/queries"
 import { getDisplayCurrency } from "@/lib/currency/server"
-import { formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates } from "@/lib/fx"
 import { getProductRatings } from "@/lib/reviews/queries"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
@@ -109,7 +109,7 @@ export async function CatalogView({
   ])
   const rate = displayRates.rates[currency] || 1
   const filters = parseFilters(sp, rate)
-  const { items, total } = await searchProducts(filters)
+  const { items } = await searchProducts(filters)
   const ratings = await getProductRatings(items.map((i) => i.id))
 
   if (filters.sort === "popular") {
@@ -218,17 +218,8 @@ export async function CatalogView({
       ) : null}
 
       <div className="sticky top-14 z-30 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <div className="flex flex-col">
-            <p className="text-sm font-medium">{t("results", { count: total })}</p>
-            {currency !== "USD" && (
-              <p className="text-xs text-muted-foreground">
-                {t("indicativePrice", {
-                  rate: formatDisplayPrice(1, currency, displayRates.rates),
-                })}
-              </p>
-            )}
-          </div>
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-3 px-4 py-3">
+          <CatalogSearch />
           <CatalogFilters categories={categories} currency={currency} />
         </div>
       </div>
