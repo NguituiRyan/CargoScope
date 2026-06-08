@@ -40,13 +40,13 @@ export async function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4">
         <Link
           href="/"
-          className="flex items-center gap-2 font-heading text-lg font-semibold tracking-tight"
+          className="flex min-w-0 items-center gap-1.5 font-heading text-base font-semibold tracking-tight sm:gap-2 sm:text-lg"
         >
           <LogoMark className="size-6 shrink-0 text-primary" />
-          <span className="hidden sm:inline">{t("brand")}</span>
+          <span className="truncate">{t("brand")}</span>
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground lg:flex">
@@ -125,7 +125,7 @@ export async function SiteHeader() {
         </div>
 
         {/* Mobile controls — currency, language, a prominent sign-up, + menu */}
-        <div className="flex items-center gap-1.5 lg:hidden">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-1.5 lg:hidden">
           <CurrencySelector current={currency} label={t("currency")} />
           <LocaleSwitcher />
           {user ? null : (
