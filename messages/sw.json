@@ -549,5 +549,52 @@
     "title": "Ukurasa haujapatikana",
     "body": "Ukurasa unaoutafuta haupo au umehamishwa.",
     "home": "Rudi nyumbani"
+  },
+  "footer": {
+    "tagline": "Pata bidhaa kutoka kwa wasambazaji walioidhinishwa wa China, zikifikishwa kote Afrika — kwa uaminifu uliojengwa ndani.",
+    "marketplace": "Soko",
+    "company": "Kampuni",
+    "legal": "Kisheria",
+    "about": "Kuhusu",
+    "contact": "Wasiliana",
+    "terms": "Masharti",
+    "privacy": "Faragha",
+    "rights": "Haki zote zimehifadhiwa."
+  },
+  "about": {
+    "title": "Kuhusu Shop Budyy",
+    "lead": "Shop Budyy ni soko la B2B linaloweka uaminifu kwanza, linalounganisha wanunuzi wa jumla wa Afrika na wazalishaji walioidhinishwa nchini China.",
+    "missionTitle": "Dhamira yetu",
+    "mission": "Tunafanya ununuzi wa kimataifa kuwa salama na rahisi — wasambazaji waliokaguliwa, bei wazi ya gharama ya kufikisha, tafsiri iliyojengwa ndani, na mazungumzo ya moja kwa moja — ili wanunuzi waagize kwa ujasiri."
+  },
+  "contact": {
+    "title": "Wasiliana nasi",
+    "lead": "Maswali, maoni, au mawazo ya ushirikiano? Tuko tayari kusaidia.",
+    "emailLabel": "Barua pepe",
+    "email": "hello@shopbudyy.com",
+    "chatTitle": "Kumfikia msambazaji",
+    "chat": "Ili kuwasiliana na mzalishaji fulani, fungua bidhaa au duka lake kisha bonyeza “Wasiliana na msambazaji” kuanza mazungumzo."
+  },
+  "terms": {
+    "title": "Masharti ya Huduma",
+    "updated": "Muhtasari wa lugha rahisi · ilisasishwa Juni 2026",
+    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha Masharti yetu kamili. Si mbadala wa makubaliano kamili — wasiliana nasi kwa maswali yoyote.",
+    "p1Title": "Kutumia jukwaa",
+    "p1": "Shop Budyy huunganisha wanunuzi na wasambazaji. Wanunuzi huvinjari na kutuma ujumbe kwa wasambazaji bila malipo; wasambazaji hulipa kuorodhesha na hukaguliwa kabla ya kuanza. Tumia jukwaa kihalali na uwaheshimu wanachama wengine.",
+    "p2Title": "Maagizo na malipo",
+    "p2": "Shop Budyy ni jukwaa la kutafuta bidhaa na mawasiliano. Bei, nukuu, na makubaliano ya ununuzi hufanywa moja kwa moja kati ya mnunuzi na msambazaji — thibitisha masharti kila wakati kabla ya kulipa.",
+    "p3Title": "Akaunti yako",
+    "p3": "Unawajibika kwa shughuli kwenye akaunti yako. Tunaweza kusimamisha akaunti zinazovunja masharti haya au kudhuru wanachama wengine."
+  },
+  "privacy": {
+    "title": "Sera ya Faragha",
+    "updated": "Muhtasari wa lugha rahisi · ilisasishwa Juni 2026",
+    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha Sera yetu kamili ya Faragha. Wasiliana nasi ikiwa una maswali yoyote kuhusu data yako.",
+    "p1Title": "Tunachokusanya",
+    "p1": "Maelezo ya akaunti (jina, barua pepe, jukumu), taarifa za kampuni na bidhaa unazotoa, na ujumbe unaotuma kupitia jukwaa.",
+    "p2Title": "Jinsi tunavyoitumia",
+    "p2": "Kuendesha soko — kuonyesha orodha, kuwezesha mazungumzo yenye tafsiri kati ya mnunuzi na msambazaji, kukagua wasambazaji, na kuboresha huduma. Hatuuzi data yako binafsi.",
+    "p3Title": "Chaguo zako",
+    "p3": "Unaweza kusasisha wasifu wako au kuomba kufutwa kwa akaunti wakati wowote kwa kuwasiliana nasi."
   }
 }

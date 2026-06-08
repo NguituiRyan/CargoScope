@@ -549,5 +549,52 @@
     "title": "Page not found",
     "body": "The page you are looking for does not exist or has moved.",
     "home": "Back to home"
+  },
+  "footer": {
+    "tagline": "Source from verified China suppliers, delivered across Africa — with trust built in.",
+    "marketplace": "Marketplace",
+    "company": "Company",
+    "legal": "Legal",
+    "about": "About",
+    "contact": "Contact",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "rights": "All rights reserved."
+  },
+  "about": {
+    "title": "About Shop Budyy",
+    "lead": "Shop Budyy is a trust-first B2B marketplace that connects African wholesale buyers with verified manufacturers in China.",
+    "missionTitle": "Our mission",
+    "mission": "We make cross-border sourcing safe and simple — vetted suppliers, transparent landed-cost pricing, built-in translation, and direct chat — so buyers can order with confidence."
+  },
+  "contact": {
+    "title": "Contact us",
+    "lead": "Questions, feedback, or partnership ideas? We're glad to help.",
+    "emailLabel": "Email",
+    "email": "hello@shopbudyy.com",
+    "chatTitle": "Reaching a supplier",
+    "chat": "To contact a specific manufacturer, open their product or storefront and tap “Message supplier” to start a chat."
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "updated": "Plain-language summary · last updated June 2026",
+    "draft": "This is a plain-language summary while we finalize our full Terms. It isn't a substitute for the complete agreement — contact us with any questions.",
+    "p1Title": "Using the platform",
+    "p1": "Shop Budyy connects buyers and suppliers. Buyers browse and message suppliers for free; suppliers pay to list and are vetted before going live. Use the platform lawfully and respect other members.",
+    "p2Title": "Orders and payments",
+    "p2": "Shop Budyy is a sourcing and communication platform. Prices, quotes, and purchase agreements are made directly between buyer and supplier — always confirm terms before you pay.",
+    "p3Title": "Your account",
+    "p3": "You're responsible for activity on your account. We may suspend accounts that break these terms or harm other members."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "updated": "Plain-language summary · last updated June 2026",
+    "draft": "This is a plain-language summary while we finalize our full Privacy Policy. Contact us if you have any questions about your data.",
+    "p1Title": "What we collect",
+    "p1": "Account details (name, email, role), the company and product information you provide, and the messages you send through the platform.",
+    "p2Title": "How we use it",
+    "p2": "To run the marketplace — showing listings, enabling buyer–supplier chat with translation, vetting suppliers, and improving the service. We don't sell your personal data.",
+    "p3Title": "Your choices",
+    "p3": "You can update your profile or request account deletion at any time by contacting us."
   }
 }

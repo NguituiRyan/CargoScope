@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server"
 import { Analytics } from "@vercel/analytics/next"
 
 import { QueryProvider } from "@/components/query-provider"
+import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { routing } from "@/i18n/routing"
 import "../globals.css"
@@ -64,6 +65,7 @@ export default async function LocaleLayout({
           <QueryProvider>
             <SiteHeader />
             <main className="flex flex-1 flex-col">{children}</main>
+            <SiteFooter />
           </QueryProvider>
         </NextIntlClientProvider>
         <Analytics />
