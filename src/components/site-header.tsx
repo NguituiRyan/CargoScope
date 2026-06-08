@@ -126,7 +126,6 @@ export async function SiteHeader() {
 
         {/* Mobile controls — currency, language, a prominent sign-up, + menu */}
         <div className="flex shrink-0 items-center gap-1 sm:gap-1.5 lg:hidden">
-          <CurrencySelector current={currency} label={t("currency")} />
           <LocaleSwitcher />
           {user ? null : (
             <Link
@@ -157,7 +156,12 @@ export async function SiteHeader() {
               rfqs: t("rfqs"),
               messages: t("messages"),
             }}
-          />
+          >
+            <div className="flex w-full items-center justify-between gap-2">
+              <span className="text-sm font-medium">{t("currency")}</span>
+              <CurrencySelector current={currency} label={t("currency")} />
+            </div>
+          </MobileNav>
         </div>
       </div>
     </header>

@@ -437,7 +437,7 @@
     "send": "发送",
     "sending": "发送中…",
     "attachLabel": "添加附件",
-    "attachHint": "图片或 PDF，每个最大 10 MB（最多 5 个）。",
+    "attachHint": "图片、PDF、Word、Excel 或文本 — 每个最大 10 MB（最多 5 个）。",
     "attachmentFallback": "附件",
     "translated": "已翻译",
     "showOriginal": "显示原文",

@@ -129,24 +129,33 @@ export async function getOrCreateConversation(
 
   const { data: existing } = await supabase
     .from("conversations")
-    .select("id")
+    .select("id, product_id")
     .eq("buyer_id", buyerId)
     .eq("manufacturer_id", manufacturerId)
     .maybeSingle()
 
-  let conversationId = (existing?.id as string | undefined) ?? undefined
-  if (!conversationId) {
-    const newConvoId = crypto.randomUUID()
-    const { error } = await supabase.from("conversations").insert({
-      id: newConvoId,
-      buyer_id: buyerId,
-      manufacturer_id: manufacturerId,
-      product_id: productId,
-    })
-    conversationId = error ? undefined : newConvoId
+  const conversationId = (existing?.id as string | undefined) ?? undefined
+  if (conversationId) {
+    // One thread per buyer↔supplier: reuse it, but refresh its product context
+    // to whatever the buyer is inquiring about now, so the thread header never
+    // shows a stale/unrelated product when they contact about a different item.
+    if (productId && existing?.product_id !== productId) {
+      await supabase
+        .from("conversations")
+        .update({ product_id: productId })
+        .eq("id", conversationId)
+    }
+    return { conversationId, selfOwned: false }
   }
 
-  return { conversationId: conversationId ?? null, selfOwned: false }
+  const newConvoId = crypto.randomUUID()
+  const { error } = await supabase.from("conversations").insert({
+    id: newConvoId,
+    buyer_id: buyerId,
+    manufacturer_id: manufacturerId,
+    product_id: productId,
+  })
+  return { conversationId: error ? null : newConvoId, selfOwned: false }
 }
 
 function partyScope(parties: ViewerParties): SQL | null {

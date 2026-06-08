@@ -437,7 +437,7 @@
     "send": "Send",
     "sending": "Sending…",
     "attachLabel": "Attach files",
-    "attachHint": "Images or PDF, up to 10 MB each (max 5).",
+    "attachHint": "Images, PDF, Word, Excel or text — up to 10 MB each (max 5).",
     "attachmentFallback": "Attachment",
     "translated": "Translated",
     "showOriginal": "Show original",

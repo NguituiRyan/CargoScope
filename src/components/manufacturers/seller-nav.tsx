@@ -18,7 +18,7 @@ export function SellerNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="flex gap-1 overflow-x-auto rounded-lg border border-border bg-card p-1 text-sm [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <nav className="flex flex-wrap gap-1 rounded-lg border border-border bg-card p-1 text-sm">
       {tabs.map((tab) => {
         const active =
           tab.href === "/seller"
