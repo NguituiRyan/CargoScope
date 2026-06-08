@@ -53,12 +53,11 @@ export async function startConversationAction(formData: FormData): Promise<void>
 
   let buyerId = parties.buyerId
   if (!buyerId) {
-    const { data: createdBuyer } = await supabase
+    const newBuyerId = crypto.randomUUID()
+    const { error: buyerError } = await supabase
       .from("buyers")
-      .insert({ owner_profile_id: user.id })
-      .select("id")
-      .single()
-    buyerId = (createdBuyer?.id as string | undefined) ?? null
+      .insert({ id: newBuyerId, owner_profile_id: user.id })
+    buyerId = buyerError ? null : newBuyerId
   }
   if (!buyerId) redirect(localePath(locale, "/products"))
 
@@ -71,16 +70,14 @@ export async function startConversationAction(formData: FormData): Promise<void>
 
   let conversationId = existing?.id as string | undefined
   if (!conversationId) {
-    const { data: createdConvo } = await supabase
-      .from("conversations")
-      .insert({
-        buyer_id: buyerId,
-        manufacturer_id: manufacturerId,
-        product_id: productId,
-      })
-      .select("id")
-      .single()
-    conversationId = createdConvo?.id as string | undefined
+    const newConvoId = crypto.randomUUID()
+    const { error: convoError } = await supabase.from("conversations").insert({
+      id: newConvoId,
+      buyer_id: buyerId,
+      manufacturer_id: manufacturerId,
+      product_id: productId,
+    })
+    conversationId = convoError ? undefined : newConvoId
   }
   if (!conversationId) redirect(localePath(locale, "/products"))
 

@@ -100,43 +100,38 @@ export async function createRfqAction(
   const parties = await resolveViewerParties(user.id)
   let buyerId = parties.buyerId
   if (!buyerId) {
-    const { data: created } = await supabase
+    const newBuyerId = crypto.randomUUID()
+    const { error: buyerError } = await supabase
       .from("buyers")
-      .insert({ owner_profile_id: user.id })
-      .select("id")
-      .single()
-    buyerId = (created?.id as string | undefined) ?? null
+      .insert({ id: newBuyerId, owner_profile_id: user.id })
+    buyerId = buyerError ? null : newBuyerId
   }
   if (!buyerId) return { error: "Could not start the RFQ. Please try again." }
 
   const d = parsed.data
-  const { data: inserted, error } = await supabase
-    .from("rfqs")
-    .insert({
-      buyer_id: buyerId,
-      category_id: d.categoryId,
-      title: d.title,
-      description: d.description,
-      quantity: d.quantity ?? null,
-      unit: d.unit,
-      target_unit_price: d.targetUnitPrice,
-      currency: d.currency,
-      destination_country: d.destinationCountry,
-      destination_city: d.destinationCity,
-      deadline: d.deadline,
-      status: "open",
-    })
-    .select("id")
-    .single()
-  if (error || !inserted) {
+  const rfqId = crypto.randomUUID()
+  const { error } = await supabase.from("rfqs").insert({
+    id: rfqId,
+    buyer_id: buyerId,
+    category_id: d.categoryId,
+    title: d.title,
+    description: d.description,
+    quantity: d.quantity ?? null,
+    unit: d.unit,
+    target_unit_price: d.targetUnitPrice,
+    currency: d.currency,
+    destination_country: d.destinationCountry,
+    destination_city: d.destinationCity,
+    deadline: d.deadline,
+    status: "open",
+  })
+  if (error) {
     return { error: "Could not post the RFQ. Please try again." }
   }
 
-  after(() =>
-    sendRfqConfirmation(user.email, { rfqTitle: d.title, rfqId: inserted.id })
-  )
+  after(() => sendRfqConfirmation(user.email, { rfqTitle: d.title, rfqId }))
   revalidatePath(localePath(locale, "/rfqs"))
-  redirect(localePath(locale, `/rfqs/${inserted.id}`))
+  redirect(localePath(locale, `/rfqs/${rfqId}`))
 }
 
 /** Manufacturer submits (or updates) their single quote on an open RFQ. */

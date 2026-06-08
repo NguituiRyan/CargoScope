@@ -129,33 +129,30 @@ export async function saveManufacturerProfileAction(
       .eq("id", manufacturerId)
     if (error) return { error: "Could not save your profile. Please try again." }
   } else {
+    // Generate the id client-side and insert it explicitly. We must NOT chain
+    // .select() onto the insert: the manufacturers SELECT policy uses a STABLE
+    // security-definer function that can't see the just-inserted row during
+    // INSERT…RETURNING, so Postgres raises an RLS error (PGRST/42501).
+    const newId = crypto.randomUUID()
     const base = slugify(companyName) || "manufacturer"
     const slugCandidates = [
       base,
       `${base}-${randomSuffix(4)}`,
       `${base}-${randomSuffix(8)}`,
     ]
-    let newId: string | null = null
-    let insertError: { code?: string } | null = null
+    let created = false
     for (const slug of slugCandidates) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("manufacturers")
-        .insert({ ...payload, slug, owner_profile_id: user.id })
-        .select("id")
-        .single()
-      if (!error && data) {
-        newId = data.id as string
+        .insert({ id: newId, ...payload, slug, owner_profile_id: user.id })
+      if (!error) {
+        created = true
         break
       }
-      insertError = error
-      if (error?.code !== "23505") break
+      if (error.code !== "23505") break
     }
-    if (!newId) {
-      return {
-        error: insertError
-          ? "Could not create your profile. Please try again."
-          : "Could not create your profile.",
-      }
+    if (!created) {
+      return { error: "Could not create your profile. Please try again." }
     }
     manufacturerId = newId
     isNew = true

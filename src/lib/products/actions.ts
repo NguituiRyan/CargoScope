@@ -210,15 +210,16 @@ export async function saveProductAction(
     }
   }
 
-  const { data: created, error: insertError } = await supabase
+  // Explicit client-side id (no .select() after insert — the products SELECT
+  // policy is a STABLE security-definer fn that can't see the new row during
+  // INSERT…RETURNING, which would raise an RLS error).
+  const newId = crypto.randomUUID()
+  const { error: insertError } = await supabase
     .from("products")
-    .insert({ ...payload, manufacturer_id: manufacturerId })
-    .select("id")
-    .single()
-  if (insertError || !created) {
+    .insert({ id: newId, ...payload, manufacturer_id: manufacturerId })
+  if (insertError) {
     return { error: "Could not create the product. Please try again." }
   }
-  const newId = created.id as string
 
   if (tiers.length > 0) {
     await supabase
