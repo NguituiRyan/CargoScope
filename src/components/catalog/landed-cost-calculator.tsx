@@ -192,6 +192,7 @@ export function LandedCostCalculator({ tiers, unit, moq, hsCode, fx }: Props) {
             <Badge variant="outline">{t("estimatedRate")}</Badge>
           )}
         </div>
+        <p>{t("kesNote")}</p>
         <p>{t("disclaimer")}</p>
       </div>
     </div>

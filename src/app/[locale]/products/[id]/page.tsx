@@ -23,7 +23,7 @@ import { getPublicProduct, getRelatedProducts } from "@/lib/catalog/queries"
 import { getProductRatings, getProductReviews } from "@/lib/reviews/queries"
 import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
-import { formatDisplayPrice } from "@/lib/currency/shared"
+import { displayAmount, formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates, getFxRate } from "@/lib/fx"
 import { cn } from "@/lib/utils"
 
@@ -172,9 +172,21 @@ export default async function ProductDetailPage({
                   <tbody className="divide-y divide-border">
                     {product.priceTiers.map((tier, i) => {
                       const price = Number(tier.unitPrice)
+                      // Derive the discount from the rounded amounts the shopper
+                      // sees, so e.g. "KSh 10 → KSh 8" reads as 20%, not 25%.
+                      const baseShown = displayAmount(
+                        baseTierPrice,
+                        currency,
+                        displayRates.rates
+                      )
+                      const priceShown = displayAmount(
+                        price,
+                        currency,
+                        displayRates.rates
+                      )
                       const pct =
-                        baseTierPrice > 0
-                          ? Math.round(((baseTierPrice - price) / baseTierPrice) * 100)
+                        baseShown > 0
+                          ? Math.round(((baseShown - priceShown) / baseShown) * 100)
                           : 0
                       const isBest =
                         product.priceTiers.length > 1 &&

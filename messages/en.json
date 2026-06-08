@@ -470,6 +470,7 @@
     "fxDated": "as of {date}",
     "estimatedRate": "estimated rate",
     "enterQuantity": "Enter a quantity to see the estimate.",
+    "kesNote": "Landed cost is shown in Kenyan Shillings (KES) for import into Kenya, regardless of your selected display currency.",
     "disclaimer": "Estimate only. Actual duty, taxes and KEBS/PVoC conformity costs depend on KRA classification and your clearing agent."
   },
   "directory": {

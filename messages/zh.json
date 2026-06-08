@@ -470,6 +470,7 @@
     "fxDated": "截至 {date}",
     "estimatedRate": "估算汇率",
     "enterQuantity": "请输入数量以查看估算。",
+    "kesNote": "到岸成本以肯尼亚先令 (KES) 显示（用于进口至肯尼亚），与您所选的显示货币无关。",
     "disclaimer": "仅供估算。实际关税、税费及 KEBS/PVoC 认证费用取决于肯尼亚税务局（KRA）的归类和您的清关代理。"
   },
   "directory": {

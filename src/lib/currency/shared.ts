@@ -34,6 +34,21 @@ const META: Record<DisplayCurrency, { symbol: string; decimals: number }> = {
   CNY: { symbol: "¥", decimals: 2 },
 }
 
+/**
+ * The numeric amount shown for a USD price in the given display currency,
+ * rounded to that currency's displayed precision. Use this (not the raw
+ * converted value) when deriving things like discount percentages, so the maths
+ * stays consistent with the rounded prices the shopper actually sees.
+ */
+export function displayAmount(
+  amountUsd: number,
+  currency: DisplayCurrency,
+  rates: DisplayRates["rates"]
+): number {
+  const factor = 10 ** META[currency].decimals
+  return Math.round(amountUsd * (rates[currency] ?? 1) * factor) / factor
+}
+
 /** Convert a USD amount into the target currency and format it with its symbol. */
 export function formatDisplayPrice(
   amountUsd: number,
@@ -41,11 +56,10 @@ export function formatDisplayPrice(
   rates: DisplayRates["rates"]
 ): string {
   const meta = META[currency]
-  const value = amountUsd * (rates[currency] ?? 1)
   const number = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: meta.decimals,
     maximumFractionDigits: meta.decimals,
-  }).format(value)
+  }).format(displayAmount(amountUsd, currency, rates))
   return `${meta.symbol}${number}`
 }
 
