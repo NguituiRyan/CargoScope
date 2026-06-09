@@ -210,6 +210,7 @@ export default async function ManufacturerDetailPage({
             </CardHeader>
             <CardContent>
               <ManufacturerStatusForm
+                key={`${m.verificationStatus}-${m.isPublished}`}
                 manufacturerId={m.id}
                 status={m.verificationStatus}
                 isPublished={m.isPublished}

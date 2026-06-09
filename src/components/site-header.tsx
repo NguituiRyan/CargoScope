@@ -5,7 +5,7 @@ import { LogoMark } from "@/components/brand/logo-mark"
 import { CurrencySelector } from "@/components/currency-selector"
 import { LocaleSwitcher } from "@/components/locale-switcher"
 import { MobileNav } from "@/components/mobile-nav"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { signOutAction } from "@/lib/auth/actions"
 import { getSessionUser } from "@/lib/auth/session"
@@ -43,7 +43,7 @@ export async function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4">
         <Link
           href="/"
-          className="flex min-w-0 items-center gap-1.5 font-heading text-base font-semibold tracking-tight sm:gap-2 sm:text-lg"
+          className="flex min-w-0 items-center gap-1.5 font-heading text-[15px] font-semibold tracking-tight sm:gap-2 sm:text-lg"
         >
           <LogoMark className="size-6 shrink-0 text-primary" />
           <span className="truncate">{t("brand")}</span>
@@ -109,9 +109,12 @@ export async function SiteHeader() {
               </Link>
               <form action={signOutAction}>
                 <input type="hidden" name="locale" value={locale} />
-                <Button type="submit" variant="outline" size="sm">
+                <button
+                  type="submit"
+                  className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+                >
                   {t("signOut")}
-                </Button>
+                </button>
               </form>
             </>
           ) : (

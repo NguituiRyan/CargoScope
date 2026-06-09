@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Menu, MessageSquare, X } from "lucide-react"
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { signOutAction } from "@/lib/auth/actions"
 import { cn } from "@/lib/utils"
@@ -141,14 +141,15 @@ export function MobileNav({
                     </Link>
                     <form action={signOutAction} className="px-1 pt-2">
                       <input type="hidden" name="locale" value={locale} />
-                      <Button
+                      <button
                         type="submit"
-                        variant="outline"
-                        size="sm"
-                        className="w-full"
+                        className={cn(
+                          buttonVariants({ variant: "outline", size: "sm" }),
+                          "w-full"
+                        )}
                       >
                         {labels.signOut}
-                      </Button>
+                      </button>
                     </form>
                   </>
                 ) : (
