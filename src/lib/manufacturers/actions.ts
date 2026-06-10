@@ -218,7 +218,7 @@ export async function submitVerificationAction(
   const manufacturerId = mfr.id as string
 
   const type = String(formData.get("type") ?? "")
-  if (type !== "identity" && type !== "business") {
+  if (type !== "identity" && type !== "business" && type !== "inspection") {
     return { error: "Choose a document type." }
   }
 

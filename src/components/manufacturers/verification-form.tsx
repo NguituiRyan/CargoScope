@@ -55,6 +55,7 @@ export function VerificationForm({ locale }: { locale: string }) {
         <Select id="type" name="type" defaultValue="business">
           <option value="business">{tv("type.business")}</option>
           <option value="identity">{tv("type.identity")}</option>
+          <option value="inspection">{tv("type.inspection")}</option>
         </Select>
       </div>
 
