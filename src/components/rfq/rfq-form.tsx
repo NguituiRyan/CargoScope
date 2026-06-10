@@ -10,9 +10,11 @@ import {
   updateRfqAction,
   type RfqActionState,
 } from "@/lib/rfq/actions"
+import { draftRfqDescriptionAction } from "@/lib/ai/actions"
 import { ATTACHMENT_ACCEPT } from "@/lib/messaging/attachments"
 import type { CategoryOption } from "@/lib/products/queries"
 import type { RfqEditValues } from "@/lib/rfq/queries"
+import { AiDraftButton } from "@/components/ai-draft-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -71,7 +73,32 @@ export function RfqForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="description">{t("fDescription")}</Label>
+        <div className="flex items-center justify-between gap-2">
+          <Label htmlFor="description">{t("fDescription")}</Label>
+          <AiDraftButton
+            label={t("aiDraft")}
+            errorLabel={t("aiDraftError")}
+            onGenerate={() =>
+              draftRfqDescriptionAction({
+                title:
+                  (document.getElementById("title") as HTMLInputElement | null)
+                    ?.value ?? "",
+                notes:
+                  (
+                    document.getElementById(
+                      "description"
+                    ) as HTMLTextAreaElement | null
+                  )?.value ?? "",
+              })
+            }
+            onResult={(text) => {
+              const el = document.getElementById(
+                "description"
+              ) as HTMLTextAreaElement | null
+              if (el) el.value = text
+            }}
+          />
+        </div>
         <Textarea
           id="description"
           name="description"

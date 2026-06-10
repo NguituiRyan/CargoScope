@@ -9,7 +9,9 @@ import {
   saveProductAction,
   type ProductActionState,
 } from "@/lib/products/actions"
+import { generateProductDescriptionAction } from "@/lib/ai/actions"
 import type { CategoryOption, ProductDetail } from "@/lib/products/queries"
+import { AiDraftButton } from "@/components/ai-draft-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -124,7 +126,30 @@ export function ProductForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="description">{t("description")}</Label>
+        <div className="flex items-center justify-between gap-2">
+          <Label htmlFor="description">{t("description")}</Label>
+          <AiDraftButton
+            label={t("aiDraft")}
+            errorLabel={t("aiDraftError")}
+            onGenerate={() =>
+              generateProductDescriptionAction({
+                title:
+                  (document.getElementById("title") as HTMLInputElement | null)
+                    ?.value ?? "",
+                specs: specs
+                  .filter((s) => s.name.trim() && s.value.trim())
+                  .map((s) => `${s.name}: ${s.value}`)
+                  .join("; "),
+              })
+            }
+            onResult={(text) => {
+              const el = document.getElementById(
+                "description"
+              ) as HTMLTextAreaElement | null
+              if (el) el.value = text
+            }}
+          />
+        </div>
         <Textarea
           id="description"
           name="description"
