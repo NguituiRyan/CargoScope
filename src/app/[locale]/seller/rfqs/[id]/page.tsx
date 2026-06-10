@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { ArrowLeft, CalendarClock, MapPin } from "lucide-react"
 
 import { QuoteForm } from "@/components/rfq/quote-form"
+import { RfqAttachments } from "@/components/rfq/rfq-attachments"
 import { RfqStatusBadge } from "@/components/rfq/status-badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -102,6 +103,7 @@ export default async function SellerRfqDetailPage({
               {rfq.description}
             </p>
           ) : null}
+          <RfqAttachments attachments={rfq.attachments} />
         </CardContent>
       </Card>
 

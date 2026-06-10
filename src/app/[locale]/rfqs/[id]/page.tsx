@@ -7,6 +7,7 @@ import { VerificationBadge } from "@/components/manufacturers/verification-badge
 import { AcceptQuoteButton } from "@/components/rfq/accept-quote-button"
 import { DeleteRfqButton } from "@/components/rfq/delete-rfq-button"
 import { QuoteComparison } from "@/components/rfq/quote-comparison"
+import { RfqAttachments } from "@/components/rfq/rfq-attachments"
 import { QuoteStatusBadge, RfqStatusBadge } from "@/components/rfq/status-badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -140,6 +141,8 @@ export default async function BuyerRfqDetailPage({
           </CardContent>
         </Card>
       )}
+
+      <RfqAttachments attachments={rfq.attachments} />
 
       <div className="flex flex-col gap-3">
         <h2 className="font-heading text-lg font-semibold">

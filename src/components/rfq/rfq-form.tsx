@@ -10,6 +10,7 @@ import {
   updateRfqAction,
   type RfqActionState,
 } from "@/lib/rfq/actions"
+import { ATTACHMENT_ACCEPT } from "@/lib/messaging/attachments"
 import type { CategoryOption } from "@/lib/products/queries"
 import type { RfqEditValues } from "@/lib/rfq/queries"
 import { Button } from "@/components/ui/button"
@@ -79,6 +80,19 @@ export function RfqForm({
           defaultValue={rfq?.description ?? ""}
           placeholder={t("fDescriptionPlaceholder")}
         />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="attachments">{t("fAttachments")}</Label>
+        <Input
+          id="attachments"
+          type="file"
+          name="attachments"
+          multiple
+          accept={ATTACHMENT_ACCEPT}
+          className="h-auto py-2 file:mr-3 file:rounded-md file:bg-secondary file:px-2.5 file:py-1 file:text-secondary-foreground"
+        />
+        <p className="text-xs text-muted-foreground">{t("fAttachmentsHint")}</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">

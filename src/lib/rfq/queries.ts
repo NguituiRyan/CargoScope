@@ -8,6 +8,7 @@ import { db } from "@/lib/db"
 import { buyers, categories, manufacturers, quotes, rfqs } from "@/lib/db/schema"
 import { resolveViewerParties } from "@/lib/messaging/queries"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
+import { parseRfqAttachments, type RfqAttachment } from "@/lib/rfq/attachments"
 
 /**
  * RFQ / quote reads.
@@ -60,11 +61,13 @@ export interface QuoteItem {
 
 export interface BuyerRfqDetail extends RfqListItem {
   description: string | null
+  attachments: RfqAttachment[]
   quotes: QuoteItem[]
 }
 
 export interface QuotingRfqDetail extends RfqListItem {
   description: string | null
+  attachments: RfqAttachment[]
   buyerCompanyName: string | null
   myQuote: {
     id: string
@@ -111,6 +114,7 @@ const RFQ_COLUMNS = {
   destinationCity: rfqs.destinationCity,
   deadline: rfqs.deadline,
   createdAt: rfqs.createdAt,
+  attachments: rfqs.attachments,
   catEn: categories.nameEn,
   catSw: categories.nameSw,
   catZh: categories.nameZh,
@@ -225,6 +229,7 @@ export async function getBuyerRfqDetail(
   return {
     ...mapListItem(row, locale, Number(row.quoteCount) || 0),
     description: row.description,
+    attachments: parseRfqAttachments(row.attachments),
     quotes: quoteItems,
   }
 }
@@ -344,6 +349,7 @@ export async function getRfqForQuoting(
   return {
     ...mapListItem(row, locale, Number(row.quoteCount) || 0),
     description: row.description,
+    attachments: parseRfqAttachments(row.attachments),
     buyerCompanyName: row.buyerCompanyName ?? null,
     myQuote: mine
       ? {

@@ -10,6 +10,10 @@ import { logAudit } from "@/lib/audit/log"
 import { localePath, requireUser } from "@/lib/auth/session"
 import { notifyRfqBuyerOfQuote, sendRfqConfirmation } from "@/lib/email"
 import { resolveViewerParties } from "@/lib/messaging/queries"
+import {
+  parseRfqAttachments,
+  storeRfqAttachments,
+} from "@/lib/rfq/attachments"
 import { tierLimits } from "@/lib/subscription/tiers"
 import { createClient } from "@/lib/supabase/server"
 
@@ -129,6 +133,15 @@ export async function createRfqAction(
     return { error: "Could not post the RFQ. Please try again." }
   }
 
+  // Upload any attachments now that the RFQ exists (RLS keys on owns_rfq).
+  const stored = await storeRfqAttachments(
+    rfqId,
+    formData.getAll("attachments").filter((f): f is File => f instanceof File)
+  )
+  if (stored.length > 0) {
+    await supabase.from("rfqs").update({ attachments: stored }).eq("id", rfqId)
+  }
+
   after(() => sendRfqConfirmation(user.email, { rfqTitle: d.title, rfqId }))
   revalidatePath(localePath(locale, "/rfqs"))
   redirect(localePath(locale, `/rfqs/${rfqId}`))
@@ -179,6 +192,25 @@ export async function updateRfqAction(
     .eq("id", rfqId)
   if (error) {
     return { error: "Could not update the RFQ. Please try again." }
+  }
+
+  // Append any newly uploaded attachments to the existing set.
+  const newFiles = formData
+    .getAll("attachments")
+    .filter((f): f is File => f instanceof File && f.size > 0)
+  if (newFiles.length > 0) {
+    const added = await storeRfqAttachments(rfqId, newFiles)
+    if (added.length > 0) {
+      const { data: cur } = await supabase
+        .from("rfqs")
+        .select("attachments")
+        .eq("id", rfqId)
+        .maybeSingle()
+      await supabase
+        .from("rfqs")
+        .update({ attachments: [...parseRfqAttachments(cur?.attachments), ...added] })
+        .eq("id", rfqId)
+    }
   }
 
   revalidatePath(localePath(locale, "/rfqs"))
