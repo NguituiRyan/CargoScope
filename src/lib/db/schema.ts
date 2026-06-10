@@ -151,6 +151,9 @@ export const manufacturers = pgTable(
     subscriptionTier: subscriptionTier("subscription_tier")
       .notNull()
       .default("none"),
+    paddleCustomerId: text("paddle_customer_id"),
+    paddleSubscriptionId: text("paddle_subscription_id"),
+    subscriptionStatus: text("subscription_status"),
     responseRate: integer("response_rate"),
     memberSince: timestamp("member_since", { withTimezone: true }),
     isPublished: boolean("is_published").notNull().default(false),

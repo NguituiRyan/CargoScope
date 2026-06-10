@@ -2,9 +2,13 @@ import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Check } from "lucide-react"
 
+import { SubscribeButton } from "@/components/billing/subscribe-button"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
+import { getSessionUser } from "@/lib/auth/session"
+import { getMyManufacturer } from "@/lib/manufacturers/queries"
+import { PADDLE_PRICE_IDS } from "@/lib/paddle/config"
 import { PRICING_TIERS } from "@/lib/subscription/tiers"
 import { cn } from "@/lib/utils"
 
@@ -21,6 +25,8 @@ export default async function PricingPage({
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("pricing")
+  const user = await getSessionUser()
+  const m = user?.role === "manufacturer" ? await getMyManufacturer() : null
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-12">
@@ -83,14 +89,31 @@ export default async function PricingPage({
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href="/sign-up"
-                  className={cn(
-                    buttonVariants({ variant: recommended ? "default" : "outline" })
-                  )}
-                >
-                  {t("cta")}
-                </Link>
+                {m?.subscriptionTier === tier ? (
+                  <span className="inline-flex h-9 items-center justify-center rounded-lg border border-border text-sm font-medium text-muted-foreground">
+                    {t("currentPlan")}
+                  </span>
+                ) : monthlyUsd > 0 &&
+                  m &&
+                  (tier === "verified" || tier === "premium") &&
+                  PADDLE_PRICE_IDS[tier] ? (
+                  <SubscribeButton
+                    priceId={PADDLE_PRICE_IDS[tier]!}
+                    manufacturerId={m.id}
+                    email={user!.email}
+                    label={t("subscribe")}
+                    variant={recommended ? "default" : "outline"}
+                  />
+                ) : (
+                  <Link
+                    href="/sign-up"
+                    className={cn(
+                      buttonVariants({ variant: recommended ? "default" : "outline" })
+                    )}
+                  >
+                    {t("cta")}
+                  </Link>
+                )}
               </CardContent>
             </Card>
           )

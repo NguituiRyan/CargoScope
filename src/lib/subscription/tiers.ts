@@ -1,7 +1,7 @@
 /**
  * Subscription tiers + feature gating. Pure config — safe to import from server
- * or client. Tier changes are admin-only (enforced by RLS); upgrades are a
- * contact flow until payments land in Phase 2.
+ * or client. Tier changes are admin-only (enforced by RLS); paid upgrades flow
+ * through Paddle checkout, and the Paddle webhook sets the tier on success.
  */
 export type SubscriptionTier = "none" | "basic" | "verified" | "premium"
 
