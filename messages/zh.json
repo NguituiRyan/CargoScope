@@ -21,6 +21,9 @@
     "subtitle": "Shop Budyy 将肯尼亚的批发买家与经审核的工厂连接起来——透明的到岸成本、应用内翻译，每一步都建立信任。",
     "ctaBrowse": "浏览产品",
     "ctaSell": "在 Shop Budyy 上销售",
+    "statsSuppliers": "已验证供应商",
+    "statsProducts": "已上架产品",
+    "statsCategories": "品类",
     "pillars": {
       "verifiedTitle": "经核实的供应商",
       "verifiedBody": "每家制造商在上架前都会经过证件审核和等级评定，让您清楚知道与谁交易。",
@@ -242,6 +245,7 @@
     "sellerTitle": "控制台",
     "sellerSubtitle": "一览您的店铺。",
     "setupTitle": "完成设置",
+    "completionScore": "资料完整度：{pct}%",
     "setupProfile": "完善公司资料",
     "setupBranding": "添加标志和横幅",
     "setupVerify": "完成认证",

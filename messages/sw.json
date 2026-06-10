@@ -21,6 +21,9 @@
     "subtitle": "Shop Budyy inaunganisha wanunuzi wa jumla wa Kenya na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
     "ctaBrowse": "Vinjari bidhaa",
     "ctaSell": "Uza kwenye Shop Budyy",
+    "statsSuppliers": "Wasambazaji walioidhinishwa",
+    "statsProducts": "Bidhaa zilizoorodheshwa",
+    "statsCategories": "Kategoria",
     "pillars": {
       "verifiedTitle": "Wasambazaji waliothibitishwa",
       "verifiedBody": "Kila mtengenezaji hukaguliwa hati na kupewa daraja kabla ya kuorodhesha, ili ujue unanunua kutoka kwa nani.",
@@ -242,6 +245,7 @@
     "sellerTitle": "Dashibodi",
     "sellerSubtitle": "Duka lako kwa mtazamo mmoja.",
     "setupTitle": "Maliza kuanzisha",
+    "completionScore": "Ukamilishaji wa wasifu: {pct}%",
     "setupProfile": "Kamilisha wasifu wa kampuni yako",
     "setupBranding": "Ongeza nembo na bango",
     "setupVerify": "Thibitishwa",

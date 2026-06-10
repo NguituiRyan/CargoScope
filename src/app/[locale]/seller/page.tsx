@@ -85,6 +85,9 @@ export default async function SellerDashboardPage({
     { done: m.isPublished, label: t("setupLive"), href: "/seller/verification" },
   ]
   const setupDone = setupSteps.every((step) => step.done)
+  const completionPct = Math.round(
+    (setupSteps.filter((step) => step.done).length / setupSteps.length) * 100
+  )
 
   return (
     <div className="flex flex-col gap-6">
@@ -112,7 +115,24 @@ export default async function SellerDashboardPage({
       {!setupDone ? (
         <Card>
           <CardContent className="flex flex-col gap-3 py-4">
-            <p className="text-sm font-semibold">{t("setupTitle")}</p>
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold">{t("setupTitle")}</p>
+              <span className="text-sm font-semibold tabular-nums text-primary">
+                {t("completionScore", { pct: completionPct })}
+              </span>
+            </div>
+            <div
+              className="h-2 overflow-hidden rounded-full bg-muted"
+              role="progressbar"
+              aria-valuenow={completionPct}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            >
+              <div
+                className="h-full rounded-full bg-primary transition-all"
+                style={{ width: `${completionPct}%` }}
+              />
+            </div>
             <ul className="flex flex-col gap-2">
               {setupSteps.map((step) => (
                 <li key={step.label} className="flex items-center gap-2.5 text-sm">

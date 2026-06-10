@@ -21,6 +21,9 @@
     "subtitle": "Shop Budyy connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
     "ctaBrowse": "Browse products",
     "ctaSell": "Sell on Shop Budyy",
+    "statsSuppliers": "Verified suppliers",
+    "statsProducts": "Products listed",
+    "statsCategories": "Categories",
     "pillars": {
       "verifiedTitle": "Verified suppliers",
       "verifiedBody": "Every manufacturer is document-checked and tier-rated before they can list, so you know who you are buying from.",
@@ -242,6 +245,7 @@
     "sellerTitle": "Dashboard",
     "sellerSubtitle": "Your storefront at a glance.",
     "setupTitle": "Finish setting up",
+    "completionScore": "Profile completion: {pct}%",
     "setupProfile": "Complete your company profile",
     "setupBranding": "Add a logo and banner",
     "setupVerify": "Get verified",

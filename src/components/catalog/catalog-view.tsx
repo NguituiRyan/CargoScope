@@ -8,6 +8,7 @@ import { ProductCard } from "@/components/catalog/product-card"
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import {
+  getCatalogStats,
   getFeaturedProducts,
   getFilterCategories,
   getPriceCeilingUsd,
@@ -112,12 +113,13 @@ export async function CatalogView({
     searchParams,
   ])
 
-  const [categories, currency, displayRates, priceCeilingUsd] =
+  const [categories, currency, displayRates, priceCeilingUsd, stats] =
     await Promise.all([
       getFilterCategories(),
       getDisplayCurrency(),
       getDisplayRates(),
       getPriceCeilingUsd(),
+      getCatalogStats(),
     ])
   const rate = displayRates.rates[currency] || 1
   const priceMax = niceCeil((priceCeilingUsd > 0 ? priceCeilingUsd : 1000) * rate)
@@ -188,6 +190,23 @@ export async function CatalogView({
           </div>
         </div>
       </section>
+
+      <div className="border-b border-border bg-muted/30">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-3 gap-4 px-4 py-5 text-center">
+          {[
+            { value: stats.suppliers, label: tHome("statsSuppliers") },
+            { value: stats.products, label: tHome("statsProducts") },
+            { value: stats.categories, label: tHome("statsCategories") },
+          ].map((stat) => (
+            <div key={stat.label} className="flex flex-col">
+              <span className="font-heading text-2xl font-bold tabular-nums text-primary">
+                {stat.value.toLocaleString()}
+              </span>
+              <span className="text-xs text-muted-foreground">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {categories.length > 0 && (
         <div className="mx-auto w-full max-w-6xl px-4 pt-5">
