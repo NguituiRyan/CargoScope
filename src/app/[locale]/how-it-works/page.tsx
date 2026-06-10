@@ -3,11 +3,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import {
   ArrowRight,
   BadgeCheck,
+  Building2,
   Calculator,
   ClipboardCheck,
+  Inbox,
   Languages,
   ListPlus,
+  MessagesSquare,
   ShieldCheck,
+  UserPlus,
   Users,
   type LucideIcon,
 } from "lucide-react"
@@ -31,6 +35,7 @@ export default async function HowItWorksPage({
   const t = await getTranslations("howItWorks")
 
   const buyerSteps: { icon: LucideIcon; title: string; body: string }[] = [
+    { icon: UserPlus, title: t("stepAccountTitle"), body: t("stepAccountBody") },
     { icon: ShieldCheck, title: t("step1Title"), body: t("step1Body") },
     { icon: Calculator, title: t("step2Title"), body: t("step2Body") },
     { icon: Languages, title: t("step3Title"), body: t("step3Body") },
@@ -38,6 +43,11 @@ export default async function HowItWorksPage({
   ]
 
   const supplierSteps: { icon: LucideIcon; title: string; body: string }[] = [
+    {
+      icon: Building2,
+      title: t("supplierStepRegisterTitle"),
+      body: t("supplierStepRegisterBody"),
+    },
     {
       icon: BadgeCheck,
       title: t("supplierStep1Title"),
@@ -47,6 +57,16 @@ export default async function HowItWorksPage({
       icon: ListPlus,
       title: t("supplierStep2Title"),
       body: t("supplierStep2Body"),
+    },
+    {
+      icon: Inbox,
+      title: t("supplierStepRfqTitle"),
+      body: t("supplierStepRfqBody"),
+    },
+    {
+      icon: MessagesSquare,
+      title: t("supplierStepChatTitle"),
+      body: t("supplierStepChatBody"),
     },
     {
       icon: Users,
