@@ -6,6 +6,7 @@ import { ArrowLeft, CalendarClock, MapPin } from "lucide-react"
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { AcceptQuoteButton } from "@/components/rfq/accept-quote-button"
 import { DeleteRfqButton } from "@/components/rfq/delete-rfq-button"
+import { QuoteComparison } from "@/components/rfq/quote-comparison"
 import { QuoteStatusBadge, RfqStatusBadge } from "@/components/rfq/status-badge"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -147,6 +148,21 @@ export default async function BuyerRfqDetailPage({
 
         {rfq.status === "closed" ? (
           <p className="text-sm text-muted-foreground">{t("closedNote")}</p>
+        ) : null}
+
+        {rfq.quotes.length >= 2 ? (
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              {t("compareTitle")}
+            </h3>
+            <QuoteComparison
+              quotes={rfq.quotes}
+              rfqId={rfq.id}
+              unit={rfq.unit}
+              closed={rfq.status === "closed"}
+              locale={locale}
+            />
+          </div>
         ) : null}
 
         {rfq.quotes.length === 0 ? (
