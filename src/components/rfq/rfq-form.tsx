@@ -5,8 +5,13 @@ import { useFormStatus } from "react-dom"
 import { Loader2, Send } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { createRfqAction, type RfqActionState } from "@/lib/rfq/actions"
+import {
+  createRfqAction,
+  updateRfqAction,
+  type RfqActionState,
+} from "@/lib/rfq/actions"
 import type { CategoryOption } from "@/lib/products/queries"
+import type { RfqEditValues } from "@/lib/rfq/queries"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -32,19 +37,24 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
 export function RfqForm({
   locale,
   categories,
+  rfq,
 }: {
   locale: string
   categories: CategoryOption[]
+  /** When present the form edits this RFQ instead of creating a new one. */
+  rfq?: RfqEditValues
 }) {
   const t = useTranslations("rfq")
+  const editing = Boolean(rfq)
   const [state, formAction] = useActionState<RfqActionState, FormData>(
-    createRfqAction,
+    editing ? updateRfqAction : createRfqAction,
     {}
   )
 
   return (
     <form action={formAction} className="flex flex-col gap-5">
       <input type="hidden" name="locale" value={locale} />
+      {rfq ? <input type="hidden" name="rfqId" value={rfq.id} /> : null}
 
       <div className="flex flex-col gap-2">
         <Label htmlFor="title">{t("fTitle")}</Label>
@@ -54,6 +64,7 @@ export function RfqForm({
           required
           minLength={3}
           maxLength={160}
+          defaultValue={rfq?.title}
           placeholder={t("fTitlePlaceholder")}
         />
       </div>
@@ -65,6 +76,7 @@ export function RfqForm({
           name="description"
           rows={5}
           maxLength={4000}
+          defaultValue={rfq?.description ?? ""}
           placeholder={t("fDescriptionPlaceholder")}
         />
       </div>
@@ -72,7 +84,11 @@ export function RfqForm({
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <Label htmlFor="categoryId">{t("fCategory")}</Label>
-          <Select id="categoryId" name="categoryId" defaultValue="">
+          <Select
+            id="categoryId"
+            name="categoryId"
+            defaultValue={rfq?.categoryId ?? ""}
+          >
             <option value="">{t("fCategoryNone")}</option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
@@ -83,7 +99,12 @@ export function RfqForm({
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="unit">{t("fUnit")}</Label>
-          <Input id="unit" name="unit" maxLength={24} defaultValue="piece" />
+          <Input
+            id="unit"
+            name="unit"
+            maxLength={24}
+            defaultValue={rfq?.unit ?? "piece"}
+          />
         </div>
       </div>
 
@@ -96,6 +117,7 @@ export function RfqForm({
             type="number"
             inputMode="numeric"
             min={1}
+            defaultValue={rfq?.quantity ?? undefined}
             placeholder="5000"
           />
         </div>
@@ -108,12 +130,13 @@ export function RfqForm({
             inputMode="decimal"
             min={0}
             step="0.01"
+            defaultValue={rfq?.targetUnitPrice ?? undefined}
             placeholder="5.80"
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="currency">{t("fCurrency")}</Label>
-          <Select id="currency" name="currency" defaultValue="USD">
+          <Select id="currency" name="currency" defaultValue={rfq?.currency ?? "USD"}>
             {CURRENCIES.map((c) => (
               <option key={c} value={c}>
                 {c}
@@ -130,7 +153,7 @@ export function RfqForm({
             id="destinationCountry"
             name="destinationCountry"
             maxLength={80}
-            defaultValue="KE"
+            defaultValue={rfq?.destinationCountry ?? "KE"}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -139,12 +162,18 @@ export function RfqForm({
             id="destinationCity"
             name="destinationCity"
             maxLength={120}
+            defaultValue={rfq?.destinationCity ?? ""}
             placeholder="Nairobi"
           />
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="deadline">{t("fDeadline")}</Label>
-          <Input id="deadline" name="deadline" type="date" />
+          <Input
+            id="deadline"
+            name="deadline"
+            type="date"
+            defaultValue={rfq?.deadline ? rfq.deadline.slice(0, 10) : undefined}
+          />
         </div>
       </div>
 
@@ -154,7 +183,10 @@ export function RfqForm({
         </p>
       ) : null}
 
-      <SubmitButton idle={t("createCta")} busy={t("posting")} />
+      <SubmitButton
+        idle={editing ? t("saveCta") : t("createCta")}
+        busy={editing ? t("saving") : t("posting")}
+      />
     </form>
   )
 }

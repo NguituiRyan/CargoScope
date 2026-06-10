@@ -134,6 +134,85 @@ export async function createRfqAction(
   redirect(localePath(locale, `/rfqs/${rfqId}`))
 }
 
+/** Buyer edits one of their RFQs. RLS (is_my_buyer) scopes the update to the owner. */
+export async function updateRfqAction(
+  _prev: RfqActionState,
+  formData: FormData
+): Promise<RfqActionState> {
+  await requireUser()
+  const locale = await getLocale()
+  const rfqId = String(formData.get("rfqId") ?? "").trim()
+  if (!rfqId) return { error: "Missing RFQ reference." }
+
+  const parsed = rfqSchema.safeParse({
+    title: formData.get("title"),
+    description: formData.get("description"),
+    categoryId: formData.get("categoryId"),
+    quantity: formData.get("quantity") || undefined,
+    unit: formData.get("unit") || undefined,
+    targetUnitPrice: formData.get("targetUnitPrice"),
+    currency: formData.get("currency") || undefined,
+    destinationCountry: formData.get("destinationCountry") || undefined,
+    destinationCity: formData.get("destinationCity"),
+    deadline: formData.get("deadline"),
+  })
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? "Please check the form." }
+  }
+  const d = parsed.data
+
+  const supabase = await createClient()
+  const { error } = await supabase
+    .from("rfqs")
+    .update({
+      category_id: d.categoryId,
+      title: d.title,
+      description: d.description,
+      quantity: d.quantity ?? null,
+      unit: d.unit,
+      target_unit_price: d.targetUnitPrice,
+      currency: d.currency,
+      destination_country: d.destinationCountry,
+      destination_city: d.destinationCity,
+      deadline: d.deadline,
+    })
+    .eq("id", rfqId)
+  if (error) {
+    return { error: "Could not update the RFQ. Please try again." }
+  }
+
+  revalidatePath(localePath(locale, "/rfqs"))
+  revalidatePath(localePath(locale, `/rfqs/${rfqId}`))
+  redirect(localePath(locale, `/rfqs/${rfqId}`))
+}
+
+/** Buyer deletes one of their RFQs (cascades quotes). RLS scopes to the owner. */
+export async function deleteRfqAction(formData: FormData): Promise<void> {
+  await requireUser()
+  const locale = await getLocale()
+  const rfqId = String(formData.get("rfqId") ?? "").trim()
+  if (rfqId) {
+    const supabase = await createClient()
+    await supabase.from("rfqs").delete().eq("id", rfqId)
+  }
+  revalidatePath(localePath(locale, "/rfqs"))
+  redirect(localePath(locale, "/rfqs"))
+}
+
+/** Buyer manually closes or reopens their RFQ. RLS scopes to the owner. */
+export async function setRfqStatusAction(formData: FormData): Promise<void> {
+  await requireUser()
+  const locale = await getLocale()
+  const rfqId = String(formData.get("rfqId") ?? "").trim()
+  const status = String(formData.get("status") ?? "").trim()
+  if (rfqId && (status === "open" || status === "closed")) {
+    const supabase = await createClient()
+    await supabase.from("rfqs").update({ status }).eq("id", rfqId)
+  }
+  revalidatePath(localePath(locale, "/rfqs"))
+  revalidatePath(localePath(locale, `/rfqs/${rfqId}`))
+}
+
 /** Manufacturer submits (or updates) their single quote on an open RFQ. */
 export async function submitQuoteAction(
   _prev: RfqActionState,

@@ -229,6 +229,52 @@ export async function getBuyerRfqDetail(
   }
 }
 
+export interface RfqEditValues {
+  id: string
+  title: string
+  description: string | null
+  categoryId: string | null
+  quantity: number | null
+  unit: string
+  targetUnitPrice: string | null
+  currency: string
+  destinationCountry: string | null
+  destinationCity: string | null
+  deadline: string | null
+  status: RfqStatus
+}
+
+/** Raw editable fields of one RFQ owned by the current buyer (for the edit form). */
+export async function getRfqForEdit(
+  id: string,
+  user: SessionUser
+): Promise<RfqEditValues | null> {
+  const { buyerId } = await resolveViewerParties(user.id)
+  if (!buyerId) return null
+
+  const [row] = await db
+    .select({
+      id: rfqs.id,
+      title: rfqs.title,
+      description: rfqs.description,
+      categoryId: rfqs.categoryId,
+      quantity: rfqs.quantity,
+      unit: rfqs.unit,
+      targetUnitPrice: rfqs.targetUnitPrice,
+      currency: rfqs.currency,
+      destinationCountry: rfqs.destinationCountry,
+      destinationCity: rfqs.destinationCity,
+      deadline: rfqs.deadline,
+      status: rfqs.status,
+    })
+    .from(rfqs)
+    .where(and(eq(rfqs.id, id), eq(rfqs.buyerId, buyerId)))
+    .limit(1)
+  if (!row) return null
+
+  return { ...row, deadline: toIso(row.deadline) }
+}
+
 /** Open / quoting RFQs any manufacturer may quote, with this seller's status. */
 export async function listOpenRfqs(user: SessionUser): Promise<OpenRfqListItem[]> {
   const { manufacturerId } = await resolveViewerParties(user.id)

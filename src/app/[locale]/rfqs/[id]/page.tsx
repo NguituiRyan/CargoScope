@@ -5,13 +5,17 @@ import { ArrowLeft, CalendarClock, MapPin } from "lucide-react"
 
 import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { AcceptQuoteButton } from "@/components/rfq/accept-quote-button"
+import { DeleteRfqButton } from "@/components/rfq/delete-rfq-button"
 import { QuoteStatusBadge, RfqStatusBadge } from "@/components/rfq/status-badge"
+import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import { requireRole } from "@/lib/auth/session"
 import { formatMoney } from "@/lib/currency/shared"
 import { formatDateOnly } from "@/lib/datetime"
+import { setRfqStatusAction } from "@/lib/rfq/actions"
 import { getBuyerRfqDetail } from "@/lib/rfq/queries"
+import { cn } from "@/lib/utils"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("rfq")
@@ -30,6 +34,7 @@ export default async function BuyerRfqDetailPage({
   if (!rfq) notFound()
 
   const t = await getTranslations("rfq")
+  const hasAcceptedQuote = rfq.quotes.some((q) => q.status === "accepted")
   const meta: { label: string; value: string }[] = []
   if (rfq.categoryName) meta.push({ label: t("category"), value: rfq.categoryName })
   if (rfq.quantity !== null)
@@ -76,6 +81,41 @@ export default async function BuyerRfqDetailPage({
           </span>
           <span>{t("postedOn", { date: formatDateOnly(rfq.createdAt, locale) })}</span>
         </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {rfq.status !== "closed" ? (
+          <Link
+            href={`/rfqs/${rfq.id}/edit`}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+          >
+            {t("manageEdit")}
+          </Link>
+        ) : null}
+        {rfq.status !== "closed" ? (
+          <form action={setRfqStatusAction}>
+            <input type="hidden" name="rfqId" value={rfq.id} />
+            <input type="hidden" name="status" value="closed" />
+            <button
+              type="submit"
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              {t("manageClose")}
+            </button>
+          </form>
+        ) : !hasAcceptedQuote ? (
+          <form action={setRfqStatusAction}>
+            <input type="hidden" name="rfqId" value={rfq.id} />
+            <input type="hidden" name="status" value="open" />
+            <button
+              type="submit"
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+            >
+              {t("manageReopen")}
+            </button>
+          </form>
+        ) : null}
+        <DeleteRfqButton rfqId={rfq.id} />
       </div>
 
       {(meta.length > 0 || rfq.description) && (
