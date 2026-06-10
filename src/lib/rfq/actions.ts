@@ -14,6 +14,7 @@ import {
   parseRfqAttachments,
   storeRfqAttachments,
 } from "@/lib/rfq/attachments"
+import { getRfqInviteState } from "@/lib/rfq/queries"
 import { tierLimits } from "@/lib/subscription/tiers"
 import { createClient } from "@/lib/supabase/server"
 
@@ -140,6 +141,21 @@ export async function createRfqAction(
   )
   if (stored.length > 0) {
     await supabase.from("rfqs").update({ attachments: stored }).eq("id", rfqId)
+  }
+
+  // Optional supplier invites — when present, only these suppliers see the RFQ.
+  const invitedIds = [
+    ...new Set(
+      formData
+        .getAll("inviteSuppliers")
+        .map((v) => String(v).trim())
+        .filter((v) => /^[0-9a-f-]{36}$/i.test(v))
+    ),
+  ]
+  if (invitedIds.length > 0) {
+    await supabase
+      .from("rfq_invites")
+      .insert(invitedIds.map((mid) => ({ rfq_id: rfqId, manufacturer_id: mid })))
   }
 
   after(() => sendRfqConfirmation(user.email, { rfqTitle: d.title, rfqId }))
@@ -293,6 +309,12 @@ export async function submitQuoteAction(
     .eq("id", d.rfqId)
     .maybeSingle()
   if (!rfq) return { error: "This RFQ is no longer open for quotes." }
+
+  // Invite-only RFQs accept quotes from invited suppliers only.
+  const invite = await getRfqInviteState(d.rfqId, parties.manufacturerId)
+  if (invite.inviteOnly && !invite.invited) {
+    return { error: "This RFQ is open to invited suppliers only." }
+  }
 
   const row = {
     rfq_id: d.rfqId,

@@ -7,6 +7,7 @@ import {
   numeric,
   pgEnum,
   pgTable,
+  primaryKey,
   text,
   timestamp,
   uuid,
@@ -345,6 +346,25 @@ export const quotes = pgTable(
   (t) => [
     index("quotes_rfq_idx").on(t.rfqId),
     index("quotes_manufacturer_idx").on(t.manufacturerId),
+  ]
+)
+
+export const rfqInvites = pgTable(
+  "rfq_invites",
+  {
+    rfqId: uuid("rfq_id")
+      .notNull()
+      .references(() => rfqs.id, { onDelete: "cascade" }),
+    manufacturerId: uuid("manufacturer_id")
+      .notNull()
+      .references(() => manufacturers.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.rfqId, t.manufacturerId] }),
+    index("rfq_invites_manufacturer_idx").on(t.manufacturerId),
   ]
 )
 

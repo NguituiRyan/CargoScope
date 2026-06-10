@@ -13,6 +13,7 @@ import {
 import { Link } from "@/i18n/navigation"
 import { requireRole } from "@/lib/auth/session"
 import { getCategoryOptions } from "@/lib/products/queries"
+import { listInvitableSuppliers } from "@/lib/rfq/queries"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("rfq")
@@ -28,7 +29,10 @@ export default async function NewRfqPage({
   setRequestLocale(locale)
   await requireRole("buyer")
   const t = await getTranslations("rfq")
-  const categories = await getCategoryOptions()
+  const [categories, suppliers] = await Promise.all([
+    getCategoryOptions(),
+    listInvitableSuppliers(),
+  ])
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-5 px-4 py-8">
@@ -45,7 +49,7 @@ export default async function NewRfqPage({
           <CardDescription>{t("newSubtitle")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <RfqForm locale={locale} categories={categories} />
+          <RfqForm locale={locale} categories={categories} suppliers={suppliers} />
         </CardContent>
       </Card>
     </div>

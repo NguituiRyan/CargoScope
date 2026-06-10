@@ -5,7 +5,14 @@ import { getLocale } from "next-intl/server"
 
 import type { SessionUser } from "@/lib/auth/session"
 import { db } from "@/lib/db"
-import { buyers, categories, manufacturers, quotes, rfqs } from "@/lib/db/schema"
+import {
+  buyers,
+  categories,
+  manufacturers,
+  quotes,
+  rfqInvites,
+  rfqs,
+} from "@/lib/db/schema"
 import { resolveViewerParties } from "@/lib/messaging/queries"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
 import { parseRfqAttachments, type RfqAttachment } from "@/lib/rfq/attachments"
@@ -62,6 +69,7 @@ export interface QuoteItem {
 export interface BuyerRfqDetail extends RfqListItem {
   description: string | null
   attachments: RfqAttachment[]
+  invitedSuppliers: { id: string; name: string }[]
   quotes: QuoteItem[]
 }
 
@@ -226,12 +234,59 @@ export async function getBuyerRfqDetail(
     createdAt: toIso(q.createdAt) ?? "",
   }))
 
+  const inviteRows = await db
+    .select({ id: manufacturers.id, name: manufacturers.companyName })
+    .from(rfqInvites)
+    .innerJoin(manufacturers, eq(manufacturers.id, rfqInvites.manufacturerId))
+    .where(eq(rfqInvites.rfqId, id))
+
   return {
     ...mapListItem(row, locale, Number(row.quoteCount) || 0),
     description: row.description,
     attachments: parseRfqAttachments(row.attachments),
+    invitedSuppliers: inviteRows,
     quotes: quoteItems,
   }
+}
+
+/**
+ * Whether an RFQ is invite-only, and whether this manufacturer is invited.
+ * Uses the trusted connection because RLS lets a manufacturer see only their
+ * own invite row — an empty RLS read can't distinguish "open to all" from
+ * "invite-only but not invited".
+ */
+export async function getRfqInviteState(
+  rfqId: string,
+  manufacturerId: string
+): Promise<{ inviteOnly: boolean; invited: boolean }> {
+  const rows = await db
+    .select({ manufacturerId: rfqInvites.manufacturerId })
+    .from(rfqInvites)
+    .where(eq(rfqInvites.rfqId, rfqId))
+  return {
+    inviteOnly: rows.length > 0,
+    invited: rows.some((r) => r.manufacturerId === manufacturerId),
+  }
+}
+
+/** Published suppliers a buyer may invite to an RFQ (for the invite picker). */
+export async function listInvitableSuppliers(): Promise<
+  { id: string; name: string }[]
+> {
+  return db
+    .select({ id: manufacturers.id, name: manufacturers.companyName })
+    .from(manufacturers)
+    .where(
+      and(
+        eq(manufacturers.isPublished, true),
+        inArray(manufacturers.verificationStatus, [
+          "identity",
+          "verified",
+          "premium",
+        ])
+      )
+    )
+    .orderBy(manufacturers.companyName)
 }
 
 export interface RfqEditValues {
@@ -299,7 +354,20 @@ export async function listOpenRfqs(user: SessionUser): Promise<OpenRfqListItem[]
     })
     .from(rfqs)
     .leftJoin(categories, eq(categories.id, rfqs.categoryId))
-    .where(inArray(rfqs.status, ["open", "quoting"]))
+    .where(
+      and(
+        inArray(rfqs.status, ["open", "quoting"]),
+        // Broadcast RFQs (no invites) or ones this supplier was invited to.
+        sql`(
+          not exists (select 1 from ${rfqInvites} where ${rfqInvites.rfqId} = ${rfqs.id})
+          or exists (
+            select 1 from ${rfqInvites}
+            where ${rfqInvites.rfqId} = ${rfqs.id}
+              and ${rfqInvites.manufacturerId} = ${manufacturerId}::uuid
+          )
+        )`
+      )
+    )
     .orderBy(desc(rfqs.createdAt))
 
   return rows.map((r) => ({
@@ -326,7 +394,20 @@ export async function getRfqForQuoting(
     .from(rfqs)
     .leftJoin(categories, eq(categories.id, rfqs.categoryId))
     .leftJoin(buyers, eq(buyers.id, rfqs.buyerId))
-    .where(and(eq(rfqs.id, id), inArray(rfqs.status, ["open", "quoting"])))
+    .where(
+      and(
+        eq(rfqs.id, id),
+        inArray(rfqs.status, ["open", "quoting"]),
+        sql`(
+          not exists (select 1 from ${rfqInvites} where ${rfqInvites.rfqId} = ${rfqs.id})
+          or exists (
+            select 1 from ${rfqInvites}
+            where ${rfqInvites.rfqId} = ${rfqs.id}
+              and ${rfqInvites.manufacturerId} = ${manufacturerId}::uuid
+          )
+        )`
+      )
+    )
     .limit(1)
   if (!row) return null
 

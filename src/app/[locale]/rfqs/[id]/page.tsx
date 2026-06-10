@@ -144,6 +144,20 @@ export default async function BuyerRfqDetailPage({
 
       <RfqAttachments attachments={rfq.attachments} />
 
+      {rfq.invitedSuppliers.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <span className="text-muted-foreground">{t("invitedTitle")}</span>
+          {rfq.invitedSuppliers.map((s) => (
+            <span
+              key={s.id}
+              className="rounded-full bg-muted px-2.5 py-0.5 text-muted-foreground"
+            >
+              {s.name}
+            </span>
+          ))}
+        </div>
+      ) : null}
+
       <div className="flex flex-col gap-3">
         <h2 className="font-heading text-lg font-semibold">
           {t("detailQuotesTitle")} · {t("quotes", { count: rfq.quotes.length })}

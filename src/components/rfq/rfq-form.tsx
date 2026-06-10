@@ -40,10 +40,13 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
 export function RfqForm({
   locale,
   categories,
+  suppliers = [],
   rfq,
 }: {
   locale: string
   categories: CategoryOption[]
+  /** Verified suppliers offered in the optional invite picker (create only). */
+  suppliers?: { id: string; name: string }[]
   /** When present the form edits this RFQ instead of creating a new one. */
   rfq?: RfqEditValues
 }) {
@@ -121,6 +124,26 @@ export function RfqForm({
         />
         <p className="text-xs text-muted-foreground">{t("fAttachmentsHint")}</p>
       </div>
+
+      {!editing && suppliers.length > 0 ? (
+        <div className="flex flex-col gap-2">
+          <Label>{t("fInvite")}</Label>
+          <div className="flex max-h-44 flex-col gap-2 overflow-y-auto rounded-lg border border-border p-3">
+            {suppliers.map((s) => (
+              <label key={s.id} className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  name="inviteSuppliers"
+                  value={s.id}
+                  className="size-4 shrink-0 accent-primary"
+                />
+                {s.name}
+              </label>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground">{t("fInviteHint")}</p>
+        </div>
+      ) : null}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
