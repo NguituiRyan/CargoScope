@@ -9,6 +9,7 @@ import { QueryProvider } from "@/components/query-provider"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { routing } from "@/i18n/routing"
+import { SITE_URL } from "@/lib/site"
 import "../globals.css"
 
 const sans = Be_Vietnam_Pro({
@@ -28,13 +29,28 @@ const display = Outfit({
   subsets: ["latin"],
 })
 
+const SITE_DESCRIPTION =
+  "Trust-first B2B sourcing connecting verified Chinese manufacturers with African wholesale buyers."
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Shop Budyy",
     template: "%s · Shop Budyy",
   },
-  description:
-    "Trust-first B2B sourcing connecting verified Chinese manufacturers with African wholesale buyers.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Shop Budyy",
+    title: "Shop Budyy",
+    description: SITE_DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shop Budyy",
+    description: SITE_DESCRIPTION,
+  },
 }
 
 export function generateStaticParams() {
