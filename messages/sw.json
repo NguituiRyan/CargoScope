@@ -560,6 +560,12 @@
     "contact": "Wasiliana",
     "terms": "Masharti",
     "privacy": "Faragha",
+    "trust": "Uaminifu",
+    "buyerProtection": "Ulinzi wa Mnunuzi",
+    "supplierVerification": "Mchakato wa Uthibitisho",
+    "supplierStandards": "Viwango vya Wasambazaji",
+    "disputes": "Utatuzi wa Migogoro",
+    "refunds": "Sera ya Marejesho",
     "rights": "Haki zote zimehifadhiwa."
   },
   "about": {
@@ -597,5 +603,58 @@
     "p2": "Kuendesha soko — kuonyesha orodha, kuwezesha mazungumzo yenye tafsiri kati ya mnunuzi na msambazaji, kukagua wasambazaji, na kuboresha huduma. Hatuuzi data yako binafsi.",
     "p3Title": "Chaguo zako",
     "p3": "Unaweza kusasisha wasifu wako au kuomba kufutwa kwa akaunti wakati wowote kwa kuwasiliana nasi."
+  },
+  "buyerProtection": {
+    "title": "Ulinzi wa Mnunuzi",
+    "updated": "Muhtasari · ilisasishwa Juni 2026",
+    "draft": "Huu ni muhtasari wa lugha rahisi wa jinsi tunavyowalinda wanunuzi tunapokamilisha sera kamili. Wasiliana nasi kwa maswali yoyote.",
+    "p1Title": "Nunua kutoka kwa wasambazaji walioidhinishwa",
+    "p1": "Kila msambazaji hukaguliwa kabla ya kuanza, na daraja la uthibitisho (Kitambulisho kimethibitishwa, Aliyethibitishwa, au Premium) huonyeshwa kwenye wasifu wake ili ujue unayeshughulika naye.",
+    "p2Title": "Zungumza kabla ya kulipa",
+    "p2": "Wanunuzi hufikia wasambazaji kupitia gumzo la ndani pekee lenye tafsiri iliyojengwa ndani. Weka mazungumzo, sampuli na makubaliano kwenye gumzo ili kuwe na rekodi wazi ya kile kilichoahidiwa.",
+    "p3Title": "Iwapo kitu kitaharibika",
+    "p3": "Malipo na usafirishaji hupangwa moja kwa moja na msambazaji, kwa hivyo thibitisha masharti kila wakati kabla ya kulipa. Iwapo msambazaji aliyethibitishwa atajidanganya, wasiliana nasi — tunachunguza na tunaweza kuondoa wasambazaji wanaovunja viwango vyetu."
+  },
+  "supplierVerification": {
+    "title": "Mchakato wa Uthibitisho wa Msambazaji",
+    "updated": "Jinsi tunavyowakagua wasambazaji",
+    "p1Title": "Kitambulisho kimethibitishwa",
+    "p1": "Wasambazaji wapya huwasilisha hati ya biashara au kitambulisho, inayokaguliwa na timu yetu kabla ya akaunti kuchapisha bidhaa. Hii huthibitisha kuwa kuna biashara halisi nyuma ya duka.",
+    "p2Title": "Msambazaji Aliyethibitishwa",
+    "p2": "Wasambazaji wanaopita ukaguzi wa hati na kudumisha wasifu kamili na sahihi hupata beji ya Aliyethibitishwa inayoonyeshwa kwenye duka na orodha za bidhaa zao.",
+    "p3Title": "Premium",
+    "p3": "Wasambazaji waliojizatiti wenye rekodi nzuri wanaweza kufikia hadhi ya Premium, inayowaweka juu zaidi kwenye katalogi na kwenye rafu ya Chaguo Bora."
+  },
+  "supplierStandards": {
+    "title": "Viwango na Mahitaji ya Wasambazaji",
+    "updated": "Tunachotarajia kutoka kwa wasambazaji",
+    "p1Title": "Orodha sahihi",
+    "p1": "Bidhaa, bei, MOQ, muda wa kuandaa na vyeti lazima viwe vya kweli na vilivyosasishwa. Orodha zinazopotosha zinaweza kusababisha kuondolewa.",
+    "p2Title": "Kujibu kwa wakati",
+    "p2": "Jibu ujumbe wa wanunuzi na RFQ haraka. Kiwango chako cha kujibu kinaonekana kwa wanunuzi na huathiri kiasi cha imani na biashara unayopata.",
+    "p3Title": "Ushughulikiaji wa haki",
+    "p3": "Heshimu bei na masharti unayonukuu, linda taarifa za mnunuzi zilizoshirikiwa kwenye gumzo, na tatua masuala kwa nia njema. Ukiukaji wa mara kwa mara unaweza kusababisha kusimamishwa."
+  },
+  "disputes": {
+    "title": "Utatuzi wa Migogoro",
+    "updated": "Muhtasari · ilisasishwa Juni 2026",
+    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha sera kamili. Wasiliana nasi ikiwa unahitaji msaada na mgogoro.",
+    "p1Title": "Anza kwenye gumzo",
+    "p1": "Masuala mengi hutatuliwa haraka zaidi moja kwa moja kati ya mnunuzi na msambazaji kwenye gumzo la ndani, ambapo mazungumzo yote na faili zilizoshirikiwa zimo kwenye rekodi.",
+    "p2Title": "Tupelekee suala",
+    "p2": "Ikiwa hamuwezi kufikia suluhisho, wasiliana na timu yetu na maelezo ya mazungumzo. Tunakagua rekodi ya gumzo na hadhi ya uthibitisho ya msambazaji ili kusaidia kupatanisha.",
+    "p3Title": "Jukumu letu",
+    "p3": "Shop Budyy huunganisha wanunuzi na wasambazaji na inaweza kuchukua hatua dhidi ya wanachama wanaovunja viwango vyetu, lakini malipo na uwasilishaji hupangwa moja kwa moja kati ya pande hizo, kwa hivyo hatuwezi kuhakikisha matokeo ya miamala ya nje ya jukwaa."
+  },
+  "refunds": {
+    "title": "Sera ya Marejesho",
+    "updated": "Muhtasari · ilisasishwa Juni 2026",
+    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha sera kamili. Wasiliana nasi kwa maswali yoyote.",
+    "p1Title": "Maagizo ni kati ya mnunuzi na msambazaji",
+    "p1": "Shop Budyy ni jukwaa la kutafuta bidhaa na mawasiliano. Ununuzi, malipo na usafirishaji hupangwa moja kwa moja na msambazaji, kwa hivyo marejesho hufuata masharti unayokubaliana naye.",
+    "p2Title": "Kubaliana masharti mapema",
+    "p2": "Kabla ya kulipa, thibitisha masharti ya marejesho, sampuli na kurudisha kwenye gumzo ili pande zote mbili ziwe na rekodi wazi. Wasambazaji waliothibitishwa wanatarajiwa kuheshimu masharti wanayonukuu.",
+    "p3Title": "Unahitaji msaada?",
+    "p3": "Ikiwa msambazaji hataheshimu masharti yaliyokubaliwa, wasiliana nasi na maelezo ya gumzo. Tunaweza kuchunguza na kuchukua hatua dhidi ya wasambazaji wanaovunja viwango vyetu, ingawa sisi wenyewe hatushughulikii malipo."
   }
 }

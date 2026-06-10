@@ -560,6 +560,12 @@
     "contact": "Contact",
     "terms": "Terms",
     "privacy": "Privacy",
+    "trust": "Trust",
+    "buyerProtection": "Buyer Protection",
+    "supplierVerification": "Verification Process",
+    "supplierStandards": "Supplier Standards",
+    "disputes": "Dispute Resolution",
+    "refunds": "Refund Policy",
     "rights": "All rights reserved."
   },
   "about": {
@@ -597,5 +603,58 @@
     "p2": "To run the marketplace — showing listings, enabling buyer–supplier chat with translation, vetting suppliers, and improving the service. We don't sell your personal data.",
     "p3Title": "Your choices",
     "p3": "You can update your profile or request account deletion at any time by contacting us."
+  },
+  "buyerProtection": {
+    "title": "Buyer Protection",
+    "updated": "Summary · last updated June 2026",
+    "draft": "This is a plain-language summary of how we protect buyers while we finalize the full policy. Contact us with any questions.",
+    "p1Title": "Source from verified suppliers",
+    "p1": "Every supplier is reviewed before going live, with a verification tier (Identity-checked, Verified, or Premium) shown on their profile so you know who you are dealing with.",
+    "p2Title": "Talk before you pay",
+    "p2": "Buyers reach suppliers only through in-app chat with built-in translation. Keep negotiations, samples and agreements in the chat so there is a clear record of what was promised.",
+    "p3Title": "If something goes wrong",
+    "p3": "Payment and shipping are arranged directly with the supplier, so always confirm terms before paying. If a verified supplier misrepresents themselves, contact us — we investigate and can remove suppliers who breach our standards."
+  },
+  "supplierVerification": {
+    "title": "Supplier Verification Process",
+    "updated": "How we vet suppliers",
+    "p1Title": "Identity-checked",
+    "p1": "New suppliers submit a business or identity document, reviewed by our team before the account can publish products. This confirms a real business is behind the storefront.",
+    "p2Title": "Verified Supplier",
+    "p2": "Suppliers who pass document review and keep a complete, accurate profile earn the Verified badge shown across their storefront and product listings.",
+    "p3Title": "Premium",
+    "p3": "Established suppliers with a strong track record can reach Premium status, which surfaces them higher in the catalogue and on the Top Picks rail."
+  },
+  "supplierStandards": {
+    "title": "Supplier Standards & Requirements",
+    "updated": "What we expect from suppliers",
+    "p1Title": "Accurate listings",
+    "p1": "Products, prices, MOQs, lead times and certifications must be truthful and kept up to date. Misleading listings can lead to removal.",
+    "p2Title": "Responsiveness",
+    "p2": "Reply to buyer messages and RFQs promptly. Your response rate is visible to buyers and affects how much trust and business you earn.",
+    "p3Title": "Fair dealing",
+    "p3": "Honour the prices and terms you quote, protect buyer information shared in chat, and resolve issues in good faith. Repeated breaches can result in suspension."
+  },
+  "disputes": {
+    "title": "Dispute Resolution",
+    "updated": "Summary · last updated June 2026",
+    "draft": "This is a plain-language summary while we finalize the full policy. Contact us if you need help with a dispute.",
+    "p1Title": "Start in the chat",
+    "p1": "Most issues are resolved fastest directly between buyer and supplier in the in-app chat, where the full conversation and any shared files are on record.",
+    "p2Title": "Escalate to us",
+    "p2": "If you cannot reach a resolution, contact our team with the conversation details. We review the chat record and the supplier's verification status to help mediate.",
+    "p3Title": "Our role",
+    "p3": "Shop Budyy connects buyers and suppliers and can act against members who breach our standards, but payment and delivery are arranged directly between the parties, so we cannot guarantee the outcome of off-platform transactions."
+  },
+  "refunds": {
+    "title": "Refund Policy",
+    "updated": "Summary · last updated June 2026",
+    "draft": "This is a plain-language summary while we finalize the full policy. Contact us with any questions.",
+    "p1Title": "Orders are between buyer and supplier",
+    "p1": "Shop Budyy is a sourcing and communication platform. Purchases, payments and shipping are arranged directly with the supplier, so refunds follow the terms you agree with them.",
+    "p2Title": "Agree terms up front",
+    "p2": "Before paying, confirm refund, sample and return terms in the chat so both sides have a clear record. Verified suppliers are expected to honour the terms they quote.",
+    "p3Title": "Need help?",
+    "p3": "If a supplier will not honour agreed terms, contact us with the chat details. We can investigate and act against suppliers who breach our standards, even though we do not process payments ourselves."
   }
 }

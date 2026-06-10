@@ -32,8 +32,18 @@ export async function SiteFooter() {
       ],
     },
     {
+      title: t("trust"),
+      links: [
+        { href: "/buyer-protection", label: t("buyerProtection") },
+        { href: "/supplier-verification", label: t("supplierVerification") },
+        { href: "/supplier-standards", label: t("supplierStandards") },
+      ],
+    },
+    {
       title: t("legal"),
       links: [
+        { href: "/disputes", label: t("disputes") },
+        { href: "/refunds", label: t("refunds") },
         { href: "/terms", label: t("terms") },
         { href: "/privacy", label: t("privacy") },
       ],
@@ -42,7 +52,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="mt-auto border-t border-border bg-muted/30">
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-8 px-4 py-10 sm:grid-cols-4">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-8 px-4 py-10 sm:grid-cols-5">
         <div className="col-span-2 flex flex-col gap-2 sm:col-span-1">
           <Link
             href="/"
