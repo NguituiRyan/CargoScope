@@ -11,12 +11,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   AIR_CONSOLIDATED_USD_PER_KG,
-  DEFAULT_UNIT_VOLUME_CBM,
-  DEFAULT_UNIT_WEIGHT_KG,
+  packagingPerUnit,
   SEA_CONSOLIDATED_KES_PER_CBM,
   type ShippingChannel,
   type ShippingMode,
   unitPriceForQuantity,
+  VOLUMETRIC_KG_PER_CBM,
 } from "@/lib/landed-cost/calculate"
 import { formatMoney } from "@/lib/format"
 
@@ -29,6 +29,9 @@ type Props = {
   manufacturerId: string
   productId: string
   productTitle: string
+  /** Supplier-declared packaging per unit; estimated via courier norms when null. */
+  unitWeightKg: number | null
+  unitVolumeCbm: number | null
   fx: { rate: number; datedAt: string; source: "live" | "fallback" }
 }
 
@@ -45,6 +48,8 @@ export function LandedCostCalculator({
   manufacturerId,
   productId,
   productTitle,
+  unitWeightKg,
+  unitVolumeCbm,
   fx,
 }: Props) {
   const t = useTranslations("landedCost")
@@ -59,22 +64,28 @@ export function LandedCostCalculator({
   }, [moq, tiers])
 
   const [qtyStr, setQtyStr] = useState(String(initialQty))
-  const [weightStr, setWeightStr] = useState(String(DEFAULT_UNIT_WEIGHT_KG))
-  const [volumeStr, setVolumeStr] = useState(String(DEFAULT_UNIT_VOLUME_CBM))
   const [mode, setMode] = useState<ShippingMode>("sea")
   const [channel, setChannel] = useState<ShippingChannel>("consolidated")
   const [container, setContainer] = useState<"lcl" | "fcl">("lcl")
 
   const qty = Math.max(0, Math.floor(Number(qtyStr) || 0))
-  const weightKg = Math.max(0, Number(weightStr) || 0)
-  const volumeCbm = Math.max(0, Number(volumeStr) || 0)
+
+  // Packaging comes from the supplier (or courier-standard estimates) — never
+  // entered by the buyer. Air charges the greater of actual vs volumetric kg.
+  const pack = packagingPerUnit(unitWeightKg, unitVolumeCbm)
+  const chargeableKgPerUnit = Math.max(
+    pack.weightKg,
+    pack.volumeCbm * VOLUMETRIC_KG_PER_CBM
+  )
 
   const unitPriceUsd = unitPriceForQuantity(tiers, qty)
   const goodsKes = Math.round(unitPriceUsd * qty * fx.rate)
   const shippingKes =
     mode === "air"
-      ? Math.round(qty * weightKg * AIR_CONSOLIDATED_USD_PER_KG * fx.rate)
-      : Math.round(qty * volumeCbm * SEA_CONSOLIDATED_KES_PER_CBM)
+      ? Math.round(
+          qty * chargeableKgPerUnit * AIR_CONSOLIDATED_USD_PER_KG * fx.rate
+        )
+      : Math.round(qty * pack.volumeCbm * SEA_CONSOLIDATED_KES_PER_CBM)
   const totalKes = goodsKes + shippingKes
   const perUnitKes = qty > 0 ? Math.round(totalKes / qty) : 0
 
@@ -148,37 +159,7 @@ export function LandedCostCalculator({
             onChange={(e) => setQtyStr(e.target.value)}
           />
         </div>
-        {consolidated ? (
-          mode === "air" ? (
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="lc-weight">{t("unitWeight")}</Label>
-              <Input
-                id="lc-weight"
-                type="number"
-                min={0}
-                step={0.1}
-                inputMode="decimal"
-                value={weightStr}
-                onChange={(e) => setWeightStr(e.target.value)}
-              />
-              <p className="text-xs text-muted-foreground">{t("weightHint")}</p>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-1.5">
-              <Label htmlFor="lc-volume">{t("unitVolume")}</Label>
-              <Input
-                id="lc-volume"
-                type="number"
-                min={0}
-                step={0.001}
-                inputMode="decimal"
-                value={volumeStr}
-                onChange={(e) => setVolumeStr(e.target.value)}
-              />
-              <p className="text-xs text-muted-foreground">{t("volumeHint")}</p>
-            </div>
-          )
-        ) : mode === "sea" ? (
+        {!consolidated && mode === "sea" ? (
           <div className="flex flex-col gap-1.5">
             <Label>{t("containerType")}</Label>
             <div className="flex gap-2">
@@ -208,6 +189,20 @@ export function LandedCostCalculator({
           <>
             <p className="text-xs text-muted-foreground">
               {mode === "air" ? t("consolidatedAirNote") : t("consolidatedSeaNote")}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {t(
+                pack.supplierDeclared ? "packagingSupplier" : "packagingEstimate",
+                {
+                  kg: pack.weightKg.toLocaleString("en-US", {
+                    maximumFractionDigits: 2,
+                  }),
+                  cbm: pack.volumeCbm.toLocaleString("en-US", {
+                    maximumFractionDigits: 4,
+                  }),
+                  unit,
+                }
+              )}
             </p>
             <dl className="flex flex-col divide-y divide-border text-sm">
               <div className="flex justify-between gap-4 py-2">

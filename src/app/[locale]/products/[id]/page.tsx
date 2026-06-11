@@ -342,6 +342,8 @@ export default async function ProductDetailPage({
                   manufacturerId={m.id}
                   productId={product.id}
                   productTitle={product.title}
+                  unitWeightKg={product.unitWeightKg}
+                  unitVolumeCbm={product.unitVolumeCbm}
                   fx={fx}
                 />
               ) : (

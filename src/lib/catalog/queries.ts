@@ -89,6 +89,8 @@ export interface PublicProductDetail {
   customizable: boolean
   sampleAvailable: boolean
   samplePrice: string | null
+  unitWeightKg: number | null
+  unitVolumeCbm: number | null
   primaryImageUrl: string | null
   categoryId: string | null
   priceTiers: PublicPriceTier[]
@@ -109,7 +111,7 @@ const CARD_SELECT =
   "id, title, primary_image_url, moq, unit, lead_time_days, origin_country, created_at, manufacturers!inner(company_name, slug, country, verification_status, is_published), product_price_tiers(unit_price, currency)"
 
 const DETAIL_SELECT =
-  "id, title, description, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, category_id, attributes, manufacturers!inner(id, company_name, slug, country, city, description, year_established, certifications, main_categories, verification_status, response_rate, member_since, logo_url, banner_url, is_published), product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
+  "id, title, description, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, unit_weight_kg, unit_volume_cbm, primary_image_url, category_id, attributes, manufacturers!inner(id, company_name, slug, country, city, description, year_established, certifications, main_categories, verification_status, response_rate, member_since, logo_url, banner_url, is_published), product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
 
 const MANUFACTURER_CARD_SELECT =
   "id, company_name, slug, country, city, verification_status, year_established, member_since, response_rate, certifications, main_categories, logo_url, banner_url, description"
@@ -381,6 +383,8 @@ type DetailRow = {
   customizable: boolean
   sample_available: boolean
   sample_price: string | null
+  unit_weight_kg: string | null
+  unit_volume_cbm: string | null
   primary_image_url: string | null
   category_id: string | null
   attributes: unknown
@@ -438,6 +442,8 @@ export async function getPublicProduct(
     customizable: Boolean(row.customizable),
     sampleAvailable: Boolean(row.sample_available),
     samplePrice: row.sample_price,
+    unitWeightKg: row.unit_weight_kg ? Number(row.unit_weight_kg) : null,
+    unitVolumeCbm: row.unit_volume_cbm ? Number(row.unit_volume_cbm) : null,
     primaryImageUrl: row.primary_image_url,
     categoryId: row.category_id,
     priceTiers,

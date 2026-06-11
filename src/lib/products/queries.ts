@@ -47,6 +47,8 @@ export interface ProductDetail {
   customizable: boolean
   sampleAvailable: boolean
   samplePrice: string | null
+  unitWeightKg: string | null
+  unitVolumeCbm: string | null
   primaryImageUrl: string | null
   status: ProductStatus
   priceTiers: PriceTier[]
@@ -100,6 +102,8 @@ type ProductDetailRow = {
   customizable: boolean
   sample_available: boolean
   sample_price: string | null
+  unit_weight_kg: string | null
+  unit_volume_cbm: string | null
   primary_image_url: string | null
   status: ProductStatus
   attributes: unknown
@@ -111,7 +115,7 @@ const LIST_COLUMNS =
   "id, title, status, primary_image_url, moq, unit, updated_at, product_price_tiers(count)"
 
 const DETAIL_COLUMNS =
-  "id, title, description, category_id, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, primary_image_url, status, attributes, product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
+  "id, title, description, category_id, moq, unit, lead_time_days, hs_code, origin_country, certifications, customizable, sample_available, sample_price, unit_weight_kg, unit_volume_cbm, primary_image_url, status, attributes, product_price_tiers(id, min_qty, unit_price, currency), product_media(id, type, url, sort)"
 
 function mapList(row: ProductListRow): ProductListItem {
   return {
@@ -154,6 +158,8 @@ function mapDetail(row: ProductDetailRow): ProductDetail {
     customizable: row.customizable,
     sampleAvailable: row.sample_available,
     samplePrice: row.sample_price,
+    unitWeightKg: row.unit_weight_kg,
+    unitVolumeCbm: row.unit_volume_cbm,
     primaryImageUrl: row.primary_image_url,
     status: row.status,
     priceTiers,

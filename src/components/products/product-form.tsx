@@ -269,6 +269,38 @@ export function ProductForm({
         </div>
       </div>
 
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="unitWeightKg">{t("packWeight")}</Label>
+          <Input
+            id="unitWeightKg"
+            name="unitWeightKg"
+            type="number"
+            inputMode="decimal"
+            min={0}
+            step="0.001"
+            defaultValue={initial?.unitWeightKg ?? ""}
+            placeholder="0.5"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="unitVolumeCbm">{t("packVolume")}</Label>
+          <Input
+            id="unitVolumeCbm"
+            name="unitVolumeCbm"
+            type="number"
+            inputMode="decimal"
+            min={0}
+            step="0.0001"
+            defaultValue={initial?.unitVolumeCbm ?? ""}
+            placeholder="0.003"
+          />
+        </div>
+        <p className="-mt-2 text-xs text-muted-foreground sm:col-span-2">
+          {t("packagingHint")}
+        </p>
+      </div>
+
       <div className="flex flex-col gap-2">
         <Label htmlFor="certifications">{t("certifications")}</Label>
         <Input

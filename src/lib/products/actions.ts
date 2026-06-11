@@ -138,6 +138,26 @@ export async function saveProductAction(
     samplePrice = parsed.toFixed(2)
   }
 
+  // Packaging per unit — powers buyer shipping estimates (kg for air, CBM for sea).
+  const unitWeightRaw = String(formData.get("unitWeightKg") ?? "").trim()
+  let unitWeightKg: string | null = null
+  if (unitWeightRaw) {
+    const parsed = Number(unitWeightRaw)
+    if (!Number.isFinite(parsed) || parsed < 0 || parsed > 10000) {
+      return { error: "Enter a valid packaging weight in kg." }
+    }
+    unitWeightKg = parsed > 0 ? parsed.toFixed(3) : null
+  }
+  const unitVolumeRaw = String(formData.get("unitVolumeCbm") ?? "").trim()
+  let unitVolumeCbm: string | null = null
+  if (unitVolumeRaw) {
+    const parsed = Number(unitVolumeRaw)
+    if (!Number.isFinite(parsed) || parsed < 0 || parsed > 100) {
+      return { error: "Enter a valid packaging volume in CBM." }
+    }
+    unitVolumeCbm = parsed > 0 ? parsed.toFixed(4) : null
+  }
+
   const tiers = parseTiers(formData)
   if (!Array.isArray(tiers)) return { error: tiers.error }
 
@@ -159,6 +179,8 @@ export async function saveProductAction(
     customizable,
     sample_available: sampleAvailable,
     sample_price: samplePrice,
+    unit_weight_kg: unitWeightKg,
+    unit_volume_cbm: unitVolumeCbm,
     attributes: specs.length > 0 ? { specs } : {},
     status,
   }
