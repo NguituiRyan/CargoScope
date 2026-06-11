@@ -31,12 +31,14 @@ export default async function StartConversationPage({
   const sp = await searchParams
   const manufacturerId = str(sp.manufacturerId)
   const productId = str(sp.productId) ?? null
+  const draft = (str(sp.draft) ?? "").slice(0, 1200)
   if (!manufacturerId) redirect(localePath(locale, "/products"))
 
   const user = await getSessionUser()
   if (!user) {
     const qs = new URLSearchParams({ manufacturerId })
     if (productId) qs.set("productId", productId)
+    if (draft) qs.set("draft", draft)
     const next = localePath(locale, `/messages/start?${qs.toString()}`)
     redirect(localePath(locale, `/sign-up?next=${encodeURIComponent(next)}`))
   }
@@ -48,6 +50,11 @@ export default async function StartConversationPage({
   )
   if (selfOwned) redirect(localePath(locale, "/messages"))
   redirect(
-    localePath(locale, conversationId ? `/messages/${conversationId}` : "/products")
+    localePath(
+      locale,
+      conversationId
+        ? `/messages/${conversationId}${draft ? `?draft=${encodeURIComponent(draft)}` : ""}`
+        : "/products"
+    )
   )
 }

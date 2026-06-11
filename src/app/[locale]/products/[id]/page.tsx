@@ -339,7 +339,9 @@ export default async function ProductDetailPage({
                   tiers={usdTiers}
                   unit={product.unit}
                   moq={product.moq}
-                  hsCode={product.hsCode}
+                  manufacturerId={m.id}
+                  productId={product.id}
+                  productTitle={product.title}
                   fx={fx}
                 />
               ) : (

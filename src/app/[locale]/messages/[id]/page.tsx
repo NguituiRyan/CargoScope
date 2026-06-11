@@ -17,11 +17,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ConversationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string; id: string }>
+  searchParams: Promise<{ draft?: string | string[] }>
 }) {
   const { locale, id } = await params
   setRequestLocale(locale)
+  const sp = await searchParams
+  const rawDraft = Array.isArray(sp.draft) ? sp.draft[0] : sp.draft
+  const draft = (rawDraft ?? "").trim().slice(0, 1200)
 
   const user = await requireUser()
   const thread = await getConversationThread(id, user)
@@ -67,7 +72,11 @@ export default async function ConversationPage({
 
       <MessageThread messages={thread.messages} />
 
-      <MessageComposer conversationId={thread.id} locale={locale} />
+      <MessageComposer
+        conversationId={thread.id}
+        locale={locale}
+        initialBody={draft || undefined}
+      />
     </div>
   )
 }

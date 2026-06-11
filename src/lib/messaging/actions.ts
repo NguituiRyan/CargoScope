@@ -42,12 +42,18 @@ export async function startConversationAction(formData: FormData): Promise<void>
   const locale = await getLocale()
   const manufacturerId = String(formData.get("manufacturerId") ?? "").trim()
   const productId = String(formData.get("productId") ?? "").trim() || null
+  // Optional pre-filled inquiry text — carried to the thread composer so the
+  // buyer reviews and sends it themselves (the Alibaba inquiry pattern).
+  const draft = String(formData.get("draft") ?? "")
+    .trim()
+    .slice(0, 1200)
   if (!manufacturerId) redirect(localePath(locale, "/products"))
 
   const user = await getSessionUser()
   if (!user) {
     const qs = new URLSearchParams({ manufacturerId })
     if (productId) qs.set("productId", productId)
+    if (draft) qs.set("draft", draft)
     const next = localePath(locale, `/messages/start?${qs.toString()}`)
     redirect(localePath(locale, `/sign-up?next=${encodeURIComponent(next)}`))
   }
@@ -60,7 +66,12 @@ export async function startConversationAction(formData: FormData): Promise<void>
   if (selfOwned) redirect(localePath(locale, "/messages"))
   if (!conversationId) redirect(localePath(locale, "/products"))
 
-  redirect(localePath(locale, `/messages/${conversationId}`))
+  redirect(
+    localePath(
+      locale,
+      `/messages/${conversationId}${draft ? `?draft=${encodeURIComponent(draft)}` : ""}`
+    )
+  )
 }
 
 /** Send a message (optional text + attachments) into a conversation. */

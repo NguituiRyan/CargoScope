@@ -36,9 +36,12 @@ function SendButton({ idle, busy }: { idle: string; busy: string }) {
 export function MessageComposer({
   conversationId,
   locale,
+  initialBody,
 }: {
   conversationId: string
   locale: string
+  /** Pre-filled inquiry text (e.g. from the PDP shipping estimator). */
+  initialBody?: string
 }) {
   const t = useTranslations("messages")
   const [state, formAction] = useActionState<MessagingActionState, FormData>(
@@ -62,8 +65,9 @@ export function MessageComposer({
 
       <Textarea
         name="body"
-        rows={3}
+        rows={initialBody ? 6 : 3}
         maxLength={4000}
+        defaultValue={initialBody}
         placeholder={t("placeholder")}
         aria-label={t("placeholder")}
       />
