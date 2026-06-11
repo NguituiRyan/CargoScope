@@ -73,19 +73,22 @@ export default async function MessagesInboxPage({
                 const name =
                   c.otherParty.name ??
                   (c.viewerIsManufacturer ? t("buyer") : t("supplier"))
-                const preview =
+                // Multi-line messages (e.g. structured inquiries) collapse into
+                // a readable one-line preview instead of a run-on sentence.
+                const preview = (
                   c.lastMessage ??
                   (c.productTitle
                     ? t("aboutProduct", { product: c.productTitle })
                     : "")
+                ).replace(/\s*\n+\s*/g, " · ")
                 return (
                   <li key={c.id}>
                     <Link
                       href={`/messages/${c.id}`}
-                      className="flex items-center gap-3 py-3 first:pt-0 last:pb-0 transition-colors hover:bg-muted/40"
+                      className="flex items-center gap-3.5 py-4 transition-colors hover:bg-muted/40"
                     >
                       <ConversationAvatar name={name} logoUrl={c.otherParty.logoUrl} />
-                      <div className="min-w-0 flex-1">
+                      <div className="flex min-w-0 flex-1 flex-col gap-1">
                         <div className="flex items-center justify-between gap-2">
                           <p className="truncate font-medium">{name}</p>
                           {c.lastMessageAt ? (
