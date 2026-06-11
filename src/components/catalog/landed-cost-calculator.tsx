@@ -160,9 +160,9 @@ export function LandedCostCalculator({
           />
         </div>
         {!consolidated && mode === "sea" ? (
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1.5 sm:col-span-2">
             <Label>{t("containerType")}</Label>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {(["lcl", "fcl"] as const).map((c) => (
                 <Button
                   key={c}
