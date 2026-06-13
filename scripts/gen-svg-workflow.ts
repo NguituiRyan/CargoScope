@@ -26,7 +26,7 @@ const REFERENCE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"
   </g>
 </svg>`
 
-const SPEC = `You are an expert SVG illustrator creating product artwork for a premium B2B e-commerce catalog (CargoScope). Produce ONE self-contained SVG illustration of the given product.
+const SPEC = `You are an expert SVG illustrator creating product artwork for a premium B2B e-commerce catalog (Shop Buddy). Produce ONE self-contained SVG illustration of the given product.
 
 HARD RULES (a violation makes the output unusable):
 - Root: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="PRODUCT NAME">. Do NOT set width/height.
@@ -69,7 +69,7 @@ const SCHEMA = {
 }
 
 const body = [
-  `export const meta = {\n  name: 'product-svgs-bulk',\n  description: 'Generate cohesive intricate product SVGs for the expanded CargoScope catalog',\n  phases: [{ title: 'Generate', detail: 'one agent per product' }],\n}`,
+  `export const meta = {\n  name: 'product-svgs-bulk',\n  description: 'Generate cohesive intricate product SVGs for the expanded Shop Buddy catalog',\n  phases: [{ title: 'Generate', detail: 'one agent per product' }],\n}`,
   `const JOBS = ${JSON.stringify(jobs)}`,
   `const SPEC = ${JSON.stringify(SPEC)}`,
   `const PALETTES = ${JSON.stringify(PALETTES)}`,

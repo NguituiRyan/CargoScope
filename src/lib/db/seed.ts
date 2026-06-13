@@ -101,9 +101,9 @@ async function ensureUser(
 
 /* ─────────────────────────── seed data ─────────────────────────── */
 
-const ADMIN_EMAIL = "admin@cargoscope.app"
-const BUYER_EMAIL = "buyer@cargoscope.app"
-const MFR_EMAIL = "manufacturer@cargoscope.app"
+const ADMIN_EMAIL = "admin@shopbuddy.africa"
+const BUYER_EMAIL = "buyer@shopbuddy.africa"
+const MFR_EMAIL = "manufacturer@shopbuddy.africa"
 
 const categorySeed = [
   { slug: "electronics", en: "Electronics", sw: "Elektroniki", zh: "电子产品", icon: "smartphone", sort: 1 },
@@ -145,7 +145,7 @@ const manufacturerSeed: ManufacturerSeed[] = [
   {
     slug: "guangzhou-homestyle",
     company: "Guangzhou HomeStyle Houseware Co., Ltd",
-    ownerEmail: "owner.homestyle@cargoscope.app",
+    ownerEmail: "owner.homestyle@shopbuddy.africa",
     city: "Guangzhou",
     vstatus: "verified",
     tier: "verified",
@@ -158,7 +158,7 @@ const manufacturerSeed: ManufacturerSeed[] = [
   {
     slug: "yiwu-fashionline",
     company: "Yiwu FashionLine Garments Co., Ltd",
-    ownerEmail: "owner.fashionline@cargoscope.app",
+    ownerEmail: "owner.fashionline@shopbuddy.africa",
     city: "Yiwu",
     vstatus: "verified",
     tier: "verified",
@@ -171,7 +171,7 @@ const manufacturerSeed: ManufacturerSeed[] = [
   {
     slug: "foshan-pureglow",
     company: "Foshan PureGlow Cosmetics Co., Ltd",
-    ownerEmail: "owner.pureglow@cargoscope.app",
+    ownerEmail: "owner.pureglow@shopbuddy.africa",
     city: "Foshan",
     vstatus: "identity",
     tier: "basic",
@@ -184,7 +184,7 @@ const manufacturerSeed: ManufacturerSeed[] = [
   {
     slug: "qingdao-irontools",
     company: "Qingdao IronTools Industrial Co., Ltd",
-    ownerEmail: "owner.irontools@cargoscope.app",
+    ownerEmail: "owner.irontools@shopbuddy.africa",
     city: "Qingdao",
     vstatus: "verified",
     tier: "verified",
@@ -197,7 +197,7 @@ const manufacturerSeed: ManufacturerSeed[] = [
   {
     slug: "shenzhen-packpro",
     company: "Shenzhen PackPro Packaging Co., Ltd",
-    ownerEmail: "owner.packpro@cargoscope.app",
+    ownerEmail: "owner.packpro@shopbuddy.africa",
     city: "Shenzhen",
     vstatus: "verified",
     tier: "verified",
@@ -400,7 +400,7 @@ async function main() {
   console.log(`  ✓ price tiers (${tierRows.length}) + media (${mediaRows.length})`)
 
   // 6b) Reviewer buyers + orders + reviews (social proof) -------------------
-  const reviewerOwnerId = await ensureUser("reviewers@cargoscope.app", {
+  const reviewerOwnerId = await ensureUser("reviewers@shopbuddy.africa", {
     full_name: "Shop Buddy Buyers",
   })
   ok(

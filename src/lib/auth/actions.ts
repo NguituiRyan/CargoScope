@@ -32,7 +32,7 @@ async function resolveLocale(formData: FormData): Promise<string> {
 }
 
 /**
- * Absolute origin of the current request (e.g. https://cargo-scope.vercel.app),
+ * Absolute origin of the current request (e.g. https://shopbuddy.africa),
  * used to build the email-confirmation redirect. Derived from the request host
  * so it always points at the live domain — not whatever NEXT_PUBLIC_SITE_URL
  * happens to be — with that env var as a last-resort fallback.

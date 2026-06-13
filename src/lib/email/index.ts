@@ -12,7 +12,7 @@ import { createAdminClient } from "@/lib/supabase/admin"
  */
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-const FROM = process.env.RESEND_FROM_EMAIL || "Shop Buddy <noreply@cargoscope.app>"
+const FROM = process.env.RESEND_FROM_EMAIL || "Shop Buddy <noreply@shopbuddy.africa>"
 
 function hasResend(): boolean {
   return Boolean(process.env.RESEND_API_KEY)

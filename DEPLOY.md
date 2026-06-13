@@ -1,6 +1,6 @@
-# Deploying CargoScope to Vercel
+# Deploying Shop Buddy to Vercel
 
-CargoScope is a **server-rendered Next.js 16 app** (App Router, Server Actions,
+Shop Buddy is a **server-rendered Next.js 16 app** (App Router, Server Actions,
 `proxy.ts`, Drizzle + Supabase). It is **not** a static site — every route is
 rendered on demand (`ƒ` in the build output). Vercel must build and serve it with
 the **Next.js framework preset**, and the runtime **environment variables must be
@@ -57,7 +57,7 @@ come from your local `.env.local` — paste them in; never commit them.
 
 | Variable               | Notes                                                                 |
 | ---------------------- | --------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | Set to the live origin, e.g. `https://cargo-scope.vercel.app` (no trailing slash). Used for auth email-confirmation redirects and links in transactional email. Wrong/missing value breaks sign-up confirmation links. |
+| `NEXT_PUBLIC_SITE_URL` | Set to the live origin, e.g. `https://shopbuddy.africa` (no trailing slash). Used for auth email-confirmation redirects and links in transactional email. Wrong/missing value breaks sign-up confirmation links. |
 
 ### Optional (features degrade gracefully — app still runs without them)
 
@@ -89,10 +89,10 @@ changing the framework preset.
 
 ```bash
 # Should be 200 (home renders the catalog at the default locale):
-curl -s -o /dev/null -w "%{http_code}\n" https://cargo-scope.vercel.app/
+curl -s -o /dev/null -w "%{http_code}\n" https://shopbuddy.africa/
 # Localised routes — all 200:
-curl -s -o /dev/null -w "%{http_code}\n" https://cargo-scope.vercel.app/sw
-curl -s -o /dev/null -w "%{http_code}\n" https://cargo-scope.vercel.app/products
+curl -s -o /dev/null -w "%{http_code}\n" https://shopbuddy.africa/sw
+curl -s -o /dev/null -w "%{http_code}\n" https://shopbuddy.africa/products
 ```
 
 If `/` is **200** you're done. If you now get **500**, env vars are still missing
@@ -105,6 +105,6 @@ or wrong (re-check step 2, especially `DATABASE_URL` and the Supabase keys).
 The auto-generated deployment URL (e.g. `cargo-scope-xxxx-...vercel.app`) may return
 **401** with a `_vercel_sso_nonce` cookie — that's **Vercel Deployment Protection**
 (Vercel Authentication), on by default. It does **not** affect the production domain
-`cargo-scope.vercel.app`. To make preview URLs publicly shareable:
+`shopbuddy.africa`. To make preview URLs publicly shareable:
 **Settings → Deployment Protection → Vercel Authentication → Disabled** (or set to
 standard-protection-with-bypass as you prefer).
