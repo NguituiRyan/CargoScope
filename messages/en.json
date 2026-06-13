@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Shop Budyy",
+    "brand": "Shop Buddy",
     "products": "Products",
     "manufacturers": "Manufacturers",
     "howItWorks": "How it works",
@@ -18,9 +18,9 @@
   "home": {
     "badge": "Verified China–Africa sourcing",
     "title": "Source from verified Chinese manufacturers, with confidence.",
-    "subtitle": "Shop Budyy connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
+    "subtitle": "Shop Buddy connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
     "ctaBrowse": "Browse products",
-    "ctaSell": "Sell on Shop Budyy",
+    "ctaSell": "Sell on Shop Buddy",
     "statsSuppliers": "Verified suppliers",
     "statsProducts": "Products listed",
     "statsCategories": "Categories",
@@ -35,9 +35,9 @@
   },
   "auth": {
     "signInTitle": "Welcome back",
-    "signInSubtitle": "Sign in to your Shop Budyy account.",
+    "signInSubtitle": "Sign in to your Shop Buddy account.",
     "signUpTitle": "Create your account",
-    "signUpSubtitle": "Join Shop Budyy to source or sell with confidence.",
+    "signUpSubtitle": "Join Shop Buddy to source or sell with confidence.",
     "email": "Email",
     "password": "Password",
     "passwordHint": "At least 8 characters.",
@@ -51,14 +51,14 @@
     "signUpCta": "Create account",
     "signingIn": "Signing in…",
     "creatingAccount": "Creating account…",
-    "noAccount": "New to Shop Budyy?",
+    "noAccount": "New to Shop Buddy?",
     "haveAccount": "Already have an account?",
     "checkEmailTitle": "Check your email",
     "checkEmailBody": "We sent you a confirmation link. Click it to activate your account and sign in."
   },
   "account": {
     "title": "Your account",
-    "subtitle": "Manage your Shop Budyy profile and session.",
+    "subtitle": "Manage your Shop Buddy profile and session.",
     "name": "Name",
     "email": "Email",
     "role": "Role",
@@ -115,7 +115,7 @@
     "banner": "Storefront banner",
     "brandingHint": "JPG, PNG, or WebP up to 5 MB. A clear logo and wide banner make your storefront look professional.",
     "contactsTitle": "Private contact details",
-    "contactsHint": "Only you and Shop Budyy admins can see these — buyers never do. Buyers reach you through in-app chat.",
+    "contactsHint": "Only you and Shop Buddy admins can see these — buyers never do. Buyers reach you through in-app chat.",
     "wechat": "WeChat ID",
     "whatsapp": "WhatsApp",
     "phone": "Phone",
@@ -290,7 +290,7 @@
     "ctaContact": "Contact sales",
     "subscribe": "Subscribe",
     "currentPlan": "Current plan",
-    "buyerNote": "Buying on Shop Budyy is always free — plans are for suppliers.",
+    "buyerNote": "Buying on Shop Buddy is always free — plans are for suppliers.",
     "tiers": {
       "basic": {
         "name": "Basic",
@@ -532,11 +532,11 @@
     "backToDirectory": "Back to manufacturers"
   },
   "howItWorks": {
-    "title": "How Shop Budyy works",
+    "title": "How Shop Buddy works",
     "subtitle": "A trust-first path from verified Chinese factories to your warehouse in Kenya.",
     "forBuyers": "For buyers",
     "stepAccountTitle": "Create your free account",
-    "stepAccountBody": "Sign up in under a minute — buying on Shop Budyy is free, with no subscription.",
+    "stepAccountBody": "Sign up in under a minute — buying on Shop Buddy is free, with no subscription.",
     "step1Title": "Find verified suppliers",
     "step1Body": "Every manufacturer is document-checked and tier-rated. Look for the verification badge before you buy.",
     "step2Title": "See the true landed cost",
@@ -617,8 +617,8 @@
     "rights": "All rights reserved."
   },
   "about": {
-    "title": "About Shop Budyy",
-    "lead": "Shop Budyy is a trust-first B2B marketplace that connects African wholesale buyers with verified manufacturers in China.",
+    "title": "About Shop Buddy",
+    "lead": "Shop Buddy is a trust-first B2B marketplace that connects African wholesale buyers with verified manufacturers in China.",
     "missionTitle": "Our mission",
     "mission": "We make cross-border sourcing safe and simple — vetted suppliers, transparent landed-cost pricing, built-in translation, and direct chat — so buyers can order with confidence."
   },
@@ -626,7 +626,7 @@
     "title": "Contact us",
     "lead": "Questions, feedback, or partnership ideas? We're glad to help.",
     "emailLabel": "Email",
-    "email": "hello@shopbudyy.com",
+    "email": "hello@shopbuddy.africa",
     "chatTitle": "Reaching a supplier",
     "chat": "To contact a specific manufacturer, open their product or storefront and tap “Message supplier” to start a chat."
   },
@@ -635,9 +635,9 @@
     "updated": "Plain-language summary · last updated June 2026",
     "draft": "This is a plain-language summary while we finalize our full Terms. It isn't a substitute for the complete agreement — contact us with any questions.",
     "p1Title": "Using the platform",
-    "p1": "Shop Budyy connects buyers and suppliers. Buyers browse and message suppliers for free; suppliers pay to list and are vetted before going live. Use the platform lawfully and respect other members.",
+    "p1": "Shop Buddy connects buyers and suppliers. Buyers browse and message suppliers for free; suppliers pay to list and are vetted before going live. Use the platform lawfully and respect other members.",
     "p2Title": "Orders and payments",
-    "p2": "Shop Budyy is a sourcing and communication platform. Prices, quotes, and purchase agreements are made directly between buyer and supplier — always confirm terms before you pay.",
+    "p2": "Shop Buddy is a sourcing and communication platform. Prices, quotes, and purchase agreements are made directly between buyer and supplier — always confirm terms before you pay.",
     "p3Title": "Your account",
     "p3": "You're responsible for activity on your account. We may suspend accounts that break these terms or harm other members."
   },
@@ -692,14 +692,14 @@
     "p2Title": "Escalate to us",
     "p2": "If you cannot reach a resolution, contact our team with the conversation details. We review the chat record and the supplier's verification status to help mediate.",
     "p3Title": "Our role",
-    "p3": "Shop Budyy connects buyers and suppliers and can act against members who breach our standards, but payment and delivery are arranged directly between the parties, so we cannot guarantee the outcome of off-platform transactions."
+    "p3": "Shop Buddy connects buyers and suppliers and can act against members who breach our standards, but payment and delivery are arranged directly between the parties, so we cannot guarantee the outcome of off-platform transactions."
   },
   "refunds": {
     "title": "Refund Policy",
     "updated": "Summary · last updated June 2026",
     "draft": "This is a plain-language summary while we finalize the full policy. Contact us with any questions.",
     "p1Title": "Orders are between buyer and supplier",
-    "p1": "Shop Budyy is a sourcing and communication platform. Purchases, payments and shipping are arranged directly with the supplier, so refunds follow the terms you agree with them.",
+    "p1": "Shop Buddy is a sourcing and communication platform. Purchases, payments and shipping are arranged directly with the supplier, so refunds follow the terms you agree with them.",
     "p2Title": "Agree terms up front",
     "p2": "Before paying, confirm refund, sample and return terms in the chat so both sides have a clear record. Verified suppliers are expected to honour the terms they quote.",
     "p3Title": "Need help?",
