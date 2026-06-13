@@ -1,4 +1,4 @@
-import { Calculator, Languages, ShieldCheck, Sparkles } from "lucide-react"
+import { Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { CatalogFilters } from "@/components/catalog/catalog-filters"
@@ -8,7 +8,6 @@ import { ProductCard } from "@/components/catalog/product-card"
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
 import {
-  getCatalogStats,
   getFeaturedProducts,
   getFilterCategories,
   getPriceCeilingUsd,
@@ -113,13 +112,12 @@ export async function CatalogView({
     searchParams,
   ])
 
-  const [categories, currency, displayRates, priceCeilingUsd, stats] =
+  const [categories, currency, displayRates, priceCeilingUsd] =
     await Promise.all([
       getFilterCategories(),
       getDisplayCurrency(),
       getDisplayRates(),
       getPriceCeilingUsd(),
-      getCatalogStats(),
     ])
   const rate = displayRates.rates[currency] || 1
   const priceMax = niceCeil((priceCeilingUsd > 0 ? priceCeilingUsd : 1000) * rate)
@@ -152,11 +150,6 @@ export async function CatalogView({
     : new Map<string, { avg: number; count: number }>()
 
   const activeCategory = filters.category ?? null
-  const pillars = [
-    { icon: ShieldCheck, label: tHome("pillars.verifiedTitle") },
-    { icon: Calculator, label: tHome("pillars.landedTitle") },
-    { icon: Languages, label: tHome("pillars.translateTitle") },
-  ]
   const popular = categories.slice(0, 5).map((c) => ({
     label: c.name,
     href: `/products?category=${c.slug}`,
@@ -176,37 +169,9 @@ export async function CatalogView({
             <div className="w-full pt-1">
               <HeroSearch defaultValue={filters.q} popular={popular} />
             </div>
-            <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 pt-0.5">
-              {pillars.map(({ icon: Icon, label }) => (
-                <li
-                  key={label}
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground"
-                >
-                  <Icon className="size-4 text-primary" aria-hidden />
-                  {label}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
-
-      <div className="border-b border-border bg-muted/30">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-3 gap-4 px-4 py-5 text-center">
-          {[
-            { value: stats.suppliers, label: tHome("statsSuppliers") },
-            { value: stats.products, label: tHome("statsProducts") },
-            { value: stats.categories, label: tHome("statsCategories") },
-          ].map((stat) => (
-            <div key={stat.label} className="flex flex-col">
-              <span className="font-heading text-2xl font-bold tabular-nums text-primary">
-                {stat.value.toLocaleString()}
-              </span>
-              <span className="text-xs text-muted-foreground">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {categories.length > 0 && (
         <div className="mx-auto w-full max-w-6xl px-4 pt-5">

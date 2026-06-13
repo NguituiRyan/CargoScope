@@ -1,10 +1,7 @@
 import "server-only"
 
-import { count, eq } from "drizzle-orm"
 import { getLocale } from "next-intl/server"
 
-import { db } from "@/lib/db"
-import { categories, manufacturers, products } from "@/lib/db/schema"
 import { createClient } from "@/lib/supabase/server"
 import { parseSpecs, type ProductSpec } from "@/lib/products/specs"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
@@ -345,27 +342,6 @@ export async function getPriceCeilingUsd(): Promise<number> {
     if (price !== null && price > max) max = price
   }
   return max
-}
-
-/** Headline catalogue counts for the homepage social-proof strip. */
-export async function getCatalogStats(): Promise<{
-  suppliers: number
-  products: number
-  categories: number
-}> {
-  const [sup, prod, cat] = await Promise.all([
-    db
-      .select({ c: count() })
-      .from(manufacturers)
-      .where(eq(manufacturers.isPublished, true)),
-    db.select({ c: count() }).from(products).where(eq(products.status, "active")),
-    db.select({ c: count() }).from(categories),
-  ])
-  return {
-    suppliers: sup[0]?.c ?? 0,
-    products: prod[0]?.c ?? 0,
-    categories: cat[0]?.c ?? 0,
-  }
 }
 
 type ManufacturerRow = Parameters<typeof mapStorefrontManufacturer>[0]

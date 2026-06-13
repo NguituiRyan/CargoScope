@@ -20,18 +20,7 @@
     "title": "放心地向经核实的中国制造商采购。",
     "subtitle": "Shop Buddy 将肯尼亚的批发买家与经审核的工厂连接起来——透明的到岸成本、应用内翻译，每一步都建立信任。",
     "ctaBrowse": "浏览产品",
-    "ctaSell": "在 Shop Buddy 上销售",
-    "statsSuppliers": "已验证供应商",
-    "statsProducts": "已上架产品",
-    "statsCategories": "品类",
-    "pillars": {
-      "verifiedTitle": "经核实的供应商",
-      "verifiedBody": "每家制造商在上架前都会经过证件审核和等级评定，让您清楚知道与谁交易。",
-      "landedTitle": "真实到岸成本",
-      "landedBody": "在下单前即可看到以肯尼亚先令计的真实价格——产品、运费、关税和手续费——到港无意外。",
-      "translateTitle": "用您的语言沟通",
-      "translateBody": "用英语或斯瓦希里语向工厂发送消息，我们即时翻译成中文，确保信息无误。"
-    }
+    "ctaSell": "在 Shop Buddy 上销售"
   },
   "auth": {
     "signInTitle": "欢迎回来",
@@ -295,17 +284,35 @@
       "basic": {
         "name": "基础版",
         "tagline": "开始上架，被买家发现。",
-        "features": ["最多 15 个在售商品", "身份核验标识", "买家消息与 AI 翻译", "标准目录展示"]
+        "features": [
+          "最多 15 个在售商品",
+          "身份核验标识",
+          "买家消息与 AI 翻译",
+          "标准目录展示"
+        ]
       },
       "verified": {
         "name": "认证版",
         "tagline": "赢得信任并响应询价。",
-        "features": ["最多 60 个在售商品", "认证供应商标识", "以报价响应买家询价", "搜索排名提升", "响应率分析"]
+        "features": [
+          "最多 60 个在售商品",
+          "认证供应商标识",
+          "以报价响应买家询价",
+          "搜索排名提升",
+          "响应率分析"
+        ]
       },
       "premium": {
         "name": "尊享版",
         "tagline": "最大曝光与精选展示。",
-        "features": ["无限商品", "尊享认证标识", "首页与类目精选展示", "搜索排名置顶", "优先询价权限", "店铺定制"]
+        "features": [
+          "无限商品",
+          "尊享认证标识",
+          "首页与类目精选展示",
+          "搜索排名置顶",
+          "优先询价权限",
+          "店铺定制"
+        ]
       }
     }
   },
@@ -367,8 +374,16 @@
     "openRfqsSubtitle": "可报价的公开采购需求。",
     "emptyOpen": "目前没有公开需求。",
     "emptyOpenHint": "请稍后再来 — 新的买家询价会显示在此。",
-    "status": { "open": "开放", "quoting": "报价中", "closed": "已关闭" },
-    "quoteStatus": { "submitted": "已提交", "accepted": "已接受", "declined": "已拒绝" },
+    "status": {
+      "open": "开放",
+      "quoting": "报价中",
+      "closed": "已关闭"
+    },
+    "quoteStatus": {
+      "submitted": "已提交",
+      "accepted": "已接受",
+      "declined": "已拒绝"
+    },
     "quotes": "{count, plural, =0 {暂无报价} other {# 条报价}}",
     "quoted": "已报价",
     "view": "查看",

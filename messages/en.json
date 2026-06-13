@@ -20,18 +20,7 @@
     "title": "Source from verified Chinese manufacturers, with confidence.",
     "subtitle": "Shop Buddy connects Kenyan wholesale buyers with vetted factories — transparent landed costs, in-app translation, and trust built in at every step.",
     "ctaBrowse": "Browse products",
-    "ctaSell": "Sell on Shop Buddy",
-    "statsSuppliers": "Verified suppliers",
-    "statsProducts": "Products listed",
-    "statsCategories": "Categories",
-    "pillars": {
-      "verifiedTitle": "Verified suppliers",
-      "verifiedBody": "Every manufacturer is document-checked and tier-rated before they can list, so you know who you are buying from.",
-      "landedTitle": "True landed cost",
-      "landedBody": "See the real price in KES — product, freight, duty, and fees — before you commit, with no surprises at the port.",
-      "translateTitle": "Talk in your language",
-      "translateBody": "Message factories in English or Swahili and we translate to Mandarin instantly, so nothing gets lost."
-    }
+    "ctaSell": "Sell on Shop Buddy"
   },
   "auth": {
     "signInTitle": "Welcome back",
@@ -295,17 +284,35 @@
       "basic": {
         "name": "Basic",
         "tagline": "Start listing and get discovered.",
-        "features": ["Up to 15 active listings", "Identity-checked badge", "Buyer messaging with AI translation", "Standard catalog placement"]
+        "features": [
+          "Up to 15 active listings",
+          "Identity-checked badge",
+          "Buyer messaging with AI translation",
+          "Standard catalog placement"
+        ]
       },
       "verified": {
         "name": "Verified",
         "tagline": "Win trust and respond to RFQs.",
-        "features": ["Up to 60 active listings", "Verified Supplier badge", "Respond to buyer RFQs with quotes", "Search ranking boost", "Response-rate analytics"]
+        "features": [
+          "Up to 60 active listings",
+          "Verified Supplier badge",
+          "Respond to buyer RFQs with quotes",
+          "Search ranking boost",
+          "Response-rate analytics"
+        ]
       },
       "premium": {
         "name": "Premium",
         "tagline": "Maximum reach and featured placement.",
-        "features": ["Unlimited listings", "Premium Verified badge", "Featured on home & category rails", "Top search ranking", "Priority RFQ access", "Storefront customization"]
+        "features": [
+          "Unlimited listings",
+          "Premium Verified badge",
+          "Featured on home & category rails",
+          "Top search ranking",
+          "Priority RFQ access",
+          "Storefront customization"
+        ]
       }
     }
   },
@@ -367,8 +374,16 @@
     "openRfqsSubtitle": "Open sourcing requests you can quote.",
     "emptyOpen": "No open requests right now.",
     "emptyOpenHint": "Check back soon — new buyer RFQs appear here.",
-    "status": { "open": "Open", "quoting": "Quoting", "closed": "Closed" },
-    "quoteStatus": { "submitted": "Submitted", "accepted": "Accepted", "declined": "Declined" },
+    "status": {
+      "open": "Open",
+      "quoting": "Quoting",
+      "closed": "Closed"
+    },
+    "quoteStatus": {
+      "submitted": "Submitted",
+      "accepted": "Accepted",
+      "declined": "Declined"
+    },
     "quotes": "{count, plural, =0 {No quotes} one {# quote} other {# quotes}}",
     "quoted": "Quoted",
     "view": "View",

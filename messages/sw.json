@@ -20,18 +20,7 @@
     "title": "Nunua kutoka kwa watengenezaji wa China waliothibitishwa, kwa uhakika.",
     "subtitle": "Shop Buddy inaunganisha wanunuzi wa jumla wa Kenya na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
     "ctaBrowse": "Vinjari bidhaa",
-    "ctaSell": "Uza kwenye Shop Buddy",
-    "statsSuppliers": "Wasambazaji walioidhinishwa",
-    "statsProducts": "Bidhaa zilizoorodheshwa",
-    "statsCategories": "Kategoria",
-    "pillars": {
-      "verifiedTitle": "Wasambazaji waliothibitishwa",
-      "verifiedBody": "Kila mtengenezaji hukaguliwa hati na kupewa daraja kabla ya kuorodhesha, ili ujue unanunua kutoka kwa nani.",
-      "landedTitle": "Gharama halisi ya kufikisha",
-      "landedBody": "Ona bei halisi kwa KES — bidhaa, usafirishaji, ushuru, na ada — kabla ya kujitolea, bila mshangao bandarini.",
-      "translateTitle": "Ongea kwa lugha yako",
-      "translateBody": "Tuma ujumbe kwa viwanda kwa Kiingereza au Kiswahili nasi tunatafsiri kwa Kichina papo hapo, ili kisipotee chochote."
-    }
+    "ctaSell": "Uza kwenye Shop Buddy"
   },
   "auth": {
     "signInTitle": "Karibu tena",
@@ -295,17 +284,35 @@
       "basic": {
         "name": "Msingi",
         "tagline": "Anza kuorodhesha na ugundulike.",
-        "features": ["Hadi orodha 15 hai", "Beji ya utambulisho uliothibitishwa", "Ujumbe na tafsiri ya AI", "Uwekaji wa kawaida wa katalogi"]
+        "features": [
+          "Hadi orodha 15 hai",
+          "Beji ya utambulisho uliothibitishwa",
+          "Ujumbe na tafsiri ya AI",
+          "Uwekaji wa kawaida wa katalogi"
+        ]
       },
       "verified": {
         "name": "Aliyethibitishwa",
         "tagline": "Pata uaminifu na ujibu RFQ.",
-        "features": ["Hadi orodha 60 hai", "Beji ya Msambazaji Aliyethibitishwa", "Jibu RFQ kwa nukuu", "Ongezeko la nafasi ya utafutaji", "Takwimu za kiwango cha majibu"]
+        "features": [
+          "Hadi orodha 60 hai",
+          "Beji ya Msambazaji Aliyethibitishwa",
+          "Jibu RFQ kwa nukuu",
+          "Ongezeko la nafasi ya utafutaji",
+          "Takwimu za kiwango cha majibu"
+        ]
       },
       "premium": {
         "name": "Premium",
         "tagline": "Ufikiaji wa juu na uwekaji maalum.",
-        "features": ["Orodha zisizo na kikomo", "Beji ya Premium Aliyethibitishwa", "Iangaziwe nyumbani na kategoria", "Nafasi ya juu ya utafutaji", "Ufikiaji wa kipaumbele wa RFQ", "Ubinafsishaji wa duka"]
+        "features": [
+          "Orodha zisizo na kikomo",
+          "Beji ya Premium Aliyethibitishwa",
+          "Iangaziwe nyumbani na kategoria",
+          "Nafasi ya juu ya utafutaji",
+          "Ufikiaji wa kipaumbele wa RFQ",
+          "Ubinafsishaji wa duka"
+        ]
       }
     }
   },
@@ -367,8 +374,16 @@
     "openRfqsSubtitle": "Maombi ya ununuzi yaliyo wazi unayoweza kunukuu.",
     "emptyOpen": "Hakuna maombi yaliyo wazi kwa sasa.",
     "emptyOpenHint": "Rudi tena hivi karibuni — maombi mapya yataonekana hapa.",
-    "status": { "open": "Wazi", "quoting": "Inanukuliwa", "closed": "Imefungwa" },
-    "quoteStatus": { "submitted": "Imewasilishwa", "accepted": "Imekubaliwa", "declined": "Imekataliwa" },
+    "status": {
+      "open": "Wazi",
+      "quoting": "Inanukuliwa",
+      "closed": "Imefungwa"
+    },
+    "quoteStatus": {
+      "submitted": "Imewasilishwa",
+      "accepted": "Imekubaliwa",
+      "declined": "Imekataliwa"
+    },
     "quotes": "{count, plural, =0 {Hakuna nukuu} one {nukuu #} other {nukuu #}}",
     "quoted": "Umenukuu",
     "view": "Angalia",
