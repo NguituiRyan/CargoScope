@@ -190,6 +190,7 @@
     "media": "Photos & videos",
     "mediaHint": "JPG, PNG, or WebP up to 10 MB; MP4 or WebM up to 50 MB. Up to 8 files.",
     "addMedia": "Upload media",
+    "optimizing": "Optimizing…",
     "uploading": "Uploading…",
     "mediaAdded": "Media uploaded.",
     "noMedia": "No media yet. The first image you upload becomes the cover.",

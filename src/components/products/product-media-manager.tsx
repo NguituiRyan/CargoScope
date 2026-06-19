@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useActionState, useEffect, useRef } from "react"
+import { useActionState, useEffect, useRef, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { Check, Loader2, Trash2, Upload } from "lucide-react"
 import { useTranslations } from "next-intl"
@@ -12,29 +12,11 @@ import {
   type ProductActionState,
 } from "@/lib/products/actions"
 import type { ProductMediaItem } from "@/lib/products/queries"
+import { compressProductImages } from "@/lib/images/compress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
-function UploadButton({ idle, busy }: { idle: string; busy: string }) {
-  const { pending } = useFormStatus()
-  return (
-    <Button type="submit" disabled={pending} className="h-10">
-      {pending ? (
-        <>
-          <Loader2 className="animate-spin" aria-hidden />
-          {busy}
-        </>
-      ) : (
-        <>
-          <Upload className="size-4" aria-hidden />
-          {idle}
-        </>
-      )}
-    </Button>
-  )
-}
 
 function DeleteMediaButton({ label }: { label: string }) {
   const { pending } = useFormStatus()
@@ -66,21 +48,40 @@ export function ProductMediaManager({
   primaryImageUrl: string | null
 }) {
   const t = useTranslations("product")
-  const [state, formAction] = useActionState<ProductActionState, FormData>(
-    addProductMediaAction,
-    {}
-  )
+  const [state, formAction, isPending] = useActionState<
+    ProductActionState,
+    FormData
+  >(addProductMediaAction, {})
+  const [optimizing, setOptimizing] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
+  const busy = optimizing || isPending
 
   useEffect(() => {
     if (state.ok) formRef.current?.reset()
   }, [state.ok])
 
+  // Compress images in the browser before uploading, then dispatch the action
+  // with the optimised files. Keeps uploads fast on slow links and avoids
+  // server-action payload limits, while display quality stays high.
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const form = e.currentTarget
+    const input = form.elements.namedItem("media") as HTMLInputElement | null
+    const files = input?.files ? Array.from(input.files) : []
+    if (files.length === 0) return
+    setOptimizing(true)
+    const processed = await compressProductImages(files)
+    const fd = new FormData()
+    fd.set("locale", locale)
+    fd.set("productId", productId)
+    for (const file of processed) fd.append("media", file)
+    setOptimizing(false)
+    formAction(fd)
+  }
+
   return (
     <div className="flex flex-col gap-5">
-      <form ref={formRef} action={formAction} className="flex flex-col gap-3">
-        <input type="hidden" name="locale" value={locale} />
-        <input type="hidden" name="productId" value={productId} />
+      <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <Label htmlFor="media">{t("media")}</Label>
           <Input
@@ -100,7 +101,7 @@ export function ProductMediaManager({
             {state.error}
           </p>
         ) : null}
-        {state.ok ? (
+        {state.ok && !busy ? (
           <p
             role="status"
             className="flex items-center gap-1.5 text-sm text-verified-foreground"
@@ -110,7 +111,19 @@ export function ProductMediaManager({
           </p>
         ) : null}
 
-        <UploadButton idle={t("addMedia")} busy={t("uploading")} />
+        <Button type="submit" disabled={busy} className="h-10">
+          {busy ? (
+            <>
+              <Loader2 className="animate-spin" aria-hidden />
+              {optimizing ? t("optimizing") : t("uploading")}
+            </>
+          ) : (
+            <>
+              <Upload className="size-4" aria-hidden />
+              {t("addMedia")}
+            </>
+          )}
+        </Button>
       </form>
 
       {media.length === 0 ? (

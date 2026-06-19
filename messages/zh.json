@@ -190,6 +190,7 @@
     "media": "图片和视频",
     "mediaHint": "JPG、PNG 或 WebP 最大 10 MB；MP4 或 WebM 最大 50 MB。最多 8 个文件。",
     "addMedia": "上传媒体",
+    "optimizing": "正在优化…",
     "uploading": "正在上传…",
     "mediaAdded": "媒体已上传。",
     "noMedia": "暂无媒体。您上传的第一张图片将作为封面。",
