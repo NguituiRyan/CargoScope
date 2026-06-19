@@ -271,17 +271,29 @@ export function ProductForm({
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="unitWeightKg">{t("packWeight")}</Label>
-          <Input
-            id="unitWeightKg"
-            name="unitWeightKg"
-            type="number"
-            inputMode="decimal"
-            min={0}
-            step="0.001"
-            defaultValue={initial?.unitWeightKg ?? ""}
-            placeholder="0.5"
-          />
+          <Label htmlFor="unitWeight">{t("packWeight")}</Label>
+          <div className="flex gap-2">
+            <Input
+              id="unitWeight"
+              name="unitWeight"
+              type="number"
+              inputMode="decimal"
+              min={0}
+              step="any"
+              defaultValue={initial?.unitWeightKg ?? ""}
+              placeholder="0.5"
+              className="flex-1"
+            />
+            <select
+              name="weightUnit"
+              defaultValue="kg"
+              aria-label={t("packWeightUnit")}
+              className="rounded-lg border border-input bg-background px-3 text-sm"
+            >
+              <option value="kg">kg</option>
+              <option value="g">g</option>
+            </select>
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label htmlFor="unitVolumeCbm">{t("packVolume")}</Label>
@@ -291,7 +303,7 @@ export function ProductForm({
             type="number"
             inputMode="decimal"
             min={0}
-            step="0.0001"
+            step="any"
             defaultValue={initial?.unitVolumeCbm ?? ""}
             placeholder="0.003"
           />

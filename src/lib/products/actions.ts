@@ -138,13 +138,19 @@ export async function saveProductAction(
     samplePrice = parsed.toFixed(2)
   }
 
-  // Packaging per unit — powers buyer shipping estimates (kg for air, CBM for sea).
-  const unitWeightRaw = String(formData.get("unitWeightKg") ?? "").trim()
+  // Packaging per unit — powers buyer shipping estimates (kg for air, CBM for
+  // sea). Weight may be entered in kg or grams; we store kilograms.
+  const unitWeightRaw = String(formData.get("unitWeight") ?? "").trim()
+  const weightUnit = String(formData.get("weightUnit") ?? "kg")
   let unitWeightKg: string | null = null
   if (unitWeightRaw) {
-    const parsed = Number(unitWeightRaw)
-    if (!Number.isFinite(parsed) || parsed < 0 || parsed > 10000) {
-      return { error: "Enter a valid packaging weight in kg." }
+    let parsed = Number(unitWeightRaw)
+    if (!Number.isFinite(parsed) || parsed < 0) {
+      return { error: "Enter a valid packaging weight." }
+    }
+    if (weightUnit === "g") parsed = parsed / 1000
+    if (parsed > 10000) {
+      return { error: "Enter a valid packaging weight." }
     }
     unitWeightKg = parsed > 0 ? parsed.toFixed(3) : null
   }
@@ -155,7 +161,7 @@ export async function saveProductAction(
     if (!Number.isFinite(parsed) || parsed < 0 || parsed > 100) {
       return { error: "Enter a valid packaging volume in CBM." }
     }
-    unitVolumeCbm = parsed > 0 ? parsed.toFixed(4) : null
+    unitVolumeCbm = parsed > 0 ? parsed.toFixed(6) : null
   }
 
   const tiers = parseTiers(formData)

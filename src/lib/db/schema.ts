@@ -254,7 +254,7 @@ export const products = pgTable(
     sampleAvailable: boolean("sample_available").notNull().default(false),
     samplePrice: numeric("sample_price", { precision: 12, scale: 2 }),
     unitWeightKg: numeric("unit_weight_kg", { precision: 10, scale: 3 }),
-    unitVolumeCbm: numeric("unit_volume_cbm", { precision: 10, scale: 4 }),
+    unitVolumeCbm: numeric("unit_volume_cbm", { precision: 12, scale: 6 }),
     primaryImageUrl: text("primary_image_url"),
     status: productStatus("status").notNull().default("draft"),
     ...timestamps(),
