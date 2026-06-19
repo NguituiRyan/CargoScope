@@ -104,6 +104,10 @@ export default async function PricingPage({
                     label={t("subscribe")}
                     variant={recommended ? "default" : "outline"}
                   />
+                ) : monthlyUsd > 0 && m ? (
+                  <span className="inline-flex h-9 items-center justify-center rounded-lg border border-dashed border-border px-3 text-sm font-medium text-muted-foreground">
+                    {t("paymentsSoon")}
+                  </span>
                 ) : (
                   <Link
                     href="/sign-up"
