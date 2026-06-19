@@ -30,6 +30,8 @@
     "email": "Email",
     "password": "Password",
     "passwordHint": "At least 8 characters.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "fullName": "Full name",
     "accountType": "I want to",
     "buyer": "Buy",
@@ -285,7 +287,7 @@
         "name": "Basic",
         "tagline": "Start listing and get discovered.",
         "features": [
-          "Up to 15 active listings",
+          "Up to 20 active listings",
           "Identity-checked badge",
           "Buyer messaging with AI translation",
           "Standard catalog placement"
@@ -295,7 +297,7 @@
         "name": "Verified",
         "tagline": "Win trust and respond to RFQs.",
         "features": [
-          "Up to 60 active listings",
+          "Up to 50 active listings",
           "Verified Supplier badge",
           "Respond to buyer RFQs with quotes",
           "Search ranking boost",
@@ -306,7 +308,7 @@
         "name": "Premium",
         "tagline": "Maximum reach and featured placement.",
         "features": [
-          "Unlimited listings",
+          "Up to 100 active listings",
           "Premium Verified badge",
           "Featured on home & category rails",
           "Top search ranking",

@@ -30,6 +30,8 @@
     "email": "Barua pepe",
     "password": "Nenosiri",
     "passwordHint": "Angalau herufi 8.",
+    "showPassword": "Onyesha nenosiri",
+    "hidePassword": "Ficha nenosiri",
     "fullName": "Jina kamili",
     "accountType": "Nataka",
     "buyer": "Kununua",
@@ -285,7 +287,7 @@
         "name": "Msingi",
         "tagline": "Anza kuorodhesha na ugundulike.",
         "features": [
-          "Hadi orodha 15 hai",
+          "Hadi orodha 20 hai",
           "Beji ya utambulisho uliothibitishwa",
           "Ujumbe na tafsiri ya AI",
           "Uwekaji wa kawaida wa katalogi"
@@ -295,7 +297,7 @@
         "name": "Aliyethibitishwa",
         "tagline": "Pata uaminifu na ujibu RFQ.",
         "features": [
-          "Hadi orodha 60 hai",
+          "Hadi orodha 50 hai",
           "Beji ya Msambazaji Aliyethibitishwa",
           "Jibu RFQ kwa nukuu",
           "Ongezeko la nafasi ya utafutaji",
@@ -306,7 +308,7 @@
         "name": "Premium",
         "tagline": "Ufikiaji wa juu na uwekaji maalum.",
         "features": [
-          "Orodha zisizo na kikomo",
+          "Hadi orodha 100 hai",
           "Beji ya Premium Aliyethibitishwa",
           "Iangaziwe nyumbani na kategoria",
           "Nafasi ya juu ya utafutaji",

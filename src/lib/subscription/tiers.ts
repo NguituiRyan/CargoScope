@@ -18,15 +18,15 @@ export interface TierLimits {
 
 export const TIER_LIMITS: Record<SubscriptionTier, TierLimits> = {
   none: { maxListings: 3, canQuoteRfq: false, featured: false, searchBoost: 0 },
-  basic: { maxListings: 15, canQuoteRfq: false, featured: false, searchBoost: 0 },
+  basic: { maxListings: 20, canQuoteRfq: false, featured: false, searchBoost: 0 },
   verified: {
-    maxListings: 60,
+    maxListings: 50,
     canQuoteRfq: true,
     featured: false,
     searchBoost: 1,
   },
   premium: {
-    maxListings: Number.POSITIVE_INFINITY,
+    maxListings: 100,
     canQuoteRfq: true,
     featured: true,
     searchBoost: 2,
