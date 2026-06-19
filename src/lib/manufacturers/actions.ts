@@ -181,6 +181,15 @@ export async function saveManufacturerProfileAction(
       .eq("id", manufacturerId)
   }
 
+  // Go live immediately: once a supplier has a company profile they are
+  // publicly listed. Verification is a trust badge, not a gate; admins can
+  // unpublish or reject substandard storefronts. (The admin-field guard allows
+  // owners to set is_published — only verification_status/tier are locked.)
+  await supabase
+    .from("manufacturers")
+    .update({ is_published: true })
+    .eq("id", manufacturerId)
+
   // Private contact details — owner + admin only (RLS); never shown to buyers.
   await supabase.from("manufacturer_contacts").upsert(
     {

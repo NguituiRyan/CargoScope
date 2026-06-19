@@ -6,8 +6,6 @@ import { createClient } from "@/lib/supabase/server"
 import { parseSpecs, type ProductSpec } from "@/lib/products/specs"
 import type { VerificationTier } from "@/lib/manufacturers/queries"
 
-const PUBLIC_TIERS = ["identity", "verified", "premium"] as const
-
 export type CatalogSort = "recent" | "popular" | "priceAsc" | "priceDesc"
 
 export interface CatalogFilters {
@@ -263,7 +261,7 @@ export async function searchProducts(
     .select(CARD_SELECT)
     .eq("status", "active")
     .eq("manufacturers.is_published", true)
-    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .neq("manufacturers.verification_status", "rejected")
 
   if (filters.tier) {
     query = query.eq("manufacturers.verification_status", filters.tier)
@@ -327,7 +325,7 @@ export async function getPriceCeilingUsd(): Promise<number> {
     )
     .eq("status", "active")
     .eq("manufacturers.is_published", true)
-    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .neq("manufacturers.verification_status", "rejected")
     .limit(1000)
 
   let max = 0
@@ -384,7 +382,7 @@ export async function getPublicProduct(
     .eq("id", id)
     .eq("status", "active")
     .eq("manufacturers.is_published", true)
-    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .neq("manufacturers.verification_status", "rejected")
     .maybeSingle()
 
   if (!data) return null
@@ -438,7 +436,7 @@ export async function getVerifiedManufacturers(
     .from("manufacturers")
     .select(MANUFACTURER_CARD_SELECT)
     .eq("is_published", true)
-    .in("verification_status", [...PUBLIC_TIERS])
+    .neq("verification_status", "rejected")
 
   if (q) query = query.ilike("company_name", `%${q}%`)
 
@@ -460,7 +458,7 @@ export async function getManufacturerStorefront(
     .select(MANUFACTURER_CARD_SELECT)
     .eq("slug", slug)
     .eq("is_published", true)
-    .in("verification_status", [...PUBLIC_TIERS])
+    .neq("verification_status", "rejected")
     .maybeSingle()
 
   if (!m) return null
@@ -512,7 +510,7 @@ export async function getRelatedProducts(opts: {
     .select(CARD_SELECT)
     .eq("status", "active")
     .eq("manufacturers.is_published", true)
-    .in("manufacturers.verification_status", [...PUBLIC_TIERS])
+    .neq("manufacturers.verification_status", "rejected")
     .neq("id", opts.productId)
   if (opts.categoryId) query = query.eq("category_id", opts.categoryId)
 
