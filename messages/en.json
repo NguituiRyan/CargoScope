@@ -663,7 +663,6 @@
   "terms": {
     "title": "Terms of Service",
     "updated": "Plain-language summary · last updated June 2026",
-    "draft": "This is a plain-language summary while we finalize our full Terms. It isn't a substitute for the complete agreement — contact us with any questions.",
     "p1Title": "Using the platform",
     "p1": "Shop Buddy connects buyers and suppliers. Buyers browse and message suppliers for free; suppliers pay to list and are vetted before going live. Use the platform lawfully and respect other members.",
     "p2Title": "Orders and payments",
@@ -674,7 +673,6 @@
   "privacy": {
     "title": "Privacy Policy",
     "updated": "Plain-language summary · last updated June 2026",
-    "draft": "This is a plain-language summary while we finalize our full Privacy Policy. Contact us if you have any questions about your data.",
     "p1Title": "What we collect",
     "p1": "Account details (name, email, role), the company and product information you provide, and the messages you send through the platform.",
     "p2Title": "How we use it",
@@ -685,7 +683,6 @@
   "buyerProtection": {
     "title": "Buyer Protection",
     "updated": "Summary · last updated June 2026",
-    "draft": "This is a plain-language summary of how we protect buyers while we finalize the full policy. Contact us with any questions.",
     "p1Title": "Source from verified suppliers",
     "p1": "Every supplier is reviewed before going live, with a verification tier (Identity-checked, Verified, or Premium) shown on their profile so you know who you are dealing with.",
     "p2Title": "Talk before you pay",
@@ -716,7 +713,6 @@
   "disputes": {
     "title": "Dispute Resolution",
     "updated": "Summary · last updated June 2026",
-    "draft": "This is a plain-language summary while we finalize the full policy. Contact us if you need help with a dispute.",
     "p1Title": "Start in the chat",
     "p1": "Most issues are resolved fastest directly between buyer and supplier in the in-app chat, where the full conversation and any shared files are on record.",
     "p2Title": "Escalate to us",
@@ -727,7 +723,6 @@
   "refunds": {
     "title": "Refund Policy",
     "updated": "Summary · last updated June 2026",
-    "draft": "This is a plain-language summary while we finalize the full policy. Contact us with any questions.",
     "p1Title": "Orders are between buyer and supplier",
     "p1": "Shop Buddy is a sourcing and communication platform. Purchases, payments and shipping are arranged directly with the supplier, so refunds follow the terms you agree with them.",
     "p2Title": "Agree terms up front",

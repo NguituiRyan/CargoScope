@@ -15,5 +15,5 @@ export default async function Page({
 }) {
   const { locale } = await params
   setRequestLocale(locale)
-  return <PolicyPage ns="refunds" draft />
+  return <PolicyPage ns="refunds" />
 }

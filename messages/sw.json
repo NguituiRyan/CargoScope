@@ -663,7 +663,6 @@
   "terms": {
     "title": "Masharti ya Huduma",
     "updated": "Muhtasari wa lugha rahisi · ilisasishwa Juni 2026",
-    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha Masharti yetu kamili. Si mbadala wa makubaliano kamili — wasiliana nasi kwa maswali yoyote.",
     "p1Title": "Kutumia jukwaa",
     "p1": "Shop Buddy huunganisha wanunuzi na wasambazaji. Wanunuzi huvinjari na kutuma ujumbe kwa wasambazaji bila malipo; wasambazaji hulipa kuorodhesha na hukaguliwa kabla ya kuanza. Tumia jukwaa kihalali na uwaheshimu wanachama wengine.",
     "p2Title": "Maagizo na malipo",
@@ -674,7 +673,6 @@
   "privacy": {
     "title": "Sera ya Faragha",
     "updated": "Muhtasari wa lugha rahisi · ilisasishwa Juni 2026",
-    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha Sera yetu kamili ya Faragha. Wasiliana nasi ikiwa una maswali yoyote kuhusu data yako.",
     "p1Title": "Tunachokusanya",
     "p1": "Maelezo ya akaunti (jina, barua pepe, jukumu), taarifa za kampuni na bidhaa unazotoa, na ujumbe unaotuma kupitia jukwaa.",
     "p2Title": "Jinsi tunavyoitumia",
@@ -685,7 +683,6 @@
   "buyerProtection": {
     "title": "Ulinzi wa Mnunuzi",
     "updated": "Muhtasari · ilisasishwa Juni 2026",
-    "draft": "Huu ni muhtasari wa lugha rahisi wa jinsi tunavyowalinda wanunuzi tunapokamilisha sera kamili. Wasiliana nasi kwa maswali yoyote.",
     "p1Title": "Nunua kutoka kwa wasambazaji walioidhinishwa",
     "p1": "Kila msambazaji hukaguliwa kabla ya kuanza, na daraja la uthibitisho (Kitambulisho kimethibitishwa, Aliyethibitishwa, au Premium) huonyeshwa kwenye wasifu wake ili ujue unayeshughulika naye.",
     "p2Title": "Zungumza kabla ya kulipa",
@@ -716,7 +713,6 @@
   "disputes": {
     "title": "Utatuzi wa Migogoro",
     "updated": "Muhtasari · ilisasishwa Juni 2026",
-    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha sera kamili. Wasiliana nasi ikiwa unahitaji msaada na mgogoro.",
     "p1Title": "Anza kwenye gumzo",
     "p1": "Masuala mengi hutatuliwa haraka zaidi moja kwa moja kati ya mnunuzi na msambazaji kwenye gumzo la ndani, ambapo mazungumzo yote na faili zilizoshirikiwa zimo kwenye rekodi.",
     "p2Title": "Tupelekee suala",
@@ -727,7 +723,6 @@
   "refunds": {
     "title": "Sera ya Marejesho",
     "updated": "Muhtasari · ilisasishwa Juni 2026",
-    "draft": "Huu ni muhtasari wa lugha rahisi tunapokamilisha sera kamili. Wasiliana nasi kwa maswali yoyote.",
     "p1Title": "Maagizo ni kati ya mnunuzi na msambazaji",
     "p1": "Shop Buddy ni jukwaa la kutafuta bidhaa na mawasiliano. Ununuzi, malipo na usafirishaji hupangwa moja kwa moja na msambazaji, kwa hivyo marejesho hufuata masharti unayokubaliana naye.",
     "p2Title": "Kubaliana masharti mapema",

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Info } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,11 +27,6 @@ export default async function PrivacyPage({
         {t("title")}
       </h1>
       <p className="mt-1 text-sm text-muted-foreground">{t("updated")}</p>
-
-      <div className="mt-6 flex items-start gap-2.5 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm">
-        <Info className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-        <p className="text-muted-foreground">{t("draft")}</p>
-      </div>
 
       <div className="mt-8 flex flex-col gap-6">
         {sections.map((section) => (
