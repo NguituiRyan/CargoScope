@@ -120,6 +120,63 @@ export async function signUpAction(
   return { needsConfirmation: true }
 }
 
+const resetRequestSchema = z.object({ email: z.string().email() })
+
+/**
+ * Send a password-reset email. Always reports success so we never reveal
+ * whether an account exists. The email links to /auth/confirm (verifyOtp,
+ * type=recovery), which sets a recovery session and forwards to /reset-password.
+ */
+export async function requestPasswordResetAction(
+  _prev: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const parsed = resetRequestSchema.safeParse({ email: formData.get("email") })
+  if (!parsed.success) {
+    return { error: "Enter a valid email address." }
+  }
+
+  const supabase = await createClient()
+  const origin = await siteOrigin()
+  await supabase.auth.resetPasswordForEmail(parsed.data.email, {
+    redirectTo: origin ? `${origin}/auth/confirm?next=/reset-password` : undefined,
+  })
+
+  return { needsConfirmation: true }
+}
+
+const newPasswordSchema = z.string().min(8, { message: "Use at least 8 characters" })
+
+/**
+ * Set a new password for the user in the current (recovery) session. Requires
+ * the session established by the reset link via /auth/confirm.
+ */
+export async function updatePasswordAction(
+  _prev: AuthState,
+  formData: FormData
+): Promise<AuthState> {
+  const password = formData.get("password")
+  const confirm = formData.get("confirm")
+  const parsed = newPasswordSchema.safeParse(password)
+  if (!parsed.success) {
+    return { error: "Use at least 8 characters." }
+  }
+  if (password !== confirm) {
+    return { error: "Passwords do not match." }
+  }
+
+  const supabase = await createClient()
+  const { error } = await supabase.auth.updateUser({ password: parsed.data })
+  if (error) {
+    return {
+      error:
+        "Could not update your password — the reset link may have expired. Request a new one.",
+    }
+  }
+
+  redirect(localePath(await resolveLocale(formData), "/account"))
+}
+
 export async function signOutAction(formData: FormData): Promise<void> {
   const supabase = await createClient()
   await supabase.auth.signOut()

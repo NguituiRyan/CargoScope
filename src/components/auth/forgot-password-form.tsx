@@ -2,15 +2,13 @@
 
 import { useActionState } from "react"
 import { useFormStatus } from "react-dom"
-import { Loader2 } from "lucide-react"
+import { Loader2, MailCheck } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { signInAction, type AuthState } from "@/lib/auth/actions"
-import { PasswordInput } from "@/components/auth/password-input"
+import { requestPasswordResetAction, type AuthState } from "@/lib/auth/actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Link } from "@/i18n/navigation"
 
 function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
   const { pending } = useFormStatus()
@@ -28,24 +26,31 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
   )
 }
 
-export function SignInForm({
-  locale,
-  next,
-}: {
-  locale: string
-  next?: string
-}) {
+export function ForgotPasswordForm({ locale }: { locale: string }) {
   const t = useTranslations("auth")
   const [state, formAction] = useActionState<AuthState, FormData>(
-    signInAction,
+    requestPasswordResetAction,
     {}
   )
+
+  if (state.needsConfirmation) {
+    return (
+      <div
+        role="status"
+        className="flex flex-col items-center gap-3 py-4 text-center"
+      >
+        <span className="flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+          <MailCheck className="size-5" aria-hidden />
+        </span>
+        <p className="font-medium">{t("resetSentTitle")}</p>
+        <p className="text-sm text-muted-foreground">{t("resetSentBody")}</p>
+      </div>
+    )
+  }
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <input type="hidden" name="locale" value={locale} />
-      {next ? <input type="hidden" name="next" value={next} /> : null}
-
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">{t("email")}</Label>
         <Input
@@ -58,31 +63,13 @@ export function SignInForm({
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-2">
-          <Label htmlFor="password">{t("password")}</Label>
-          <Link
-            href="/forgot-password"
-            className="text-xs text-muted-foreground transition-colors hover:text-foreground hover:underline"
-          >
-            {t("forgotPassword")}
-          </Link>
-        </div>
-        <PasswordInput
-          id="password"
-          name="password"
-          autoComplete="current-password"
-          required
-        />
-      </div>
-
       {state.error ? (
         <p role="alert" className="text-sm text-destructive">
           {state.error}
         </p>
       ) : null}
 
-      <SubmitButton idle={t("signInCta")} busy={t("signingIn")} />
+      <SubmitButton idle={t("sendResetLink")} busy={t("sending")} />
     </form>
   )
 }

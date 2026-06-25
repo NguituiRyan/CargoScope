@@ -5,12 +5,10 @@ import { useFormStatus } from "react-dom"
 import { Loader2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { signInAction, type AuthState } from "@/lib/auth/actions"
+import { updatePasswordAction, type AuthState } from "@/lib/auth/actions"
 import { PasswordInput } from "@/components/auth/password-input"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Link } from "@/i18n/navigation"
 
 function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
   const { pending } = useFormStatus()
@@ -28,51 +26,35 @@ function SubmitButton({ idle, busy }: { idle: string; busy: string }) {
   )
 }
 
-export function SignInForm({
-  locale,
-  next,
-}: {
-  locale: string
-  next?: string
-}) {
+export function ResetPasswordForm({ locale }: { locale: string }) {
   const t = useTranslations("auth")
   const [state, formAction] = useActionState<AuthState, FormData>(
-    signInAction,
+    updatePasswordAction,
     {}
   )
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
       <input type="hidden" name="locale" value={locale} />
-      {next ? <input type="hidden" name="next" value={next} /> : null}
-
       <div className="flex flex-col gap-2">
-        <Label htmlFor="email">{t("email")}</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          placeholder="you@example.com"
-        />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between gap-2">
-          <Label htmlFor="password">{t("password")}</Label>
-          <Link
-            href="/forgot-password"
-            className="text-xs text-muted-foreground transition-colors hover:text-foreground hover:underline"
-          >
-            {t("forgotPassword")}
-          </Link>
-        </div>
+        <Label htmlFor="password">{t("newPassword")}</Label>
         <PasswordInput
           id="password"
           name="password"
-          autoComplete="current-password"
+          autoComplete="new-password"
           required
+          minLength={8}
+        />
+        <p className="text-xs text-muted-foreground">{t("passwordHint")}</p>
+      </div>
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="confirm">{t("confirmPassword")}</Label>
+        <PasswordInput
+          id="confirm"
+          name="confirm"
+          autoComplete="new-password"
+          required
+          minLength={8}
         />
       </div>
 
@@ -82,7 +64,7 @@ export function SignInForm({
         </p>
       ) : null}
 
-      <SubmitButton idle={t("signInCta")} busy={t("signingIn")} />
+      <SubmitButton idle={t("updatePassword")} busy={t("updating")} />
     </form>
   )
 }
