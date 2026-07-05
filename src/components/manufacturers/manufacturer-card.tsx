@@ -46,9 +46,11 @@ export async function ManufacturerCard({
             >
               {manufacturer.companyName}
             </Link>
-            <div className="mt-1">
-              <VerificationBadge status={manufacturer.verificationStatus} />
-            </div>
+            {manufacturer.verificationStatus !== "pending" && (
+              <div className="mt-1">
+                <VerificationBadge status={manufacturer.verificationStatus} />
+              </div>
+            )}
           </div>
         </div>
 

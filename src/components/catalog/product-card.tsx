@@ -53,9 +53,11 @@ export async function ProductCard({
               aria-hidden
             />
           )}
-          <div className="absolute left-2 top-2">
-            <VerificationBadge status={product.manufacturer.verificationStatus} />
-          </div>
+          {product.manufacturer.verificationStatus !== "pending" && (
+            <div className="absolute left-2 top-2">
+              <VerificationBadge status={product.manufacturer.verificationStatus} />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-3">

@@ -62,7 +62,10 @@ export default async function AdminManufacturersPage({
                       {m.isPublished ? (
                         <Badge variant="outline">{t("live")}</Badge>
                       ) : null}
-                      <VerificationBadge status={m.verificationStatus} />
+                      <VerificationBadge
+                        status={m.verificationStatus}
+                        showPending={true}
+                      />
                       <ChevronRight
                         className="size-4 text-muted-foreground"
                         aria-hidden
