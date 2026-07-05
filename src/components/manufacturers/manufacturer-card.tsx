@@ -1,8 +1,6 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 import { Building2, MapPin } from "lucide-react"
-
-import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
@@ -46,11 +44,7 @@ export async function ManufacturerCard({
             >
               {manufacturer.companyName}
             </Link>
-            {manufacturer.verificationStatus !== "pending" && (
-              <div className="mt-1">
-                <VerificationBadge status={manufacturer.verificationStatus} />
-              </div>
-            )}
+
           </div>
         </div>
 

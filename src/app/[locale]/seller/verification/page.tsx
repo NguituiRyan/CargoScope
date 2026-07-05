@@ -53,7 +53,7 @@ export default async function VerificationPage({
             </div>
             <VerificationBadge
               status={manufacturer.verificationStatus}
-              showPending={true}
+              forceShow={true}
             />
           </div>
         </CardHeader>

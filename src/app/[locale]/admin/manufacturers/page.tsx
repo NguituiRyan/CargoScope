@@ -64,7 +64,7 @@ export default async function AdminManufacturersPage({
                       ) : null}
                       <VerificationBadge
                         status={m.verificationStatus}
-                        showPending={true}
+                        forceShow={true}
                       />
                       <ChevronRight
                         className="size-4 text-muted-foreground"

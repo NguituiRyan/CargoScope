@@ -6,7 +6,6 @@ import {
   ReadyToShipBadge,
   READY_TO_SHIP_MAX_DAYS,
 } from "@/components/catalog/ready-to-ship-badge"
-import { VerificationBadge } from "@/components/manufacturers/verification-badge"
 import { Stars } from "@/components/reviews/stars"
 import { Card } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
@@ -53,11 +52,7 @@ export async function ProductCard({
               aria-hidden
             />
           )}
-          {product.manufacturer.verificationStatus !== "pending" && (
-            <div className="absolute left-2 top-2">
-              <VerificationBadge status={product.manufacturer.verificationStatus} />
-            </div>
-          )}
+
         </div>
 
         <div className="flex flex-1 flex-col gap-2 p-3">

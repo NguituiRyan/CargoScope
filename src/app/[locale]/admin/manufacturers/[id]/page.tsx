@@ -79,7 +79,7 @@ export default async function ManufacturerDetailPage({
           </h1>
           <p className="text-sm text-muted-foreground">{location}</p>
         </div>
-        <VerificationBadge status={m.verificationStatus} showPending={true} />
+        <VerificationBadge status={m.verificationStatus} forceShow={true} />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">

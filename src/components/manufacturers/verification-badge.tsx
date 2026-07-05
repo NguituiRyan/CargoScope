@@ -16,12 +16,12 @@ const VARIANT: Record<
 
 export async function VerificationBadge({
   status,
-  showPending = false,
+  forceShow = false,
 }: {
   status: VerificationTier
-  showPending?: boolean
+  forceShow?: boolean
 }) {
-  if (status === "pending" && !showPending) {
+  if (!forceShow) {
     return null
   }
   const t = await getTranslations("verification")
