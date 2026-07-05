@@ -12,7 +12,7 @@ import {
 import { LogoMark } from "@/components/brand/logo-mark"
 import { Link } from "@/i18n/navigation"
 
-const CONTACT_EMAIL = "hello@shopbuddy.africa"
+const CONTACT_EMAIL = "info@shopbuddy.africa"
 
 /**
  * Global footer. Rendered on every page (in the locale layout) so navigation,
