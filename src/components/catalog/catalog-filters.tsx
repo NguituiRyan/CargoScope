@@ -181,7 +181,7 @@ export function CatalogFilters({
                   >
                     <option value="">{t("allCategories")}</option>
                     {categories.map((cat) => (
-                      <option key={cat.id} value={cat.slug}>
+                      <option key={cat.id} value={cat.slug} disabled={!cat.hasProducts}>
                         {cat.name}
                       </option>
                     ))}

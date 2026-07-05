@@ -98,6 +98,7 @@ export interface FilterCategory {
   id: string
   slug: string
   name: string
+  hasProducts: boolean
 }
 
 // Kept as single string literals (not concatenated) so supabase-js infers the
@@ -222,15 +223,32 @@ function mapStorefrontManufacturer(m: {
 export async function getFilterCategories(): Promise<FilterCategory[]> {
   const locale = await getLocale()
   const supabase = await createClient()
-  const { data } = await supabase
+  
+  // Get all categories ordered by sort field
+  const { data: categoriesData } = await supabase
     .from("categories")
     .select("id, slug, name_en, name_sw, name_zh")
     .order("sort", { ascending: true })
 
-  return (data ?? []).map((row) => ({
+  // Get active products to check which categories have items
+  const { data: productsData } = await supabase
+    .from("products")
+    .select("category_id, manufacturers!inner(is_published, verification_status)")
+    .eq("status", "active")
+    .eq("manufacturers.is_published", true)
+    .neq("manufacturers.verification_status", "rejected")
+
+  const activeCategoryIds = new Set(
+    (productsData ?? [])
+      .map((p) => p.category_id)
+      .filter((id): id is string => id !== null)
+  )
+
+  return (categoriesData ?? []).map((row) => ({
     id: row.id,
     slug: row.slug,
     name: localizedCategoryName(row, locale),
+    hasProducts: activeCategoryIds.has(row.id),
   }))
 }
 

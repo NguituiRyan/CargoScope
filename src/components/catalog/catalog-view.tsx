@@ -77,11 +77,25 @@ function CategoryChip({
   href,
   label,
   active,
+  disabled,
 }: {
   href: string
   label: string
   active: boolean
+  disabled?: boolean
 }) {
+  if (disabled) {
+    return (
+      <span
+        className={cn(
+          "shrink-0 rounded-full border px-3.5 py-1.5 text-sm whitespace-nowrap select-none",
+          "border-border bg-muted/40 text-muted-foreground/45 cursor-not-allowed"
+        )}
+      >
+        {label}
+      </span>
+    )
+  }
   return (
     <Link
       href={href}
@@ -187,6 +201,7 @@ export async function CatalogView({
                 href={`/products?category=${category.slug}`}
                 label={category.name}
                 active={activeCategory === category.slug}
+                disabled={!category.hasProducts}
               />
             ))}
           </div>
