@@ -51,10 +51,12 @@ export default async function VerificationPage({
                 {t("verificationSubtitle")}
               </CardDescription>
             </div>
-            <VerificationBadge
-              status={manufacturer.verificationStatus}
-              forceShow={true}
-            />
+            {manufacturer.verificationStatus !== "pending" && (
+              <VerificationBadge
+                status={manufacturer.verificationStatus}
+                forceShow={true}
+              />
+            )}
           </div>
         </CardHeader>
         <CardContent>
