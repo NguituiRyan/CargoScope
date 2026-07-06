@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { routing } from "@/i18n/routing"
 import { SITE_URL } from "@/lib/site"
+import Script from "next/script"
 import "../globals.css"
 
 const sans = Be_Vietnam_Pro({
@@ -76,6 +77,20 @@ export default async function LocaleLayout({
       className={`${sans.variable} ${geistMono.variable} ${display.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NXSP73BPZR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NXSP73BPZR');
+          `}
+        </Script>
+      </head>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
           <QueryProvider>
