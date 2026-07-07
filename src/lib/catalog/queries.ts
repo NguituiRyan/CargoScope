@@ -321,9 +321,20 @@ export async function searchProducts(
   if (filters.sort === "priceAsc" || filters.sort === "priceDesc") {
     const dir = filters.sort === "priceAsc" ? 1 : -1
     items = [...items].sort((a, b) => {
+      const aPremium = a.manufacturer.verificationStatus === "premium" ? 1 : 0
+      const bPremium = b.manufacturer.verificationStatus === "premium" ? 1 : 0
+      if (aPremium !== bPremium) {
+        return bPremium - aPremium
+      }
       if (a.minPrice === null) return 1
       if (b.minPrice === null) return -1
       return (a.minPrice - b.minPrice) * dir
+    })
+  } else {
+    items = [...items].sort((a, b) => {
+      const aPremium = a.manufacturer.verificationStatus === "premium" ? 1 : 0
+      const bPremium = b.manufacturer.verificationStatus === "premium" ? 1 : 0
+      return bPremium - aPremium
     })
   }
 
