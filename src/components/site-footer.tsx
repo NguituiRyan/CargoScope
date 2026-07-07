@@ -94,29 +94,18 @@ export async function SiteFooter() {
             </li>
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-              <div className="flex flex-col gap-1">
-                <a
-                  href="tel:+254786564564"
-                  className="transition-colors hover:text-foreground"
-                >
-                  {t("phoneKe")}
-                </a>
-                <a
-                  href="tel:+8619750539767"
-                  className="transition-colors hover:text-foreground"
-                >
-                  {t("phoneCn")}
-                </a>
-              </div>
+              <a
+                href="tel:+8619750539767"
+                className="transition-colors hover:text-foreground"
+              >
+                {t("phoneCn")}
+              </a>
             </li>
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-              <div className="flex flex-col gap-0.5">
-                <span>{t("location")}</span>
-                <span className="text-xs text-muted-foreground/80 leading-normal">
-                  {t("addressCn")}
-                </span>
-              </div>
+              <span className="leading-normal">
+                {t("addressCn")}
+              </span>
             </li>
             <li className="flex items-start gap-2">
               <Clock className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />

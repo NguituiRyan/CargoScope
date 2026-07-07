@@ -305,7 +305,7 @@
         "name": "Basic",
         "tagline": "Start listing and get discovered.",
         "features": [
-          "Up to 20 active listings",
+          "Up to 50 active listings",
           "Identity-checked badge",
           "Buyer messaging with AI translation",
           "Standard catalog placement"
@@ -315,7 +315,7 @@
         "name": "Verified",
         "tagline": "Win trust and respond to RFQs.",
         "features": [
-          "Up to 50 active listings",
+          "Up to 75 active listings",
           "Verified Supplier badge",
           "Respond to buyer RFQs with quotes",
           "Search ranking boost",

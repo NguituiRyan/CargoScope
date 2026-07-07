@@ -18,9 +18,9 @@ export interface TierLimits {
 
 export const TIER_LIMITS: Record<SubscriptionTier, TierLimits> = {
   none: { maxListings: 3, canQuoteRfq: false, featured: false, searchBoost: 0 },
-  basic: { maxListings: 20, canQuoteRfq: false, featured: false, searchBoost: 0 },
+  basic: { maxListings: 50, canQuoteRfq: false, featured: false, searchBoost: 0 },
   verified: {
-    maxListings: 50,
+    maxListings: 75,
     canQuoteRfq: true,
     featured: false,
     searchBoost: 1,
@@ -44,6 +44,6 @@ export const PRICING_TIERS: {
   recommended: boolean
 }[] = [
   { tier: "basic", monthlyUsd: 0, recommended: false },
-  { tier: "verified", monthlyUsd: 99, recommended: true },
-  { tier: "premium", monthlyUsd: 299, recommended: false },
+  { tier: "verified", monthlyUsd: 75, recommended: true },
+  { tier: "premium", monthlyUsd: 100, recommended: false },
 ]
