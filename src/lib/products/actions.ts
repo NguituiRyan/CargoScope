@@ -387,6 +387,35 @@ function storagePathFromUrl(url: string): string | null {
   return decodeURIComponent(url.slice(idx + PUBLIC_MARKER.length))
 }
 
+export async function setProductCoverAction(formData: FormData): Promise<void> {
+  const user = await requireRole("manufacturer")
+  const supabase = await createClient()
+
+  const manufacturerId = await myManufacturerId(supabase, user.id)
+  if (!manufacturerId) return
+
+  const productId = String(formData.get("productId") ?? "").trim()
+  const mediaUrl = String(formData.get("mediaUrl") ?? "").trim()
+  if (!productId || !mediaUrl) return
+
+  const { data: product } = await supabase
+    .from("products")
+    .select("id")
+    .eq("id", productId)
+    .eq("manufacturer_id", manufacturerId)
+    .maybeSingle()
+  if (!product) return
+
+  await supabase
+    .from("products")
+    .update({ primary_image_url: mediaUrl })
+    .eq("id", productId)
+
+  const locale = await getLocale()
+  revalidatePath(localePath(locale, `/seller/products/${productId}/edit`))
+  revalidatePath(localePath(locale, "/seller/products"))
+}
+
 export async function deleteProductMediaAction(formData: FormData): Promise<void> {
   const user = await requireRole("manufacturer")
   const supabase = await createClient()

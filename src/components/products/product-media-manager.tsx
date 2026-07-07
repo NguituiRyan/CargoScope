@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl"
 import {
   addProductMediaAction,
   deleteProductMediaAction,
+  setProductCoverAction,
   type ProductActionState,
 } from "@/lib/products/actions"
 import type { ProductMediaItem } from "@/lib/products/queries"
@@ -157,6 +158,17 @@ export function ProductMediaManager({
                 >
                   {t("primary")}
                 </Badge>
+              ) : item.type === "image" ? (
+                <form action={setProductCoverAction}>
+                  <input type="hidden" name="productId" value={productId} />
+                  <input type="hidden" name="mediaUrl" value={item.url} />
+                  <button
+                    type="submit"
+                    className="absolute bottom-1.5 left-1.5 rounded-md bg-black/60 px-2 py-1 text-[10px] font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/85"
+                  >
+                    {t("setAsCover")}
+                  </button>
+                </form>
               ) : null}
               <form action={deleteProductMediaAction}>
                 <input type="hidden" name="locale" value={locale} />
