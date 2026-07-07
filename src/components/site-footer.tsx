@@ -6,6 +6,7 @@ import {
   Mail,
   MapPin,
   MessagesSquare,
+  Phone,
   ShieldCheck,
 } from "lucide-react"
 
@@ -81,9 +82,9 @@ export async function SiteFooter() {
             {tNav("brand")}
           </Link>
           <p className="max-w-xs text-sm text-muted-foreground">{t("tagline")}</p>
-          <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Mail className="size-4 shrink-0 text-primary" aria-hidden />
+          <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
+            <li className="flex items-start gap-2">
+              <Mail className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="transition-colors hover:text-foreground"
@@ -91,12 +92,34 @@ export async function SiteFooter() {
                 {CONTACT_EMAIL}
               </a>
             </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="size-4 shrink-0 text-primary" aria-hidden />
-              {t("location")}
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <div className="flex flex-col gap-1">
+                <a
+                  href="tel:+254786564564"
+                  className="transition-colors hover:text-foreground"
+                >
+                  {t("phoneKe")}
+                </a>
+                <a
+                  href="tel:+8619750539767"
+                  className="transition-colors hover:text-foreground"
+                >
+                  {t("phoneCn")}
+                </a>
+              </div>
             </li>
-            <li className="flex items-center gap-2">
-              <Clock className="size-4 shrink-0 text-primary" aria-hidden />
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <div className="flex flex-col gap-0.5">
+                <span>{t("location")}</span>
+                <span className="text-xs text-muted-foreground/80 leading-normal">
+                  {t("addressCn")}
+                </span>
+              </div>
+            </li>
+            <li className="flex items-start gap-2">
+              <Clock className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
               {t("hours")}
             </li>
           </ul>
