@@ -112,6 +112,10 @@ const DETAIL_SELECT =
 const MANUFACTURER_CARD_SELECT =
   "id, company_name, slug, country, city, verification_status, year_established, member_since, response_rate, certifications, main_categories, logo_url, banner_url, description"
 
+// Price filtering and sorting happen after this bounded fetch. Keep enough
+// headroom for the live catalog until those operations move to paginated SQL.
+const CATALOG_FETCH_LIMIT = 250
+
 // PostgREST returns a to-one embed as an object, but can surface it as a
 // single-element array depending on relationship inference. Normalise both.
 function one<T>(value: T | T[] | null | undefined): T | null {
@@ -303,7 +307,7 @@ export async function searchProducts(
 
   const { data } = await query
     .order("created_at", { ascending: false })
-    .limit(120)
+    .limit(CATALOG_FETCH_LIMIT)
 
   let items = (data ?? [])
     .map((row) => mapCard(row as CardRow))
