@@ -115,7 +115,7 @@ export async function SiteFooter() {
 
           <div className="mt-5 flex flex-col gap-3.5">
             <a
-              href="https://wa.me/8619550539767?text=Hello%20Shop%20Buddy%2C%20I%27m%20interested%20in%20sourcing%20products%20from%20China."
+              href="https://wa.me/8619550539767?text=Hello%20Shopbuddy%2C%20I%27m%20interested%20in%20sourcing%20products%20from%20China."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700 w-fit"

@@ -19,7 +19,7 @@ export default function GlobalNotFound() {
             className="flex items-center gap-2 text-lg font-semibold tracking-tight"
           >
             <LogoMark className="size-7 shrink-0 text-primary" />
-            Shop Buddy
+            Shopbuddy
           </Link>
           <p className="text-5xl font-bold text-muted-foreground">404</p>
           <h1 className="text-2xl font-semibold">Page not found</h1>

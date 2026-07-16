@@ -1,6 +1,6 @@
-# Deploying Shop Buddy to Vercel
+# Deploying Shopbuddy to Vercel
 
-Shop Buddy is a **server-rendered Next.js 16 app** (App Router, Server Actions,
+Shopbuddy is a **server-rendered Next.js 16 app** (App Router, Server Actions,
 `proxy.ts`, Drizzle + Supabase). It is **not** a static site — every route is
 rendered on demand (`ƒ` in the build output). Vercel must build and serve it with
 the **Next.js framework preset**, and the runtime **environment variables must be

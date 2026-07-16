@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Shop Buddy",
+    "brand": "Shopbuddy",
     "products": "产品",
     "manufacturers": "制造商",
     "howItWorks": "运作方式",
@@ -18,15 +18,15 @@
   "home": {
     "badge": "经核实的中非采购",
     "title": "放心地向经核实的中国制造商采购。",
-    "subtitle": "Shop Buddy 将非洲的批发买家与经审核的工厂连接起来——透明的到岸成本、应用内翻译，每一步都建立信任。",
+    "subtitle": "Shopbuddy 将非洲的批发买家与经审核的工厂连接起来——透明的到岸成本、应用内翻译，每一步都建立信任。",
     "ctaBrowse": "浏览产品",
-    "ctaSell": "在 Shop Buddy 上销售"
+    "ctaSell": "在 Shopbuddy 上销售"
   },
   "auth": {
     "signInTitle": "欢迎回来",
-    "signInSubtitle": "登录您的 Shop Buddy 账户。",
+    "signInSubtitle": "登录您的 Shopbuddy 账户。",
     "signUpTitle": "创建您的账户",
-    "signUpSubtitle": "加入 Shop Buddy，放心采购或销售。",
+    "signUpSubtitle": "加入 Shopbuddy，放心采购或销售。",
     "email": "电子邮箱",
     "password": "密码",
     "passwordHint": "至少 8 个字符。",
@@ -57,14 +57,14 @@
     "signUpCta": "创建账户",
     "signingIn": "正在登录…",
     "creatingAccount": "正在创建账户…",
-    "noAccount": "初次使用 Shop Buddy？",
+    "noAccount": "初次使用 Shopbuddy？",
     "haveAccount": "已经有账户了？",
     "checkEmailTitle": "请查收您的邮箱",
     "checkEmailBody": "我们已向您发送确认链接。点击链接以激活账户并登录。"
   },
   "account": {
     "title": "您的账户",
-    "subtitle": "管理您的 Shop Buddy 资料和会话。",
+    "subtitle": "管理您的 Shopbuddy 资料和会话。",
     "name": "姓名",
     "email": "电子邮箱",
     "role": "角色",
@@ -121,7 +121,7 @@
     "banner": "店铺横幅",
     "brandingHint": "JPG、PNG 或 WebP，最大 5 MB。清晰的标志和宽幅横幅让您的店铺更专业。",
     "contactsTitle": "私密联系方式",
-    "contactsHint": "只有您和 Shop Buddy 管理员可以看到这些——买家永远看不到。买家通过应用内聊天与您联系。",
+    "contactsHint": "只有您和 Shopbuddy 管理员可以看到这些——买家永远看不到。买家通过应用内聊天与您联系。",
     "wechat": "微信号",
     "whatsapp": "WhatsApp",
     "phone": "电话",
@@ -300,7 +300,7 @@
     "subscribe": "订阅",
     "currentPlan": "当前方案",
     "paymentsSoon": "支付即将开通",
-    "buyerNote": "在 Shop Buddy 采购始终免费 — 套餐面向供应商。",
+    "buyerNote": "在 Shopbuddy 采购始终免费 — 套餐面向供应商。",
     "tiers": {
       "basic": {
         "name": "基础版",
@@ -568,11 +568,11 @@
     "backToDirectory": "返回制造商"
   },
   "howItWorks": {
-    "title": "Shop Buddy 如何运作",
+    "title": "Shopbuddy 如何运作",
     "subtitle": "从认证的中国工厂到您在非洲仓库的信任优先之路。",
     "forBuyers": "买家须知",
     "stepAccountTitle": "免费注册账户",
-    "stepAccountBody": "不到一分钟即可注册 — 在 Shop Buddy 采购完全免费，无需订阅。",
+    "stepAccountBody": "不到一分钟即可注册 — 在 Shopbuddy 采购完全免费，无需订阅。",
     "step1Title": "找到认证供应商",
     "step1Body": "每家制造商都经过证件审核和等级评定。购买前请查看认证徽章。",
     "step2Title": "看清真实到岸成本",
@@ -653,7 +653,7 @@
     "rights": "保留所有权利。",
     "forBuyers": "买家",
     "forSuppliers": "供应商",
-    "becomeSupplier": "在 Shop Buddy 上销售",
+    "becomeSupplier": "在 Shopbuddy 上销售",
     "location": "肯尼亚，内罗毕",
     "addressCn": "中国浙江省金华市义乌市福田街道长春七街47-49号 (322000)",
     "phoneKe": "+254 786 564 564",
@@ -667,8 +667,8 @@
     "bottomLine": "值得信赖的中非采购。"
   },
   "about": {
-    "title": "关于 Shop Buddy",
-    "lead": "Shop Buddy 是一个以信任为先的 B2B 市场，连接非洲批发买家与经过验证的中国制造商。",
+    "title": "关于 Shopbuddy",
+    "lead": "Shopbuddy 是一个以信任为先的 B2B 市场，连接非洲批发买家与经过验证的中国制造商。",
     "missionTitle": "我们的使命",
     "mission": "我们让跨境采购安全又简单 — 经审核的供应商、透明的到岸成本、内置翻译以及直接沟通 — 让买家放心下单。"
   },
@@ -684,9 +684,9 @@
     "title": "服务条款",
     "updated": "通俗摘要 · 最后更新于 2026 年 6 月",
     "p1Title": "使用平台",
-    "p1": "Shop Buddy 连接买家与供应商。买家可免费浏览并向供应商发送消息；供应商付费上架，并在上线前经过审核。请合法使用平台并尊重其他会员。",
+    "p1": "Shopbuddy 连接买家与供应商。买家可免费浏览并向供应商发送消息；供应商付费上架，并在上线前经过审核。请合法使用平台并尊重其他会员。",
     "p2Title": "订单与付款",
-    "p2": "Shop Buddy 是采购与沟通平台。价格、报价和采购协议由买卖双方直接达成 — 付款前请务必确认条款。",
+    "p2": "Shopbuddy 是采购与沟通平台。价格、报价和采购协议由买卖双方直接达成 — 付款前请务必确认条款。",
     "p3Title": "您的账户",
     "p3": "您需对账户上的活动负责。对于违反本条款或损害其他会员的账户，我们可能予以暂停。"
   },
@@ -738,13 +738,13 @@
     "p2Title": "升级给我们",
     "p2": "如果无法达成解决方案，请将对话详情发给我们团队。我们会查看聊天记录和供应商的验证状态以协助调解。",
     "p3Title": "我们的角色",
-    "p3": "Shop Buddy 连接买家与供应商，并可对违反标准的会员采取措施，但付款和交付由双方直接安排，因此我们无法保证平台外交易的结果。"
+    "p3": "Shopbuddy 连接买家与供应商，并可对违反标准的会员采取措施，但付款和交付由双方直接安排，因此我们无法保证平台外交易的结果。"
   },
   "refunds": {
     "title": "退款政策",
     "updated": "摘要 · 最后更新于 2026 年 6 月",
     "p1Title": "订单由买卖双方达成",
-    "p1": "Shop Buddy 是采购与沟通平台。采购、付款和运输由您与供应商直接安排，因此退款遵循您与其约定的条款。",
+    "p1": "Shopbuddy 是采购与沟通平台。采购、付款和运输由您与供应商直接安排，因此退款遵循您与其约定的条款。",
     "p2Title": "提前约定条款",
     "p2": "付款前，请在聊天中确认退款、样品和退货条款，使双方都有清晰记录。已验证的供应商应遵守其报出的条款。",
     "p3Title": "需要帮助？",

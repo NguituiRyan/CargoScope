@@ -1,5 +1,5 @@
 /**
- * Shop Buddy demo seed — populates a Supabase project with §13 prototype data:
+ * Shopbuddy demo seed — populates a Supabase project with §13 prototype data:
  * categories, 4 verified manufacturers, ~16 active products (tiered pricing +
  * media), one buyer, one admin, and one open RFQ.
  *
@@ -469,10 +469,10 @@ productSeed.push(...extraProducts)
 /* ─────────────────────────── run ─────────────────────────── */
 
 async function main() {
-  console.log("Seeding Shop Buddy demo data…")
+  console.log("Seeding Shopbuddy demo data…")
 
   // 1) Accounts (auth.users) ------------------------------------------------
-  const adminId = await ensureUser(ADMIN_EMAIL, { full_name: "Shop Buddy Admin" })
+  const adminId = await ensureUser(ADMIN_EMAIL, { full_name: "Shopbuddy Admin" })
   const buyerOwnerId = await ensureUser(BUYER_EMAIL, { full_name: "Amani Wanjiru" })
 
   const mfrOwnerIdByEmail = new Map<string, string>()
@@ -486,7 +486,7 @@ async function main() {
 
   // 2) Profiles (role assignment) -------------------------------------------
   const profileRows = [
-    { id: adminId, role: "admin", full_name: "Shop Buddy Admin", locale: "en", country: "KE" },
+    { id: adminId, role: "admin", full_name: "Shopbuddy Admin", locale: "en", country: "KE" },
     { id: buyerOwnerId, role: "buyer", full_name: "Amani Wanjiru", locale: "en", country: "KE" },
     ...[...mfrOwnerIdByEmail.entries()].map(([, id]) => ({
       id,
@@ -629,7 +629,7 @@ async function main() {
 
   // 6b) Reviewer buyers + orders + reviews (social proof) -------------------
   const reviewerOwnerId = await ensureUser("reviewers@shopbuddy.africa", {
-    full_name: "Shop Buddy Buyers",
+    full_name: "Shopbuddy Buyers",
   })
   ok(
     (
@@ -638,7 +638,7 @@ async function main() {
           {
             id: reviewerOwnerId,
             role: "buyer",
-            full_name: "Shop Buddy Buyers",
+            full_name: "Shopbuddy Buyers",
             locale: "en",
             country: "KE",
           },

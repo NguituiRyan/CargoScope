@@ -35,20 +35,20 @@ const SITE_DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Shop Buddy",
-    template: "%s · Shop Buddy",
+    default: "Shopbuddy",
+    template: "%s · Shopbuddy",
   },
   description: SITE_DESCRIPTION,
   openGraph: {
     type: "website",
-    siteName: "Shop Buddy",
-    title: "Shop Buddy",
+    siteName: "Shopbuddy",
+    title: "Shopbuddy",
     description: SITE_DESCRIPTION,
     url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shop Buddy",
+    title: "Shopbuddy",
     description: SITE_DESCRIPTION,
   },
 }

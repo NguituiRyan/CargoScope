@@ -1,5 +1,5 @@
 /**
- * Shop Buddy logo mark — the shopping-bag + swoosh from the brand kit.
+ * Shopbuddy logo mark — the shopping-bag + swoosh from the brand kit.
  * Uses `currentColor`, so colour it with a text class (e.g. `text-primary`).
  */
 export function LogoMark({ className }: { className?: string }) {

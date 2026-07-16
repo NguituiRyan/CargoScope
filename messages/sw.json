@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Shop Buddy",
+    "brand": "Shopbuddy",
     "products": "Bidhaa",
     "manufacturers": "Watengenezaji",
     "howItWorks": "Jinsi inavyofanya kazi",
@@ -18,15 +18,15 @@
   "home": {
     "badge": "Ununuzi uliothibitishwa China–Afrika",
     "title": "Nunua kutoka kwa watengenezaji wa China waliothibitishwa, kwa uhakika.",
-    "subtitle": "Shop Buddy inaunganisha wanunuzi wa jumla wa Afrika na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
+    "subtitle": "Shopbuddy inaunganisha wanunuzi wa jumla wa Afrika na viwanda vilivyokaguliwa — gharama za uwazi za kufikisha, tafsiri ndani ya programu, na uaminifu katika kila hatua.",
     "ctaBrowse": "Vinjari bidhaa",
-    "ctaSell": "Uza kwenye Shop Buddy"
+    "ctaSell": "Uza kwenye Shopbuddy"
   },
   "auth": {
     "signInTitle": "Karibu tena",
-    "signInSubtitle": "Ingia kwenye akaunti yako ya Shop Buddy.",
+    "signInSubtitle": "Ingia kwenye akaunti yako ya Shopbuddy.",
     "signUpTitle": "Fungua akaunti yako",
-    "signUpSubtitle": "Jiunge na Shop Buddy kununua au kuuza kwa uhakika.",
+    "signUpSubtitle": "Jiunge na Shopbuddy kununua au kuuza kwa uhakika.",
     "email": "Barua pepe",
     "password": "Nenosiri",
     "passwordHint": "Angalau herufi 8.",
@@ -57,14 +57,14 @@
     "signUpCta": "Fungua akaunti",
     "signingIn": "Inaingia…",
     "creatingAccount": "Inafungua akaunti…",
-    "noAccount": "Mgeni kwenye Shop Buddy?",
+    "noAccount": "Mgeni kwenye Shopbuddy?",
     "haveAccount": "Tayari una akaunti?",
     "checkEmailTitle": "Angalia barua pepe yako",
     "checkEmailBody": "Tumekutumia kiungo cha uthibitisho. Bofya ili kuwasha akaunti yako na kuingia."
   },
   "account": {
     "title": "Akaunti yako",
-    "subtitle": "Dhibiti wasifu wako wa Shop Buddy na kipindi chako.",
+    "subtitle": "Dhibiti wasifu wako wa Shopbuddy na kipindi chako.",
     "name": "Jina",
     "email": "Barua pepe",
     "role": "Wajibu",
@@ -121,7 +121,7 @@
     "banner": "Bango la duka",
     "brandingHint": "JPG, PNG, au WebP hadi 5 MB. Nembo wazi na bango pana hufanya duka lako lionekane la kitaalamu.",
     "contactsTitle": "Maelezo ya mawasiliano ya faragha",
-    "contactsHint": "Wewe na wasimamizi wa Shop Buddy pekee mnaweza kuona haya — wanunuzi hawayaoni kamwe. Wanunuzi wanawasiliana nawe kupitia gumzo la programu.",
+    "contactsHint": "Wewe na wasimamizi wa Shopbuddy pekee mnaweza kuona haya — wanunuzi hawayaoni kamwe. Wanunuzi wanawasiliana nawe kupitia gumzo la programu.",
     "wechat": "Kitambulisho cha WeChat",
     "whatsapp": "WhatsApp",
     "phone": "Simu",
@@ -300,7 +300,7 @@
     "subscribe": "Jisajili",
     "currentPlan": "Mpango wa sasa",
     "paymentsSoon": "Malipo yanawashwa hivi karibuni",
-    "buyerNote": "Kununua kwenye Shop Buddy ni bure kila wakati — mipango ni kwa wasambazaji.",
+    "buyerNote": "Kununua kwenye Shopbuddy ni bure kila wakati — mipango ni kwa wasambazaji.",
     "tiers": {
       "basic": {
         "name": "Msingi",
@@ -568,11 +568,11 @@
     "backToDirectory": "Rudi kwa watengenezaji"
   },
   "howItWorks": {
-    "title": "Jinsi Shop Buddy inavyofanya kazi",
+    "title": "Jinsi Shopbuddy inavyofanya kazi",
     "subtitle": "Njia ya uaminifu kutoka viwanda vya China vilivyothibitishwa hadi ghala lako Afrika.",
     "forBuyers": "Kwa wanunuzi",
     "stepAccountTitle": "Fungua akaunti yako bila malipo",
-    "stepAccountBody": "Jisajili kwa chini ya dakika moja — kununua kwenye Shop Buddy ni bure, bila usajili wa malipo.",
+    "stepAccountBody": "Jisajili kwa chini ya dakika moja — kununua kwenye Shopbuddy ni bure, bila usajili wa malipo.",
     "step1Title": "Pata wasambazaji waliothibitishwa",
     "step1Body": "Kila mtengenezaji hukaguliwa hati na kupewa daraja. Tafuta beji ya uthibitisho kabla ya kununua.",
     "step2Title": "Ona gharama halisi ya kufikisha",
@@ -653,7 +653,7 @@
     "rights": "Haki zote zimehifadhiwa.",
     "forBuyers": "Kwa wanunuzi",
     "forSuppliers": "Kwa wasambazaji",
-    "becomeSupplier": "Uza kwenye Shop Buddy",
+    "becomeSupplier": "Uza kwenye Shopbuddy",
     "location": "Nairobi, Kenya",
     "addressCn": "Changchun 7th St, Futian, Yiwu, Zhejiang, China (322000)",
     "phoneKe": "+254 786 564 564",
@@ -667,8 +667,8 @@
     "bottomLine": "Ununuzi wa kuaminika kutoka China hadi Afrika."
   },
   "about": {
-    "title": "Kuhusu Shop Buddy",
-    "lead": "Shop Buddy ni soko la B2B linaloweka uaminifu kwanza, linalounganisha wanunuzi wa jumla wa Afrika na wazalishaji walioidhinishwa nchini China.",
+    "title": "Kuhusu Shopbuddy",
+    "lead": "Shopbuddy ni soko la B2B linaloweka uaminifu kwanza, linalounganisha wanunuzi wa jumla wa Afrika na wazalishaji walioidhinishwa nchini China.",
     "missionTitle": "Dhamira yetu",
     "mission": "Tunafanya ununuzi wa kimataifa kuwa salama na rahisi — wasambazaji waliokaguliwa, bei wazi ya gharama ya kufikisha, tafsiri iliyojengwa ndani, na mazungumzo ya moja kwa moja — ili wanunuzi waagize kwa ujasiri."
   },
@@ -684,9 +684,9 @@
     "title": "Masharti ya Huduma",
     "updated": "Muhtasari wa lugha rahisi · ilisasishwa Juni 2026",
     "p1Title": "Kutumia jukwaa",
-    "p1": "Shop Buddy huunganisha wanunuzi na wasambazaji. Wanunuzi huvinjari na kutuma ujumbe kwa wasambazaji bila malipo; wasambazaji hulipa kuorodhesha na hukaguliwa kabla ya kuanza. Tumia jukwaa kihalali na uwaheshimu wanachama wengine.",
+    "p1": "Shopbuddy huunganisha wanunuzi na wasambazaji. Wanunuzi huvinjari na kutuma ujumbe kwa wasambazaji bila malipo; wasambazaji hulipa kuorodhesha na hukaguliwa kabla ya kuanza. Tumia jukwaa kihalali na uwaheshimu wanachama wengine.",
     "p2Title": "Maagizo na malipo",
-    "p2": "Shop Buddy ni jukwaa la kutafuta bidhaa na mawasiliano. Bei, nukuu, na makubaliano ya ununuzi hufanywa moja kwa moja kati ya mnunuzi na msambazaji — thibitisha masharti kila wakati kabla ya kulipa.",
+    "p2": "Shopbuddy ni jukwaa la kutafuta bidhaa na mawasiliano. Bei, nukuu, na makubaliano ya ununuzi hufanywa moja kwa moja kati ya mnunuzi na msambazaji — thibitisha masharti kila wakati kabla ya kulipa.",
     "p3Title": "Akaunti yako",
     "p3": "Unawajibika kwa shughuli kwenye akaunti yako. Tunaweza kusimamisha akaunti zinazovunja masharti haya au kudhuru wanachama wengine."
   },
@@ -738,13 +738,13 @@
     "p2Title": "Tupelekee suala",
     "p2": "Ikiwa hamuwezi kufikia suluhisho, wasiliana na timu yetu na maelezo ya mazungumzo. Tunakagua rekodi ya gumzo na hadhi ya uthibitisho ya msambazaji ili kusaidia kupatanisha.",
     "p3Title": "Jukumu letu",
-    "p3": "Shop Buddy huunganisha wanunuzi na wasambazaji na inaweza kuchukua hatua dhidi ya wanachama wanaovunja viwango vyetu, lakini malipo na uwasilishaji hupangwa moja kwa moja kati ya pande hizo, kwa hivyo hatuwezi kuhakikisha matokeo ya miamala ya nje ya jukwaa."
+    "p3": "Shopbuddy huunganisha wanunuzi na wasambazaji na inaweza kuchukua hatua dhidi ya wanachama wanaovunja viwango vyetu, lakini malipo na uwasilishaji hupangwa moja kwa moja kati ya pande hizo, kwa hivyo hatuwezi kuhakikisha matokeo ya miamala ya nje ya jukwaa."
   },
   "refunds": {
     "title": "Sera ya Marejesho",
     "updated": "Muhtasari · ilisasishwa Juni 2026",
     "p1Title": "Maagizo ni kati ya mnunuzi na msambazaji",
-    "p1": "Shop Buddy ni jukwaa la kutafuta bidhaa na mawasiliano. Ununuzi, malipo na usafirishaji hupangwa moja kwa moja na msambazaji, kwa hivyo marejesho hufuata masharti unayokubaliana naye.",
+    "p1": "Shopbuddy ni jukwaa la kutafuta bidhaa na mawasiliano. Ununuzi, malipo na usafirishaji hupangwa moja kwa moja na msambazaji, kwa hivyo marejesho hufuata masharti unayokubaliana naye.",
     "p2Title": "Kubaliana masharti mapema",
     "p2": "Kabla ya kulipa, thibitisha masharti ya marejesho, sampuli na kurudisha kwenye gumzo ili pande zote mbili ziwe na rekodi wazi. Wasambazaji waliothibitishwa wanatarajiwa kuheshimu masharti wanayonukuu.",
     "p3Title": "Unahitaji msaada?",
