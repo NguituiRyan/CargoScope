@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation"
 import { z } from "zod"
 
-import { createSourcingHostedPayment } from "@/lib/flutterwave"
+import { sendSourcingRequestConfirmation } from "@/lib/email"
 import { passesSpamChecks } from "@/lib/spam"
 import { createAdminClient } from "@/lib/supabase/admin"
 import { paymentReference, publicReference } from "@/lib/sourcing/references"
@@ -57,7 +57,7 @@ export interface SourcingActionState {
   reference?: string
 }
 
-export async function startSourcingPaymentAction(
+export async function submitSourcingRequestAction(
   _state: SourcingActionState,
   formData: FormData
 ): Promise<SourcingActionState> {
@@ -118,7 +118,7 @@ export async function startSourcingPaymentAction(
     id,
     reference,
     image_search_request_id: d.imageSearchId || null,
-    status: "payment_pending",
+    status: "new",
     product_name: d.productName,
     product_link: d.productLink || null,
     quantity: d.quantity,
@@ -139,30 +139,29 @@ export async function startSourcingPaymentAction(
     attachments: [...inherited, ...preUploaded, ...uploaded],
     activation_fee: 100,
     activation_currency: "USD",
-    payment_provider: "flutterwave",
+    payment_provider: "manual_follow_up",
     payment_reference: txRef,
-    payment_status: "pending",
+    payment_status: "not_collected",
   })
   if (insertError) {
     return { error: "Could not save your request. Please try again." }
   }
 
-  let paymentUrl: string
-  try {
-    paymentUrl = await createSourcingHostedPayment({
-      txRef,
-      email: d.email,
-      name: d.clientName,
-      phone: d.whatsapp,
-      requestReference: reference,
-    })
-  } catch (error) {
-    return {
-      error: error instanceof Error ? error.message : "Could not start payment.",
-      reference,
-    }
-  }
-  redirect(paymentUrl)
+  await sendSourcingRequestConfirmation({
+    reference,
+    productName: d.productName,
+    quantity: d.quantity,
+    qualityPreference: d.qualityPreference,
+    destination: [d.destinationCountry, d.destinationCity, d.destinationPort]
+      .filter(Boolean)
+      .join(" / "),
+    clientName: d.clientName,
+    businessName: d.businessName || null,
+    whatsapp: d.whatsapp,
+    email: d.email,
+  })
+
+  redirect(`/sourcing/confirmation?reference=${encodeURIComponent(reference)}`)
 }
 
 export interface ImageSearchActionState {

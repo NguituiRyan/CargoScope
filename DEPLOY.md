@@ -110,13 +110,11 @@ The auto-generated deployment URL (e.g. `cargo-scope-xxxx-...vercel.app`) may re
 standard-protection-with-bypass as you prefer).
 # ShopBuddy sourcing, CMS and reporting launch checklist
 
-The new public flow is `/sourcing`; its payment webhook is
-`/api/payments/flutterwave/webhook`. Configure Flutterwave Standard with a USD
-collection account and set the webhook secret hash to `FLUTTERWAVE_WEBHOOK_HASH`.
-The checkout requests cards and M-Pesa, but the exact methods shown are governed
-by the merchant's registered country, approved currencies, and Flutterwave
-dashboard preferences. International Visa/Mastercard is the baseline; M-Pesa is
-shown only when it is enabled for that merchant/currency combination.
+The public flow is `/sourcing`. Requests are currently submitted immediately as
+`New`; the sourcing team follows up by email or WhatsApp with activation and
+next steps. The future payment webhook remains available at
+`/api/payments/flutterwave/webhook`, but the public form does not start an online
+checkout until ShopBuddy's merchant account is ready.
 
 Paddle remains the Merchant of Record for recurring supplier plans. Configure
 the two recurring prices and `/api/paddle/webhook`; subscription status is
@@ -124,7 +122,8 @@ updated by verified Paddle events.
 
 Required operational settings:
 
-- `SOURCING_TO_EMAIL`: main Gmail that receives paid RFQs.
+- `SOURCING_TO_EMAIL`: main Gmail that receives new RFQs (defaults to
+  `shopbuddyafrica@gmail.com`).
 - `INFO_CC_EMAILS`: comma-separated info addresses to CC.
 - `CRON_SECRET`: random secret used by the Monday 06:00 UTC / 09:00 EAT report.
 - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`: Search Console token value.

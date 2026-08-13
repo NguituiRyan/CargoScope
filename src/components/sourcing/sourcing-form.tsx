@@ -1,7 +1,7 @@
 "use client"
 
 import { useActionState, useRef, useState } from "react"
-import { Check, ImagePlus, Loader2, LockKeyhole, ShieldCheck } from "lucide-react"
+import { Check, ImagePlus, Loader2, Send, ShieldCheck } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,7 @@ import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { compressProductImages } from "@/lib/images/compress"
 import { trackBusinessEvent } from "@/lib/analytics/client"
-import { startSourcingPaymentAction } from "@/lib/sourcing/actions"
+import { submitSourcingRequestAction } from "@/lib/sourcing/actions"
 import { SOURCING_ACCEPT } from "@/lib/sourcing/storage-shared"
 import { uploadSourcingFiles } from "@/lib/sourcing/upload-client"
 import { TurnstileWidget } from "@/components/security/turnstile-widget"
@@ -43,7 +43,7 @@ export function SourcingForm({ imageSearchId }: { imageSearchId?: string }) {
         formData.delete("attachments")
         formData.set("preUploadedAttachments", JSON.stringify(uploaded))
       }
-      return await startSourcingPaymentAction(previous, formData)
+      return await submitSourcingRequestAction(previous, formData)
     } catch (error) {
       return { error: error instanceof Error ? error.message : "Upload failed. Please try again." }
     }
@@ -148,14 +148,13 @@ export function SourcingForm({ imageSearchId }: { imageSearchId?: string }) {
           disabled={pending}
           onClick={() => {
             trackBusinessEvent("sourcing_started")
-            trackBusinessEvent("sourcing_payment_clicked", { amount: 100, currency: "USD" })
           }}
           className="mt-6 h-12 w-full text-base font-bold"
         >
-          {pending ? <Loader2 className="animate-spin" aria-hidden /> : <LockKeyhole aria-hidden />}
-          {pending ? "Preparing secure payment…" : "Pay US$100 & Start Sourcing"}
+          {pending ? <Loader2 className="animate-spin" aria-hidden /> : <Send aria-hidden />}
+          {pending ? "Sending request…" : "Submit Sourcing Request"}
         </Button>
-        <p className="mt-3 text-center text-xs text-muted-foreground">Secure hosted checkout. International Visa/Mastercard and local methods such as M‑Pesa appear when enabled for the merchant account.</p>
+        <p className="mt-3 text-center text-xs text-muted-foreground">After submission, our sourcing team will review your requirements and contact you by WhatsApp or email with the next steps.</p>
       </aside>
     </form>
   )

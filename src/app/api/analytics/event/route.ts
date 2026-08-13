@@ -6,6 +6,7 @@ const ALLOWED = new Set([
   "image_search_started",
   "image_search_uploaded",
   "sourcing_started",
+  "sourcing_request_submitted",
   "sourcing_payment_clicked",
   "sourcing_payment_success",
   "subscription_checkout_started",

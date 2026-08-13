@@ -69,7 +69,7 @@ async function send(
 }
 
 function sourcingRecipients(): { to: string | null; cc: string[] } {
-  const to = process.env.SOURCING_TO_EMAIL?.trim() || null
+  const to = process.env.SOURCING_TO_EMAIL?.trim() || "shopbuddyafrica@gmail.com"
   const cc = (process.env.INFO_CC_EMAILS ?? "")
     .split(",")
     .map((email) => email.trim())
@@ -87,6 +87,37 @@ export interface SourcingEmailDetails {
   businessName?: string | null
   whatsapp: string
   email: string
+}
+
+/** Confirm receipt to the customer and notify the ShopBuddy sourcing inbox. */
+export async function sendSourcingRequestConfirmation(
+  details: SourcingEmailDetails
+): Promise<void> {
+  if (!hasResend()) return
+  await send(
+    details.email,
+    `Sourcing request received — ${details.reference}`,
+    layout(
+      "We received your sourcing request",
+      `<p style="font-size:14px;color:#334155">Thank you. Your request <strong>${escapeHtml(details.reference)}</strong> has been received and our sourcing team will review it.</p>
+       <p style="font-size:14px;color:#334155"><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+       <p style="font-size:14px;color:#334155">We will contact you by WhatsApp or email with the next steps. Keep this reference for all follow-up: <strong>${escapeHtml(details.reference)}</strong>.</p>`
+    )
+  )
+
+  const recipients = sourcingRecipients()
+  if (recipients.to) {
+    await send(
+      recipients.to,
+      `NEW sourcing request ${details.reference}: ${details.productName}`,
+      layout(
+        "New sourcing request",
+        `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+         <p style="font-size:14px;color:#334155">Review this request in the admin dashboard and contact the customer with activation and sourcing next steps.</p>`
+      ),
+      { cc: recipients.cc, replyTo: details.email }
+    )
+  }
 }
 
 /** Confirmation sent only after the gateway-verified US$100 activation. */
