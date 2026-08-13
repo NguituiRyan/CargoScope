@@ -46,14 +46,108 @@ function button(href: string, label: string): string {
   return `<a href="${href}" style="display:inline-block;background:#ff7700;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600">${label}</a>`
 }
 
-async function send(to: string, subject: string, html: string): Promise<void> {
+async function send(
+  to: string | string[],
+  subject: string,
+  html: string,
+  options?: { cc?: string[]; replyTo?: string }
+): Promise<void> {
   const client = getClient()
   if (!client) return
   try {
-    await client.emails.send({ from: FROM, to, subject, html })
+    await client.emails.send({
+      from: FROM,
+      to,
+      cc: options?.cc,
+      replyTo: options?.replyTo,
+      subject,
+      html,
+    })
   } catch {
     // best-effort — never surface email failures to the user
   }
+}
+
+function sourcingRecipients(): { to: string | null; cc: string[] } {
+  const to = process.env.SOURCING_TO_EMAIL?.trim() || null
+  const cc = (process.env.INFO_CC_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean)
+  return { to, cc }
+}
+
+export interface SourcingEmailDetails {
+  reference: string
+  productName: string
+  quantity: number
+  qualityPreference: string
+  destination: string
+  clientName: string
+  businessName?: string | null
+  whatsapp: string
+  email: string
+}
+
+/** Confirmation sent only after the gateway-verified US$100 activation. */
+export async function sendSourcingActivationConfirmation(
+  details: SourcingEmailDetails
+): Promise<void> {
+  if (!hasResend()) return
+  await send(
+    details.email,
+    `Sourcing request activated — ${details.reference}`,
+    layout(
+      "Your sourcing request is active",
+      `<p style="font-size:14px;color:#334155">Payment of <strong>US$100</strong> was confirmed and request <strong>${escapeHtml(details.reference)}</strong> is now active.</p>
+       <p style="font-size:14px;color:#334155">Your activation includes supplier research and comparison, China market search, initial price negotiation, MOQ comparison, supplier communications, and a shortlist of suitable suppliers.</p>
+       <p style="font-size:14px;color:#334155"><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+       <p style="font-size:14px;color:#334155">Keep this reference for all follow-up: <strong>${escapeHtml(details.reference)}</strong>.</p>`
+    )
+  )
+
+  const recipients = sourcingRecipients()
+  if (recipients.to) {
+    await send(
+      recipients.to,
+      `PAID sourcing request ${details.reference}: ${details.productName}`,
+      layout(
+        "New paid sourcing request",
+        `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+         <p style="font-size:14px;color:#334155">The US$100 activation payment has been verified. Open the admin dashboard to begin sourcing.</p>`
+      ),
+      { cc: recipients.cc, replyTo: details.email }
+    )
+  }
+}
+
+export async function sendSourcingStatusEmail(
+  toEmail: string,
+  opts: { reference: string; status: string; note?: string }
+): Promise<void> {
+  if (!hasResend()) return
+  const pretty = opts.status.replaceAll("_", " ")
+  await send(
+    toEmail,
+    `Sourcing request ${opts.reference}: ${pretty}`,
+    layout(
+      `Request status: ${escapeHtml(pretty)}`,
+      `<p style="font-size:14px;color:#334155">Your ShopBuddy sourcing request <strong>${escapeHtml(opts.reference)}</strong> has moved to <strong>${escapeHtml(pretty)}</strong>.</p>${opts.note ? `<p style="font-size:14px;color:#334155">${escapeHtml(opts.note)}</p>` : ""}`
+    )
+  )
+}
+
+export async function sendWeeklyMetricsReport(
+  subject: string,
+  html: string
+): Promise<boolean> {
+  if (!hasResend()) return false
+  const recipients = sourcingRecipients()
+  if (!recipients.to) return false
+  await send(recipients.to, subject, layout("Weekly website metrics", html), {
+    cc: recipients.cc,
+  })
+  return true
 }
 
 /** Confirm to the buyer that their RFQ is live. */

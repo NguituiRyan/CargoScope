@@ -4,8 +4,11 @@ import { notFound } from "next/navigation"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { Analytics } from "@vercel/analytics/next"
+import { Suspense } from "react"
+import Script from "next/script"
 
 import { QueryProvider } from "@/components/query-provider"
+import { PageTracker } from "@/components/analytics/page-tracker"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { routing } from "@/i18n/routing"
@@ -51,6 +54,9 @@ export const metadata: Metadata = {
     title: "Shopbuddy",
     description: SITE_DESCRIPTION,
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 }
 
 export function generateStaticParams() {
@@ -77,21 +83,18 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* eslint-disable-next-line @next/next/next-script-for-ga */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-NXSP73BPZR"
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-NXSP73BPZR"}`}
+          strategy="afterInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script id="shopbuddy-google-analytics" strategy="afterInteractive">
+          {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-NXSP73BPZR');
-            `,
-          }}
-        />
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-NXSP73BPZR"}', { send_page_view: true });
+            `}
+        </Script>
       </head>
       <body className="flex min-h-full flex-col">
         <NextIntlClientProvider>
@@ -101,6 +104,7 @@ export default async function LocaleLayout({
             <SiteFooter />
           </QueryProvider>
         </NextIntlClientProvider>
+        <Suspense fallback={null}><PageTracker /></Suspense>
         <Analytics />
       </body>
     </html>

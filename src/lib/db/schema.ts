@@ -111,6 +111,28 @@ export const groupBuyStatus = pgEnum("group_buy_status", [
 
 export const shipmentMode = pgEnum("shipment_mode", ["sea", "air"])
 
+export const sourcingStatus = pgEnum("sourcing_status", [
+  "new",
+  "payment_pending",
+  "paid",
+  "sourcing",
+  "quoted",
+  "approved",
+  "ordered",
+  "completed",
+])
+
+export const sourcingQuality = pgEnum("sourcing_quality", [
+  "premium",
+  "standard",
+  "budget",
+])
+
+export const blogPostStatus = pgEnum("blog_post_status", [
+  "draft",
+  "published",
+])
+
 /* ───────────────────────── profiles ───────────────────────── */
 
 export const profiles = pgTable("profiles", {
@@ -586,6 +608,124 @@ export const subscriptions = pgTable(
     ...timestamps(),
   },
   (t) => [index("subscriptions_manufacturer_idx").on(t.manufacturerId)]
+)
+
+/* ShopBuddy managed sourcing (paid activation) */
+
+export const imageSearchRequests = pgTable(
+  "image_search_requests",
+  {
+    id: pk(),
+    reference: text("reference").notNull().unique(),
+    attachments: jsonb("attachments").$type<unknown[]>().default([]),
+    sourcePath: text("source_path"),
+    visitorId: text("visitor_id"),
+    ...timestamps(),
+  },
+  (t) => [index("image_search_requests_created_idx").on(t.createdAt)]
+)
+
+export const sourcingRequests = pgTable(
+  "sourcing_requests",
+  {
+    id: pk(),
+    reference: text("reference").notNull().unique(),
+    imageSearchRequestId: uuid("image_search_request_id").references(
+      () => imageSearchRequests.id,
+      { onDelete: "set null" }
+    ),
+    status: sourcingStatus("status").notNull().default("payment_pending"),
+    productName: text("product_name").notNull(),
+    productLink: text("product_link"),
+    quantity: integer("quantity").notNull(),
+    unit: text("unit").notNull().default("pieces"),
+    qualityPreference: sourcingQuality("quality_preference")
+      .notNull()
+      .default("standard"),
+    targetBudget: numeric("target_budget", { precision: 14, scale: 2 }),
+    targetBudgetCurrency: text("target_budget_currency")
+      .notNull()
+      .default("USD"),
+    destinationCountry: text("destination_country").notNull(),
+    destinationCity: text("destination_city"),
+    destinationPort: text("destination_port"),
+    privateLabeling: boolean("private_labeling").notNull().default(false),
+    brandName: text("brand_name"),
+    specialRequirements: text("special_requirements"),
+    clientName: text("client_name").notNull(),
+    businessName: text("business_name"),
+    whatsapp: text("whatsapp").notNull(),
+    email: text("email").notNull(),
+    attachments: jsonb("attachments").$type<unknown[]>().default([]),
+    activationFee: numeric("activation_fee", { precision: 10, scale: 2 })
+      .notNull()
+      .default("100"),
+    activationCurrency: text("activation_currency").notNull().default("USD"),
+    paymentProvider: text("payment_provider").notNull().default("flutterwave"),
+    paymentReference: text("payment_reference").notNull().unique(),
+    paymentTransactionId: text("payment_transaction_id"),
+    paymentStatus: text("payment_status").notNull().default("pending"),
+    paidAt: timestamp("paid_at", { withTimezone: true }),
+    activatedAt: timestamp("activated_at", { withTimezone: true }),
+    ...timestamps(),
+  },
+  (t) => [
+    index("sourcing_requests_status_idx").on(t.status),
+    index("sourcing_requests_email_idx").on(t.email),
+    index("sourcing_requests_created_idx").on(t.createdAt),
+  ]
+)
+
+/* First-party conversion events used by the weekly business report. */
+
+export const analyticsEvents = pgTable(
+  "analytics_events",
+  {
+    id: pk(),
+    event: text("event").notNull(),
+    visitorId: text("visitor_id"),
+    sessionId: text("session_id"),
+    path: text("path"),
+    referrer: text("referrer"),
+    country: text("country"),
+    metadata: jsonb("metadata").$type<Record<string, unknown>>().default({}),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+  },
+  (t) => [
+    index("analytics_events_event_idx").on(t.event),
+    index("analytics_events_created_idx").on(t.createdAt),
+    index("analytics_events_visitor_idx").on(t.visitorId),
+  ]
+)
+
+/* Lightweight, admin-managed publishing CMS. */
+
+export const blogPosts = pgTable(
+  "blog_posts",
+  {
+    id: pk(),
+    authorProfileId: uuid("author_profile_id").references(() => profiles.id, {
+      onDelete: "set null",
+    }),
+    status: blogPostStatus("status").notNull().default("draft"),
+    title: text("title").notNull(),
+    slug: text("slug").notNull().unique(),
+    excerpt: text("excerpt"),
+    content: text("content").notNull(),
+    seoTitle: text("seo_title"),
+    metaDescription: text("meta_description"),
+    category: text("category"),
+    featuredImageUrl: text("featured_image_url"),
+    videoUrl: text("video_url"),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    ...timestamps(),
+  },
+  (t) => [
+    index("blog_posts_status_idx").on(t.status),
+    index("blog_posts_published_idx").on(t.publishedAt),
+  ]
 )
 
 /* ───────────────────────── landed cost ───────────────────────── */

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { initializePaddle, type Paddle } from "@paddle/paddle-js"
 
 import { Button } from "@/components/ui/button"
+import { trackBusinessEvent } from "@/lib/analytics/client"
 
 /**
  * Opens the Paddle overlay checkout for a supplier subscription. The
@@ -49,6 +50,7 @@ export function SubscribeButton({
   }, [])
 
   function openCheckout() {
+    trackBusinessEvent("subscription_checkout_started", { priceId })
     paddleRef.current?.Checkout.open({
       items: [{ priceId, quantity: 1 }],
       customer: { email },

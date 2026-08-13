@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Mail, MessageSquare } from "lucide-react"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { TrackedExternalLink } from "@/components/analytics/tracked-external-link"
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("contact")
@@ -29,12 +30,14 @@ export default async function ContactPage({
           <Mail className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
           <div>
             <p className="text-sm font-semibold">{t("emailLabel")}</p>
-            <a
+            <TrackedExternalLink
               href={`mailto:${email}`}
+              event="contact_click"
+              metadata={{ channel: "email", placement: "contact_page" }}
               className="text-sm text-primary hover:underline"
             >
               {email}
-            </a>
+            </TrackedExternalLink>
           </div>
         </div>
 

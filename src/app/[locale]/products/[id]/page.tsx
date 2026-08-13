@@ -26,6 +26,7 @@ import { getDisplayCurrency } from "@/lib/currency/server"
 import { displayAmount, formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates, getFxRate } from "@/lib/fx"
 import { cn } from "@/lib/utils"
+import { ConversionEvent } from "@/components/analytics/conversion-event"
 
 export async function generateMetadata({
   params,
@@ -103,6 +104,7 @@ export default async function ProductDetailPage({
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8">
+      <ConversionEvent event="product_view" metadata={{ productId: product.id, productName: product.title }} />
       <Link
         href="/products"
         className="inline-flex w-fit items-center gap-1 text-sm text-muted-foreground hover:text-foreground"

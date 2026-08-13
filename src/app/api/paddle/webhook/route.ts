@@ -74,6 +74,12 @@ export async function POST(request: Request): Promise<Response> {
         .update({ subscription_tier: tier, subscription_status: status })
         .eq("paddle_subscription_id", subscriptionId)
     }
+    if (event.eventType === "subscription.created" && active) {
+      await admin.from("analytics_events").insert({
+        event: "subscription_purchase",
+        metadata: { manufacturerId, subscriptionId, tier, provider: "paddle" },
+      })
+    }
   }
 
   return new Response("ok", { status: 200 })

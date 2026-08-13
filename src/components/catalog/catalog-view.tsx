@@ -2,6 +2,7 @@ import { Sparkles } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
 import { CatalogFilters } from "@/components/catalog/catalog-filters"
+import { ImageSearchPanel } from "@/components/sourcing/image-search-panel"
 import { CatalogSearch } from "@/components/catalog/catalog-search"
 import { HeroSearch } from "@/components/catalog/hero-search"
 import { ProductCard } from "@/components/catalog/product-card"
@@ -187,6 +188,8 @@ export async function CatalogView({
         </div>
       </section>
 
+      <ImageSearchPanel noResults={items.length === 0} />
+
       {categories.length > 0 && (
         <div className="mx-auto w-full max-w-6xl px-4 pt-5">
           <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -248,6 +251,12 @@ export async function CatalogView({
             <CardContent className="flex flex-col items-center gap-1 py-12 text-center">
               <p className="text-sm font-medium">{t("empty")}</p>
               <p className="text-sm text-muted-foreground">{t("emptyHint")}</p>
+              <Link
+                href="/sourcing"
+                className="mt-4 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:bg-primary/80"
+              >
+                Let ShopBuddy Source It
+              </Link>
             </CardContent>
           </Card>
         ) : (
