@@ -15,7 +15,7 @@ import { SOURCING_ACCEPT } from "@/lib/sourcing/storage-shared"
 import { uploadSourcingFiles } from "@/lib/sourcing/upload-client"
 import { TurnstileWidget } from "@/components/security/turnstile-widget"
 
-const ACTIVATION = [
+const INCLUDED = [
   "Supplier research",
   "Supplier comparison",
   "China market search",
@@ -135,12 +135,12 @@ export function SourcingForm({ imageSearchId }: { imageSearchId?: string }) {
       </div>
 
       <aside className="h-fit rounded-2xl border-2 border-primary bg-card p-5 shadow-lg lg:sticky lg:top-20">
-        <div className="flex items-center gap-2 text-primary"><ShieldCheck className="size-6" aria-hidden /><span className="text-sm font-bold tracking-wide uppercase">Sourcing activation</span></div>
-        <p className="mt-3 font-heading text-4xl font-bold">US$100</p>
-        <p className="mt-2 text-sm text-muted-foreground">Payable before sourcing begins. This is an activation fee for the work below, not a product deposit.</p>
-        <p className="mt-5 text-sm font-bold">US$100 ACTIVATES:</p>
+        <div className="flex items-center gap-2 text-primary"><ShieldCheck className="size-6" aria-hidden /><span className="text-sm font-bold tracking-wide uppercase">Managed sourcing</span></div>
+        <p className="mt-3 font-heading text-4xl font-bold">Free</p>
+        <p className="mt-2 text-sm text-muted-foreground">Shopbuddy&apos;s managed sourcing service is free to start — no activation fee. You only ever pay your supplier and shipping.</p>
+        <p className="mt-5 text-sm font-bold">WHAT YOU GET:</p>
         <ul className="mt-3 flex flex-col gap-2.5">
-          {ACTIVATION.map((item) => <li key={item} className="flex items-start gap-2 text-sm"><Check className="mt-0.5 size-4 shrink-0 text-verified-foreground" aria-hidden />{item}</li>)}
+          {INCLUDED.map((item) => <li key={item} className="flex items-start gap-2 text-sm"><Check className="mt-0.5 size-4 shrink-0 text-verified-foreground" aria-hidden />{item}</li>)}
         </ul>
         <Button
           type="submit"

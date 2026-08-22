@@ -610,7 +610,7 @@ export const subscriptions = pgTable(
   (t) => [index("subscriptions_manufacturer_idx").on(t.manufacturerId)]
 )
 
-/* ShopBuddy managed sourcing (paid activation) */
+/* Shopbuddy managed sourcing (paid activation) */
 
 export const imageSearchRequests = pgTable(
   "image_search_requests",
@@ -659,7 +659,7 @@ export const sourcingRequests = pgTable(
     attachments: jsonb("attachments").$type<unknown[]>().default([]),
     activationFee: numeric("activation_fee", { precision: 10, scale: 2 })
       .notNull()
-      .default("100"),
+      .default("0"),
     activationCurrency: text("activation_currency").notNull().default("USD"),
     paymentProvider: text("payment_provider").notNull().default("flutterwave"),
     paymentReference: text("payment_reference").notNull().unique(),

@@ -89,7 +89,7 @@ export interface SourcingEmailDetails {
   email: string
 }
 
-/** Confirm receipt to the customer and notify the ShopBuddy sourcing inbox. */
+/** Confirm receipt to the customer and notify the Shopbuddy sourcing inbox. */
 export async function sendSourcingRequestConfirmation(
   details: SourcingEmailDetails
 ): Promise<void> {
@@ -113,14 +113,14 @@ export async function sendSourcingRequestConfirmation(
       layout(
         "New sourcing request",
         `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
-         <p style="font-size:14px;color:#334155">Review this request in the admin dashboard and contact the customer with activation and sourcing next steps.</p>`
+         <p style="font-size:14px;color:#334155">Review this request in the admin dashboard and contact the customer with the sourcing next steps.</p>`
       ),
       { cc: recipients.cc, replyTo: details.email }
     )
   }
 }
 
-/** Confirmation sent only after the gateway-verified US$100 activation. */
+/** Sent when a request moves into active sourcing. The service is free. */
 export async function sendSourcingActivationConfirmation(
   details: SourcingEmailDetails
 ): Promise<void> {
@@ -130,8 +130,8 @@ export async function sendSourcingActivationConfirmation(
     `Sourcing request activated — ${details.reference}`,
     layout(
       "Your sourcing request is active",
-      `<p style="font-size:14px;color:#334155">Payment of <strong>US$100</strong> was confirmed and request <strong>${escapeHtml(details.reference)}</strong> is now active.</p>
-       <p style="font-size:14px;color:#334155">Your activation includes supplier research and comparison, China market search, initial price negotiation, MOQ comparison, supplier communications, and a shortlist of suitable suppliers.</p>
+      `<p style="font-size:14px;color:#334155">Request <strong>${escapeHtml(details.reference)}</strong> is now active and our sourcing team has started work. Shopbuddy&rsquo;s managed sourcing is free — there is no activation fee.</p>
+       <p style="font-size:14px;color:#334155">We are handling supplier research and comparison, China market search, initial price negotiation, MOQ comparison, supplier communications, and a shortlist of suitable suppliers.</p>
        <p style="font-size:14px;color:#334155"><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
        <p style="font-size:14px;color:#334155">Keep this reference for all follow-up: <strong>${escapeHtml(details.reference)}</strong>.</p>`
     )
@@ -141,11 +141,11 @@ export async function sendSourcingActivationConfirmation(
   if (recipients.to) {
     await send(
       recipients.to,
-      `PAID sourcing request ${details.reference}: ${details.productName}`,
+      `ACTIVE sourcing request ${details.reference}: ${details.productName}`,
       layout(
-        "New paid sourcing request",
+        "Sourcing request activated",
         `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
-         <p style="font-size:14px;color:#334155">The US$100 activation payment has been verified. Open the admin dashboard to begin sourcing.</p>`
+         <p style="font-size:14px;color:#334155">This request is active — managed sourcing is free, so no fee is collected. Open the admin dashboard to begin sourcing.</p>`
       ),
       { cc: recipients.cc, replyTo: details.email }
     )
@@ -163,7 +163,7 @@ export async function sendSourcingStatusEmail(
     `Sourcing request ${opts.reference}: ${pretty}`,
     layout(
       `Request status: ${escapeHtml(pretty)}`,
-      `<p style="font-size:14px;color:#334155">Your ShopBuddy sourcing request <strong>${escapeHtml(opts.reference)}</strong> has moved to <strong>${escapeHtml(pretty)}</strong>.</p>${opts.note ? `<p style="font-size:14px;color:#334155">${escapeHtml(opts.note)}</p>` : ""}`
+      `<p style="font-size:14px;color:#334155">Your Shopbuddy sourcing request <strong>${escapeHtml(opts.reference)}</strong> has moved to <strong>${escapeHtml(pretty)}</strong>.</p>${opts.note ? `<p style="font-size:14px;color:#334155">${escapeHtml(opts.note)}</p>` : ""}`
     )
   )
 }

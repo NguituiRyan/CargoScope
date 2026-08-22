@@ -137,7 +137,7 @@ export async function submitSourcingRequestAction(
     whatsapp: d.whatsapp,
     email: d.email,
     attachments: [...inherited, ...preUploaded, ...uploaded],
-    activation_fee: 100,
+    activation_fee: 0, // managed sourcing is free — no activation fee is charged
     activation_currency: "USD",
     payment_provider: "manual_follow_up",
     payment_reference: txRef,

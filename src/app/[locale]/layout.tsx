@@ -9,6 +9,7 @@ import Script from "next/script"
 
 import { QueryProvider } from "@/components/query-provider"
 import { PageTracker } from "@/components/analytics/page-tracker"
+import { FloatingChat } from "@/components/chat/floating-chat"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { routing } from "@/i18n/routing"
@@ -102,6 +103,7 @@ export default async function LocaleLayout({
             <SiteHeader />
             <main className="flex flex-1 flex-col">{children}</main>
             <SiteFooter />
+            <FloatingChat />
           </QueryProvider>
         </NextIntlClientProvider>
         <Suspense fallback={null}><PageTracker /></Suspense>

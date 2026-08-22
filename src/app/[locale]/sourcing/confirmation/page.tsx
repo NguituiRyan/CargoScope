@@ -24,10 +24,10 @@ export default async function SourcingConfirmationPage({
   const reference =
     rawReference && /^SB-SRC-\d{8}-[A-Z0-9]+$/.test(rawReference)
       ? rawReference
-      : "your ShopBuddy sourcing request"
-  const subject = encodeURIComponent(`ShopBuddy sourcing request ${reference}`)
+      : "your Shopbuddy sourcing request"
+  const subject = encodeURIComponent(`Shopbuddy sourcing request ${reference}`)
   const message = encodeURIComponent(
-    `Hello ShopBuddy, I submitted sourcing request ${reference}. Please contact me with the next steps.`
+    `Hello Shopbuddy, I submitted sourcing request ${reference}. Please contact me with the next steps.`
   )
 
   return (
@@ -43,7 +43,8 @@ export default async function SourcingConfirmationPage({
         </h1>
         <p className="mt-3 text-muted-foreground">
           Thank you. Our sourcing team will review your requirements and contact
-          you by WhatsApp or email with the next steps.
+          you by WhatsApp or email with the next steps. Managed sourcing is free
+          — nothing to pay to get started.
         </p>
         <div className="mt-5 rounded-xl bg-muted p-4">
           <p className="text-xs font-medium text-muted-foreground uppercase">
@@ -62,13 +63,13 @@ export default async function SourcingConfirmationPage({
             rel="noreferrer"
             className={cn(buttonVariants({ size: "lg" }))}
           >
-            <MessageCircle aria-hidden /> WhatsApp ShopBuddy
+            <MessageCircle aria-hidden /> WhatsApp Shopbuddy
           </a>
           <a
             href={`mailto:${SOURCING_EMAIL}?subject=${subject}&body=${message}`}
             className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
           >
-            <Mail aria-hidden /> Email ShopBuddy
+            <Mail aria-hidden /> Email Shopbuddy
           </a>
         </div>
         <Link

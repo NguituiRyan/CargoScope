@@ -11,19 +11,22 @@ export interface FulfillmentResult {
   error?: string
 }
 
+/**
+ * Managed sourcing is free, so there is no fee to verify — this only exists for
+ * legacy gateway callbacks: a successful charge whose reference maps to a
+ * sourcing request activates that request. No amount or currency is required.
+ */
 export async function fulfillSourcingPayment(
   transactionId: string | number,
   expectedTxRef?: string
 ): Promise<FulfillmentResult> {
   const transaction = await verifyFlutterwaveTransaction(transactionId)
-  if (!transaction) return { ok: false, error: "Payment could not be verified." }
+  if (!transaction) return { ok: false, error: "Transaction could not be verified." }
   if (
     transaction.status !== "successful" ||
-    transaction.currency !== "USD" ||
-    Number(transaction.amount) < 100 ||
     (expectedTxRef && transaction.tx_ref !== expectedTxRef)
   ) {
-    return { ok: false, error: "Payment details did not match the activation fee." }
+    return { ok: false, error: "Transaction did not match a sourcing request." }
   }
 
   const admin = createAdminClient()
@@ -54,7 +57,7 @@ export async function fulfillSourcingPayment(
     .neq("payment_status", "successful")
     .select("id")
     .maybeSingle()
-  if (error) return { ok: false, error: "Payment was verified but activation failed." }
+  if (error) return { ok: false, error: "The request could not be activated." }
   if (!updated) return { ok: true, reference: request.reference, alreadyPaid: true }
 
   const destination = [

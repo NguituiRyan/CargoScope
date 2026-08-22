@@ -55,6 +55,6 @@ export async function GET(request: Request): Promise<Response> {
     <h2 style="font-size:16px;margin-top:24px">Visitor countries</h2>${list(countries)}
     <h2 style="font-size:16px;margin-top:24px">Most-viewed products</h2>${list(productViews)}
   `
-  const sent = await sendWeeklyMetricsReport(`ShopBuddy weekly metrics — ${end.toISOString().slice(0, 10)}`, html)
+  const sent = await sendWeeklyMetricsReport(`Shopbuddy weekly metrics — ${end.toISOString().slice(0, 10)}`, html)
   return Response.json({ ok: true, sent, start: start.toISOString(), end: end.toISOString() })
 }

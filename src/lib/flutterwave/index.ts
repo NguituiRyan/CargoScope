@@ -8,6 +8,9 @@ interface HostedPaymentInput {
   name: string
   phone: string
   requestReference: string
+  /** Managed sourcing is free, so the caller states any amount it needs. */
+  amount: number
+  currency?: string
 }
 
 export interface VerifiedFlutterwaveTransaction {
@@ -33,8 +36,8 @@ export async function createSourcingHostedPayment(
     },
     body: JSON.stringify({
       tx_ref: input.txRef,
-      amount: "100.00",
-      currency: "USD",
+      amount: input.amount.toFixed(2),
+      currency: input.currency ?? "USD",
       redirect_url: `${site.replace(/\/$/, "")}/sourcing/confirmation`,
       payment_options: "card,mpesa",
       customer: {
@@ -43,12 +46,12 @@ export async function createSourcingHostedPayment(
         phonenumber: input.phone,
       },
       customizations: {
-        title: "ShopBuddy Sourcing Activation",
-        description: `US$100 sourcing activation — ${input.requestReference}`,
+        title: "Shopbuddy payment",
+        description: `Shopbuddy sourcing request ${input.requestReference}`,
       },
       meta: {
         sourcing_reference: input.requestReference,
-        purpose: "sourcing_activation",
+        purpose: "sourcing_request",
       },
       configurations: { session_duration: 30, max_retry_attempt: 5 },
     }),

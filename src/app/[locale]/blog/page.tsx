@@ -9,8 +9,9 @@ import { getPublishedPosts } from "@/lib/blog/queries"
 
 export const metadata: Metadata = {
   title: "Sourcing & Import Blog",
-  description: "Practical ShopBuddy Africa guides for sourcing, supplier checks, importing and wholesale growth.",
+  description: "Practical Shopbuddy Africa guides for sourcing, supplier checks, importing and wholesale growth.",
   alternates: { canonical: "/blog" },
+  openGraph: { type: "website", title: "Sourcing & Import Blog", description: "Practical Shopbuddy Africa guides for sourcing, supplier checks, importing and wholesale growth.", url: "/blog" },
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -19,7 +20,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const posts = await getPublishedPosts()
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-12">
-      <div className="max-w-3xl"><p className="text-sm font-bold tracking-[0.18em] text-primary uppercase">ShopBuddy knowledge hub</p><h1 className="mt-2 font-heading text-4xl font-bold tracking-tight sm:text-5xl">Sourcing & import insights</h1><p className="mt-4 text-lg text-muted-foreground">Practical guidance for African businesses buying from verified suppliers and moving goods confidently.</p></div>
+      <div className="max-w-3xl"><p className="text-sm font-bold tracking-[0.18em] text-primary uppercase">Shopbuddy knowledge hub</p><h1 className="mt-2 font-heading text-4xl font-bold tracking-tight sm:text-5xl">Sourcing & import insights</h1><p className="mt-4 text-lg text-muted-foreground">Practical guidance for African businesses buying from verified suppliers and moving goods confidently.</p></div>
       {posts.length ? (
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (

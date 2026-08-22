@@ -61,7 +61,7 @@ export function ImageSearchPanel({ noResults = false }: { noResults?: boolean })
                 CAN&apos;T FIND IT? SEND US A PHOTO.
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-background/75 sm:text-base">
-                No product name or SKU needed. Upload a clear photo and continue straight to a ShopBuddy sourcing request.
+                No product name or SKU needed. Upload a clear photo and continue straight to a Shopbuddy sourcing request.
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ export function ImageSearchPanel({ noResults = false }: { noResults?: boolean })
               className="h-11 w-full font-bold"
             >
               {pending ? <Loader2 className="animate-spin" aria-hidden /> : <UploadCloud aria-hidden />}
-              {pending ? "Uploading…" : noResults ? "Let ShopBuddy Source It" : "Search with photo"}
+              {pending ? "Uploading…" : noResults ? "Let Shopbuddy Source It" : "Search with photo"}
             </Button>
             {state.error ? <p role="alert" className="text-xs text-red-300">{state.error}</p> : null}
             <TurnstileWidget />

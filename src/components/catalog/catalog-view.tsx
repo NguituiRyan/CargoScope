@@ -255,7 +255,7 @@ export async function CatalogView({
                 href="/sourcing"
                 className="mt-4 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:bg-primary/80"
               >
-                Let ShopBuddy Source It
+                Let Shopbuddy Source It
               </Link>
             </CardContent>
           </Card>

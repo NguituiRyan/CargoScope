@@ -25,12 +25,13 @@ export default async function AdminSourcingDetailPage({
   const request = await getSourcingRequest(id)
   if (!request) notFound()
 
+  // Managed sourcing is free — never print a fee, only how the request came in.
   const activation =
     request.paymentProvider === "manual_follow_up"
-      ? `Follow-up required (US$${request.activationFee})`
-      : `US$${request.activationFee} via ${request.paymentProvider}${
+      ? "Free — no activation fee. Follow up with the client directly."
+      : `Free — no activation fee (via ${request.paymentProvider}${
           request.paymentTransactionId ? ` — ${request.paymentTransactionId}` : ""
-        }`
+        })`
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
