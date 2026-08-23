@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl"
 
 import { Input } from "@/components/ui/input"
 import { useRouter } from "@/i18n/navigation"
+import { trackBusinessEvent } from "@/lib/analytics/client"
 
 /**
  * Compact search that lives in the sticky catalog toolbar, so a shopper can keep
@@ -26,6 +27,7 @@ export function CatalogSearch() {
     })
     if (q) merged.q = q
     else delete merged.q
+    trackBusinessEvent("product_search", { query: q || "(cleared)" })
     router.push({ pathname: "/products", query: merged })
   }
 

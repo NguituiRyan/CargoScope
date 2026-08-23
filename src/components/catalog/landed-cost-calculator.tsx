@@ -94,8 +94,8 @@ export function LandedCostCalculator({
 
   const channelText = consolidated
     ? mode === "air"
-      ? `Air — consolidated (~$${AIR_CONSOLIDATED_USD_PER_KG}/kg all-in)`
-      : `Sea — consolidated (~KSh ${SEA_CONSOLIDATED_KES_PER_CBM.toLocaleString()}/CBM all-in)`
+      ? "Air — consolidated (all-in)"
+      : "Sea — consolidated (all-in)"
     : mode === "air"
       ? "Air — declared (full customs entry)"
       : `Sea — declared, ${container.toUpperCase()} (full customs entry)`
@@ -189,20 +189,6 @@ export function LandedCostCalculator({
           <>
             <p className="text-xs text-muted-foreground">
               {mode === "air" ? t("consolidatedAirNote") : t("consolidatedSeaNote")}
-            </p>
-            <p className="text-xs text-muted-foreground">
-              {t(
-                pack.supplierDeclared ? "packagingSupplier" : "packagingEstimate",
-                {
-                  kg: pack.weightKg.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  }),
-                  cbm: pack.volumeCbm.toLocaleString("en-US", {
-                    maximumFractionDigits: 4,
-                  }),
-                  unit,
-                }
-              )}
             </p>
             <dl className="flex flex-col divide-y divide-border text-sm">
               <div className="flex justify-between gap-4 py-2">

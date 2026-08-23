@@ -108,3 +108,42 @@ The auto-generated deployment URL (e.g. `cargo-scope-xxxx-...vercel.app`) may re
 `shopbuddy.africa`. To make preview URLs publicly shareable:
 **Settings → Deployment Protection → Vercel Authentication → Disabled** (or set to
 standard-protection-with-bypass as you prefer).
+# ShopBuddy sourcing, CMS and reporting launch checklist
+
+The public flow is `/sourcing`. Requests are currently submitted immediately as
+`New`; the sourcing team follows up by email or WhatsApp with activation and
+next steps. The future payment webhook remains available at
+`/api/payments/flutterwave/webhook`, but the public form does not start an online
+checkout until ShopBuddy's merchant account is ready.
+
+Paddle remains the Merchant of Record for recurring supplier plans. Configure
+the two recurring prices and `/api/paddle/webhook`; subscription status is
+updated by verified Paddle events.
+
+Required operational settings:
+
+- `SOURCING_TO_EMAIL`: main Gmail that receives new RFQs (defaults to
+  `shopbuddyafrica@gmail.com`).
+- `INFO_CC_EMAILS`: comma-separated info addresses to CC.
+- `CRON_SECRET`: random secret used by the Monday 06:00 UTC / 09:00 EAT report.
+- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`: Search Console token value.
+- Flutterwave, Paddle and Resend production credentials from `.env.example`.
+
+Admin/CMS access already uses Supabase login and the `admin_emails` allowlist.
+The allowlisted Gmail accounts can sign in at `/sign-in` and open `/admin/blog`
+to manage article text, images/videos, categories, featured images, SEO titles,
+meta descriptions, drafts and publishing.
+
+Business confirmation still required before production payments: confirm the
+registered merchant/entity and customer-facing payment descriptor. The code
+cannot determine whether ShopBuddy Africa is a registered entity or whether the
+Flutterwave/Paddle account settles to ShopBuddy Africa or Cargo Scope. Configure
+the provider account and statement descriptor under ShopBuddy Africa if that is
+the registered/approved merchant; otherwise use the legally registered Cargo
+Scope entity and disclose it clearly at checkout.
+
+Vercel provides TLS/SSL and immutable deployment rollbacks. Enable Supabase
+Point-in-Time Recovery or scheduled database backups in the Supabase dashboard;
+database backups are an account-level setting and cannot be truthfully enabled
+from this repository alone. Storage/database RLS and security headers ship with
+the app.

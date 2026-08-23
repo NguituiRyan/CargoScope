@@ -46,14 +46,139 @@ function button(href: string, label: string): string {
   return `<a href="${href}" style="display:inline-block;background:#ff7700;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600">${label}</a>`
 }
 
-async function send(to: string, subject: string, html: string): Promise<void> {
+async function send(
+  to: string | string[],
+  subject: string,
+  html: string,
+  options?: { cc?: string[]; replyTo?: string }
+): Promise<void> {
   const client = getClient()
   if (!client) return
   try {
-    await client.emails.send({ from: FROM, to, subject, html })
+    await client.emails.send({
+      from: FROM,
+      to,
+      cc: options?.cc,
+      replyTo: options?.replyTo,
+      subject,
+      html,
+    })
   } catch {
     // best-effort — never surface email failures to the user
   }
+}
+
+function sourcingRecipients(): { to: string | null; cc: string[] } {
+  const to = process.env.SOURCING_TO_EMAIL?.trim() || "shopbuddyafrica@gmail.com"
+  const cc = (process.env.INFO_CC_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean)
+  return { to, cc }
+}
+
+export interface SourcingEmailDetails {
+  reference: string
+  productName: string
+  quantity: number
+  qualityPreference: string
+  destination: string
+  clientName: string
+  businessName?: string | null
+  whatsapp: string
+  email: string
+}
+
+/** Confirm receipt to the customer and notify the Shopbuddy sourcing inbox. */
+export async function sendSourcingRequestConfirmation(
+  details: SourcingEmailDetails
+): Promise<void> {
+  if (!hasResend()) return
+  await send(
+    details.email,
+    `Sourcing request received — ${details.reference}`,
+    layout(
+      "We received your sourcing request",
+      `<p style="font-size:14px;color:#334155">Thank you. Your request <strong>${escapeHtml(details.reference)}</strong> has been received and our sourcing team will review it.</p>
+       <p style="font-size:14px;color:#334155"><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+       <p style="font-size:14px;color:#334155">We will contact you by WhatsApp or email with the next steps. Keep this reference for all follow-up: <strong>${escapeHtml(details.reference)}</strong>.</p>`
+    )
+  )
+
+  const recipients = sourcingRecipients()
+  if (recipients.to) {
+    await send(
+      recipients.to,
+      `NEW sourcing request ${details.reference}: ${details.productName}`,
+      layout(
+        "New sourcing request",
+        `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+         <p style="font-size:14px;color:#334155">Review this request in the admin dashboard and contact the customer with the sourcing next steps.</p>`
+      ),
+      { cc: recipients.cc, replyTo: details.email }
+    )
+  }
+}
+
+/** Sent when a request moves into active sourcing. The service is free. */
+export async function sendSourcingActivationConfirmation(
+  details: SourcingEmailDetails
+): Promise<void> {
+  if (!hasResend()) return
+  await send(
+    details.email,
+    `Sourcing request activated — ${details.reference}`,
+    layout(
+      "Your sourcing request is active",
+      `<p style="font-size:14px;color:#334155">Request <strong>${escapeHtml(details.reference)}</strong> is now active and our sourcing team has started work. Shopbuddy&rsquo;s managed sourcing is free — there is no activation fee.</p>
+       <p style="font-size:14px;color:#334155">We are handling supplier research and comparison, China market search, initial price negotiation, MOQ comparison, supplier communications, and a shortlist of suitable suppliers.</p>
+       <p style="font-size:14px;color:#334155"><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+       <p style="font-size:14px;color:#334155">Keep this reference for all follow-up: <strong>${escapeHtml(details.reference)}</strong>.</p>`
+    )
+  )
+
+  const recipients = sourcingRecipients()
+  if (recipients.to) {
+    await send(
+      recipients.to,
+      `ACTIVE sourcing request ${details.reference}: ${details.productName}`,
+      layout(
+        "Sourcing request activated",
+        `<p style="font-size:14px;color:#334155"><strong>RFQ:</strong> ${escapeHtml(details.reference)}<br><strong>Client:</strong> ${escapeHtml(details.clientName)}${details.businessName ? ` — ${escapeHtml(details.businessName)}` : ""}<br><strong>Email:</strong> ${escapeHtml(details.email)}<br><strong>WhatsApp:</strong> ${escapeHtml(details.whatsapp)}<br><strong>Product:</strong> ${escapeHtml(details.productName)}<br><strong>Quantity:</strong> ${details.quantity}<br><strong>Quality:</strong> ${escapeHtml(details.qualityPreference)}<br><strong>Destination:</strong> ${escapeHtml(details.destination)}</p>
+         <p style="font-size:14px;color:#334155">This request is active — managed sourcing is free, so no fee is collected. Open the admin dashboard to begin sourcing.</p>`
+      ),
+      { cc: recipients.cc, replyTo: details.email }
+    )
+  }
+}
+
+export async function sendSourcingStatusEmail(
+  toEmail: string,
+  opts: { reference: string; status: string; note?: string }
+): Promise<void> {
+  if (!hasResend()) return
+  const pretty = opts.status.replaceAll("_", " ")
+  await send(
+    toEmail,
+    `Sourcing request ${opts.reference}: ${pretty}`,
+    layout(
+      `Request status: ${escapeHtml(pretty)}`,
+      `<p style="font-size:14px;color:#334155">Your Shopbuddy sourcing request <strong>${escapeHtml(opts.reference)}</strong> has moved to <strong>${escapeHtml(pretty)}</strong>.</p>${opts.note ? `<p style="font-size:14px;color:#334155">${escapeHtml(opts.note)}</p>` : ""}`
+    )
+  )
+}
+
+export async function sendWeeklyMetricsReport(
+  subject: string,
+  html: string
+): Promise<boolean> {
+  if (!hasResend()) return false
+  const recipients = sourcingRecipients()
+  if (!recipients.to) return false
+  await send(recipients.to, subject, layout("Weekly website metrics", html), {
+    cc: recipients.cc,
+  })
+  return true
 }
 
 /** Confirm to the buyer that their RFQ is live. */

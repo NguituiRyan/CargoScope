@@ -33,6 +33,8 @@ export async function SiteHeader() {
 
   const navLinks = [
     { href: "/products", label: t("products") },
+    { href: "/sourcing", label: "Start Sourcing" },
+    { href: "/blog", label: "Blog" },
     { href: "/manufacturers", label: t("manufacturers") },
     { href: "/how-it-works", label: t("howItWorks") },
     { href: "/pricing", label: t("pricing") },

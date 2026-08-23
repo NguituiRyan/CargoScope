@@ -22,6 +22,9 @@
 
 # misc
 .DS_Store
+scratch/edge-*/
+scratch/*.png
+scratch/**
 *.pem
 
 # debug
@@ -40,3 +43,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

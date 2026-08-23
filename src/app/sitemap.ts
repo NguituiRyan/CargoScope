@@ -2,13 +2,15 @@ import type { MetadataRoute } from "next"
 import { and, eq } from "drizzle-orm"
 
 import { db } from "@/lib/db"
-import { manufacturers, products } from "@/lib/db/schema"
+import { blogPosts, manufacturers, products } from "@/lib/db/schema"
 import { SITE_URL } from "@/lib/site"
 
 // Public, indexable routes (default locale — localized variants share content).
 const STATIC_PATHS = [
   "",
   "/products",
+  "/sourcing",
+  "/blog",
   "/manufacturers",
   "/pricing",
   "/how-it-works",
@@ -57,6 +59,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${SITE_URL}/manufacturers/${m.slug}`,
         changeFrequency: "weekly",
         priority: 0.6,
+      })
+    }
+
+    const livePosts = await db
+      .select({ slug: blogPosts.slug })
+      .from(blogPosts)
+      .where(eq(blogPosts.status, "published"))
+      .limit(2000)
+    for (const post of livePosts) {
+      entries.push({
+        url: `${SITE_URL}/blog/${post.slug}`,
+        changeFrequency: "monthly",
+        priority: 0.65,
       })
     }
   } catch {

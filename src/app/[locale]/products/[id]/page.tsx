@@ -25,7 +25,9 @@ import { startConversationAction } from "@/lib/messaging/actions"
 import { getDisplayCurrency } from "@/lib/currency/server"
 import { displayAmount, formatDisplayPrice } from "@/lib/currency/shared"
 import { getDisplayRates, getFxRate } from "@/lib/fx"
+import { buildProductJsonLd, jsonLdScript } from "@/lib/seo/product-jsonld"
 import { cn } from "@/lib/utils"
+import { ConversionEvent } from "@/components/analytics/conversion-event"
 
 export async function generateMetadata({
   params,
@@ -80,6 +82,22 @@ export default async function ProductDetailPage({
     ? Number(product.priceTiers[0].unitPrice)
     : 0
 
+  // Google compares the offer price against the page, so quote the same entry
+  // tier in the same display currency the pricing table renders.
+  const jsonLd = buildProductJsonLd({
+    id: product.id,
+    title: product.title,
+    description: product.description,
+    primaryImageUrl: product.primaryImageUrl,
+    media: product.media,
+    brand: m.companyName,
+    priceUsd: product.priceTiers.length ? baseTierPrice : null,
+    currency,
+    rates: displayRates.rates,
+    rating: reviews.rating,
+    reviews: reviews.items,
+  })
+
   const specs: { label: string; value: string }[] = [
     {
       label: t("specMoq"),
@@ -103,6 +121,11 @@ export default async function ProductDetailPage({
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
+      />
+      <ConversionEvent event="product_view" metadata={{ productId: product.id, productName: product.title }} />
       <Link
         href="/products"
         className="inline-flex w-fit items-center gap-1 text-sm text-muted-foreground hover:text-foreground"

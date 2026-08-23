@@ -12,6 +12,7 @@ import {
 
 import { LogoMark } from "@/components/brand/logo-mark"
 import { Link } from "@/i18n/navigation"
+import { TrackedExternalLink } from "@/components/analytics/tracked-external-link"
 
 const CONTACT_EMAIL = "info@shopbuddy.africa"
 
@@ -85,12 +86,14 @@ export async function SiteFooter() {
           <ul className="flex flex-col gap-2.5 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
-              <a
+              <TrackedExternalLink
                 href={`mailto:${CONTACT_EMAIL}`}
+                event="contact_click"
+                metadata={{ channel: "email" }}
                 className="transition-colors hover:text-foreground"
               >
                 {CONTACT_EMAIL}
-              </a>
+              </TrackedExternalLink>
             </li>
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
@@ -114,15 +117,17 @@ export async function SiteFooter() {
           </ul>
 
           <div className="mt-5 flex flex-col gap-3.5">
-            <a
+            <TrackedExternalLink
               href="https://wa.me/8619550539767?text=Hello%20Shopbuddy%2C%20I%27m%20interested%20in%20sourcing%20products%20from%20China."
+              event="whatsapp_click"
+              metadata={{ placement: "footer" }}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-3.5 py-2 text-sm font-medium text-white transition-colors hover:bg-emerald-700 w-fit"
             >
               <WhatsappIcon className="size-4.5 shrink-0" />
               {t("chatWhatsapp")}
-            </a>
+            </TrackedExternalLink>
             <div className="flex items-center gap-4 text-muted-foreground">
               <a
                 href="https://www.tiktok.com/@shopbuddychinasourcing"

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { ClipboardCheck, FileWarning, Store } from "lucide-react"
+import { ClipboardCheck, FileText, FileWarning, SearchCheck, Store } from "lucide-react"
 
 import { Link } from "@/i18n/navigation"
 import { buttonVariants } from "@/components/ui/button"
@@ -87,6 +87,11 @@ export default async function AdminHomePage({
           </Link>
         </CardContent>
       </Card>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Card><CardHeader className="flex-row items-center gap-3"><SearchCheck className="size-7 text-primary" aria-hidden /><div><CardTitle className="text-lg">Sourcing requests</CardTitle><CardDescription>Paid RFQs and customer stages</CardDescription></div></CardHeader><CardContent><Link href="/admin/sourcing" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>Open sourcing queue</Link></CardContent></Card>
+        <Card><CardHeader className="flex-row items-center gap-3"><FileText className="size-7 text-primary" aria-hidden /><div><CardTitle className="text-lg">Blog CMS</CardTitle><CardDescription>Articles, images, video and SEO</CardDescription></div></CardHeader><CardContent><Link href="/admin/blog" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>Manage articles</Link></CardContent></Card>
+      </div>
     </div>
   )
 }
